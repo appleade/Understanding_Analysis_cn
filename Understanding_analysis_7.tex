@@ -1,0 +1,1247 @@
+\chapter{Riemann积分}
+\label{chap:7}
+\section{讨论:积分应如何定义？}
+\label{sec:7.1}
+微积分基本定理阐述了微分与积分之间的互逆关系。它分为两部分，取决于我们是对积分进行微分还是对导数进行积分。在函数 \(f\) 和 \(F\) 的适当假设下，微积分基本定理指出
+
+\begin{enumerate}[label=(\roman*)]
+\item\label{item:7.1.1} \({\int }_{a}^{b}{F}^{\prime }\left( x\right) {dx} = F\left( b\right)  - F\left( a\right)\) 
+\item\label{item:7.1.2} 如果 \(G\left( x\right)  = {\int }_{a}^{x}f\left( t\right) {dt}\) ，那么 \({G}^{\prime }\left( x\right)  = f\left( x\right)\) 。
+\end{enumerate}
+
+
+在我们能够对这些陈述进行任何类型的严格研究之前，我们需要确定 \({\int }_{a}^{b}f\) 的定义。历史上，积分的概念被定义为微分的逆过程。换句话说，函数 \(f\) 的积分被理解为满足 \({F}^{\prime } = f\) 的函数 \(F\) 。Newton、Leibniz、Fermat 以及其他微积分创始人随后继续探讨了反导数与计算面积问题之间的关系。从分析的角度来看，这种方法最终并不令人满意，因为它导致可以积分的函数数量非常有限。回想一下，每个导数都满足介值性质(Darboux定理，定理\ref{thm:5.2.7})。这意味着任何具有跳跃间断点的函数都不能是导数。如果我们想通过反微分来定义积分，那么我们必须接受这样一个结果，即像
+
+\[
+h\left( x\right)  = \left\{  \begin{array}{ll} 1 & 0 \leq  x < 1 \\  2 & 1 \leq  x \leq  2 \end{array}\right.
+\]
+
+这样的函数在区间 \(\left\lbrack  {0,2}\right\rbrack\) 上不可积。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_1_675_381_603_457_0.jpg}
+  \caption{Riemann和}
+  \label{fig:7.1}
+\end{figure}
+
+
+
+在1850年左右，Cauchy 的工作中发生了一个非常有趣的侧重点转变，不久之后，Bernhard Riemann 的工作中也出现了类似的转变。这一转变的核心思想是将积分与导数完全分离，转而使用“曲线下面积”的概念作为构建严格积分定义的起点。这一转变的原因颇为复杂。正如我们之前提到的(第\ref{sec:1.2}节)，函数的概念正在经历一场变革。传统上将函数视为整体公式(如 \(f\left( x\right)  =\)  \({x}^{2}\) )的理解正在被一种更为宽泛的解释所取代，这种解释包括了诸如第\ref{sec:4.1}节中讨论的Dirichlet函数等奇异构造。推动这一演变的催化剂是正在兴起的Fourier级数理论(在第\ref{sec:8.3}节中讨论)，该理论要求能够对这些更为不规则的函数进行积分。
+
+如今所称的Riemann积分，通常是在微积分入门课程中讨论的内容。从定义在 \(\left\lbrack  {a,b}\right\rbrack\) 上的函数 \(f\) 开始，我们将定义域分割为若干小的子区间。在每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上，我们选取某一点 \({c}_{k} \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) ，并使用 \(y\) 值 \(f\left( {c}_{k}\right)\) 作为 \(f\) 在 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上的近似值。从图形上看，结果是一排细长的矩形，用于近似 \(f\) 与 \(x\) 轴之间的区域。每个矩形的面积为 \(f\left( {c}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right)\) ，因此所有矩形的总面积由Riemann和给出(图\ref{fig:7.1})。
+
+\[
+\mathop{\sum }\limits_{{k = 1}}^{n}f\left( {c}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right) .
+\]
+
+请注意，这里的“面积”是基于以下理解:位于 \(x\) 轴下方的区域被赋予负值。%有向面积
+
+从图中可以看出，随着矩形变窄，Riemann和近似的精度似乎有所提高。在某种意义上，我们将这些近似Riemann和的极限作为分区中各个子区间宽度趋近于零时的极限。如果这个极限存在，它就是Riemann对 \({\int }_{a}^{b}f\) 的定义。
+
+这引出了几个问题。为刚才提到的极限赋予严格的意义并不太困难。我们（以及Riemann本人）最感兴趣的是确定哪些类型的函数可以通过这个程序进行积分。具体来说， \(f\) 的什么条件能保证这个极限存在？
+
+Riemann积分理论的关键在于观察到较小的子区间能更好地逼近函数 \(f\) 。在每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上，函数 \(f\) 被其在某点 \({c}_{k} \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 的值近似表示。逼近的质量直接与以下差值相关
+
+\[
+\left| {f\left( x\right)  - f\left( {c}_{k}\right) }\right|
+\]
+
+当 \(x\) 在子区间上变化时。由于子区间的宽度可以任意小，这意味着我们希望当 \(x\) 接近 \({c}_{k}\) 时， \(f\left( x\right)\) 也接近 \(f\left( {c}_{k}\right)\) 。而这听起来像是在讨论连续性！我们很快会看到， \(f\) 的连续性与Riemann积分 \({\int }_{a}^{b}f\) 密切相关。
+
+连续性是否足以证明Riemann和收敛到一个明确定义的极限？它是必要的吗，或者Riemann积分能否处理如前所述的 \(h\left( x\right)\) 这样的不连续函数？依赖于面积的直观概念，似乎 \({\int }_{0}^{2}h = 3\) ，但Riemann积分是否得出了这个结论？如果是这样，函数在不可积之前可以有多不连续？Riemann积分能否理解像Dirichlet函数在区间 \(\left\lbrack  {0,1}\right\rbrack\) 上这样病态的情况？
+
+又例如考察以下函数
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} {x}^{2}\sin \left( \frac{1}{x}\right) & x \neq  0 \\  0 & x = 0 \end{array}\right.
+\]
+
+这便提出了另一个有趣的问题。这是一个可微函数的例子（已在第\ref{sec:5.1}节中研究过），其导数 \({g}^{\prime }\left( x\right)\) 不是连续的。当我们探索可积函数类时，必须尝试将积分与导数重新联系起来。在独立于微分定义积分之后，我们希望回过头来研究微积分基本定理中方程\ref{item:7.1.1}和\ref{item:7.1.2}成立的条件。如果我们为希望可积的函数类型列一个愿望清单，那么根据方程\ref{item:7.1.1}，这个集合至少被赋予了“包含导数”的期望。“导数并不总是连续的”这一事实则进一步激励我们不要止步于一种无法处理某些不连续性的积分理论。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_3_703_381_544_401_0.jpg}
+  \caption{上和与下和}
+  \label{fig:7.2}
+\end{figure}
+
+
+\section{Riemann积分的定义}
+\label{sec:7.2}
+尽管本章介绍的积分发展具有一些现代修饰的优势，但它与刚刚讨论的过程密切相关。我们将用上和与下和（图 \ref{fig:7.2}）代替Riemann和，并用上确界和下确界代替极限。
+
+在本节中，总假设我们处理的是闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数 \(f\) ，这意味着 \( \exists M > 0\) ，使得 \( \forall x \in  \left\lbrack  {a,b}\right\rbrack\) ， \(\left| {f\left( x\right) }\right|  \leq  M\) 成立。
+
+\subsection{分割、上和与下和}
+
+\begin{Def}
+  \label{def:7.2.1}
+  一个分割(partition) \(P\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 的一个有限有序集合
+
+\[
+P = \left\{  {a = {x}_{0} < {x}_{1} < {x}_{2} < \cdots  < {x}_{n} = b}\right\}  .
+\]
+
+对于 \(P\) 的每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) ，令
+
+\[
+{m}_{k} = \inf \left\{  {f\left( x\right)  : x \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack  }\right\}  \quad, {M}_{k} = \sup \left\{  {f\left( x\right)  : x \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack  }\right\}  .
+\]
+
+\(f\) 关于 \(P\) 的下和(lower sum)由下式给出
+
+\[
+L\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}{m}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right) .
+\]
+
+同样地，我们定义 \(f\) 关于 \(P\) 的上和(upper sum)为
+
+\[
+U\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}{M}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right) .
+\]
+\end{Def}
+
+对于特定的分割 \(P\) ，显然有 \(U\left( {f,P}\right)  \geq  L\left( {f,P}\right)\) 。事实上，如果上下和是针对不同的分割计算的，那么这一不等式仍然成立。这便是接下来两个引理的内容。
+
+\begin{Def}
+  \label{def:7.2.2}
+  如果分割 \(Q\) 包含分割 \(P\) 的所有点，则称分割 \(Q\) 是分割 \(P\) 的细化(refinement)。在这种情况下，我们记 \(P \subseteq  Q\) 。
+\end{Def}
+
+\begin{Lem}
+  \label{lem:7.2.3}
+  若 \(P \subseteq  Q\) ，则 \(L\left( {f,P}\right)  \leq  L\left( {f,Q}\right)\) ，且 \(U\left( {f,P}\right)  \geq  U\left( {f,Q}\right)\) 。
+\end{Lem}
+
+\begin{proof}
+
+考虑当我们通过向 \(P\) 的某个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 添加一个点 \(z\) 来细化 \(P\) 时会发生什么。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.2\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_4_662_787_299_325_0.jpg}
+\end{figure}
+
+暂时先只关注下和，我们有
+
+\begin{align*}
+  {m}_{k}\left( {{x}_{x} - {x}_{k - 1}}\right)  = &{m}_{k}\left( {{x}_{k} - z}\right)  + {m}_{k}\left( {z - {x}_{k - 1}}\right)\\
+  \leq & {m}_{k}^{\prime }\left( {{x}_{k} - z}\right)  + {m}_{k}^{\prime \prime }\left( {z - {x}_{k - 1}}\right) ,
+\end{align*}
+
+其中
+
+\[
+{m}_{k}^{\prime } = \inf \left\{  {f\left( x\right)  : x \in  \left\lbrack  {z,{x}_{k}}\right\rbrack  }\right\}  \quad, {m}_{k}^{\prime \prime } = \inf \left\{  {f\left( x\right)  : x \in  \left\lbrack  {{x}_{k - 1},z}\right\rbrack  }\right\}
+\]
+
+每个都必然大于或等于 \({m}_{k}\) 。
+
+通过归纳，我们有 \(L\left( {f,P}\right)  \leq  L\left( {f,Q}\right)\) ，并且类似的论证适用于上和。  
+\end{proof}
+
+\begin{Lem}
+  \label{lem:7.2.4}
+如果 \({P}_{1}\) 和 \({P}_{2}\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 的任意两个分割，则 \(L\left( {f,{P}_{1}}\right)  \leq U\left( {f,{P}_{2}}\right)\) 。
+\end{Lem}
+
+\begin{proof}
+  设 \(Q = {P}_{1} \cup  {P}_{2}\) 为 \({P}_{1}\) 和 \({P}_{2}\) 的所谓共同细化。因为 \(Q \subseteq  {P}_{1}\) 和 \(Q \subseteq  {P}_{2}\) ，所以得出
+
+\[
+L\left( {f,{P}_{1}}\right)  \leq  L\left( {f,Q}\right)  \leq  U\left( {f,Q}\right)  \leq  U\left( {f,{P}_{2}}\right) .
+\]
+\end{proof}
+
+
+\subsection{可积性}
+
+直观上，可以将特定的上和视为积分值的高估，而下和视为低估。随着分割的细化，上和可能会变小，而下和可能会变大。如果上和与下和在某个中间值“相遇”，则函数是可积的。
+
+我们不采用这些和的极限，而是利用完备性公理，考虑上和的下确界与下和的上确界。
+
+\begin{Def}
+  \label{def:7.2.5}
+  设 \(\mathcal{P}\) 为区间 \(\left\lbrack  {a,b}\right\rbrack\) 的所有可能分割的集合。 \(f\) 的上积分定义为
+
+\[
+U\left( f\right)  = \inf \{ U\left( {f,P}\right)  : P \in  \mathcal{P}\} .
+\]
+
+类似地，通过以下方式定义 \(f\) 的下积分
+
+\[
+L\left( f\right)  = \sup \{ U\left( {f,P}\right)  : P \in  \mathcal{P}\} .
+\]
+
+\end{Def}
+
+
+以下事实并不令人惊讶。
+
+\begin{Lem}\label{lem:7.2.6}
+  对于定义在 \(\left\lbrack  {a,b}\right\rbrack\) 上的任何有界函数 \(f\) ，总是有 \(U\left( f\right)  \geq  L\left( f\right)\) 。
+\end{Lem}
+
+
+\begin{proof}
+对于任意分割 \(P, Q \in \mathcal{P}\)，取它们的共同加细 \(R\)。由引理 \ref{lem:7.2.4} 可知：
+\[
+U(f,P) \geq L(f,Q)
+\]
+固定 \(Q\)，对所有 \(P\) 取下确界得：
+\[
+U(f) = \inf_P U(f,P) \geq L(f,Q).
+\]
+再对所有 \(Q\) 取上确界即得：
+\[
+U(f) \geq \sup_Q L(f,Q) = L(f).
+\]
+\end{proof}
+
+
+
+\begin{Def}[Riemann可积性]
+  \label{def:7.2.7}
+  如果 \(U\left( f\right)  = L\left( f\right)\) ，则定义在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数 \(f\) 是Riemann可积的。在这种情况下，我们将 \({\int }_{a}^{b}f\) 或 \({\int }_{a}^{b}f\left( x\right) {dx}\) 定义为此共同值；即，
+
+\[
+{\int }_{a}^{b}f = U\left( f\right)  = L\left( f\right) .
+\]
+\end{Def}
+
+“可积”前面的修饰词“Riemann”准确地表明还有其他定义积分的方法。事实上，我们在本章的工作将揭示需要一种不同的方法，其中一种方法在第\ref{sec:8.1}节中讨论。在本章中，Riemann积分是唯一考虑的方法，因此通常可以方便地省略修饰词“Riemann”，而简单地将函数称为“可积”。
+
+\subsection{可积性准则}
+
+总结目前的情况，对于区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数 \(f\) ，总是有以下情况:
+
+\[
+\sup \{ L\left( {f,P}\right)  : P \in  \mathcal{P}\}  = L\left( f\right)  \leq  U\left( f\right)  = \inf \{ U\left( {f,P}\right)  : P \in  \mathcal{P}\} .
+\]
+
+如果不等式取等，则函数 \(f\) 是可积的。我们研究积分的主要目标是尽可能准确地描述可积函数的类别。前面的不等式揭示了可积性实际上等价于存在上、下和任意接近的分割。
+
+
+\begin{Thm}\label{thm:7.2.8}
+  一个有界函数 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，当且仅当 \(\forall \varepsilon  > 0\) ，存在一个 \(\left\lbrack  {a,b}\right\rbrack\) 的分割 \({P}_{\varepsilon }\) ，使得
+
+\[
+U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  < \varepsilon
+\]
+\end{Thm}
+
+\begin{proof}
+设 \(\varepsilon  > 0\) 。如果存在这样的分割 \({P}_{\varepsilon }\) ，那么
+
+\[
+U\left( f\right)  - L\left( f\right)  \leq  U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  < \varepsilon .
+\]
+
+因为 \(\varepsilon\) 是任意的，所以必须有 \(U\left( f\right)  = L\left( f\right)\) ，因此 \(f\) 是可积的。(为了绝对精确，我们可以引用定理\ref{thm:1.2.6}。)
+
+逆命题的证明是一个熟悉的三角不等式论证（但是用括号代替绝对值符号）。这是因为在每种情况下，我们都知道哪个量更大。由于 \(U\left( f\right)\) 是上和的下确界，我们知道，给定某个 \(\varepsilon  > 0\) ，必须存在一个分割 \({P}_{1}\) ，使得
+
+\[
+U\left( {f,{P}_{1}}\right)  < U\left( f\right)  + \frac{\varepsilon }{2}.
+\]
+
+同样地，存在一个分割 \({P}_{2}\) 满足
+
+\[
+L\left( {f,{P}_{2}}\right)  > L\left( f\right)  - \frac{\varepsilon }{2}.
+\]
+
+现在，令 \({P}_{\varepsilon } = {P}_{1} \cup  {P}_{2}\) 为共同加细。记住 \(f\) 的可积性意味着 \(U\left( f\right)  = L\left( f\right)\) ，我们可以写出
+
+\begin{align*}
+U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  \leq &   U\left( {f,{P}_{1}}\right)  - L\left( {f,{P}_{2}}\right)\\
+=  & \left( {U\left( {f,{P}_{1}}\right)  - U\left( f\right) }\right)  + \left( {L\left( f\right)  - L\left( {f,{P}_{2}}\right) }\right)\\
+< &\frac{\varepsilon }{2} + \frac{\varepsilon }{2} = \varepsilon
+\end{align*}
+\end{proof}
+
+
+在本章开头的讨论中，可以清楚地看出可积性与连续性的概念密切相关。为了使这一观察更加精确，设 \(P = \left\{  {a = {x}_{0} < {x}_{1} < {x}_{2} < \cdots  < {x}_{n} = b}\right\}\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的任意分割，并定义向后差分(backward difference) \(\Delta {x}_{k} = {x}_{k} - {x}_{k - 1}\) 。
+然后，
+
+\[
+U\left( {f,P}\right)  - L\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}\left( {{M}_{k} - {m}_{k}}\right) \Delta {x}_{k},
+\]
+
+其中 \({M}_{k}\) 和 \({m}_{k}\) 分别是函数在区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上的上确界和下确界。我们控制 \(U\left( {f,P}\right)  - L\left( {f,P}\right)\) 大小的能力取决于差 \({M}_{k} - {m}_{k}\) ，这可以解释为函数在区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上的变化范围（振幅）。在 \(\left\lbrack  {a,b}\right\rbrack\) 中任意小的区间内，将 \(f\) 的振幅作限制——这正是 \(f\) 在该集合上一致连续的定义。
+
+\begin{Thm}
+  \label{thm:7.2.9}
+  如果 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，则它是可积的。
+\end{Thm}
+
+
+\begin{proof}
+  第一个关键观察是，由于 \(f\) 在紧集上是连续的，因此它是一致连续的。这意味着，给定 \( \forall\varepsilon  > 0\) ，\( \exists \delta  > 0\) ，使得只要 \(\left| {x - y}\right|  < \delta\) ，就能保证
+
+\[
+\left| {f\left( x\right)  - f\left( y\right) }\right|  < \frac{\varepsilon }{b - a}.
+\]
+
+现在，设 \(P\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割，其中对于 \(P\) 的每个子区间， \(\Delta {x}_{k} = {x}_{k} - {x}_{k - 1} < \delta\) 。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_7_703_732_370_401_0.jpg}
+\end{figure}
+
+给定 \(P\) 的一个特定子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) ，根据极值定理(定理\ref{thm:4.4.3})，我们知道 \(\exists{z}_{k} \in\) 在 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\)  使得上确界 \({M}_{k} = f\left( {z}_{k}\right)\)。同理，下确界 \({m}_{k}\) 在区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 内的某个点 \({y}_{k}\) 处达到。但这意味着 \(\left| {{z}_{k} - {y}_{k}}\right|  < \delta\) ，所以
+
+\[
+{M}_{k} - {m}_{k} = f\left( {z}_{k}\right)  - f\left( {y}_{k}\right)  < \frac{\varepsilon }{b - a}.
+\]
+
+最后，
+
+\[
+U\left( {f,P}\right)  - L\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}\left( {{M}_{k} - {m}_{k}}\right) \Delta {x}_{k} < \frac{\varepsilon }{b - a}\mathop{\sum }\limits_{{k = 1}}^{n}\Delta {x}_{k} = \varepsilon ,
+\]
+
+根据定理\ref{thm:7.2.8}中给出的准则， \(f\) 是可积的。
+\end{proof}
+
+\subsection{练习}
+
+练习 7.2.1. 设 \(f\) 是定义在 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数，且 \(P\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 的任意分割。首先，解释为什么 \(U\left( f\right)  \geq  L\left( {f,P}\right)\) 。现在，证明引理 7.2.6。
+
+练习 7.2.2. 考虑 \(f\left( x\right)  = {2x} + 1\) 在区间 \(\left\lbrack  {1,3}\right\rbrack\) 上的情况。设 \(P\) 是由点 \(\{ 1,3/2,2,3\}\) 构成的分割。
+
+(a) 计算 \(L\left( {f,P}\right) ,U\left( {f,P}\right)\) 和 \(U\left( {f,P}\right)  - L\left( {f,P}\right)\) 。
+
+(b) 当我们将点 \(5/2\) 添加到分区时， \(U\left( {f,P}\right)  - L\left( {f,P}\right)\) 的值会发生什么变化？
+
+(c) 找到一个 \(\left\lbrack  {1,3}\right\rbrack\) 的分区 \({P}^{\prime }\) ，使得 \(U\left( {f,{P}^{\prime }}\right)  - L\left( {f,{P}^{\prime }}\right)  < 2\) 。
+
+练习7.2.3. 直接证明(不依赖于定理7.2)常数函数 \(f\left( x\right)  = k\) 在任何闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可积。 \({\int }_{a}^{b}f\) 是什么？
+
+练习 7.2.4. (a) 证明有界函数 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积的充分必要条件是存在一个分割序列 \({\left( {P}_{n}\right) }_{n = 1}^{\infty }\) 满足
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}\left\lbrack  {U\left( {f,{P}_{n}}\right)  - L\left( {f,{P}_{n}}\right) }\right\rbrack   = 0.
+\]
+
+(b) 对于每个 \(n\) ，令 \({P}_{n}\) 为将 \(\left\lbrack  {0,1}\right\rbrack\) 分割成 \(n\) 个相等子区间的分割。如果 \(f\left( x\right)  = x\) ，求 \(U\left( {f,{P}_{n}}\right)\) 和 \(L\left( {f,{P}_{n}}\right)\) 的公式。公式 \(1 + 2 + 3 + \cdots  + n =\)  \(n\left( {n + 1}\right) /2\) 将会有用。
+
+使用(a)中的可积性顺序准则直接证明 \(f\left( x\right)  = x\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上是可积的。
+
+习题7.2.5。假设对于每个 \(n,{f}_{n}\) ， \(\left\lbrack  {a,b}\right\rbrack\) 上的可积函数。如果 \(\left( {f}_{n}\right)  \rightarrow  f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛，证明 \(f\) 在这个集合上也是可积的。(我们将看到，如果收敛是逐点的，这个结论不一定成立。)
+
+练习 7.2.6. 设 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 在集合 \(\left\lbrack  {a,b}\right\rbrack\) 上递增(即，当 \(x < y\) 时， \(f\left( x\right)  \leq\)  \(f\left( y\right)\) )。证明 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积。
+
+\section{具有间断点的函数的积分}
+\label{sec:7.3}
+连续函数可积这一事实与其说是一个幸运的发现，不如说是积分理论设计良好的的证据。Riemann积分是对Cauchy积分定义的修改，而Cauchy积分是专门为处理连续函数而设计的。而（Riemann积分相较于Cauchy积分的）有趣之处来自于：考察Riemann积分对被积函数连续性的依赖程度。
+
+\begin{Eg}\label{eg:7.3.1}
+考虑定义在 $[0,2]$ 上的函数
+
+\[
+f\left( x\right)  = \left\{  \begin{array}{ll} 1 & x \neq  1 \\  0 &x = 1 \end{array}\right.
+\]
+
+设 \(P\) 是 \(\left\lbrack  {0,2}\right\rbrack\) 的任意分割，心算一下便知 \(U\left( {f,P}\right)  = 2\) 。而下和 \(L\left( {f,P}\right)\) 将小于2，因为任何包含 \(x = 1\) 的 \(P\) 的子区间对下和的值贡献为零。证明 \(f\) 可积的方法是：通过将 \(x = 1\) 嵌入到一个非常小的子区间中，来构造一个将不连续性的影响最小化的分割。
+
+设 \(\varepsilon  > 0\) ，并考虑分割 \({P}_{\varepsilon } = \{ 0,1 - \varepsilon /3,1 + \varepsilon /3,2\}\) 。然后，
+\begin{align*}
+L\left( {f,{P}_{\varepsilon }}\right)  = & 1\left( {1 - \frac{\varepsilon }{3}}\right)  + 0\left( \varepsilon \right)  + 1\left( {1 - \frac{\varepsilon }{3}}\right)\\
+= &  2 - \frac{2}{3}\varepsilon \text{ . }
+\end{align*}
+
+因为 \(U\left( {f,{P}_{\varepsilon }}\right)  = 2\) ，我们有
+
+\[
+U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  = \frac{2}{3}\varepsilon  < \varepsilon .
+\]
+
+我们现在可以使用定理\ref{thm:7.2.8}来得出结论， \(f\) 是可积的。
+  
+\end{Eg}
+
+
+尽管例\ref{eg:7.3.1}中的函数极其简单，但其用来证明其可积的方法实际上与证明任何具有单个不连续点的有界函数可积的方法完全相同。以下证明中的符号更为繁琐，但论证的本质是函数在其不连续点处的异常行为被隔离在分割的一个特别小的子区间内。
+
+
+\begin{Thm}
+  \label{thm:7.3.2}
+如果 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 是有界的，并且 \(\forall c \in  \left( {a,b}\right)\) ， \(f\) 在 \(\left\lbrack  {c,b}\right\rbrack\) 上可积，那么 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积。类似的结果在另一个端点也成立。  
+\end{Thm}
+
+
+\begin{proof}
+设 \(M\) 为 \(f\) 的一个界，即 \(\forall x \in  \left\lbrack  {a,b}\right\rbrack\) ， \(\left| {f\left( x\right) }\right|  \leq  M\) 成立。如果
+
+\[
+P = \left\{  {a = {x}_{0} < {x}_{1} < {x}_{2} < \cdots {x}_{n} = b}\right\}
+\]
+
+是 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割，则
+
+\begin{align*}
+U\left( {f,P}\right)  - L\left( {f,P}\right)  = &\mathop{\sum }\limits_{{k = 1}}^{n}\left( {{M}_{k} - {m}_{k}}\right) \Delta {x}_{k}\\
+= & \left( {{M}_{1} - {m}_{1}}\right) \left( {{x}_{1} - a}\right)  + \mathop{\sum }\limits_{{k = 2}}^{n}\left( {{M}_{k} - {m}_{k}}\right) \Delta {x}_{k}\\
+= & \left( {{M}_{1} - {m}_{1}}\right) \left( {{x}_{1} - a}\right)  + \left( {U\left( {f,{P}_{\left\lbrack  {x}_{1},b\right\rbrack  }}\right)  - L\left( {f,{P}_{\left\lbrack  {x}_{1},b\right\rbrack  }}\right) }\right) ,
+\end{align*}
+
+
+其中 \({P}_{\left\lbrack  {x}_{1},b\right\rbrack  } = \left\{  {{x}_{1} < {x}_{2} < \cdots  < {x}_{n} = b}\right\}\) 是通过从 \(P\) 中删除 \(a\) 得到的 \(\left\lbrack  {{x}_{1},b}\right\rbrack\) 的分割。
+
+给定 \(\varepsilon  > 0\) ，第一步是选择足够接近 \(a\) 的 \({x}_{1}\) ，使得
+
+\[
+\left( {{M}_{1} - {m}_{1}}\right) \left( {{x}_{1} - a}\right)  < \frac{\varepsilon }{2}.
+\]
+
+这并不太难。因为 \({M}_{1} - {m}_{1} \leq  {2M}\) ，我们可以选择 \({x}_{1}\) 使得
+
+\[
+{x}_{1} - a \leq  \frac{\varepsilon }{4M}.
+\]
+
+根据假设， \(f\) 在 \(\left\lbrack  {{x}_{1},b}\right\rbrack\) 上是可积的，因此存在 \(\left\lbrack  {{x}_{1},b}\right\rbrack\) 的一个分割 \({P}_{1}\) ，使得
+
+\[
+U\left( {f,{P}_{1}}\right)  - L\left( {f,{P}_{1}}\right)  < \frac{\varepsilon }{2}.
+\]
+
+最后，我们令 \({P}_{2} = \{ a\}  \cup  {P}_{1}\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割，由此可得
+
+\[
+U\left( {f,{P}_{2}}\right)  - L\left( {f,{P}_{2}}\right)  \leq  \left( {2M}\right) \left( {{x}_{1} - a}\right)  + \left( {U\left( {f,{P}_{1}}\right)  - L\left( {f,{P}_{1}}\right) }\right)
+\]
+
+\[
+< \frac{\varepsilon }{2} + \frac{\varepsilon }{2} = \varepsilon
+\]
+\end{proof}
+
+定理\ref{thm:7.3.2}仅允许在区间的端点处存在不连续性，但这很容易补救。在下一节中，我们将证明在区间 \(\left\lbrack  {a,b}\right\rbrack\) 和 \(\left\lbrack  {b,d}\right\rbrack\) 上的可积性等价于在 \(\left\lbrack  {a,d}\right\rbrack\) 上的可积性。这一性质，结合归纳论证，可以得出结论:任何具有有限个不连续点的函数仍然是可积的。但如果不连续点的数量是无限的，情况会如何？
+
+
+\begin{Eg}
+  回忆Dirichlet函数
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} 1 & x\in \mathbb{Q} \\  0 & x\notin \mathbb{Q} \end{array}\right.
+\]
+
+根据第\ref{sec:4.1}节，如果 \(P\) 是 \(\left\lbrack  {0,1}\right\rbrack\) 的某个分割，那么有理数在 \(\mathbf{R}\) 中的稠密性意味着 \(P\) 的每个子区间都将包含一个有理点 $x$，在该点处 \(g\left( x\right)  = 1\) 。因此， \(U\left( {g,P}\right)  = 1\) 。另一方面， \(L\left( {g,P}\right)  = 0\) 。这是因为无理数在 \(\mathbf{R}\) 中也是稠密的。由于这对于每个分割 \(P\) 都成立，我们看到上积分 \(U\left( f\right)  = 1\) 和下积分 \(L\left( f\right)  = 0\) 。两者不相等，因此我们得出结论：Dirichlet函数不可积。
+\end{Eg}
+
+
+一个函数在不可积之前可以有多不连续？在匆忙得出（错误的）结论——Riemann积分对于具有超过有限个不连续点的函数失效——之前，我们应该意识到Dirichlet函数在 \(\left\lbrack  {0,1}\right\rbrack\) 中的每一点都是不连续的。研究一个不连续点数量无限但不必构成整个 \(\left\lbrack  {0,1}\right\rbrack\) 的函数将是有益的。Thomae函数(也在第\ref{sec:4.1}节中定义)就是这样一个例子。该函数的不连续点恰好是 \(\left\lbrack  {0,1}\right\rbrack\) 中的有理数。在第\ref{sec:7.6}节中，我们将看到Thomae函数是Riemann可积的，这将允许的不连续点的标准提高到包括可能无限的集合。
+
+这个故事的结论包含在 Henry Lebesgue的博士论文中，他于1901年展示了他的工作。Lebesgue关于Riemann可积性的优雅准则在第\ref{sec:7.6}节中进行了详细探讨。不过，现在我们将暂时从可积性问题中绕开，构建一个著名的微积分基本定理的证明。
+
+
+\subsection{练习}
+
+练习7.3.1。考虑函数
+
+\[
+h\left( x\right)  = \left\{  \begin{array}{ll} 1 & \text{ for }0 \leq  x < 1 \\  2 & \text{ for }x = 1 \end{array}\right.
+\]
+
+在区间 \(\left\lbrack  {0,1}\right\rbrack\) 上。
+
+(a) 证明对于 \(\left\lbrack  {0,1}\right\rbrack\) 的每个分割 \(P\) ， \(L\left( {f,P}\right)  = 1\) 成立。
+
+(b) 构建一个分割 \(P\) ，使得 \(U\left( {f,P}\right)  < 1 + 1/{10}\) 成立。
+
+给定 \(\varepsilon  > 0\) ，构造一个分区 \({P}_{\varepsilon }\) ，使得 \(U\left( {f,{P}_{\varepsilon }}\right)  < 1 + \varepsilon\) 。
+
+练习 7.3.2。在例 7.3.3 中，我们了解到Dirichlet函数 \(g\left( x\right)\) 不是Riemann可积的。构造一个可积函数序列 \({g}_{n}\left( x\right)\) ，使得 \({g}_{n} \rightarrow  g\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上逐点收敛。这表明可积函数的逐点极限不一定可积。将此示例与练习 7.2.5 中要求的结果进行比较。
+
+练习 7.3.3。这里是对为什么在 \(\left\lbrack  {a,b}\right\rbrack\) 上具有有限个间断点的函数 \(f\) 可积的另一种解释。补充缺失的细节。
+
+将每个不连续性嵌入足够小的开区间，并令 \(O\) 为这些区间的并集。解释为什么 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack   \smallsetminus  O\) 上一致连续，并利用这一点完成论证。
+
+练习7.3.4。假设 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 是可积的。
+
+(a) 证明如果在某一点 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 处改变 \(f\left( x\right)\) 的一个值，那么 \(f\) 仍然是可积的，并且积分值不变。
+
+(b) 证明如果改变 \(f\) 的有限个值，(a)中的观察仍然成立。
+
+(c) 找出一个例子，说明通过改变可数个值， \(f\) 可能不再可积。
+
+练习7.3.5。设
+
+\[
+f\left( x\right)  = \left\{  \begin{array}{ll} 1 & x = 1/n\text{ for some }n \in  \mathbf{N} \\  0 & \text{ otherwise. } \end{array}\right.
+\]
+
+证明 \(f\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上可积，并计算 \({\int }_{0}^{1}f\) 。
+
+习题 7.3.6。一个集合 \(A \subseteq  \left\lbrack  {a,b}\right\rbrack\) 如果对于每一个 \(\varepsilon  > 0\) 都存在一个有限的开区间集合 \(\left\{  {{O}_{1},{O}_{2},\ldots ,{O}_{N}}\right\}\) ，这些开区间的并集包含 \(A\) 且它们的长度之和为 \(\varepsilon\) 或更小，则称该集合具有零内容。用 \(\left| {O}_{n}\right|\) 表示每个区间的长度，我们有
+
+\[
+A \subseteq  \mathop{\bigcup }\limits_{{n = 1}}^{N}{O}_{n}\;\text{ and }\;\mathop{\sum }\limits_{{k = 1}}^{N}\left| {O}_{n}\right|  \leq  \varepsilon .
+\]
+
+(a) 设 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上有界。证明如果 \(f\) 的不连续点集具有零内容，则 \(f\) 可积。
+
+(b) 证明任何有限集都具有零内容。
+
+(c) 内容为零的集合不必是有限的。它们也不必是可数的。证明第3.1节中定义的Cantor集 \(C\) 的内容为零。
+
+(d) 证明
+
+\[
+h\left( x\right)  = \left\{  \begin{array}{ll} 1 & x \in  C \\  0 & x \notin  C. \end{array}\right.
+\]
+
+是可积的，并求出积分的值。
+
+\section{积分的性质}
+\label{sec:7.4}
+在开始证明微积分基本定理之前，我们需要验证一些可能是非常熟悉的积分性质。上一节的讨论已经使用了以下事实。
+
+
+\begin{Thm}\label{thm:7.4.1}
+假设 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 是有界的，且令 \(c \in  \left( {a,b}\right)\) 。那么， \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积当且仅当 \(f\) 同时在 \(\left\lbrack  {a,c}\right\rbrack\) 和  \(\left\lbrack  {c,b}\right\rbrack\) 上可积。在这种情况下，我们有
+
+\[
+{\int }_{a}^{b}f = {\int }_{a}^{c}f + {\int }_{c}^{b}f
+\]
+\end{Thm}
+
+\begin{proof}
+  如果 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，那么对于 \( \forall \varepsilon  > 0\) ，存在一个分割 \(P\) ，使得 \(U\left( {f,P}\right)  - L\left( {f,P}\right)  < \varepsilon\) 。因为细化分割只会使上和与下和更接近，如果 \(c\) 不在 \(P\) 中，我们可以简单地将其加入 \(P\) 。然后，令 \({P}_{1} = P \cap  \left\lbrack  {a,c}\right\rbrack\) 为 \(\left\lbrack  {a,c}\right\rbrack\) 的一个分割， \({P}_{2} = P \cap  \left\lbrack  {c,b}\right\rbrack\) 为 \(\left\lbrack  {c,b}\right\rbrack\) 的一个分割。由此可得
+
+\[
+U\left( {f,{P}_{1}}\right)  - L\left( {f,{P}_{1}}\right)  < \varepsilon, \quad \left( {f,{P}_{2}}\right)  - L\left( {f,{P}_{2}}\right)  < \varepsilon ,
+\]
+
+这意味着 \(f\) 在 \(\left\lbrack  {a,c}\right\rbrack\) 和 \(\left\lbrack  {c,b}\right\rbrack\) 上是可积的。
+
+反之，如果我们已知 \(f\) 在两个较小的区间 \(\left\lbrack  {a,c}\right\rbrack\) 和 \(\left\lbrack  {c,b}\right\rbrack\) 上是可积的，那么给定一个 \(\varepsilon  > 0\) ，我们可以分别生成 \(\left\lbrack  {a,c}\right\rbrack\) 和 \(\left\lbrack  {c,b}\right\rbrack\) 的分割 \({P}_{1}\) 和 \({P}_{2}\) ，使得
+
+\[
+U\left( {f,{P}_{1}}\right)  - L\left( {f,{P}_{1}}\right)  < \frac{\varepsilon }{2}, \quad U\left( {f,P}\right)  - L\left( {f,P}\right)  < \frac{\varepsilon }{2}.
+\]
+
+令 \(P = {P}_{1} \cup  {P}_{2}\) 生成 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割，使得
+
+\[
+U\left( {f,P}\right)  - L\left( {f,P}\right)  < \varepsilon .
+\]
+
+因此， \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上是可积的。
+
+继续像之前那样令 \(P = {P}_{1} \cup  {P}_{2}\) ，我们有
+\begin{align*}
+{\int }_{a}^{b}f \leq  & U\left( {f,P}\right)  < L\left( {f,P}\right)  + \varepsilon\\
+= &  L\left( {f,{P}_{1}}\right)  + L\left( {f,{P}_{2}}\right)  + \varepsilon\\
+\leq  & {\int }_{a}^{c}f + {\int }_{c}^{b}f + \varepsilon
+\end{align*}
+
+这意味着 \({\int }_{a}^{b}f \leq  {\int }_{a}^{c}f + {\int }_{c}^{b}f\) 。为了得到另一个不等式，注意到
+\begin{align*}
+{\int }_{a}^{c}f + {\int }_{c}^{b}f \leq &   U\left( {f,{P}_{1}}\right)  + U\left( {f,{P}_{2}}\right)\\
+< & L\left( {f,{P}_{1}}\right)  + L\left( {f,{P}_{2}}\right)  + \varepsilon\\
+= & L\left( {f,P}\right)  + \varepsilon\\
+\leq & {\int }_{a}^{b}f + \varepsilon
+\end{align*}
+
+
+因为 \(\varepsilon  > 0\) 是任意的，我们必须有 \({\int }_{a}^{c}f + {\int }_{c}^{b}f \leq  {\int }_{a}^{b}f\) ，所以
+
+\[
+{\int }_{a}^{c}f + {\int }_{c}^{b}f = {\int }_{a}^{b}f
+\]
+
+是为所求。
+\end{proof}
+
+定理\ref{thm:7.4.1}的证明展示了一些用于证明Riemann积分相关事实的标准技巧。诚然，操作分割并不显得特别优雅。下一个结果列出了我们在接下来的论证中所需的积分的基本性质。
+
+
+\begin{Thm}\label{thm:7.4.2}
+假设 \(f\) 和 \(g\) 是区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的可积函数。
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:7.4.1} 函数 \(f + g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上是可积的，且 \({\int }_{a}^{b}\left( {f + g}\right)  = {\int }_{a}^{b}f + {\int }_{a}^{b}g\) 。
+\item\label{item:7.4.2} 对于 \(k \in  \mathbf{R}\) ，函数 \({kf}\) 是可积的，且 \({\int }_{a}^{b}{kf} = k{\int }_{a}^{b}f\) 。
+\item\label{item:7.4.3} 如果 \(m \leq  f \leq  M\) ，那么 \(m\left( {b - a}\right)  \leq  {\int }_{a}^{b}f \leq  M\left( {b - a}\right)\) 。
+\item\label{item:7.4.4} 如果 \(f \leq  g\) ，那么 \({\int }_{a}^{b}f \leq  {\int }_{a}^{b}g\) 。
+\item\label{item:7.4.5} 函数 \(\left| f\right|\) 是可积的，且 \(\left| {{\int }_{a}^{b}f}\right|  \leq  {\int }_{a}^{b}\left| f\right|\) 。
+\end{enumerate}
+\end{Thm}
+
+\begin{proof}
+性质 \ref{item:7.4.1} 和 \ref{item:7.4.2} 让人联想到代数极限定理及其众多衍生定理(定理 \ref{thm:2.3.3}、\ref{thm:2.7.1}、\ref{cor:4.2.4} 和 \ref{thm:5.2.4})。事实上，也有一种方法可以将代数极限定理用于此论证。定理 \ref{thm:7.2.8} 的一个直接推论是，函数 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积当且仅当存在一个分割序列 \(\left( {P}_{n}\right)\) 满足
+
+\begin{equation}
+\label{eq:7.4.1}
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}\left\lbrack  {U\left( {f,{P}_{n}}\right)  - L\left( {f,{P}_{n}}\right) }\right\rbrack   = 0,
+\end{equation}
+
+在这种情况下 \({\int }_{a}^{b}f = \lim U\left( {f,{P}_{n}}\right)  = \lim L\left( {f,{P}_{n}}\right)\) 。(详见练习7.2.4。)
+
+为了证明\ref{item:7.4.2}在 \(k \geq  0\) 情况下的成立，首先验证对于任何分割 \(P\) 我们有
+
+\[
+U\left( {{kf},P}\right)  = {kU}\left( {f,P}\right) , \quad L\left( {{kf},P}\right)  = {kL}\left( {f,P}\right) .
+\]
+
+这里使用了练习1.3.5。因为 \(f\) 是可积的，所以存在满足 \ref{eq:7.4.1} 的分割 \(\left( {P}_{n}\right)\) 。将注意力转向函数 $(kf)$，我们看到
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}\left\lbrack  {U\left( {{kf},{P}_{n}}\right)  - L\left( {{kf},{P}_{n}}\right) }\right\rbrack   = \mathop{\lim }\limits_{{n \rightarrow  \infty }}k\left\lbrack  {U\left( {f,{P}_{n}}\right)  - L\left( {f,{P}_{n}}\right) }\right\rbrack   = 0,
+\]
+
+这便得到了 \ref{item:7.4.2}。 \(k < 0\) 的情况类似，只是我们有
+
+\[
+U\left( {{kf},{P}_{n}}\right)  = {kL}\left( {f,{P}_{n}}\right) \;\text{ 且 }\;L\left( {{kf},{P}_{n}}\right)  = {kU}\left( {f,{P}_{n}}\right) .
+\]
+
+可以使用类似的方法构造 \ref{item:7.4.1} 的证明，详见练习7.4.5。
+
+为了证明 \ref{item:7.4.3}，观察到下式对任何分割 $P$ 都成立：
+
+\[
+U\left( {f,P}\right)  \geq  {\int }_{a}^{b}f \geq  L\left( {f,P}\right)
+\]
+
+我们取 \(P\) 为仅包含端点 \(a\) 和 \(b\) 的平凡分割，便得到 \ref{item:7.4.3}。
+
+对于~\ref{item:7.4.4}，令 \(h = g - f \geq  0\) 并使用~\ref{item:7.4.1}和~\ref{item:7.4.3}。
+
+因为 \(- \left| f\right|  \leq  f \leq  \left| f\right|\) ，如果我们能证明 \(\left| f\right|\) 实际上是可积的，则我们可以由 \ref{item:7.4.4} 直接得出 \ref{item:7.4.5}。证明详见练习7.4.1。  
+\end{proof}
+
+
+到目前为止，我们仅在 $a<b$ 的情况下定义了 \({\int }_{a}^{b}f\) ，但其推广并不困难。
+
+
+\begin{Def}\label{def:7.4.3}
+  如果 \(f\) 在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，则定义
+
+\[
+{\int }_{b}^{a}f =  - {\int }_{a}^{b}f
+\]
+
+同时，定义
+
+\[
+{\int }_{c}^{c}f = 0
+\]
+
+\end{Def}
+
+定义\ref{def:7.4.3}是为了简化积分代数的一个自然约定。如果 \(f\) 是某个区间 \(I\) 上的可积函数，那么可以直接验证方程
+
+\[
+{\int }_{a}^{b}f = {\int }_{a}^{c}f + {\int }_{c}^{b}f
+\]
+
+来自定理\ref{thm:7.4.1}的方程对于从 \(I\) 中任意顺序选择的任意三个点 \(a,b\) 和 \(c\) 仍然有效。
+
+\subsection{一致收敛与积分}
+
+设 \(\left( {f}_{n}\right)\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 上的可积函数序列，且 \({f}_{n} \rightarrow  f\) ，那么我们不可避免地想知道是否有
+\begin{equation}
+\label{eq:7.4.2}
+{\int }_{a}^{b}{f}_{n} \rightarrow  {\int }_{a}^{b}f
+\end{equation}
+
+
+这是分析学中一个主要主题的典型例子:诸如积分之类的数学操作何时会尊重极限过程？
+
+如果收敛仅是逐点的，那么可能会出现许多问题。每个 \({f}_{n}\) 可能是可积的，但极限 \(f\) 可能不可积(练习7.3.2)。即使极限函数 \(f\) 是可积的，方程\ref{eq:7.4.2}也可能不成立。作为这种情况的一个例子，设
+
+\[
+{f}_{n}\left( x\right)  = \left\{  \begin{array}{ll} n & 0 < x < 1/n \\  0 & \text{otherwise} \end{array}\right.
+\]
+
+每个 \({f}_{n}\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上有两个不连续点，因此是可积的，且易见  \({\int }_{0}^{1}{f}_{n} = 1\) 。对于每个 \(x \in  \left\lbrack  {0,1}\right\rbrack\) ，我们有 \(\lim {f}_{n}\left( x\right)  = 0\) ，因此在 \(\left\lbrack  {0,1}\right\rbrack\) 上 \({f}_{n} \rightarrow  0\) 逐点收敛。但现在观察到极限函数 \(f = 0\) 的积分确实为0，并且
+
+\[
+0 \neq  \mathop{\lim }\limits_{{n \rightarrow  \infty }}{\int }_{0}^{1}{f}_{n}
+\]
+
+作为对\ref{eq:7.4.2}中可能出现的问题的最后评注，我们应该指出，可以修改这个例子以产生一种情况，使得 \(\lim {\int }_{0}^{1}{f}_{n}\) 甚至不存在。
+
+解决所有这些问题的其中一种方法是添加一致收敛的假设。
+
+\begin{Thm}
+  \label{thm:7.4.4}
+  假设 \({f}_{n} \rightarrow  f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛，并且每个 \({f}_{n}\) 都是可积的。那么， \(f\) 是可积的，并且
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}{\int }_{a}^{b}{f}_{n} = {\int }_{a}^{b}f
+\]
+\end{Thm}
+
+\begin{proof}
+  
+对任意 \(\varepsilon > 0\)，存在 \(N\) 使得当 \(n \geq N\) 时，\(|f_{n}(x) - f(x)| < \frac{\varepsilon}{3(b-a)}\)。  
+取定 \(n \geq N\)，因 \({f}_{n}\) 可积，存在分割 \(P\) 使得 \(U(f_{n}, P) - L(f_{n}, P) < \frac{\varepsilon}{3}\)。  
+对分割 \(P\) 的任一小区间，\(f\) 的振幅 \(\omega_{i} \leq \omega_{n,i} + 2 \cdot \frac{\varepsilon}{3(b-a)}\)，其中 \(\omega_{n,i}\) 为 \({f}_{n}\) 的振幅。  
+则 \(U(f, P) - L(f, P) \leq [U(f_{n}, P) - L(f_{n}, P)] + 2 \cdot \frac{\varepsilon}{3(b-a)} \cdot (b-a) < \frac{\varepsilon}{3} + \frac{2\varepsilon}{3} = \varepsilon\)，故 \(f\) 可积。
+
+由一致收敛，存在 \(N'\) 使得当 \(n \geq N'\) 时，\(|f_{n}(x) - f(x)| < \frac{\varepsilon}{b-a}\)。  
+则 \(\left| \int_{a}^{b} (f_{n} - f) \right| \leq \int_{a}^{b} |f_{n} - f| < \frac{\varepsilon}{b-a} \cdot (b-a) = \varepsilon\)，即 \(\lim_{n \to \infty} \int_{a}^{b} f_{n} = \int_{a}^{b} f\)。
+\end{proof}
+
+
+\subsection{习题}
+
+习题7.4.1。(a) 设 \(f\) 为集合 \(A\) 上的有界函数，并设
+
+\[
+M = \sup \{ f\left( x\right)  : x \in  A\} ,\;m = \inf \{ f\left( x\right)  : x \in  A\} ,
+\]
+
+\[
+{M}^{\prime } = \sup \{ \left| {f\left( x\right) }\right|  : x \in  A\} ,\;\text{ and }\;{m}^{\prime } = \inf \{ \left| {f\left( x\right) }\right|  : x \in  A\} .
+\]
+
+证明 \(M - m \geq  {M}^{\prime } - {m}^{\prime }\) 。
+
+(b) 证明如果 \(f\) 在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，则 \(\left| f\right|\) 在此区间上也可积。
+
+(c) 提供论证的细节，说明在这种情况下我们有 \(\left| {{\int }_{a}^{b}f}\right|  \leq\)  \({\int }_{a}^{b}\left| f\right|\) 。
+
+练习 7.4.2。回顾定义 7.4.3。证明如果 \(c \leq  a \leq  b\) 和 \(f\) 在区间 \(\left\lbrack  {c,b}\right\rbrack\) 上可积，则 \({\int }_{a}^{b}f = {\int }_{a}^{c}f + {\int }_{c}^{b}f\) 仍然成立。
+
+练习7.4.3. 证明定理7.4.4，包括对练习7.2.5的论证(如果尚未完成)。练习7.4.4. 判断以下猜想中哪些为真，并提供简短证明。对于不成立的猜想，给出反例。
+
+(a) 如果 \(\left| f\right|\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，则 \(f\) 在该集合上也可积。
+
+(b) 假设 \(g\) 可积且 \(g \geq  0\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上。如果在无限多个点 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 上 \(g\left( x\right)  > 0\) ，则 \(\int g > 0\) 。
+
+如果 \(g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 和 \(g \geq  0\) 上连续，并且至少存在一个点 \({x}_{0} \in  \left\lbrack  {a,b}\right\rbrack\) 使得 \(g\left( {x}_{0}\right)  > 0\) ，那么 \({\int }_{a}^{b}g > 0\) 。
+
+如果 \({\int }_{a}^{b}f > 0\) ，存在一个区间 \(\left\lbrack  {c,d}\right\rbrack   \subseteq  \left\lbrack  {a,b}\right\rbrack\) 和一个 \(\delta  > 0\) ，使得对于所有的 \(x \in  \left\lbrack  {c,d}\right\rbrack\) ， \(f\left( x\right)  \geq  \delta\) 成立。
+
+练习 7.4.5. 设 \(f\) 和 \(g\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 上的可积函数。
+
+(a) 证明如果 \(P\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 的任意分割，则
+
+\[
+U\left( {f + g,P}\right)  \leq  U\left( {f,P}\right)  + U\left( {g,P}\right) .
+\]
+
+提供一个具体例子，其中不等式是严格的。对应的下和不等式是什么样子的？
+
+(b) 回顾定理 7.4.2 (ii) 的证明，并为该定理的 (i) 部分提供论证。
+
+练习 7.4.6. 回顾定理 7.4.4 之前的讨论。
+
+(a) 构造一个序列 \({f}_{n} \rightarrow  0\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上逐点收敛的例子，其中 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{\int }_{0}^{1}{f}_{n}\) 不存在。
+
+(b) 生成另一个例子(如有必要)，其中 \({f}_{n} \rightarrow  0\) 且序列 \({\int }_{0}^{1}{f}_{n}\) 无界。
+
+(c) 在(a)和(b)部分的例子中，是否可能构造每个 \({f}_{n}\) 使其连续？
+
+(d) 是否有可能构造序列 \(\left( {f}_{n}\right)\) 使其一致有界？(一致有界意味着存在一个单一的 \(M > 0\) 满足 \(\left| {f}_{n}\right|  \leq  M\) 对于所有 \(n \in  \mathbf{N}\) 。
+
+练习 7.4.7。假设 \({g}_{n}\) 和 \(g\) 是 \(\left\lbrack  {0,1}\right\rbrack\) 上的有界可积函数，且 \({g}_{n} \rightarrow  g\) 。收敛性不是一致的；然而，在任何形式为 \(\left\lbrack  {\delta ,1}\right\rbrack\) 的集合上，其中 \(0 < \delta  < 1\) ，收敛性是一致的。证明 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{\int }_{0}^{1}{g}_{n} =\)  \({\int }_{0}^{1}g\) 。
+
+\section{微积分基本定理}
+\label{sec:7.5}
+导数和积分已被独立定义，各自有其严格的数学术语。导数的定义源于寻找切线的问题，并以差商的函数极限形式给出。积分的定义则源于描述非恒定函数下面积的愿望，并以有限和的上确界和下确界形式给出。微积分基本定理揭示了这两个过程之间显著的互逆关系。
+
+结果分为两部分陈述。第一部分是一个计算性陈述，描述了如何使用反导数来计算特定区间上的积分。第二部分更具理论性，表达了每个连续函数都是其不定积分的导数这一事实。
+
+\begin{Thm}
+  \label{thm:7.5.1}
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:7.5.1}如果 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow \mathbf{R}\) 是可积的，且 \(F : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 满足 \(\forall x \in  \left\lbrack  {a,b}\right\rbrack, {F}^{\prime }\left( x\right)  = f\left( x\right)\) ，则
+
+\[
+{\int }_{a}^{b}f = F\left( b\right)  - F\left( a\right) .
+\]
+\item\label{item:7.5.2}设 \(g : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 是可积的。设定义在 $[a,b]$ 上的函数
+
+\[
+G\left( x\right)  = {\int }_{a}^{x}g
+\]
+
+则 \(G\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上是连续的。如果 \(g\) 在某点 \(c \in  \left\lbrack  {a,b}\right\rbrack\) 连续，则 \(G\) 在 \(c\) 可微且 \({G}^{\prime }\left( c\right)  = g\left( c\right)\) 。
+  \end{enumerate}
+\end{Thm}
+
+
+\begin{proof}
+对于 \ref{item:7.5.1}，设 \(P\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割，在区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上对 $F$ 应用中值定理，便得到点列 \({t}_{k} \in  \left( {{x}_{k - 1},{x}_{k}}\right)\) 使得
+
+\begin{align*}
+F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right)  = & {F}^{\prime }\left( {t}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right)\\
+= & f\left( {t}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right) \text{ . }
+\end{align*}
+
+现在，考虑上确界和下确界 \(U\left( {f,P}\right)\) 和 \(L\left( {f,P}\right)\) 。因为 \({m}_{k} \leq f\left( {t}_{k}\right)  \leq  {M}_{k}\) (其中 \({m}_{k}\) 是 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上的下确界， \({M}_{k}\) 是上确界)，所以可以得出
+
+\[
+L\left( {f,P}\right)  \leq  \mathop{\sum }\limits_{{k = 1}}^{n}\left\lbrack  {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right) }\right\rbrack   \leq  U\left( {f,P}\right) .
+\]
+
+注意到中间的求和项可以简化为
+
+\[
+\mathop{\sum }\limits_{{k = 1}}^{n}\left\lbrack  {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right) }\right\rbrack   = F\left( b\right)  - F\left( a\right) ,
+\]
+
+这与分割 \(P\) 无关。因此我们有
+
+\[
+L\left( f\right)  \leq  F\left( b\right)  - F\left( a\right)  \leq  U\left( f\right) .
+\]
+
+又因为 \(L\left( f\right)  = U\left( f\right)  = {\int }_{a}^{b}f\) ，我们得出结论 \({\int }_{a}^{b}f = F\left( b\right)  - F\left( a\right)\) 。
+
+为了证明 \ref{item:7.5.2}，取 \(x,y \in  \left\lbrack  {a,b}\right\rbrack\) 并观察到
+
+\[
+\left| {G\left( x\right)  - G\left( y\right) }\right|  = \left| {{\int }_{a}^{x}g - {\int }_{a}^{y}g}\right|  = \left| {{\int }_{y}^{x}g}\right|
+\]
+
+\[
+\leq  {\int }_{y}^{x}\left| g\right|
+\]
+
+\[
+\leq  M\left| {x - y}\right|
+\]
+
+其中 \(M > 0\) 是 \(\left| g\right|\) 的一个界。这表明 \(G\) 是 Lipschitz 的，因此在 \(\left\lbrack  {a,b}\right\rbrack\) 上是一致连续的(练习4.4.9)。
+
+现在，假设 \(g\) 在 \(c \in  \left\lbrack  {a,b}\right\rbrack\) 处连续。为了证明 \({G}^{\prime }\left( c\right)  = g\left( c\right)\) ，我们将 \({G}^{\prime }\left( c\right)\) 的极限重写为
+\begin{align*}
+\mathop{\lim }\limits_{{x \rightarrow  c}}\frac{G\left( x\right)  - G\left( c\right) }{x - c} = & \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{1}{x - c}\left( {{\int }_{a}^{x}g\left( t\right) {dt} - {\int }_{a}^{c}g\left( t\right) {dt}}\right)\\
+= & \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{1}{x - c}\left( {{\int }_{c}^{x}g\left( t\right) {dt}}\right) .
+\end{align*}
+
+我们希望证明这个极限等于 \(g\left( c\right)\) 。因此，给定一个 \(\varepsilon  > 0\) ，我们必须选取一个 \(\delta  > 0\) ，使得只要 \(\left| {x - c}\right|  < \delta\) ，便有
+\begin{equation}
+\label{eq:7.5.1}
+\left| {\frac{1}{x - c}\left( {{\int }_{c}^{x}g\left( t\right) {dt}}\right)  - g\left( c\right) }\right|  < \varepsilon .
+\end{equation}
+
+\(g\) 的连续性假设使我们能够控制差值 \(\left| {g\left( t\right)  - g\left( c\right) }\right|\) 。特别是，我们知道存在一个 \(\delta  > 0\) ，使得
+
+\[
+\left| {t - c}\right|  < \delta  \Rightarrow \left| {g\left( t\right)  - g\left( c\right) }\right|  < \varepsilon .
+\]
+
+为了利用这一点，我们巧妙地将常数 \(g\left( c\right)\) 写成
+
+\[
+g\left( c\right)  = \frac{1}{x - c}{\int }_{c}^{x}g\left( c\right) {dt}
+\]
+
+并将方程\eqref{eq:7.5.1}中的两项合并为一个积分。考虑到 \(\left| {x - c}\right|  \geq  \left| {t - c}\right|\) ，我们对于所有 \(\left| {x - c}\right|  < \delta\) ，都有
+
+\begin{align*}
+\left| {\frac{1}{x - c}\left( {{\int }_{c}^{x}g\left( t\right) {dt}}\right)  - g\left( c\right) }\right|  = & \left| {\frac{1}{x - c}{\int }_{c}^{x}\left\lbrack  {g\left( t\right)  - g\left( c\right) }\right\rbrack  {dt}}\right|\\
+\leq & \frac{1}{\left( x - c\right) }{\int }_{c}^{x}\left| {g\left( t\right)  - g\left( c\right) }\right| {dt}\\
+< & \frac{1}{\left( x - c\right) }{\int }_{c}^{x}{\varepsilon dt} = \varepsilon .
+\end{align*}
+\end{proof}
+
+\subsection{练习}
+
+练习7.5.1. 我们已经看到并非每个导数都是连续的，但请解释为什么我们至少知道每个连续函数都是导数。
+
+练习7.5.2. (a) 设 \(f\left( x\right)  = \left| x\right|\) 并定义 \(F\left( x\right)  = {\int }_{-1}^{x}f\) 。为所有 \(x\) 找到 \(F\left( x\right)\) 的公式。 \(F\) 在何处连续？ \(F\) 在何处可微？ \({F}^{\prime }\left( x\right)  = f\left( x\right)\) 在何处成立？
+
+(b) 对函数重复(a)部分
+
+\[
+f\left( x\right)  = \left\{  \begin{array}{ll} 1 & x < 0 \\  2 & x \geq  0. \end{array}\right.
+\]
+
+练习7.5.3。定理7.5.1(i)中的假设，即对于所有 \({F}^{\prime }\left( x\right)  = f\left( x\right)\) ， \(x \in  \left\lbrack  {a,b}\right\rbrack\) 的条件略强于实际需要。仔细阅读证明，并准确陈述在 \(f\) 和 \(F\) 之间的关系上需要假设什么才能使证明成立。
+
+练习7.5.4(自然对数)。设
+
+\[
+H\left( x\right)  = {\int }_{1}^{x}\frac{1}{t}{dt}
+\]
+
+其中我们仅考虑 \(x > 0\) 。
+
+(a) \(H\left( 1\right)\) 是什么？找出 \({H}^{\prime }\left( x\right)\) 。
+
+(b) 证明 \(H\) 是严格递增的；即，证明如果 \(0 < x < y\) ，则 \(H\left( x\right)  < H\left( y\right)\) 。
+
+(c) 证明 \(H\left( {cx}\right)  = H\left( c\right)  + H\left( x\right)\) 。(将 \(c\) 视为常数并对 \(g\left( x\right)  = H\left( {cx}\right)\) 进行微分。)
+
+练习 7.5.5。微积分基本定理可用于在导数序列连续的附加假设下，为定理 6.3.1 提供更简短的论证。
+
+假设 \({f}_{n} \rightarrow  f\) 逐点收敛且 \({f}_{n}^{\prime } \rightarrow  g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛。假设每个 \({f}_{n}^{\prime }\) 都是连续的，我们可以应用定理 7.5.1 (i) 得到
+
+\[
+{\int }_{a}^{x}{f}_{n}^{\prime } = {f}_{n}\left( x\right)  - {f}_{n}\left( a\right)
+\]
+
+对于所有 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 。证明 \(g\left( x\right)  = {f}^{\prime }\left( x\right)\) 。
+
+练习7.5.6。使用定理7.5.1的第(ii)部分，通过以下策略构造定理7.5.1的第(i)部分的另一个证明。给定 \(f\) 和 \(F\) 如第(i)部分所述，设 \(G\left( x\right)  = {\int }_{a}^{x}f\) 。 \(F\) 和 \(G\) 之间有什么关系？
+
+练习7.5.7(平均值)。如果 \(g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，证明存在一个点 \(c \in  \left( {a,b}\right)\) 使得
+
+\[
+g\left( c\right)  = \frac{1}{b - a}{\int }_{a}^{b}g.
+\]
+
+习题7.5.8. 给定函数 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上，定义 \(f\) 的全变差为
+
+为
+
+\[
+{Vf} = \sup \left\{  {\mathop{\sum }\limits_{{k = 1}}^{n}\left| {f\left( {x}_{k}\right)  - f\left( {x}_{k - 1}\right) }\right| }\right\}  ,
+\]
+
+其中上确界取遍 \(\left\lbrack  {a,b}\right\rbrack\) 的所有分割 \(P\) 。
+
+(a) 如果 \(f\) 是连续可微的( \({f}^{\prime }\) 作为连续函数存在)，使用微积分基本定理证明 \({Vf} \leq  {\int }_{a}^{b}\left| {f}^{\prime }\right|\) 。
+
+(b) 使用中值定理建立反向不等式并得出结论 \({Vf} = {\int }_{a}^{b}\left| {f}^{\prime }\right|\) 。
+
+习题7.5.9. 设
+
+\[
+h\left( x\right)  = \left\{  \begin{array}{ll} 1 & x < 1\text{ or }x > 1 \\  0 & x = 1 \end{array}\right.
+\]
+
+并定义 \(H\left( x\right)  = {\int }_{0}^{x}h\) 。证明即使 \(h\) 在 \(x = 1\) 处不连续， \(H\left( x\right)\) 在 \(x = 1\) 处仍然可微。
+
+练习7.5.10。假设 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积，并且在 \(c \in  \left( {a,b}\right)\) 处有一个“跳跃间断点”。这意味着当 \(x\) 从左和从右接近 \(c\) 时，两个单侧极限都存在，但
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  {c}^{ - }}}f\left( x\right)  \neq  \mathop{\lim }\limits_{{x \rightarrow  {c}^{ + }}}f\left( x\right) .
+\]
+
+(这一现象在第4.6节中有更详细的讨论。)
+
+证明 \(F\left( x\right)  = {\int }_{a}^{x}f\) 在 \(x = c\) 处不可微。
+
+练习7.5.11。第5章的结语提到存在一个连续单调函数，该函数在实数集R的一个稠密子集上不可微。结合练习7.5.10和练习6.4.8的结果，展示如何构造这样的函数。
+
+\section{Riemann可积性的Lebesgue准则}
+\label{sec:7.6}
+我们现在回到对连续性与Riemann积分之间关系的探讨。我们已经证明了连续函数是可积的，并且积分也存在于仅有有限个间断点的函数中。在另一极端，我们看到Dirichlet函数在 \(\left\lbrack  {0,1}\right\rbrack\) 上的每一点都不连续，因此Riemann不可积。接下来的例子表明，可积函数的间断点集可以是无限的，甚至可以是不可数的。
+
+\subsection{具有无限间断点的Riemann可积函数}
+
+回顾第\ref{sec:4.1}节，Thomae函数
+
+\[
+t\left( x\right)  = \left\{  \begin{array}{ll} 1 &x = 0 \\  1/n & x = m/n \in  \mathbf{Q} \smallsetminus  \{ 0\} ,n > 0, \gcd(m,n) = 1 \\  0 & x \notin  \mathbf{Q} \end{array}\right.
+\]
+
+在无理数集上连续，并在每个有理点处不连续。让我们证明Thomae函数在 \(\left\lbrack  {0,1}\right\rbrack\) 上可积，且 \({\int }_{0}^{1}t = 0\) 。
+
+设 \(\varepsilon  > 0\) 。策略与往常一样，是构造 \(\left\lbrack  {0,1}\right\rbrack\) 的一个分割 \({P}_{\varepsilon }\) ，使得 \(U\left( {t,{P}_{\varepsilon }}\right)  - L\left( {t,{P}_{\varepsilon }}\right)  < \varepsilon\) 。
+
+练习7.6.1。a) 首先，论证对于 \(\left\lbrack  {0,1}\right\rbrack\) 的任何分割 \(P\) ，都有 \(L\left( {t,P}\right)  = 0\) 。
+
+b) 考虑点集 \({D}_{\varepsilon /2} = \{ x : t\left( x\right)  \geq  \varepsilon /2\}\) 。 \({D}_{\varepsilon /2}\) 有多大？
+
+c) 为了完成论证，解释如何构造 \(\left\lbrack  {0,1}\right\rbrack\) 的一个分割 \({P}_{\varepsilon }\) ，使得 \(U\left( {t,{P}_{\varepsilon }}\right)  < \varepsilon\) 。
+
+我们首次在3.1节中遇到了Cantor集 \(C\) 。我们随后了解到， \(C\) 是区间 \(\left\lbrack  {0,1}\right\rbrack\) 的一个紧的、不可数的子集。练习4.3.12的要求是证明该函数
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} 1 & x \in  C \\  0 & x \notin  C \end{array}\right.
+\]
+
+在 \(C\) 的补集的每一点上连续，并且在 \(C\) 的每一点上都有间断。因此， \(g\) 在一个不可数无限集上不连续。
+
+练习 7.6.2. 利用 \(C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}\) 这一事实，其中每个 \({C}_{n}\) 由有限个闭区间的并集组成，论证 \(g\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上是Riemann可积的。
+
+\subsection{零测集}
+
+Thomae函数在 \(\left\lbrack  {0,1}\right\rbrack\) 中的每个有理数点处都不连续。尽管这个集合是无限的，但我们已经看到 \(\mathbf{Q}\) 的任何子集都是可数的。可数无限集是最小类型的无限集。Cantor集是不可数的，但在某种意义上它也是“小”的，我们现在可以精确地描述这一点。在第3章的引言中，我们提出了一个论点，即Cantor集的“长度”为零。这里的“长度”一词并不恰当，因为它实际上只应应用于区间或区间的并集，而Cantor集并非如此。有一种将长度概念推广到更一般集合的方法，称为集合的测度(measure)。在我们的讨论中，感兴趣的是测度为零的子集。
+
+
+
+\begin{Def}
+  \label{def:7.6.1}
+  称一个集合 \(A \subseteq  \mathbf{R}\) 具有零测度，如果对于所有 \(\varepsilon  > 0\) ，存在一个可数的开区间集合 \({O}_{n}\) ，使得 \(A\) 包含在所有区间的并集中，并且所有区间的长度之和小于或等于 \(\varepsilon\) 。更准确地说，如果 \(\left| {O}_{n}\right|\) 表示区间 \({O}_{n}\) 的长度，那么我们有
+
+\[
+A \subseteq  \mathop{\bigcup }\limits_{{n = 1}}^{\infty }{O}_{n}\;\text{ 且}\;\mathop{\sum }\limits_{{n = 1}}^{\infty }\left| {O}_{n}\right|  \leq  \varepsilon .
+\]
+\end{Def}
+
+\begin{Eg}
+考虑一个有限集合 \(A = \left\{  {{a}_{1},{a}_{2},\ldots ,{a}_{N}}\right\}\) 。为了证明 \(A\) 具有零测度，令 \(\varepsilon  > 0\) 为任意值。对于每个 \(1 \leq  n \leq  N\) ，构造
+区间
+
+\[
+{G}_{n} = \left( {{a}_{n} - \frac{\varepsilon }{2N},{a}_{n} + \frac{\varepsilon }{2N}}\right) .
+\]
+
+显然， \(A\) 包含在这些区间的并集中，并且
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{N}\left| {G}_{n}\right|  = \mathop{\sum }\limits_{{n = 1}}^{N}\frac{\varepsilon }{N} = \varepsilon
+\]  
+\end{Eg}
+
+
+练习7.6.3. 证明任何可数集的测度为零。
+
+练习7.6.4. 证明Cantor集(不可数)的测度为零。
+
+练习7.6.5. 证明如果两个集合 \(A\) 和 \(B\) 的测度都为零，那么 \(A \cup  B\) 的测度也为零。此外，讨论更强命题的证明，即测度为零的集合的可数并集的测度也为零。(第二个命题是正确的，但完全严格的证明需要关于第2.8节中讨论的双重求和的结果。)
+
+\subsection{\(\alpha\) -连续性}
+\begin{Def}
+  \label{def:7.6.3}
+  设 \(f\) 定义在 \(\left\lbrack  {a,b}\right\rbrack\) 上，且令 \(\alpha  > 0\) 。若存在 \(\delta  > 0\) ，使得对于所有 \(y,z \in  \left( {x - \delta ,x + \delta }\right)\) ，都有 \(\left| {f\left( y\right)  - f\left( z\right) }\right|  < \alpha\) ，则称函数 \(f\) 在 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 处是 \(\alpha\) -连续的。
+
+\end{Def}
+
+
+  设 \(f\) 是定义在 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数。对于每个 \(\alpha  > 0\) ，定义 \({D}_{\alpha }\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 中函数 \(f\) 不满足 \(\alpha\) -连续性的点集；即，
+
+\begin{equation}
+\label{eq:7.6.1}
+{D}_{\alpha } = \{ x \in  \left\lbrack  {a,b}\right\rbrack   : f  \text{在}x \text{处不} \alpha \text{连续}.\} .
+\end{equation}
+
+
+\(\alpha\) -连续性的概念已在第\ref{sec:4.6}节中介绍。随后的几个练习也出现在本节中。
+
+练习7.6.6。如果 \({\alpha }_{1} < {\alpha }_{2}\) ，证明 \({D}_{{\alpha }_{2}} \subseteq  {D}_{{\alpha }_{1}}\) 。
+
+现在，设
+
+\begin{equation}
+\label{eq:7.6.2}
+D = \{ x \in  \left\lbrack  {a,b}\right\rbrack   : f  \text{在}x \text{处不连续}\} .
+\end{equation}
+
+练习 7.6.7. (a) 设 \(\alpha  > 0\) 给定。证明如果 \(f\) 在 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 处连续，则它在 \(x\) 处也是 \(\alpha\) -连续的。解释如何由此得出 \({D}_{\alpha } \subseteq  D\) 。
+
+(b) 证明如果 \(f\) 在 \(x\) 处不连续，则 \(f\) 对于某个 \(\alpha  > 0\) 不是 \(\alpha\) -连续的。现在，解释为什么这保证了
+
+\[
+D = \mathop{\bigcup }\limits_{{n = 1}}^{\infty }{D}_{1/n}
+\]
+
+练习 7.6.8. 证明对于固定的 \(\alpha  > 0\) ，集合 \({D}_{\alpha }\) 是闭的。
+
+练习 7.6.9。通过模仿定理 4.4.8 的证明，证明如果对于某个固定的 \(\alpha  > 0,f\) ， \(\alpha\) 在某个紧集 \(K\) 上的每一点都是连续的，那么 \(f\) 在 \(K\) 上是一致 \(\alpha\) 连续的。所谓一致 \(\alpha\) 连续，是指存在一个 \(\delta  > 0\) ，使得每当 \(x\) 和 \(y\) 是 \(K\) 中满足 \(\left| {x - y}\right|  < \delta\) 的点时，就有 \(\left| {f\left( x\right)  - f\left( y\right) }\right|  < \alpha\) 。
+
+\subsection{紧性再探}
+
+实数集的紧性可以用三种等价的方式来描述。以下定理出现在第 \ref{sec:3.3} 节的末尾。
+
+\begin{Thm}
+  \label{thm:7.6.4}
+  设 \(K \subseteq  \mathbf{R}\) 。以下三个陈述都是等价的，即如果其中任何一个为真，则其他两个也为真。
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:7.6.1} 每个包含在 \(K\) 中的序列都有一个收敛子序列，且该子序列收敛到 \(K\) 中的一个极限。
+\item\label{item:7.6.2} \(K\) 是闭集且有界的。
+\item\label{item:7.6.3}给定一组覆盖 \(K\) 的开区间 \(\left\{  {{G}_{\alpha } : \alpha  \in  \Lambda }\right\}\) ；即 \(K \subseteq  \mathop{\bigcup }\limits_{{\alpha  \in  \Lambda }}{G}_{\alpha }\) ，存在原集合的一个有限子集 \(\left\{  {{G}_{{\alpha }_{1}},{G}_{{\alpha }_{2}},{G}_{{\alpha }_{3}},\ldots ,{G}_{{\alpha }_{N}}}\right\}\) ，该子集也覆盖 \(K\) 。
+\end{enumerate}
+\end{Thm}
+
+
+\ref{item:7.6.1}和~\ref{item:7.6.2}的等价性已在文本的核心材料中广泛使用。特征~\ref{item:7.6.3}虽然不那么核心，但对即将进行的论证至关重要。为了使本节内容自成一体，我们快速概述~\ref{item:7.6.1}和~\ref{item:7.6.2}蕴含~\ref{item:7.6.3}的证明。(这也作为练习3.3.8出现。)
+
+\begin{proof}
+  假设 \(K\) 满足~\ref{item:7.6.1}和~\ref{item:7.6.2}，并设 \(\left\{  {{G}_{\alpha } : \alpha  \in  \Lambda }\right\}\) 是 \(K\) 的一个开覆盖。为了引出矛盾，我们假设不存在有限子覆盖。
+
+设 \({I}_{0}\) 为一个包含 \(K\) 的闭区间，然后将 \({I}_{0}\) 二等分为两个闭区间 \({A}_{1}\) 和 \({B}_{1}\) 。必定存在 \({A}_{1} \cap  K\) 或 \({B}_{1} \cap  K\) (或两者)无法由 \(\left\{  {{G}_{\alpha } : \alpha  \in  \Lambda }\right\}\) 中的集合构成有限子覆盖。设 \({I}_{1}\) 为 \({I}_{0}\) 的一半，包含无法被有限覆盖的 \(K\) 部分。重复此构造将得到一个闭区间嵌套序列 \({I}_{0} \supseteq  {I}_{1} \supseteq  {I}_{2} \supseteq\)  \(\cdots\) ，其性质为，对于任何 \(n,{I}_{n} \cap  K\) 都无法被有限覆盖且 \(\mathop{\lim }\limits_{n}\left| {I}_{n}\right|  = 0\) 。
+\end{proof}
+
+
+练习 7.6.10. (a) 证明存在一个 \(x \in  K\) ，使得对于所有 \(n\) ， \(x \in  {I}_{n}\) 成立。
+
+(b) 由于 \(x \in  K\) ，原始集合中必须存在一个包含 \(x\) 作为元素的开集 \({G}_{{\alpha }_{0}}\) 。解释为什么这为我们提供了所需的矛盾。
+
+\subsection{Lebesgue定理}
+
+我们现在准备从连续性的角度对Riemann可积函数的集合进行完全分类。
+
+\begin{Thm}[Lebesgue定理]
+  \label{thm:7.6.5}
+  设 \(f\) 是定义在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的有界函数。那么， \(f\) 是Riemann可积的当且仅当 \(f\) 不连续的点集测度为零。
+\end{Thm}
+
+\begin{proof}
+  设 \(M > 0\) 满足 \(\left| {f\left( x\right) }\right|  \leq  M\) 对所有 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 成立，并设 \(D\) 和 \({D}_{\alpha }\) 如前面方程\ref{eq:7.6.1}和\ref{eq:7.6.2}所定义。我们首先假设 \(D\) 的测度为零，并证明我们的函数是可积的。
+
+($\Leftarrow$) 设
+
+\[
+\alpha  = \frac{\varepsilon }{2\left( {b - a}\right) }.
+\]
+
+练习7.6.11。证明存在一个由不相交的开区间 \(\left\{  {{G}_{1},{G}_{2},\ldots ,{G}_{N}}\right\}\) 组成的有限集合，其并集包含 \({D}_{\alpha }\) ，并且满足
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{N}\left| {G}_{n}\right|  < \frac{\varepsilon }{4M}
+\]
+
+练习7.6.12。设 \(K\) 为区间 \(\left\lbrack  {a,b}\right\rbrack\) 在移除所有开区间 \({G}_{n}\) 后剩余的部分；即 \(K = \left\lbrack  {a,b}\right\rbrack   \smallsetminus  \mathop{\bigcup }\limits_{{n = 1}}^{N}{G}_{n}\) 。论证 \(f\) 在 \(K\) 上是一致 \(\alpha\) 连续的。
+
+练习 7.6.13. 通过解释如何构造一个分区 \({P}_{\varepsilon }\) 来完成这个方向的证明，使得 \(U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  \leq  \varepsilon\) 。将和式分解为两部分会有所帮助
+
+\[
+U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}\left( {{M}_{k} - {m}_{k}}\right) \Delta {x}_{k}
+\]
+
+一部分包含 \({D}_{\alpha }\) 点的子区间，另一部分不包含 \({D}_{\alpha }\) 点的子区间。
+
+\(\left(  \Rightarrow  \right)\) 对于另一个方向，假设 \(f\) 是Riemann可积的。我们必须论证 \(f\) 的不连续点集 \(D\) 的测度为零。
+
+固定 \(\alpha  > 0\) ，并令 \(\varepsilon  > 0\) 为任意值。因为 \(f\) 是Riemann可积的，存在 \(\left\lbrack  {a,b}\right\rbrack\) 的一个分割 \({P}_{\varepsilon }\) ，使得 \(U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  < {\alpha \varepsilon }\) 。
+
+习题 7.6.14. (a) 使用分割 \({P}_{\varepsilon }\) 的子区间来证明 \({D}_{\alpha }\) 的测度为零。指出可以选择由有限个开区间组成的 \({D}_{\alpha }\) 的覆盖。(对于这种情况的集合有时被称为零内容。参见习题 7.3.6。)
+
+(b) 展示这如何意味着 \(D\) 的测度为零。
+\end{proof}
+
+
+\subsection{不可积的导数}
+
+到目前为止，我们关于不可积函数的一个例子是Dirichlet的无处连续函数。我们以另一个具有特殊意义的例子来结束本节。微积分基本定理的内容是积分和微分是彼此互逆的过程。这让我们提出了一个问题(在第\ref{sec:7.1}节讨论的最后一段中)，即我们是否可以对每一个导数进行积分。对于Riemann积分，答案是否定的。接下来是一个可微函数的构造，其导数无法用Riemann积分进行积分。
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_25_578_392_802_363_0.jpg}
+  \caption{\({f}_{1}\left( x\right)\) 的初步草图。}
+  \label{fig:7.3}
+\end{figure}
+
+我们将再次对在第3.1节中定义的Cantor集感兴趣
+
+\[
+C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}
+\]
+
+作为第一步，让我们创建一个在 \(\left\lbrack  {0,1}\right\rbrack\) 上可微的函数 \(f\left( x\right)\) ，其导数 \({f}^{\prime }\left( x\right)\) 在 \(C\) 的每一点都有间断。这个构造的关键成分是函数
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} {x}^{2}\sin \left( {1/x}\right) & x > 0 \\  0 &x \leq  0. \end{array}\right.
+\]
+
+练习7.6.15. (a) 求 \({g}^{\prime }\left( 0\right)\) 。
+
+(b) 使用微分的标准规则计算 $x\ne 0 $ 时的 \({g}^{\prime }\left( x\right)\) 。
+
+(c) 解释为什么，对于每一个 \(\delta  > 0,{g}^{\prime }\left( x\right)\) ，当 \(x\) 在集合 \(\left( {-\delta ,\delta }\right)\) 上变化时， \(\delta  > 0,{g}^{\prime }\left( x\right)\) 会取得\(1\)和\(-1\)之间的每一个值。由此得出 \({g}^{\prime }\) 在 \(x = 0\) 处不连续。
+
+现在，我们希望将 \(g\) 在零附近的行为转移到构成Cantor集定义中使用的闭区间 \({C}_{n}\) 的每个端点。公式虽然复杂，但基本思路是直接的。首先设定
+
+\[
+{f}_{0}\left( x\right)  = 0,\quad \forall x \in {C}_{0} = \left\lbrack  {0,1}\right\rbrack  .
+\]
+
+要在 \(\left\lbrack  {0,1}\right\rbrack\) 上定义 \({f}_{1}\) ，首先赋值
+
+\[
+{f}_{1}\left( x\right)  = 0,\quad \forall x \in  {C}_{1} = \left\lbrack  {0,\frac{1}{3}}\right\rbrack   \cup  \left\lbrack  {\frac{2}{3},1}\right\rbrack  .
+\]
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/01955a91-ef56-7036-8187-7c057cf36cc4_26_424_391_799_364_0.jpg}
+  \caption{\({f}_{2}\left( x\right)\) 的图像}
+  \label{fig:7.4}
+\end{figure}
+
+在剩余的开放中间三分之一处，放置 \(g\) 的翻译“副本”，使其向两个端点振荡(图\ref{fig:7.3})。用公式表示，我们有
+
+\[
+{f}_{1}\left( x\right)  = \left\{  \begin{array}{ll} 0 & x \in  \left\lbrack  {0,1/3}\right\rbrack  \\  g\left( {x - 1/3}\right) & x\text{ 恰在 }1/3 \text{之右} \\  g\left( {-x + 1/3}\right) & x\text{ 恰在 }2/3 \text{之右} \\  0 & x \in  \left\lbrack  {2/3,1}\right\rbrack  . \end{array}\right.
+\]
+
+最后，我们将 \({f}_{1}\) 的两个振荡部分以使其可微的方式拼接在一起。这并不是什么了不起的壮举，我们将跳过细节，以便将注意力集中在两个端点 \(1/3\) 和 \(2/3\) 上。这些是 \({f}_{1}^{\prime }\left( x\right)\) 不连续的点。
+
+为了定义 \({f}_{2}\left( x\right)\) ，我们从 \({f}_{1}\left( x\right)\) 开始，并采用与之前相同的技巧，这次在两个开区间 \(\left( {1/9,2/9}\right)\) 和 \(\left( {7/9,8/9}\right)\) 中进行。结果(图\ref{fig:7.4})是一个在 \({C}_{2}\) 上为零的可微函数，其导数在该集合上不连续。
+
+\[
+\{ 1/9,2/9,1/3,2/3,7/9,8/9\} \text{ . }
+\]
+
+以这种方式继续下去，会产生一系列定义在 \(\left\lbrack  {0,1}\right\rbrack\) 上的函数 \({f}_{0},{f}_{1},{f}_{2},\ldots\) 。
+
+练习7.6.16。(a) 如果 \(c \in  C\) ，那么 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{n}\left( c\right)\) 是什么？
+
+(b) 为什么 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{n}\left( x\right)\) 对 \(x \notin  C\) 存在？
+
+现在，设置
+
+\[
+f\left( x\right)  = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{n}\left( x\right) .
+\]
+
+练习 7.6.17. (a) 解释为什么 \({f}^{\prime }\left( x\right)\) 对所有 \(x \notin  C\) 存在。
+
+(b) 如果 \(c \in  C\) ，论证 \(\left| {f\left( x\right) }\right|  \leq  {\left( x - c\right) }^{2}\) 对所有 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 成立。说明这如何暗示 \({f}^{\prime }\left( c\right)  = 0\) 。
+
+(c) 给出一个详细的论证，说明为什么 \({f}^{\prime }\left( x\right)\) 在 \(C\) 上不连续。记住， \(C\) 包含了许多除了构成 \({C}_{1},{C}_{2},{C}_{3},\ldots\) 的区间端点之外的点。
+
+让我们盘点一下当前的情况。我们的目标是创建一个不可积的导数。我们的函数 \(f\left( x\right)\) 是可微的，而 \({f}^{\prime }\) 在 \(C\) 上不连续。我们还没有完全完成。
+
+练习7.6.18。为什么 \({f}^{\prime }\left( x\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上是Riemann可积的？
+
+Cantor集的测度为零的原因是，在每一阶段，从 \({C}_{n - 1}\) 中移除了长度为 \(1/{3}^{n}\) 的 \({2}^{n - 1}\) 个开区间。最终的和
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }{2}^{n - 1}\left( \frac{1}{{3}^{n}}\right)
+\]
+
+收敛到一，这意味着近似集 \({C}_{1},{C}_{2},{C}_{3},\ldots\) 的总长度趋向于零。与其在每一阶段移除长度为 \(1/{3}^{n}\) 的开区间，让我们看看当我们移除长度为 \(1/{3}^{n + 1}\) 的区间时会发生什么。
+
+练习7.6.19。证明在这些情况下，组成每个 \({C}_{n}\) 的区间长度之和不再随着 \(n \rightarrow  \infty\) 趋于零。这个极限是什么？
+
+如果我们再次取交集 \(\mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}\) ，结果是一个具有相同拓扑性质的Cantor型集合——它是闭的、紧的和完美的。但前一个练习的结果是它不再具有零测度。这正是我们定义所需函数所需要的。通过在这个新的具有正测度的Cantor型集合上重复 \(f\left( x\right)\) 的构造，我们得到一个可微函数。但其导数有太多的不连续点。根据Lebesgue定理，这个导数Riemann不可积。
+
+\section{结语}
+\label{sec:7.7}
+Riemann对积分的定义是对Cauchy积分的修改，后者最初是为了积分连续函数而设计的。在这一目标上，Riemann积分取得了完全的成功。至少对于连续函数而言，积分过程现在建立在自身严格的基点上，独立于微分而定义。然而，随着分析学的发展，可积性对连续性的依赖变得有问题。第\ref{sec:7.6}节的最后一个例子突显了一种类型的弱点:并非每个导数都可以被积分。Riemann积分的另一个限制出现在与函数序列的极限相关的情况下。为了理解这一点，让我们再次考虑第\ref{sec:4.1}节中引入的Dirichlet函数 \(g\left( x\right)\) 。回想一下，当 \(x\) 为有理数时， \(g\left( x\right)  = 1\) ；而在每个无理点， \(g\left( x\right)  = 0\) 。暂时关注区间 \(\left\lbrack  {0,1}\right\rbrack\) ，将其中的全体有理数枚举为
+
+\[
+\left\{  {{r}_{1},{r}_{2},{r}_{3},{r}_{4}\ldots }\right\}
+\]
+
+现在，如果 \({g}_{1}\left( x\right)  = 1\) ，则定义 \(x = {r}_{1}\) ，否则定义 \({g}_{1}\left( x\right)  = 0\) 。接下来，如果 \(x\) 是 \({r}_{1}\) 或 \({r}_{2}\) ，则定义 \({g}_{2}\left( x\right)  = 1\) ，在其他所有点定义 \({g}_{2}\left( x\right)  = 0\) 。一般而言，对于每个 \(n \in  \mathbf{N}\) ，定义
+
+\[
+{g}_{n}\left( x\right)  = \left\{  \begin{array}{ll} 1 & x \in  \left\{  {{r}_{1},{r}_{2},\ldots ,{r}_{n}}\right\}  \\  0 & \text{ otherwise. } \end{array}\right.
+\]
+
+注意到每个 \({g}_{n}\) 只有有限个间断点，因此在 \({\int }_{0}^{1}{g}_{n} = 0\) 下是Riemann可积的。但我们在区间 \(\left\lbrack  {0,1}\right\rbrack\) 上也有 \({g}_{n} \rightarrow  g\) 逐点收敛。问题出现在我们想起Dirichlet的无处连续函数不是Riemann可积的时候。因此，方程
+
+\begin{equation}
+\label{eq:7.6.3}
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}{\int }_{0}^{1}{g}_{n} = {\int }_{0}^{1}g
+\end{equation}
+
+不成立，不是因为等号两边的值不同，而是因为右边的值不存在。定理\ref{thm:7.4.4}的内容是，当我们有 \({g}_{n} \rightarrow  g\) 一致收敛时，这个方程成立。这是解决这种情况的合理方式，但有点不令人满意，因为在这种情况下，缺陷并不完全在于收敛类型，而在于Riemann积分的强度。如果我们能通过某种其他积分定义来理解右边，那么也许方程\eqref{eq:7.6.3}实际上会成立。
+
+这种定义由 Henri Lebesgue 于1901年提出。一般来说，Lebesgue积分是通过一种称为集合测度的长度推广来构建的。在前一节中，我们研究了零测集。特别是，我们证明了 \(\left\lbrack  {0,1}\right\rbrack\) 中的有理数(因为它们是可数的)具有零测度。 \(\left\lbrack  {0,1}\right\rbrack\) 中的无理数具有测度 $1$。这并不令人惊讶，因为我们现在知道这两个不相交集合的测度加起来等于区间 \(\left\lbrack  {0,1}\right\rbrack\) 的长度。Lebesgue建议通过分割 \(y\) 轴来近似曲线下的面积，而不是分割 \(x\) 轴。在Dirichlet函数 \(g\) 的情况下，只有两个范围值——$0$和$1$。根据Lebesgue的观点，积分可以通过以下方式定义:
+\begin{align*}
+  {\int }_{0}^{1}g = & 1 \cdot  \left\lbrack  {g^{-1}(1)\text{的测度}}\right\rbrack   + 0 \cdot  \left\lbrack  {g^{-1}(0) \text{的测度}}\right\rbrack\\
+  = & 1 \cdot  0 + 0 \cdot  1 = 0.
+\end{align*}
+
+
+根据对 \({\int }_{0}^{1}g\) 的这种解释，方程\eqref{eq:7.6.3}现在成立！
+
+Lebesgue积分是目前高等数学中的标准积分。该理论被教授给所有研究生以及许多高年级本科生，并且在需要积分的多数研究论文中使用。Lebesgue积分推广了Riemann积分，因为任何Riemann可积的函数都是Lebesgue可积的，并且积分值相同。Lebesgue积分的真正优势在于可积函数的类要大得多。最重要的是，该类包括各种类型的可积函数Cauchy列的极限。这导致了一组与方程\eqref{eq:7.6.3}相关的极其重要的收敛定理，其假设比定理\ref{thm:7.4.4}中假设的一致收敛性要弱得多。
+
+尽管Lebesgue积分广泛使用，但它确实有一些缺点。存在一些函数的反常Riemann积分存在，但不是Lebesgue可积的。另一个失望来自于积分与微分之间的关系。即使使用Lebesgue积分，仍然无法在对 \(f\) 进行一些额外假设的情况下证明
+
+\[
+{\int }_{a}^{b}{f}^{\prime } = f\left( b\right)  - f\left( a\right)
+\]
+
+大约在1960年，提出了一种新的积分，它能够比Riemann积分或Lebesgue积分积分更大类的函数，并且没有前述的缺点。值得注意的是，这种积分实际上是对Riemann原始积分技术的回归，只是在对分区的“精细度”描述上做了一些小的修改。广义Riemann积分的介绍是第\ref{sec:8.1}节的主题。

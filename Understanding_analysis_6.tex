@@ -1,0 +1,1390 @@
+\chapter{函数序列与函数级数}
+\label{chap:6}
+\section{讨论:分支过程}
+\label{sec:6.1}
+多项式函数在纯数学与应用分析领域具有广泛的应用，其背后的原因是多方面的。它们是连续的、无限可微的，并且在整个 \(\mathbb{R}\) 上都有定义。无论是从代数(加法、乘法、因式分解)还是微积分(积分、微分)的角度来看，它们都易于计算和操作。因此，即使在微积分发展的最初阶段，数学家们就尝试将多项式的概念扩展到本质上为无限次多项式的函数，这并不令人惊讶。这类对象被称为幂级数，其形式表示为
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n} = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{4} + \cdots .
+\]
+
+从分析的角度来看，基本困境在于何时将极限函数(在本例中为多项式)的理想特性传递给极限(即幂级数)。为了使讨论更加具体，让我们来看一个概率论中的特定问题。
+
+1873年，Francis Galton 请伦敦数学学会考虑姓氏的存续问题(当时姓氏仅由成年男性后代传承)。Galton说:“假设人口规律是，在每一代中， \({p}_{0}\) \%的成年男性没有活到成年的男性后代； \({p}_{1}\) \%有一个这样的男性后代； \({p}_{2}\) \%有两个；以此类推……求[姓氏在] \(r\) 代后灭绝的概率。”我们应补充(或明确)一个假设，即每个后代及其后代的生活独立于家族其他成员的命运。
+
+Galton询问了经过 \(r\) 代后灭绝的概率，我们将其称为 \({d}_{r}\) 。如果我们从一个父代开始，那么 \({d}_{1} = {p}_{0}\) 。如果 \({p}_{0} = 0\) ，那么对于所有世代 \(r\) ， 都显然有\({d}_{r} = 0\)。为了使问题保持有趣，我们从这里开始持 \({p}_{0} > 0\) 的假定 。现在， \({d}_{2}\) ，无论它等于什么，都肯定满足 \({d}_{1} \leq  {d}_{2}\) ，因为如果种群在一代后灭绝，它将在两代后仍然如此。通过这种推理，我们得到了一个单调序列
+
+\[
+{d}_{1} \leq  {d}_{2} \leq  {d}_{3} \leq  {d}_{4}\cdots ,
+\]
+
+由于我们处理的是概率，该序列的上界为 $1$。根据单调收敛定理，该序列收敛，我们可以设
+
+\[
+d = \mathop{\lim }\limits_{{r \rightarrow  \infty }}{d}_{r}
+\]
+
+为姓氏在未来任何时候最终灭绝的概率。知道它存在后，我们的任务是找到 \(d\) 。
+
+解决方案中真正巧妙的一步是定义函数
+
+\[
+G\left( x\right)  = {p}_{0} + {p}_{1}x + {p}_{2}{x}^{2} + {p}_{3}{x}^{3} + \cdots .
+\]
+
+在产生雄性后代的这一问题中，似乎可以安全地假设这个总和在五到六项后终止，因为自然规律会使得 \({p}_{n} = 0\) 对于所有超过这一点的 \(n\) 值都成立。然而，如果我们在研究核反应堆中的中子，或携带突变基因的杂合子(这在分支过程理论中很常见)，那么无限和的概念就成为一个更具吸引力的模型。关键在于:我们将毫无顾忌地进行，并将函数 \(G\left( x\right)\) 视为一个熟悉的有限次多项式。然而，在完成计算流程后，我们仍需回归分析学家的严谨范式，基于\(G(x)\)对所有\(x\)值构成无穷级数的预设条件，系统验证此前实施的运算操作在理论层面的合法性。
+
+关键的观察是
+
+\[
+G\left( {d}_{r}\right)  = {d}_{r + 1}.
+\]
+
+理解这一点的方法是查看下述表达式
+
+\[
+G\left( {d}_{r}\right)  = {p}_{0} + {p}_{1}{d}_{r} + {p}_{2}{d}_{r}^{2} + {p}_{3}{d}_{r}^{3} + \cdots
+\]
+
+该展开式实质上表征了各类灭绝路径的概率叠加，其中各路径的灭绝事件均可能发生于第\( r+1\) 代之前，并以第一代后的系统状态为初始条件进行迭代分析。具体来说， \({p}_{0}\) 是初始父代没有后代且在 \(r + 1\) 代后仍然没有后代的概率。项 \({p}_{1}{d}_{r}\) 是初始父代有一个男性后代的概率乘以该后代的家族在 \(r\) 代后灭绝的概率。因此，概率 \({p}_{1}{d}_{r}\) 是对 \(r + 1\) 步内灭绝概率的另一个贡献。第三项表示初始父代有两个后代且这两个后代的姓氏在 \(r\) 代内灭绝的概率。以此类推，我们看到 \(r + 1\) 步内灭绝的每一种可能情况都在和 \(G\left( {d}_{r}\right)\) 中被精确地计算了一次。根据 \({d}_{r + 1}\) 的定义，我们得到 \(G\left( {d}_{r}\right)  = {d}_{r + 1}\) 。
+
+现在进行一些分析。如果我们对方程 \(G\left( {d}_{r}\right)  = {d}_{r + 1}\) 的两边取 \(r \rightarrow  \infty\) 的极限，那么在右侧我们得到 \(\lim {d}_{r + 1} = d\) 。假设 \(G\) 是连续的，我们有
+
+\[
+d = \mathop{\lim }\limits_{{r \rightarrow  \infty }}{d}_{r + 1} = \mathop{\lim }\limits_{{r \rightarrow  \infty }}G\left( {d}_{r}\right)  = G\left( d\right) .
+\]
+
+结论 \(d = G\left( d\right)\) 意味着点 \(d\) 是 \(G\) 的一个不动点。可以通过寻找 \(G\) 的图形与直线 \(y = x\) 的交点来图形化地定位它。
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_2_524_803_613_358_0.jpg}
+\end{figure}
+
+注意到下面的表达式是恒成立的：
+
+\[
+G\left( 1\right)  = {p}_{0} + {p}_{1} + {p}_{2} + {p}_{3} + \cdots  = 1
+\]
+
+因为概率 \(\left( {p}_{k}\right)\) 构成了一个完整的分布。但 \(d = 1\) 不一定是 \(G\left( d\right)  = d\) 的唯一解。图(ii)展示 \(G\) 在区间(0,1)内除了 \(x = 1\) 之外还有另一个固定点的可能。
+
+将 \(G\) 视为多项式，我们逐项微分得到
+
+\[
+{G}^{\prime }\left( x\right)  = {p}_{1} + 2{p}_{2}x + 3{p}_{3}{x}^{2} + 4{p}_{4}{x}^{3} + \cdots
+\]
+
+和
+
+\[
+{G}^{\prime \prime }\left( x\right)  = 2{p}_{2} + 6{p}_{3}x + {12}{p}_{4}{x}^{2} + \cdots .
+\]
+
+在区间 \(\left\lbrack  {0,1}\right\rbrack\) 上， \({G}^{\prime }\) 和 \({G}^{\prime \prime }\) 中的每一项都是非负的，这意味着 \(G\) 是从 \(G\left( 0\right)  = {p}_{0} > 0\) 到 \(G\left( 1\right)  = 1\) 的递增凸函数。这表明前面的两个图形相当完整地展示了 \(G\) 在固定点方面的行为可能性。特别值得关注的是图(ii)，其中 \(y = x\) 的图形在 \(\left\lbrack  {0,1}\right\rbrack\) 内与 \(G\) 相交两次。利用中值定理，我们可以证明(练习5.3.6)：存在 \(d \in  \left( {0,1}\right)\) 使得 \(G\left( d\right)  = d\) ，当且仅当 \({G}^{\prime }\left( 1\right)  > 1\) 。
+
+现在，
+
+\[
+{G}^{\prime }\left( 1\right)  = {p}_{1} + 2{p}_{2} + 3{p}_{3} + 4{p}_{4} + \cdots
+\]
+
+在概率语言中有一个非常有趣的解释。这个和是一个加权平均值，其中每一项我们都将男性子代的数量乘以实际产生这个特定数量的概率。结果是一个给定父母的预期男性后代数量的期望值。换句话说， \({G}^{\prime }\left( 1\right)\) 是这个特定家谱中父母产生的男性孩子的平均数量。
+
+不难论证， \(\left( {d}_{r}\right)\) 将在 \(\left\lbrack  {0,1}\right\rbrack\) 上收敛到 \(G\left( d\right)  = d\) 的最小解(习题 6.5.12)，因此我们得出以下结论。如果每个父母平均生育超过一个男性后代，那么姓氏有正概率得以延续。方程 \(G\left( d\right)  = d\) 在 (0,1) 内有唯一解，且 \(1 - d\) 表示姓氏不会灭绝的概率。另一方面，如果每个父母的男性后代期望数为 $1$或小于$1$，则灭绝的概率为$1$。
+
+这些结果对核反应和癌症扩散的影响是另一个引人入胜的话题。我们在这里关注的是我们对 \(G\left( x\right)\) 的操作是否合理。假设 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{p}_{n} =\) 保证 \(G\) 至少在 \(x = 1\) 处有定义。点 \(x = 0\) 没有问题，但 \(G\) 在 \(0 < x < 1\) 处是否必然有定义？如果是，我们如何证明 \(G\) 在这个集合上是连续的？可微的？二次可微的？如果 \(G\) 是可微的，我们能否通过简单地逐项微分级数来计算导数？我们最初解决这些问题的方法需要我们集中注意力在区间 \(\lbrack 0,1)\) 上。当我们试图将结果扩展到包括端点 \(x = 1\) 时，会出现一些有趣的微妙之处。
+
+\section{函数序列的一致收敛}
+\label{sec:6.2}
+正如在第\ref{chap:2}章中，我们最初将关注函数收敛序列的行为和性质。因为无限和的收敛性是根据相关的部分和序列来定义的，所以我们对序列研究的结果将立即适用于我们提出的关于幂级数和一般函数无限级数的问题。
+
+\subsection{逐点收敛}
+
+\begin{Def}\label{def:6.2.1}
+  \(\forall n \in  \mathbb{N}\) ，设 \({f}_{n}\) 是定义在集合 \(A \subseteq  \mathbb{R}\) 上的函数。称函数序列 \(\left( {f}_{n}\right)\) 在 \(A\) 上逐点收敛到函数 \(f : A \rightarrow  \mathbb{R}\) ，若 \(\forall x \in  A\) ，实数序列 \({f}_{n}\left( x\right)\) 收敛到 \(f\left( x\right)\) 。
+\end{Def}
+
+在这种情况下，我们记作 \({f}_{n} \rightarrow  f,\lim {f}_{n} = f\) ，或 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{n}\left( x\right)  = f\left( x\right)\) 。后者有助于区分 $x,n$ 谁才是趋于无穷的变量。 
+
+
+\begin{Eg}\label{eg:6.2.2}
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:6.2.1}考虑定义在 $\mathbb{R}$ 上的函数列
+
+\[
+{f}_{n}\left( x\right)  = \left( {{x}^{2} + {nx}}\right) /n
+\]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_4_510_394_618_409_0.jpg}
+  \caption{\({f}_{1},{f}_{5},{f}_{10},{f}_{20}\) 其中 \({f}_{n} = \left( {{x}^{2} + {nx}}\right) /n\) }\label{fig:6.1}
+\end{figure}
+
+
+\({f}_{1},{f}_{5},{f}_{10}\) 和 \({f}_{20}\) 的图像(图\ref{fig:6.1})告诉我们当 \(n\) 变大时情况如何。在代数上，我们可以计算
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{n}\left( x\right)  = \mathop{\lim }\limits_{{n \rightarrow  \infty }}\frac{{x}^{2} + {nx}}{n} = \mathop{\lim }\limits_{{n \rightarrow  \infty }}\frac{{x}^{2}}{n} + x = x.
+\]
+
+因此， \(\left( {f}_{n}\right)\) 在 \(\mathbb{R}\) 上逐点收敛到 \(f\left( x\right)  = x\) 。
+
+\item \label{item:6.2.2}设 \({g}_{n}\left( x\right)  = {x}^{n}\) 定义在 \(\left\lbrack  {0,1}\right\rbrack\) 上，并考虑当 \(n\) 趋于无穷大时会发生什么(图\ref{fig:6.2})。如果 \(0 \leq  x < 1\) ，那么我们已经看到 \({x}^{n} \rightarrow  0\) 。另一方面，如果 \(x = 1\) ，那么 \({x}^{n} \rightarrow  1\) 。由此可知， \({g}_{n} \rightarrow  g\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上逐点收敛，其中
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} 0 & 0 \leq  x < 1 \\  1 &x = 1 \end{array}\right.
+\]
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_4_603_1535_411_337_0.jpg}
+  \caption{\(g\left( x\right)  = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{x}^{n}\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上不连续}
+  \label{fig:6.2}
+\end{figure}
+
+
+\item \label{item:6.2.3}考虑定义在 $[-1,1]$ 上的 \({h}_{n}\left( x\right)  = {x}^{1 + \frac{1}{{2n} - 1}}\) (图\ref{fig:6.3})。对于固定的 \(x \in  \left\lbrack  {-1,1}\right\rbrack\) ，我们有
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}{h}_{n}\left( x\right)  = x\mathop{\lim }\limits_{{n \rightarrow  \infty }}{x}^{\frac{1}{{2n} - 1}} = \left| x\right| .
+\]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_5_702_391_549_365_0.jpg}
+  \caption{ 在 \(\left\lbrack  {-1,1}\right\rbrack\) 上 \({h}_{n} \rightarrow  \left| x\right|\) ，其极限不可微}
+  \label{fig:6.3}
+\end{figure}
+
+\end{enumerate}
+\end{Eg}
+
+
+例\ref{eg:6.2.2} \ref{item:6.2.2}和\ref{item:6.2.3}使我们首次意识到前方存在一些困难工作。本章的核心主题是分析极限函数从逼近序列中继承了哪些性质。在例\ref{eg:6.2.2} \ref{item:6.2.3}中，我们有一个可微函数序列逐点收敛到一个在原点不可微的极限。在例\ref{eg:6.2.2} \ref{item:6.2.2}中，我们看到了一个更基本的问题，即连续函数序列收敛到一个不连续的极限。
+
+\subsection{极限函数的连续性}
+
+牢记例\ref{eg:6.2.2} \ref{item:6.2.2}，我们以一个注定失败的尝试开始讨论，试图证明连续函数的逐点极限是连续的。在发现论证中的问题后，我们将更好地理解需要一种更强的函数序列收敛概念的必要性。
+
+设 \(\left( {f}_{n}\right)\) 是集合 \(A \subseteq  \mathbb{R}\) 上的一列连续函数，并且设 \(\left( {f}_{n}\right)\) 逐点收敛到极限 \(f\) 。为了论证 \(f\) 是连续的，固定一个点 \(c \in  A\) ，并令 \(\epsilon  > 0\) 。我们需要找到一个 \(\delta  > 0\) 使得
+
+\[
+\left| {x - c}\right|  < \delta \Rightarrow \left| {f\left( x\right)  - f\left( c\right) }\right|  < \varepsilon .
+\]
+
+根据三角不等式，
+
+\begin{align*}
+\left| {f\left( x\right)  - f\left( c\right) }\right|  =& \left| {f\left( x\right)  - {f}_{n}\left( x\right)  + {f}_{n}\left( x\right)  - {f}_{n}\left( c\right)  + {f}_{n}\left( c\right)  - f\left( c\right) }\right|\\
+\leq &  \left| {f\left( x\right)  - {f}_{n}\left( x\right) }\right|  + \left| {{f}_{n}\left( x\right)  - {f}_{n}\left( c\right) }\right|  + \left| {{f}_{n}\left( c\right)  - f\left( c\right) }\right| .
+\end{align*}
+
+(我们实际上应该称之为“四边形不等式”，因为我们使用三条连接的“边”作为第四条边长的估计。)
+
+我们最初乐观的印象是，右侧求和中的每一项都可以变得很小——第一项和第三项由于 \({f}_{n} \rightarrow  f\) 的存在，而中间项则由于 \({f}_{n}\) 的连续性。为了利用 \({f}_{n}\) 的连续性，我们必须首先确定我们讨论的是哪个特定的 \({f}_{n}\) 。由于 \(c \in  A\) 是固定的，选择 \(N \in  \mathbb{N}\) 使得
+
+\[
+\left| {{f}_{N}\left( c\right)  - f\left( c\right) }\right|  < \frac{\varepsilon }{3}.
+\]
+
+既然 \(N\) 已经选定， \({f}_{N}\) 的连续性意味着存在一个 \(\delta  > 0\)使得 $\forall x\in (c-\delta, c+\delta)$
+
+\[
+\left| {{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+但这里有一个问题。我们还需要 $\forall x\in (c-\delta, c+\delta)$
+
+\[
+\left| {{f}_{N}\left( x\right)  - f\left( x\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+其中 \(x\) 的值取决于 \(\delta\) ，而 \(\delta\) 又取决于 \(N\) 的选择。因此，我们不能简单地回头选择不同的 \(N\) 。更重要的是，变量 \(x\) 在此讨论中并不像 \(c\) 那样固定，而是代表区间 \(\left( {c - \delta ,c + \delta }\right)\) 中的任意点。逐点收敛意味着对于足够大的 \(n\) 值，我们可以使 \(\left| {{f}_{n}\left( x\right)  - f\left( x\right) }\right|  < \varepsilon /3\) 成立，但 \(n\) 的值取决于点 \(x\) 。不同的 \(x\) 值可能导致需要选择不同的(更大的) \(n\) 值。这种现象在例\ref{eg:6.2.2} \ref{item:6.2.2}中显而易见：为了实现不等式
+
+\[
+\left| {{g}_{n}\left( {1/2}\right)  - g\left( {1/2}\right) }\right|  < \frac{1}{3},
+\]
+
+我们只需要 \(n \geq  2\) ，而
+
+\[
+\left| {{g}_{n}\left( {9/{10}}\right)  - g\left( {9/{10}}\right) }\right|  < \frac{1}{3}
+\]
+
+只有在 \(n \geq  {11}\) 之后才成立。
+
+\subsection{一致收敛}
+
+为了解决这一难题，我们定义一个新的、更强的函数收敛概念。
+
+\begin{Def}\label{def:6.2.3}
+  设 \({f}_{n}\) 为定义在集合 \(A \subseteq  \mathbb{R}\) 上的一列函数。那么，称 \(\left( {f}_{n}\right)\) 在 \(A\) 上一致收敛到定义在 \(A\) 上的极限函数 \(f\) ，若\(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得当 \(n \geq  N\) 且 \(x \in  A\) 时， \(\left| {{f}_{n}\left( x\right)  - f\left( x\right) }\right|  < \varepsilon\) 成立。
+\end{Def}
+
+为了强调一致收敛与逐点收敛之间的区别，我们重述定义\ref{def:6.2.1}，并更明确地说明 \(\varepsilon ,N\) 与 \(x\) 之间的关系。特别要注意的是，在每个定义中域点 \(x\) 的引用位置，以及因此 \(N\) 的选择是否依赖于该值。
+
+\addtocounter{Thm}{-3}
+
+\begin{Def}
+  设 \({f}_{n}\) 为定义在集合 \(A \subseteq  \mathbb{R}\) 上的一系列函数。那么， 称 \(\left( {f}_{n}\right)\) 在 \(A\) 上逐点收敛到定义在 \(A\) 上的极限 \(f\) ，如果对于每一个 \(\varepsilon  > 0\) 和 \(x \in  A\) ，存在一个 \(N \in  \mathbb{N}\) (可能依赖于 \(x\) )，使得当 \(n \geq  N.\) 时， \(\left| {{f}_{n}\left( x\right)  - f\left( x\right) }\right|  < \varepsilon\) 成立。
+\end{Def}
+
+\addtocounter{Thm}{2}
+
+此处使用副词“一致地”应让人联想到其在第4章中“一致连续”一词的使用。在这两种情况下，术语“一致地”用于表达对规定 \(\varepsilon\) 的响应( \(\delta\) 或 \(N\) )可以同时适用于相关域中所有 \(x\) 值的事实。
+
+
+\begin{Eg}\label{eg:6.2.4}
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:6.2.4} 设
+
+\[
+{g}_{n}\left( x\right)  = \frac{1}{n\left( {1 + {x}^{2}}\right) }.
+\]
+
+对于任意的固定的 \(x \in  \mathbb{R}\) ，我们可以看到 \(\lim {g}_{n}\left( x\right)  = 0\) ，因此 \(g\left( x\right)  = 0\) 是序列 \(\left( {g}_{n}\right)\) 在 \(\mathbb{R}\) 上的逐点极限。这种收敛是否一致？注意到 \( \forall x \in  \mathbb{R}, 1/\left( {1 + {x}^{2}}\right)  \leq  1\) 。这意味着
+
+\[
+\left| {{g}_{n}\left( x\right)  - g\left( x\right) }\right|  = \left| {\frac{1}{n\left( {1 + {x}^{2}}\right) } - 0}\right|  \leq  \frac{1}{n}.
+\]
+
+因此，给定 \(\varepsilon  > 0\) ，我们可以选择 \(N > 1/\varepsilon\) (它不依赖于 \(x\) )，从而得出 $\forall x\in \mathbb{R}$
+
+\[
+n \geq  N\Rightarrow \left| {{g}_{n}\left( x\right)  - g\left( x\right) }\right|  < \varepsilon
+\]
+
+根据定义\ref{def:6.2.3}， \({g}_{n} \rightarrow  0\) 在 \(\mathbb{R}\) 上一致收敛。
+
+  \item\label{item:6.2.5}回顾例\ref{eg:6.2.2}\ref{item:6.2.1}，我们看到 \({f}_{n}\left( x\right)  = \left( {{x}^{2} + {nx}}\right) /n\) 在 \(\mathbb{R}\) 上逐点收敛到 \(f\left( x\right)  = x\) 。在 \(\mathbb{R}\) 上，该收敛不是一致的。为了理解这一点，我们计算
+
+\[
+\left| {{f}_{n}\left( x\right)  - f\left( x\right) }\right|  = \left| {\frac{{x}^{2} + {nx}}{n} - x}\right|  = \frac{{x}^{2}}{n},
+\]
+
+并注意到为了迫使 \(\left| {{f}_{n}\left( x\right)  - f\left( x\right) }\right|  < \varepsilon\) ，我们将不得不选择
+
+\[
+N > \frac{{x}^{2}}{\varepsilon }.
+\]
+
+虽然对于每个 \(x \in  \mathbb{R}\) 来说这是可能的，但无法选择一个单一的 \(N\) 值，使其同时适用于所有 \(x\) 的值。
+
+另一方面，我们可以证明 \({f}_{n} \rightarrow  f\) 在集合 \(\left\lbrack  {-b,b}\right\rbrack\) 上一致收敛。通过将注意力限制在一个有界区间内，我们现在可以断言
+
+\[
+\frac{{x}^{2}}{n} \leq  \frac{{b}^{2}}{n}
+\]
+
+
+给定 \(\varepsilon  > 0\) ，那么我们可以选择
+
+\[
+N > \frac{{b}^{2}}{\varepsilon }
+\]
+
+该选择独立于 \(x \in  \left\lbrack  {-b,b}\right\rbrack\) 。
+
+  \end{enumerate}
+\end{Eg}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_8_601_353_406_311_0.jpg}
+  \caption{\({f}_{n} \rightarrow  f\) 在 \(A\) 上一致收敛}
+  \label{fig:6.4}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/01955a91-a525-7c4f-8f3b-e2aa1fe64f7f_8_616_810_393_311_0.jpg}
+  \caption{\({g}_{n} \rightarrow  g\) 逐点收敛，但不一致收敛}
+  \label{fig:6.5}
+\end{figure}
+
+从图形的角度来看，函数序列 \(\{f_n\}\) 在集合 \(A\) 上一致收敛至函数 \(f\)，可以通过在极限函数 \(f\) 的图像周围构建一个半径为 \(\varepsilon\)（即上下各 \(\varepsilon\)）的带状区域来直观理解。如果 \({f}_{n} \rightarrow  f\) 一致收敛，那么序列中存在一个临界点，在此之后每个 \({f}_{n}\) 都完全包含在这个 \(\varepsilon\) 带中(图\ref{fig:6.4})。这个图像应该与\ref{eg:6.2.2}中的图\ref{fig:6.1}-\ref{fig:6.2}以及图\ref{fig:6.5}中的图像进行比较。
+
+\subsection{Cauchy准则}
+
+回忆：实数列收敛的Cauchy准则是收敛的等价命题。但与定义不同，它没有明确提到极限。Cauchy准则的有用性表明需要对一致收敛的函数列进行类似的表征。与所有关于一致性的陈述一样，请注意量词“ \(\forall x \in  A\) ”在陈述中出现的位置。
+
+
+\begin{Def}[一致收敛的Cauchy准则]
+  \label{thm:6.2.5}
+  定义在集合 \(A \subseteq  \mathbb{R}\) 上的函数序列 \(\left( {f}_{n}\right)\) 在 \(A\) 上一致收敛，当且仅当 \(\forall \varepsilon  > 0\) ，\(\exists N \in  \mathbb{N}\) ，使得对于所有的 \(m,n \geq  N\) 和所有的 \(x \in  A\) ， \(\left| {{f}_{n}\left( x\right)  - {f}_{m}\left( x\right) }\right|  < \varepsilon\) 成立。
+\end{Def}
+
+\begin{proof}
+  必要性：若 \(\{f_n\}\) 在 \(A\) 上一致收敛于 \(f\)，则对任意 \(\varepsilon > 0\)，存在 \(N \in \mathbb{N}\)，使得当 \(n \geq N\) 时，对所有 \(x \in A\)，有 \(|f_n(x) - f(x)| < \varepsilon/2\)。同理，当 \(m \geq N\) 时，亦有 \(|f_m(x) - f(x)| < \varepsilon/2\)。由三角不等式：
+\[
+|f_n(x) - f_m(x)| \leq |f_n(x) - f(x)| + |f_m(x) - f(x)| < \varepsilon,
+\]
+故对 \(m,n \geq N\) 及所有 \(x \in A\)，条件成立。
+
+充分性：若满足Cauchy条件，则对任意 \(x \in A\)，序列 \(\{f_n(x)\}\) 为实数的 Cauchy序列，故收敛于某实数 \(f(x)\)。由此定义 \(f: A \to \mathbb{R}\)。
+
+固定 \(\varepsilon > 0\)，取 \(N\) 使得当 \(m,n \geq N\) 时，对所有 \(x \in A\)，有 \(|f_n(x) - f_m(x)| < \varepsilon/2\)。对任意 \(n \geq N\) 及 \(x \in A\)，考虑当 \(m \to \infty\) 时：
+\[
+|f_n(x) - f(x)| = \lim_{m \to \infty} |f_n(x) - f_m(x)| \leq \varepsilon/2 < \varepsilon。
+\]
+即存在 \(N\) 使当 \(n \geq N\) 时，对所有 \(x \in A\)，\(|f_n(x) - f(x)| < \varepsilon\)，故 \(\{f_n\}\) 一致收敛于 \(f\)。
+
+综上，命题得证。
+\end{proof}
+
+\subsection{连续性的再探讨}
+回顾我们试图证明“连续函数的极限是连续的”的证明，不难发现“一致收敛”的更强假设正是我们消除其中的缺陷的所需要的工具。
+
+\begin{Thm}\label{thm:6.2.6}
+  设 \(\left( {f}_{n}\right)\) 为定义在 \(A \subseteq  \mathbb{R}\) 上的一列函数，且在 \(A\) 上一致收敛于函数 \(f\) 。若每个 \({f}_{n}\) 在 \(c \in  A\) 处连续，则 \(f\) 在 \(c\) 处连续。
+\end{Thm}
+
+
+\begin{proof}
+固定 \(c \in  A\) 并令 \(\varepsilon  > 0\) 。选择 \(N\) 使得
+
+\[
+\left| {{f}_{N}\left( x\right)  - f\left( x\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+对所有 \(x \in  A\) 成立。由于 \({f}_{N}\) 连续，存在一个 \(\delta  > 0\) 使得
+
+\[
+\left| {{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+当 \(\left| {x - c}\right|  < \delta\) 时成立。但这意味着
+
+\begin{align*}
+\left| {f\left( x\right)  - f\left( c\right) }\right|  = & \left| {f\left( x\right)  - {f}_{N}\left( x\right)  + {f}_{N}\left( x\right)  - {f}_{N}\left( c\right)  + {f}_{N}\left( c\right)  - f\left( c\right) }\right|\\
+\leq & \left| {f\left( x\right)  - {f}_{N}\left( x\right) }\right|  + \left| {{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }\right|  + \left| {{f}_{N}\left( c\right)  - f\left( c\right) }\right|\\
+< & \frac{\varepsilon }{3} + \frac{\varepsilon }{3} + \frac{\varepsilon }{3} = \varepsilon
+\end{align*}
+
+
+因此， \(f\) 在 \(c \in  A\) 处连续。
+  
+\end{proof}
+
+\subsection{习题}
+
+习题6.2.1。设
+
+\[
+{f}_{n}\left( x\right)  = \frac{nx}{1 + n{x}^{2}}.
+\]
+
+(a) 找出 \(\left( {f}_{n}\right)\) 对所有 \(x \in  \left( {0,\infty }\right)\) 的点态极限。
+
+(b) 在 \(\left( {0,\infty }\right)\) 上收敛是否一致？
+
+(c) 在 (0,1) 上收敛是否一致？
+
+(d) 在 \(\left( {1,\infty }\right)\) 上收敛是否一致？
+
+练习 6.2.2. 设
+
+\[
+{g}_{n}\left( x\right)  = \frac{{nx} + \sin \left( {nx}\right) }{2n}.
+\]
+
+找出 \(\left( {g}_{n}\right)\) 在 \(\mathbb{R}\) 上的点态极限。在 \(\left\lbrack  {-{10},{10}}\right\rbrack\) 上收敛是否一致？在整个 \(\mathbb{R}\) 上收敛是否一致？
+
+练习6.2.3. 考虑函数序列
+
+\[
+{h}_{n}\left( x\right)  = \frac{x}{1 + {x}^{n}}
+\]
+
+在域 \(\lbrack 0,\infty )\) 上。
+
+(a) 找出 \(\left( {h}_{n}\right)\) 在 \(\lbrack 0,\infty )\) 上的逐点极限。
+
+(b) 解释为什么我们知道收敛在 \(\lbrack 0,\infty )\) 上不可能一致。
+
+(c) 选择一个较小的集合，使得收敛在其上一致，并提供论证证明情况确实如此。
+
+练习6.2.4。对于每个 \(n \in  \mathbb{N}\) ，找出 \(\mathbb{R}\) 上函数 \({f}_{n}\left( x\right)  = x/\left( {1 + n{x}^{2}}\right)\) 达到其最大值和最小值的点。用此证明 \(\left( {f}_{n}\right)\) 在 \(\mathbb{R}\) 上一致收敛。极限函数是什么？
+
+练习6.2.5。对于每个 \(n \in  \mathbb{N}\) ，在 \(\mathbb{R}\) 上定义 \({f}_{n}\)
+
+\[
+{f}_{n}\left( x\right)  = \left\{  \begin{array}{ll} 1 & \text{ if }\left| x\right|  \geq  1/n \\  n\left| x\right| & \text{ if }\left| x\right|  < 1/n. \end{array}\right.
+\]
+
+(a) 找出 \(\left( {f}_{n}\right)\) 在 \(\mathbb{R}\) 上的逐点极限，并判断收敛是否一致。
+
+(b) 构造一个连续函数的逐点极限的例子，该极限在紧集 \(\left\lbrack  {-5,5}\right\rbrack\) 上处处收敛到一个在该集上无界的极限函数。
+
+练习6.2.6。利用实数收敛序列的Cauchy准则(定理2.6.4)，为定理6.2.5提供一个证明。(首先，定义一个 \(f\left( x\right)\) 的候选者，然后论证 \({f}_{n} \rightarrow  f\) 一致收敛。)
+
+练习 6.2.7. 假设 \(\left( {f}_{n}\right)\) 在 \(A\) 上一致收敛于 \(f\) ，且每个 \({f}_{n}\) 在 \(A\) 上一致连续。证明 \(f\) 在 \(A\) 上一致连续。
+
+练习 6.2.8. 判断以下猜想哪些为真，哪些为假。为有效的猜想提供证明，为每个无效的猜想提供反例。
+
+(a) 如果 \({f}_{n} \rightarrow  f\) 在紧集 \(K\) 上逐点收敛，则 \({f}_{n} \rightarrow  f\) 在 \(K\) 上一致收敛。
+
+(b) 如果 \({f}_{n} \rightarrow  f\) 在 \(A\) 上一致收敛且 \(g\) 是 \(A\) 上的有界函数，则 \({f}_{n}g \rightarrow  {fg}\) 在 \(A\) 上一致收敛。
+
+(c) 如果 \({f}_{n} \rightarrow  f\) 在 \(A\) 上一致收敛，且每个 \({f}_{n}\) 在 \(A\) 上有界，则 \(f\) 也必须有界。
+
+(d) 如果 \({f}_{n} \rightarrow  f\) 在集合 \(A\) 上一致收敛，且 \({f}_{n} \rightarrow  f\) 在集合 \(B\) 上一致收敛，则 \({f}_{n} \rightarrow  f\) 在 \(A \cup  B\) 上一致收敛。
+
+(e) 如果 \({f}_{n} \rightarrow  f\) 在区间上一致收敛，且每个 \({f}_{n}\) 是递增的，则 \(f\) 也是递增的。
+
+(f) 重复猜想 (e)，假设仅有点态收敛。
+
+练习 6.2.9. 假设 \(\left( {f}_{n}\right)\) 在紧集 \(K\) 上一致收敛于 \(f\) ，且 \(g\) 是 \(K\) 上的连续函数，满足 \(g\left( x\right)  \neq  0\) 。证明 \(\left( {{f}_{n}/g}\right)\) 在 \(K\) 上一致收敛于 \(f/g\) 。
+
+练习 6.2.10. 设 \(f\) 在整个 \(\mathbb{R}\) 上一致连续，并通过 \({f}_{n}\left( x\right)  = f\left( {x + \frac{1}{n}}\right)\) 定义一个函数序列。证明 \({f}_{n} \rightarrow  f\) 一致收敛。给出一个例子说明如果 \(f\) 仅在 \(\mathbb{R}\) 上连续而不一致连续，该命题不成立。
+
+练习6.2.11。假设 \(\left( {f}_{n}\right)\) 和 \(\left( {g}_{n}\right)\) 是一致收敛的函数序列。
+
+(a) 证明 \(\left( {{f}_{n} + {g}_{n}}\right)\) 是一致收敛的函数序列。
+
+(b) 给出一个例子说明乘积 \(\left( {{f}_{n}{g}_{n}}\right)\) 可能不一致收敛。
+
+(c) 证明如果存在一个 \(M > 0\) 使得对于所有 \(n \in  \mathbb{N}\) ， \(\left| {f}_{n}\right|  \leq  M\) 和 \(\left| {g}_{n}\right|  \leq  M\) 成立，则 \(\left( {{f}_{n}{g}_{n}}\right)\) 确实一致收敛。
+
+练习 6.2.12. 定理 6.2.6 有一个部分逆命题。假设 \({f}_{n} \rightarrow  f\) 在紧集 \(K\) 上逐点收敛，并且假设对于每个 \(x \in  K\) ，序列 \({f}_{n}\left( x\right)\) 是递增的。按照以下步骤证明，如果 \({f}_{n}\) 和 \(f\) 在 \(K\) 上连续，则收敛是一致的。
+
+(a) 设 \({g}_{n} = f - {f}_{n}\) 并将前面的假设转化为关于序列 \(\left( {g}_{n}\right)\) 的陈述。
+
+(b) 设 \(\varepsilon  > 0\) 为任意值，并定义 \({K}_{n} = \left\{  {x \in  K : {g}_{n}\left( x\right)  \geq  \varepsilon }\right\}\) 。论证 \({K}_{1} \supseteq  {K}_{2} \supseteq  {K}_{3} \supseteq  \cdots\) 是一个紧集的嵌套序列，并利用这一观察来完成论证。
+
+练习 6.2.13(Cantor函数)。回顾第 3.1 节中Cantor集 \(C \subseteq  \left\lbrack  {0,1}\right\rbrack\) 的构造。本练习利用了该讨论中的结果和符号。
+
+(a) 为所有 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 定义 \({f}_{0}\left( x\right)  = x\) 。现在，设
+
+\[
+{f}_{1}\left( x\right)  = \left\{  \begin{array}{ll} \left( {3/2}\right) x & \text{ for }0 \leq  x \leq  1/3 \\  1/2 & \text{ for }1/3 < x < 2/3 \\  \left( {3/2}\right) x - 1/2 & \text{ for }2/3 \leq  x \leq  1 \end{array}\right.
+\]
+
+绘制 \({f}_{0}\) 和 \({f}_{1}\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上，并观察到 \({f}_{1}\) 是连续的、递增的，并且在中间三分之一 \(\left( {1/3,2/3}\right)  = \left\lbrack  {0,1}\right\rbrack   \smallsetminus  {C}_{1}\) 上是恒定的。
+
+(b) 通过模仿这一过程，将 \({f}_{1}\) 的每个非恒定段的中间三分之一压平来构造 \({f}_{2}\) 。具体来说，令
+
+\[
+{f}_{2}\left( x\right)  = \left\{  \begin{array}{ll} \left( {1/2}\right) {f}_{1}\left( {3x}\right) & \text{ for }0 \leq  x \leq  1/3 \\  {f}_{1}\left( x\right) & \text{ for }1/3 < x < 2/3 \\  \left( {1/2}\right) {f}_{1}\left( {{3x} - 2}\right)  + 1/2 & \text{ for }2/3 \leq  x \leq  1 \end{array}\right.
+\]
+
+如果我们继续这个过程，证明生成的序列 \(\left( {f}_{n}\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上一致收敛。
+
+(c) 设 \(f = \lim {f}_{n}\) 。证明 \(f\) 是 \(\left\lbrack  {0,1}\right\rbrack\) 上的一个连续、递增函数，且满足 \(f\left( 0\right)  = 0\) 和 \(f\left( 1\right)  = 1\) ，对于开集 \(\left\lbrack  {0,1}\right\rbrack   \smallsetminus  C\) 中的所有 \(x\) ，满足 \({f}^{\prime }\left( x\right)  = 0\) 。回想一下，Cantor集(Cantor set) \(C\) 的“长度”为0。然而， \(f\) 在“长度为1”的集合上保持不变的同时，设法从0增加到1。
+
+练习6.2.14。回想一下，Bolzano-Weierstrass定理(定理2.5.5)指出，每个有界的实数序列都有一个收敛的子序列。对于有界函数序列的类似陈述在一般情况下并不成立，但在更强的假设下，可以得出几种不同的结论。一种方法是假设序列中所有函数的共同定义域是可数的。(另一种方法将在接下来的两个练习中探讨。)
+
+设 \(A = \left\{  {{x}_{1},{x}_{2},{x}_{3},\ldots }\right\}\) 为可数集。对于每个 \(n \in  \mathbb{N}\) ，令 \({f}_{n}\) 定义在 \(A\) 上，并假设存在一个 \(M > 0\) ，使得对于所有 \(n \in  \mathbb{N}\) 和 \(x \in  A\) ， \(\left| {{f}_{n}\left( x\right) }\right|  \leq  M\) 成立。按照以下步骤证明存在 \(\left( {f}_{n}\right)\) 的一个子序列在 \(A\) 上逐点收敛。
+
+(a) 为什么实数序列 \({f}_{n}\left( {x}_{1}\right)\) 必然包含一个收敛子序列 \(\left( {f}_{{n}_{k}}\right)\) ？为了表示函数子序列 \(\left( {f}_{{n}_{k}}\right)\) 是通过考虑函数在 \({x}_{1}\) 处的值生成的，我们将使用符号 \({f}_{{n}_{k}} = {f}_{1,k}\) 。
+
+(b) 现在，解释为什么序列 \({f}_{1,k}\left( {x}_{2}\right)\) 包含一个有界子序列。
+
+(c) 仔细构造一个嵌套的子序列族 \(\left( {f}_{m,k}\right)\) ，并使用Cantor对角线化技术(来自定理1.5.1)生成一个在 \(A\) 的每一点都收敛的 \(\left( {f}_{n}\right)\) 的单一子序列。
+
+习题6.2.15。定义在集合 \(E \subseteq  \mathbb{R}\) 上的一列函数 \(\left( {f}_{n}\right)\) 被称为等度连续的，如果对于每一个 \(\varepsilon  > 0\) ，存在一个 \(\delta  > 0\) ，使得对于 \(E\) 中的所有 \(n \in  \mathbb{N}\) 和 \(\left| {x - y}\right|  < \delta\) ，都有 \(\left| {{f}_{n}\left( x\right)  - {f}_{n}\left( y\right) }\right|  < \varepsilon\) 。
+
+(a) 说一列函数 \(\left( {f}_{n}\right)\) 是等度连续的，与仅仅断言序列中的每一个 \({f}_{n}\) 都是单独一致连续的，有什么区别？
+
+(b) 给出一个定性解释，说明为什么序列 \({g}_{n}\left( x\right)  = {x}^{n}\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上不是等度连续的。每个 \({g}_{n}\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上是否一致连续？
+
+习题6.2.16(阿尔泽拉-阿斯科利定理)。对于每个 \(n \in  \mathbb{N}\) ，设 \({f}_{n}\) 是定义在 \(\left\lbrack  {0,1}\right\rbrack\) 上的函数。如果 \(\left( {f}_{n}\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上有界——即存在一个 \(M > 0\) ，使得对于所有 \(n \in  \mathbb{N}\) 和 \(x \in  \left\lbrack  {0,1}\right\rbrack\) ， \(\left| {{f}_{n}\left( x\right) }\right|  \leq  M\) 成立——并且如果函数集合 \(\left( {f}_{n}\right)\) 是等度连续的(习题6.2.15)，按照以下步骤证明 \(\left( {f}_{n}\right)\) 包含一个一致收敛的子序列。
+
+(a) 使用练习6.2.14生成一个子序列 \(\left( {f}_{{n}_{k}}\right)\) ，该序列在 \(\left\lbrack  {0,1}\right\rbrack\) 中的每个有理点处收敛。为简化符号，设 \({g}_{k} = {f}_{{n}_{k}}\) 。仍需证明 \(\left( {g}_{k}\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上一致收敛。
+
+(b) 设 \(\varepsilon  > 0\) 。根据等连续性，存在一个 \(\delta  > 0\) 使得
+
+\[
+\left| {{g}_{k}\left( x\right)  - {g}_{k}\left( y\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+对于所有 \(\left| {x - y}\right|  < \delta\) 和 \(k \in  \mathbb{N}\) 。利用这个 \(\delta\) ，设 \({r}_{1},{r}_{2},\ldots ,{r}_{m}\) 是一个有理点的有限集合，其性质是邻域 \({V}_{\delta }\left( {r}_{i}\right)\) 的并集包含 \(\left\lbrack  {0,1}\right\rbrack\) 。
+
+解释为什么必须存在一个 \(N \in  \mathbb{N}\) 使得
+
+\[
+\left| {{g}_{s}\left( {r}_{i}\right)  - {g}_{t}\left( {r}_{i}\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+对于所有 \(s,t \geq  N\) 和 \({r}_{i}\) 在刚刚描述的 \(\left\lbrack  {0,1}\right\rbrack\) 的有限子集中。为什么集合 \(\left\{  {{r}_{1},{r}_{2},\ldots ,{r}_{m}}\right\}\) 是有限的这一点很重要？
+
+通过证明对于任意的 \(x \in  \left\lbrack  {0,1}\right\rbrack\) ，完成论证。
+
+\[
+\left| {{g}_{s}\left( x\right)  - {g}_{t}\left( x\right) }\right|  < \varepsilon
+\]
+
+对于所有的 \(s,t \geq  N\) 。
+
+\section{一致收敛与微分}
+\label{sec:6.3}
+例\ref{eg:6.2.2} \ref{item:6.2.3} 对我们可能希望关于微分和一致收敛成立的结论施加了一些重要的限制。如果 \({h}_{n} \rightarrow  h\) 一致收敛且每个 \({h}_{n}\) 都是可微的，我们不应期待 \({h}_{n}^{\prime } \rightarrow  {h}^{\prime }\) ，因为在这个例子中 \({h}^{\prime }\left( x\right)\) 甚至在 \(x = 0\) 处不存在。
+
+要证明关于极限函数导数的任何事实，所需的关键假设是导数序列一致收敛。这听起来似乎我们在假设我们想要证明的内容，这种抱怨有一定的道理。一个命题的假设越多，应用起来就越困难。下一个定理的内容是，如果我们给定一个逐点收敛的可微函数序列，并且如果我们知道导数序列一致收敛到某个函数，那么导数的极限确实是极限函数的导数。
+
+
+\begin{Thm}\label{thm:6.3.1}
+  设 \({f}_{n} \rightarrow  f\) 在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上逐点收敛，并假设每个 \({f}_{n}\) 都是可微的。如果 \(\left( {f}_{n}^{\prime }\right)\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛于函数 \(g\) ，则函数 \(f\) 是可微的，且 \({f}^{\prime } = g\) 。
+\end{Thm}
+
+\begin{proof}
+设 \(\varepsilon  > 0\) 并固定 \(c \in  \left\lbrack  {a,b}\right\rbrack\) 。我们想要证明 \({f}^{\prime }\left( c\right)\) 存在且等于 \(g\left( c\right)\) 。因为 \({f}^{\prime }\) 由极限定义
+
+\[
+{f}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{f\left( x\right)  - f\left( c\right) }{x - c},
+\]
+
+我们的任务是找到一个 \(\delta  > 0\) ，使得 $\forall x\in (c-\delta, c+\delta)$
+
+\[
+\left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - g\left( c\right) }\right|  < \varepsilon
+\]
+
+利用三角不等式，我们可以估计
+\begin{align*}
+\left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - g\left( c\right) }\right|  \leq &  \left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - \frac{{f}_{n}\left( x\right)  - {f}_{n}\left( c\right) }{x - c}}\right|\\
+ & + \left| {\frac{{f}_{n}\left( x\right)  - {f}_{n}\left( c\right) }{x - c} - {f}_{n}^{\prime }\left( c\right) }\right|  + \left| {{f}_{n}^{\prime }\left( c\right)  - g\left( c\right) }\right| .
+\end{align*}
+
+
+我们的意图是迫使右边的三个项都小于 \(\varepsilon /3\) 。对于第三项(因为 \({f}_{n}^{\prime } \rightarrow  g\) 一致)和第二项(因为 \({f}_{n}\) 可微)来说，这不会太困难。处理第一项需要最精细的手法，我们首先处理这个任务。
+
+将中值定理应用于区间 \(\left\lbrack  {c,x}\right\rbrack\) 上的函数 \({f}_{m} - {f}_{n}\) （不妨设 $c<x$）。根据中值定理，存在一个 \(\alpha  \in  \left( {c,x}\right)\) 使得
+
+使得
+
+\[
+{f}_{m}^{\prime }\left( \alpha \right)  - {f}_{n}^{\prime }\left( \alpha \right)  = \frac{\left( {{f}_{m}\left( x\right)  - {f}_{n}\left( x\right) }\right)  - \left( {{f}_{m}\left( c\right)  - {f}_{n}\left( c\right) }\right) }{x - c}.
+\]
+
+现在，根据一致收敛的Cauchy准则(定理\ref{thm:6.2.5})，存在一个 \({N}_{1} \in  \mathbb{N}\) ，使得 \( \forall m,n \geq  {N}_{1}\) ，都有
+
+\[
+\left| {{f}_{m}^{\prime }\left( \alpha \right)  - {f}_{n}^{\prime }\left( \alpha \right) }\right|  < \frac{\varepsilon }{3}.
+\]
+
+我们应该指出， \(\alpha\) 依赖于 \(m\) 和 \(n\) 的选择，因此在论证的这一点上， \(\left( {f}_{n}^{\prime }\right)\) 的一致收敛性至关重要。将最后这两个陈述结合起来，可以得出结论：$\forall m,n \geq  {N}_{1}, x \in  \left\lbrack  {a,b}\right\rbrack$
+
+\[
+\left| {\frac{{f}_{m}\left( x\right)  - {f}_{m}\left( c\right) }{x - c} - \frac{{f}_{n}\left( x\right)  - {f}_{n}\left( c\right) }{x - c}}\right|  < \frac{\varepsilon }{3}
+\]
+
+对于所有。因为 \({f}_{m} \rightarrow  f\) ，我们可以取 \(m \rightarrow  \infty\) 的极限，并使用序极限定理(定理\ref{thm:2.3.4})来断言 $\forall n\ge N_1$
+
+\[
+\left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - \frac{{f}_{n}\left( x\right)  - {f}_{n}\left( c\right) }{x - c}}\right|  \leq  \frac{\varepsilon }{3}
+\]
+
+为了完成证明，选择足够大的 \({N}_{2}\) ，使得 $\forall m\ge N_2$
+
+\[
+\left| {{f}_{m}^{\prime }\left( c\right)  - g\left( c\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+然后令 \(N = \max \left\{  {{N}_{1},{N}_{2}}\right\}\) 。在确定了 \(N\) 的选择后，我们利用 \({f}_{N}\) 可微的事实来生成一个 \(\delta  > 0\) ，使得 $\forall x\in (c-\delta, c+\delta)$
+
+\[
+\left| {\frac{{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }{x - c} - {f}_{N}^{\prime }\left( c\right) }\right|  < \frac{\varepsilon }{3}
+\]
+
+最后，我们观察到对于这些 \(x\) 的值，
+\begin{align*}
+\left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - g\left( c\right) }\right|  \leq & \left| {\frac{f\left( x\right)  - f\left( c\right) }{x - c} - \frac{{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }{x - c}}\right|\\
+& + \left| {\frac{{f}_{N}\left( x\right)  - {f}_{N}\left( c\right) }{x - c} - {f}_{N}^{\prime }\left( c\right) }\right|  + \left| {{f}_{N}^{\prime }\left( c\right)  - g\left( c\right) }\right|\\
+< & \frac{\varepsilon }{3} + \frac{\varepsilon }{3} + \frac{\varepsilon }{3} = \varepsilon
+\end{align*}
+
+  
+\end{proof}
+
+定理\ref{thm:6.3.1}中的假设过于强。实际上，我们不需要假设在域中的每个点 \({f}_{n}\left( x\right)  \rightarrow  f\left( x\right)\) 都成立，因为导数序列 \(\left( {f}_{n}^{\prime }\right)\) 一致收敛的假设几乎足以证明 \(\left( {f}_{n}\right)\) 实际上也是一致收敛的。两个具有相同导数的函数可能相差一个常数，因此我们必须假设至少存在一个点 \({x}_{0}\) ，在该点 \({f}_{n}\left( {x}_{0}\right)  \rightarrow  f\left( {x}_{0}\right)\) 成立。
+
+
+\begin{Thm}
+  设 \(\left( {f}_{n}\right)\) 为定义在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的一系列可微函数，并假设 \(\left( {f}_{n}^{\prime }\right)\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛。若存在一点 \({x}_{0} \in  \left\lbrack  {a,b}\right\rbrack\) 使得 \({f}_{n}\left( {x}_{0}\right)\) 收敛，则 \(\left( {f}_{n}\right)\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛。
+\end{Thm}
+\begin{proof}
+
+设 \((f_n')\) 一致收敛于函数 \(g\)。根据 Cauchy 准则，对任意 \(\varepsilon > 0\)，存在 \(N\)，使得当 \(n,m \geq N\) 时，
+   \[
+   \sup_{t \in [a,b]} |f_n'(t) - f_m'(t)| < \frac{\varepsilon}{2(b-a)}.
+   \]
+
+又 \( \exists x_0 \in [a,b]\) 使得 \((f_n(x_0))\) 满足 Cauchy 准则，即 \(\exists N_1\in \mathbb{N}\)，使得 \(\forall n,m \geq N_1\) ，
+   \[
+   |f_n(x_0) - f_m(x_0)| < \frac{\varepsilon}{2}.
+   \]
+
+对任意 \(x \in [a,b]\)，考虑 \(n,m \geq \max(N, N_1)\)。利用导数的差和区间长度（实际上是利用了 Lagrange 中值定理），
+   \[
+   |f_n(x) - f_m(x)| \leq |f_n(x_0) - f_m(x_0)| + |x - x_0| \cdot \sup_{t} |f_n'(t) - f_m'(t)|.
+   \]
+   由于 \(|x - x_0| \leq b - a\)，代入估计得：
+   \[
+   |f_n(x) - f_m(x)| \leq \frac{\varepsilon}{2} + (b-a) \cdot \frac{\varepsilon}{2(b-a)} = \varepsilon.
+   \]
+
+上述估计表明 \((f_n)\) 在 \([a,b]\) 上满足一致收敛的 Cauchy 条件，故 \((f_n)\) 一致收敛。
+\end{proof}
+
+结合最后两个结果，可以得到定理\ref{thm:6.3.1}的一个更强版本。
+
+\begin{Thm}\label{thm:6.3.3}
+设 \(\left( {f}_{n}\right)\) 为定义在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的一系列可微函数，并假设 \(\left( {f}_{n}^{\prime }\right)\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛于函数 \(g\) 。若存在一点 \({x}_{0} \in  \left\lbrack  {a,b}\right\rbrack\) 使得 \({f}_{n}\left( {x}_{0}\right)\) 收敛，则 \(\left( {f}_{n}\right)\) 一致收敛。此外，极限函数 \(f = \lim {f}_{n}\) 可微且满足 \({f}^{\prime } = g\) 。  
+\end{Thm}
+
+
+\subsection{练习}
+
+练习6.3.1。(a) 设
+
+\[
+{h}_{n}\left( x\right)  = \frac{\sin \left( {nx}\right) }{n}.
+\]
+
+证明 \({h}_{n} \rightarrow  0\) 在 \(\mathbb{R}\) 上一致收敛。导数序列 \({h}_{n}^{\prime }\) 在哪些点收敛？
+
+(b) 修改此示例以证明序列 \(\left( {f}_{n}\right)\) 可能一致收敛，但 \(\left( {f}_{n}^{\prime }\right)\) 无界。
+
+练习6.3.2。考虑由以下定义的函数序列
+
+\[
+{g}_{n}\left( x\right)  = \frac{{x}^{n}}{n}.
+\]
+
+(a) 证明 \(\left( {g}_{n}\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上一致收敛，并求出 \(g = \lim {g}_{n}\) 。证明 \(g\) 可微，并计算所有 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 的 \({g}^{\prime }\left( x\right)\) 。
+
+(b) 现在，证明 \(\left( {g}_{n}^{\prime }\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上收敛。收敛是否一致？设 \(h = \lim {g}_{n}^{\prime }\) 并比较 \(h\) 和 \({g}^{\prime }\) 。它们是否相同？
+
+练习6.3.3。考虑函数序列
+
+\[
+{f}_{n}\left( x\right)  = \frac{x}{1 + n{x}^{2}}.
+\]
+
+练习6.2.4包含了一些关于如何证明 \(\left( {f}_{n}\right)\) 在 \(\mathbb{R}\) 上一致收敛的建议。复习或完成这个练习。
+
+现在，设 \(f = \lim {f}_{n}\) 。计算 \({f}_{n}^{\prime }\left( x\right)\) 并找出所有满足 \({f}^{\prime }\left( x\right)  = \lim {f}_{n}^{\prime }\left( x\right)\) 的 \(x\) 的值。
+
+练习6.3.4。设
+
+\[
+{g}_{n}\left( x\right)  = \frac{{nx} + {x}^{2}}{2n},
+\]
+
+并设 \(g\left( x\right)  = \lim {g}_{n}\left( x\right)\) 。证明 \(g\) 在两种方式下可微:
+
+(a) 通过代数方法计算 \(g\left( x\right)\) ，取 \(n \rightarrow  \infty\) 的极限，然后求 \({g}^{\prime }\left( x\right)\) 。
+
+(b) 对每个 \(n \in  \mathbb{N}\) 计算 \({g}_{n}^{\prime }\left( x\right)\) ，并证明导数序列 \(\left( {g}_{n}^{\prime }\right)\) 在每个区间 \(\left\lbrack  {-M,M}\right\rbrack\) 上一致收敛。使用定理 6.3.3 得出结论 \({g}^{\prime }\left( x\right)  = \lim {g}_{n}^{\prime }\left( x\right)\) 。
+
+(c) 对序列 \({f}_{n}\left( x\right)  = \left( {n{x}^{2} + 1}\right) /\left( {{2n} + x}\right)\) 重复部分 (a) 和 (b)。
+
+练习 6.3.5. 使用以下建议为定理 6.3.2 提供证明。首先，观察三角不等式意味着，对于任何 \(x \in\)  \(\left\lbrack  {a,b}\right\rbrack\) ，
+
+\[
+\left| {{f}_{n}\left( x\right)  - {f}_{m}\left( x\right) }\right|  \leq  \left| {\left( {{f}_{n}\left( x\right)  - {f}_{m}\left( x\right) }\right)  - \left( {{f}_{n}\left( {x}_{0}\right)  - {f}_{m}\left( {x}_{0}\right) }\right) }\right|  + \left| {{f}_{n}\left( {x}_{0}\right)  - {f}_{m}\left( {x}_{0}\right) }\right| .
+\]
+
+现在，将中值定理应用于 \({f}_{n} - {f}_{m}\) 。
+
+\section{函数级数}
+\label{sec:6.4}
+\begin{Def}
+ \(\forall n \in  \mathbb{N}\) ，令 \({f}_{n}\) 和 \(f\) 为定义在集合 \(A \subseteq  \mathbb{R}\) 上的函数。称无穷级数
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\left( x\right)  = {f}_{1}\left( x\right)  + {f}_{2}\left( x\right)  + {f}_{3}\left( x\right)  + \cdots
+\]
+
+在 \(A\) 上逐点收敛到 \(f\left( x\right)\) ，若由以下定义的部分和序列 \({s}_{k}\left( x\right)\)
+
+\[
+{s}_{k}\left( x\right)  = {f}_{1}\left( x\right)  + {f}_{2}\left( x\right)  + \cdots  + {f}_{k}\left( x\right)
+\]
+
+逐点收敛于 \(f\left( x\right)\) 。
+
+如果序列 \({s}_{k}\left( x\right)\) 在 \(A\) 上一致收敛于 \(f\left( x\right)\) ，则称该级数在 \(A\) 上一致收敛于 \(f\) 。
+
+在这两种情况下，我们都将其记作 \(f = \mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\) 或 \(f\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\left( x\right)\) ，然后另外说明其收敛类型。
+\end{Def}
+
+
+如果我们有一个级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\) ，其中函数 \({f}_{n}\) 是连续的，那么代数连续性定理(定理4.3.4)保证了部分和——因为它们是有限和——也将是连续的。如果我们处理的是可微函数，相应的观察也是成立的。因此，我们可以立即将前几节中关于序列的结果转化为关于函数无穷级数行为的陈述。
+
+
+\begin{Thm}
+  设 \({f}_{n}\) 是定义在集合 \(A \subseteq  \mathbb{R}\) 上的连续函数，并假设 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\) 在 \(A\) 上一致收敛于函数 \(f\) 。那么， \(f\) 在 \(A\) 上是连续的。
+\end{Thm}
+
+\begin{proof}
+  将定理\ref{thm:6.2.6}应用于部分和 \({s}_{k} = {f}_{1} + {f}_{2} + \cdots  + {f}_{k}\) 即得。
+\end{proof}
+
+\begin{Thm}\label{thm:6.4.3}
+  设 \({f}_{n}\) 为定义在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的可微函数，并假设 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}^{\prime }\left( x\right)\) 在 \(A\) 上一致收敛于极限 \(g\left( x\right)\) 。若存在一点 \({x}_{0} \in  \left\lbrack  {a,b}\right\rbrack\) 使得 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\left( {x}_{0}\right)\) 收敛，则级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\left( x\right)\) 一致收敛于一个可微函数 \(f\left( x\right)\) ，该函数在 \(\left\lbrack  {a,b}\right\rbrack\) 上满足 \({f}^{\prime }\left( x\right)  = g\left( x\right)\) 。换言之，
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\left( x\right) \;\text{ 且 }\;{f}^{\prime }\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}^{\prime }\left( x\right) .
+\]
+\end{Thm}
+
+\begin{proof}
+ 将定理~\ref{thm:6.3.3}应用于部分和 \({s}_{k} = {f}_{1} + {f}_{2} + \cdots  + {f}_{k}\) 。观察到定理\ref{thm:5.2.4}意味着 \({s}_{k}^{\prime } = {f}_{1}^{\prime } + {f}_{2}^{\prime } + \cdots  + {f}_{k}^{\prime }\) 。
+\end{proof}
+
+在无穷级数的语言中，Cauchy准则采取以下形式。
+
+\begin{Thm}[级数一致收敛的Cauchy准则]
+  \label{thm:6.4.4}
+  级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\) 在 \(A \subseteq  \mathbb{R}\) 上一致收敛，当且仅当对于每个 \(\varepsilon  > 0\) ，存在一个 \(N \in  \mathbb{N}\) ，使得对于 \(\forall n > m \geq  N, x\in A\) ，
+
+\[
+\left| {{f}_{m + 1}\left( x\right)  + {f}_{m + 2}\left( x\right)  + {f}_{m + 3}\left( x\right)  + \cdots  + {f}_{n}\left( x\right) }\right|  < \varepsilon
+\]
+\end{Thm}
+
+一致收敛相较于逐点收敛的优势表明需要一些方法来确定级数何时一致收敛。Cauchy准则的以下推论是最常见的此类工具。特别是，它在我们即将进行的幂级数研究中将非常有用。
+
+\begin{Cor}[Weierstrass $M$-test]
+  \label{cor:6.4.5}
+   \(\forall n \in  \mathbb{N}\) ，设 \({f}_{n}\) 是定义在集合 \(A \subseteq  \mathbb{R}\) 上的函数，且设 \({M}_{n} > 0\) 是满足以下条件的实数：$\forall x\in A$
+
+\[
+\left| {{f}_{n}\left( x\right) }\right|  \leq  {M}_{n}
+\]
+
+如果 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{M}_{n}\) 收敛，则 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{f}_{n}\) 在 \(A\) 上一致收敛。
+\end{Cor}
+
+\begin{proof}
+由条件，\(\sum_{n=1}^\infty M_n\) 收敛。根据 Cauchy 收敛准则，对任意 \(\varepsilon > 0\)，存在正整数 \(N\)，使得当 \(n \geq N\) 且任意 \(m \geq n\) 时：
+\[
+\sum_{k=n}^m M_k < \varepsilon.
+\]
+
+对任意 \(x \in A\)，有：
+\[
+\left| \sum_{k=n}^m f_k(x) \right| \leq \sum_{k=n}^m \left| f_k(x) \right| \leq \sum_{k=n}^m M_k < \varepsilon.
+\]
+
+因该估计对所有 \(x \in A\) 同时成立，故 \(\sum_{n=1}^\infty f_n\) 满足一致收敛的Cauchy准则，从而在 \(A\)上一致收敛。
+\end{proof}
+
+
+\subsection{练习}
+
+练习6.4.1. 证明如果 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{g}_{n}\) 一致收敛，则 \(\left( {g}_{n}\right)\) 一致收敛于零。
+
+练习6.4.2. 提供WeierstrassM检验(推论6.4.5)证明的细节。
+
+练习6.4.3. (a) 证明 \(g\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }\cos \left( {{2}^{n}x}\right) /{2}^{n}\) 在整个 \(\mathbb{R}\) 上连续。
+
+(b) 证明 \(h\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }{x}^{n}/{n}^{2}\) 在 \(\left\lbrack  {-1,1}\right\rbrack\) 上连续。
+
+练习 6.4.4. 在第5.4节中，我们推迟了关于无处可微函数
+
+\[
+g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }\frac{1}{{2}^{n}}h\left( {{2}^{n}x}\right)
+\]
+
+在 \(\mathbb{R}\) 上连续的论证。使用WeierstrassM检验来补充缺失的证明。
+
+练习 6.4.5. 设
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{k = 1}}^{\infty }\frac{\sin \left( {kx}\right) }{{k}^{3}}.
+\]
+
+(a) 证明 \(f\left( x\right)\) 是可微的，并且导数 \({f}^{\prime }\left( x\right)\) 是连续的。
+
+(b) 我们能否确定 \(f\) 是否二次可微？
+
+练习 6.4.6. 观察级数
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{x}^{n}}{n} = x + \frac{{x}^{2}}{2} + \frac{{x}^{3}}{3} + \frac{{x}^{4}}{4} + \cdots
+\]
+
+对于半开区间 \(\lbrack 0,1)\) 中的每一个 \(x\) 都收敛，但当 \(x = 1\) 时不收敛。对于固定的 \({x}_{0} \in  \left( {0,1}\right)\) ，解释我们如何仍然可以使用WeierstrassM判别法(Weierstrass M-Test)来证明 \(f\) 在 \({x}_{0}\) 处连续。
+
+习题 6.4.7. 设
+
+\[
+h\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{1}{{x}^{2} + {n}^{2}}.
+\]
+
+(a) 证明 \(h\) 是定义在 \(\mathbb{R}\) 上的连续函数。
+
+(b) \(h\) 是否可微？如果是，导数函数 \({h}^{\prime }\) 是否连续？
+
+习题 6.4.8. 设 \(\left\{  {{r}_{1},{r}_{2},{r}_{3},\ldots }\right\}\) 为有理数集的枚举。对于每一个 \({r}_{n} \in  \mathbb{Q}\) ，定义
+
+\[
+{u}_{n}\left( x\right)  = \left\{  \begin{array}{ll} 1/{2}^{n} & \text{ for }x > {r}_{n} \\  0 & \text{ for }x \leq  {r}_{n}. \end{array}\right.
+\]
+
+现在，设 \(h\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }{u}_{n}\left( x\right)\) 。证明 \(h\) 是定义在 \(\mathbb{R}\) 上的单调函数，且在每一个无理点处连续。
+
+\section{幂级数}
+\label{sec:6.5}
+是时候为我们对以幂级数形式表示的函数理解增添一些数学的严谨性了。形如以下形式的函数称为幂级数：
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n} = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + \cdots .
+\]
+
+首要任务是确定使得右侧级数收敛的点 \(x \in  \mathbb{R}\) 。这个集合肯定包含 \(x = 0\) ，并且，正如下一个结果所示，它呈现出一种非常可预测的形式。
+
+\begin{Thm}\label{thm:6.5.1}
+  如果一个幂级数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 在某点 \({x}_{0} \in  \mathbb{R}\) 收敛，那么对于任何满足 \(\left| x\right|  < \left| {x}_{0}\right|\) 的 \(x\) ，它都绝对收敛。
+\end{Thm}
+
+\begin{proof}
+  如果 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}_{0}^{n}\) 收敛，则项序列 \(\left( {{a}_{n}{x}_{0}^{n}}\right)\) 有界(事实上，它收敛于$0$)。设 \(M > 0\) 满足 \(\left| {{a}_{n}{x}_{0}^{n}}\right|  \leq  M\) 对所有 \(n \in  \mathbb{N}\) 成立。如果 \(x \in  \mathbb{R}\) 满足 \(\left| x\right|  < \left| {x}_{0}\right|\) ，则
+
+\[
+\left| {{a}_{n}{x}^{n}}\right|  = {\left| {a}_{n}{x}_{0}\right| }^{n}{\left| \frac{x}{{x}_{0}}\right| }^{n} \leq  M{\left| \frac{x}{{x}_{0}}\right| }^{n}.
+\]
+
+但请注意
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }M{\left| \frac{x}{{x}_{0}}\right| }^{n}
+\]
+
+是一个公比为 \(\left| {x/{x}_{0}}\right|  < 1\) 的几何级数，因此收敛。根据比较判别法， \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 绝对收敛。
+\end{proof}
+
+定理~\ref{thm:6.5.1}的主要含义是，给定幂级数收敛的点集必然为 \(\{ 0\} ,\mathbb{R}\) ，或是以 \(x = 0\) 为中心的有界区间。由于定理~\ref{thm:6.5.1}中的严格不等式，区间的端点存在一定的模糊性，收敛点集可能呈现 \[\left( {-R,R}\right) ,\left\lbrack  {-R,R),( - R,R}\right\rbrack \text{或} \left\lbrack  {-R,R}\right\rbrack\] 的形式。
+
+\(R\) 的值被称为幂级数的收敛半径，通常将 \(R\) 赋值为0或 \(\infty\) 以分别表示集合 \(\{ 0\}\) 或 \(\mathbb{R}\) 。在练习中探讨了一些计算幂级数收敛半径的标准方法。我们更感兴趣的是研究以这种方式定义的函数的性质。它们是否连续？是否可微？如果是，我们可以逐项微分级数吗？在端点处会发生什么？
+
+\subsection{建立一致收敛性}
+
+对前述问题的肯定回答，以及幂级数在一般情况下的实用性，很大程度上归因于它们在收敛点域内的紧集上一致收敛。正如我们即将看到的，这一事实的完整证明需要相当精细的论证，这归功于挪威数学家 Niels Abel。然而，利用Weierstrass $M$-test(推论~\ref{cor:6.4.5})可以取得显著进展。
+
+\begin{Thm}\label{thm:6.5.2}
+  如果幂级数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 在某点 \({x}_{0}\) 绝对收敛，则它在闭区间 \(\left\lbrack  {-c,c}\right\rbrack\) 上一致收敛，其中 \(c = \left| {x}_{0}\right|\) 。
+\end{Thm}
+
+\begin{proof}
+对任意 \(x \in [-c, c]\)，有 \(|x| \leq c = |x_0|\)，故 \(|x^n| \leq |x_0|^n\)。令 \(M_n = |a_n| \cdot |x_0|^n\)，则 \(|a_n x^n| \leq M_n\)。由已知条件，\(\sum_{n=0}^{\infty} M_n = \sum_{n=0}^{\infty} |a_n x_0^n|\) 收敛。根据 Weierstrass $M$-test，级数在 \([-c, c]\) 上一致收敛。
+\end{proof}
+
+对于许多应用来说，定理~\ref{thm:6.5.2}已经足够。例如，结合我们迄今为止关于一致收敛和幂级数的结果，我们现在可以论证，在开区间$(-R, R)$上收敛的幂级数必然在该区间上连续(习题6.5.4)。
+
+但是如果我们知道一个级数在其收敛区间的端点处收敛，会发生什么情况呢？级数在$(-R, R)$上的良好行为是否必然延伸到端点 \(x = R\) ？如果级数在 \(x = R\) 处的收敛是绝对收敛，那么我们可以再次依赖定理~\ref{thm:6.5.2}来得出结论，即级数在集合 \(\left\lbrack  {-R,R}\right\rbrack\) 上一致收敛。剩下的有趣开放问题是，如果级数在点 \(x = R\) 处条件收敛，会发生什么情况。我们仍然可以使用定理~\ref{thm:6.5.1}来得出结论，即级数在区间 \(( - R,R\rbrack\) 上逐点收敛，但需要更多的工作来建立包含 \(x = R\) 的紧集上的一致收敛。
+
+\subsection{Abel定理}
+
+我们应当指出，如果幂级数 \(g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 在 \(x = R\) 处条件收敛，那么当 \(x =  - R\) 时它有可能发散。
+
+以级数
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n}{x}^{n}}{n}
+\]
+
+为例，其收敛半径 $R = 1$。为了将注意力集中在收敛的端点，我们将证明在集合 \(\left\lbrack  {0,R}\right\rbrack\) 上的一致收敛性。
+
+我们所需的论证与 Abel 判别法的证明非常相似，该判别法包含在第\ref{sec:2.7}节的练习中。Abel 判别法证明的第一步是一个估计，有时称为 Abel 引理，我们很快会再次需要它。
+
+\begin{Lem}[Abel引理]
+  \label{lem:6.5.3}
+  设 \({b}_{n}\) 满足 \({b}_{1} \geq  {b}_{2} \geq  {b}_{3} \geq  \cdots  \geq  0\) ，且设 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 为一个部分和有界的级数。换句话说，假设存在 \(A > 0\) 使得
+
+\[
+\left| {{a}_{1} + {a}_{2} + \cdots  + {a}_{n}}\right|  \leq  A
+\]
+
+对于所有 \(n \in  N\) 。那么，对于所有 \(n \in  \mathbb{N}\) ，
+
+\[
+\left| {{a}_{1}{b}_{1} + {a}_{2}{b}_{2} + {a}_{3}{b}_{3} + \cdots  + {a}_{n}{b}_{n}}\right|  \leq  {2A}{b}_{1}.
+\]
+\end{Lem}
+
+\begin{proof}
+设 \(S_k = a_1 + a_2 + \cdots + a_k\)，由题设 \(|S_k| \leq A\)。应用分部求和：
+
+\[
+\sum_{k=1}^n a_k b_k = S_n b_n + \sum_{k=1}^{n-1} S_k (b_k - b_{k+1}).
+\]
+
+分别估计各部分：
+\begin{itemize}
+\item \(|S_n b_n| \leq A b_n \leq A b_1\)
+\item \(\sum_{k=1}^{n-1} |S_k (b_k - b_{k+1})| \leq A \sum_{k=1}^{n-1} (b_k - b_{k+1}) = A(b_1 - b_n) \leq A b_1\)
+\end{itemize}
+
+两部分绝对值之和为：
+\(
+A b_1 + A b_1 = 2A b_1.
+\)
+故原式绝对值满足：
+
+\[
+\left|\sum_{k=1}^n a_k b_k\right| \leq 2A b_1.
+\]
+\end{proof}
+
+
+值得注意的是，如果 \(A\) 是 \(\sum \left| {a}_{n}\right|\) 部分和的上界(注意绝对值符号)，那么引理~\ref{lem:6.5.3}的证明将只是三角不等式的一个简单应用。此外，我们不需要因子$2$，实际上，除了我们特定的证明方法需要它之外，一般情况下并不需要它。问题的关键在于，由于我们仅假设条件收敛，三角不等式在证明Abel定理时将毫无用处，但我们现在拥有一个可以替代它的不等式。
+
+\begin{Thm}[Abel定理]
+  设 \(g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 为在点 \(x = R > 0\) 收敛的幂级数。则该级数在区间 \(\left\lbrack  {0,R}\right\rbrack\) 上一致收敛。如果级数在 \(x =  - R\) 收敛，则类似结果成立。
+\end{Thm}
+
+\begin{proof}
+  为了应用引理~\ref{lem:6.5.3}，我们首先写出
+
+\[
+g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n} = \mathop{\sum }\limits_{{n = 0}}^{\infty }\left( {{a}_{n}{R}^{n}}\right) {\left( \frac{x}{R}\right) }^{n}.
+\]
+
+设 \(\varepsilon  > 0\) 。根据级数一致收敛的Cauchy准则(定理~\ref{thm:6.4.4})，如果我们能找到一个 \(N\) 使得 \eqref{eq:6.5.1} 对于 \( \forall n > m \geq  N\) 成立，则证明完成。
+
+\begin{equation}
+\label{eq:6.5.1}
+\left| {\;\left( {{a}_{m + 1}{R}^{m + 1}}\right) {\left( \frac{x}{R}\right) }^{m + 1} + \left( {{a}_{m + 2}{R}^{m + 2}}\right) {\left( \frac{x}{R}\right) }^{m + 2} + \cdots }\right. + \left( {{a}_{n}{R}^{n}}\right) {\left( \frac{x}{R}\right) }^{n} \mid   < \varepsilon .
+\end{equation}
+
+因为我们假设 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}{R}^{n}\) 收敛，实数收敛级数的Cauchy准则保证了 \(\exists N\in \mathbb{N}\) ，使得 $\forall n > m \geq  N$
+
+\[
+\left| {{a}_{m + 1}{R}^{m + 1} + {a}_{m + 2}{R}^{m + 2} + \cdots  + {a}_{n}{R}^{n}}\right|  < \frac{\varepsilon }{2}
+\]
+
+但现在，对于任何固定的 \(m \in  N\) ，我们可以将引理 \ref{lem:6.5.3}应用于通过省略前 \(m\) 项得到的序列。使用 \(\varepsilon /2\) 作为 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{m + j}{R}^{m + j}\) 的部分和的界限，并观察到 \({\left( x/R\right) }^{m + j}\) 是单调递减的，将引理应用于方程\ref{eq:6.5.1}得到
+\begin{align*}
+  &\left| {\;\left( {{a}_{m + 1}{R}^{m + 1}}\right) {\left( \frac{x}{R}\right) }^{m + 1} + \left( {{a}_{m + 2}{R}^{m + 2}}\right) {\left( \frac{x}{R}\right) }^{m + 2} + \cdots }+ \left( {{a}_{n}{R}^{n}}\right) {\left( \frac{x}{R}\right) }^{n}\right|\\
+ \leq&   2\left( \frac{\varepsilon }{2}\right) {\left( \frac{x}{R}\right) }^{m + 1} \leq  \varepsilon .
+\end{align*}
+
+\end{proof}
+
+不等式不严格(如Cauchy准则技术上的要求)是一个干扰，但不是真正的缺陷。我们将其留给读者讨论。
+
+\subsection{幂级数的胜利}
+总结定理~\ref{thm:6.5.2}和Abel定理结论的经济方法如下。
+\begin{Thm}
+  \label{thm:6.5.5}
+  如果一个幂级数在集合 \(A \subseteq  \mathbb{R}\) 上逐点收敛，那么它在任何紧集 \(K \subseteq  A\) 上一致收敛。
+\end{Thm}
+
+这一事实得出了一个理想的结论：幂级数在其收敛的每一点都是连续的。为了论证可微性，我们希望引用定理~\ref{thm:6.4.3}；然而，这个结果的假设条件稍微复杂一些。为了得出幂级数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 可微且允许逐项微分的结论，我们需要事先知道微分后的级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }n{a}_{n}{x}^{n - 1}\) 一致收敛。
+
+\begin{Thm}
+  \label{thm:6.5.6}
+  如果 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}\) 对所有 \(x \in  \left( {-R,R}\right)\) 收敛，则微分级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }n{a}_{n}{x}^{n - 1}\) 在每个 \(x \in  \left( {-R,R}\right)\) 处也收敛。因此，在包含于$(-R, R)$的紧集上，收敛是一致的。
+\end{Thm}
+
+\begin{proof}
+原级数的收敛半径为 \(R\)，由根值法可知：
+\[
+\limsup_{n\to\infty} |a_n|^{1/n} = \frac{1}{R}.
+\]
+微分级数的系数为 \(n a_n\)。考虑其根值：
+\[
+\limsup_{n\to\infty} |n a_n|^{1/n} = \limsup_{n\to\infty} n^{1/n} \cdot |a_n|^{1/n} = 1 \cdot \frac{1}{R} = \frac{1}{R},
+\]
+因此微分级数的收敛半径仍为 \(R\)，从而在 \(|x| < R\) 时收敛。
+
+考虑紧集 \(K \subset (-R, R)\)，例如 \(K = [-r, r]\)（\(0 < r < R\)）。对于任意 \(x \in K\)，微分级数的项满足：
+\[
+|n a_n x^{n-1}| \leq n |a_n| r^{n-1}.
+\]
+由于原级数在 \(r\) 处收敛（即 \(\sum |a_n| r^n\) 收敛），考察控制级数：
+\[
+\sum_{n=1}^{\infty} n |a_n| r^{n-1} = \frac{1}{r} \sum_{n=1}^{\infty} n |a_n| r^n.
+\]
+注意到原级数与微分级数具有相同的收敛半径，故 \(\sum n |a_n| r^{n-1}\) 收敛。由 Weierstrass $M$-test，微分级数在 \(K\) 上一致收敛。
+\end{proof}
+
+
+我们应当指出，一个级数可能在端点 \(x = R\) 处收敛，但其微分级数在该点却发散。当 \(x = 1\) 时，级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{\left( -x\right) }^{n}/n\) 具有这一特性。另一方面，如果微分级数在点 \(x = R\) 处确实收敛，那么Abel定理适用，且微分级数在包含 \(R\) 的紧集上一致收敛。
+
+在一切就绪之后，我们总结本节令人印象深刻的结论。
+
+\begin{Thm}
+  \label{thm:6.5.7}
+  假设
+\[
+g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}
+\]
+
+在区间 \(A \subseteq  \mathbb{R}\) 上收敛。则函数 \(g\) 在 \(A\) 上连续，并在任何开区间 \(\left( {-R,R}\right)  \subseteq  A\) 上可微。其导数由下式给出
+
+\[
+{g}^{\prime }\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{\infty }n{a}_{n}{x}^{n - 1}.
+\]
+
+此外， \(g\) 在$(-R, R)$上无限可微，且其逐次导数可通过适当级数的逐项微分获得。
+\end{Thm}
+
+\begin{proof}
+幂级数在其收敛区间内绝对收敛且局部一致收敛。每个单项 \(a_n x^n\) 均为连续函数，而一致收敛的连续函数之和仍保持连续性。因此，\(g(x)\) 在 \(A\) 上连续。
+
+考虑逐项微分后的级数 \(\sum_{n=1}^{\infty} n a_n x^{n-1}\)。原级数的收敛半径为 \(R\)，满足：
+\[
+\limsup_{n→∞} |a_n|^{1/n} = 1/R.
+\]
+对微分后的级数，系数变为 \(n a_n\)，其收敛半径计算为：
+\[
+\limsup_{n→∞} |n a_n|^{1/n} = \limsup_{n→∞} \left( n^{1/n} |a_n|^{1/n} \right) = 1/R \cdot 1 = 1/R,
+\]
+故微分后的级数仍以 \(R\) 为收敛半径，在 \((-R, R)\) 内绝对收敛。进一步，在任意闭子区间 \([-r, r] \subset (-R, R)\) 上，微分级数一致收敛。根据逐项微分定理，原级数的导数存在且为：
+\[
+g'(x) = \sum_{n=1}^{\infty} n a_n x^{n-1}.
+\]
+
+逐次微分后的级数系数为 \(n(n-1)\cdots(n-k+1) a_n\)，其收敛半径计算时，多项式因子 \(n^k\) 的 \(n\) 次根仍趋近于 $1$，因此收敛半径保持为 \(R\)。每次微分后的级数均在 \((-R, R)\) 内收敛，故 \(g(x)\) 在此区间内可无限微分，且各阶导数均由逐项微分获得。
+\end{proof}
+
+微分幂级数本身也是一个幂级数，定理~\ref{thm:6.5.6}表明，尽管该级数在特定端点可能不再收敛，但收敛半径不会改变。因此，通过归纳，幂级数可以无限次微分。
+
+\subsection{练习}
+
+练习6.5.1。考虑由幂级数定义的函数 \(g\)
+
+\[
+g\left( x\right)  = x - \frac{{x}^{2}}{2} + \frac{{x}^{3}}{3} - \frac{{x}^{4}}{4} + \frac{{x}^{5}}{5} - \cdots .
+\]
+
+(a) \(g\) 在(-1,1)上定义吗？它在这个集合上连续吗？ \(g\) 在 \(( - 1,1\rbrack\) 上定义吗？它在这个集合上连续吗？在 \(\left\lbrack  {-1,1}\right\rbrack\) 上会发生什么？ \(g\left( x\right)\) 的幂级数是否可能在其他点 \(\left| x\right|  > 1\) 上收敛？请解释。
+
+(b) 对于哪些 \(x\) 的值， \({g}^{\prime }\left( x\right)\) 有定义？求 \({g}^{\prime }\) 的公式。
+
+练习 6.5.2. 找到合适的系数 \(\left( {a}_{n}\right)\) ，使得生成幂级数 \(\sum {a}_{n}{x}^{n}\)
+
+(a) 对所有 \(x \in  \left\lbrack  {-1,1}\right\rbrack\) 绝对收敛，并在此集合外发散；
+
+(b) 在 \(x =  - 1\) 处条件收敛，在 \(x = 1\) 处发散；
+
+(c) 在 \(x =  - 1\) 和 \(x = 1\) 处都条件收敛。
+
+(d) 是否有可能找到一个幂级数的例子，它在 \(x =  - 1\) 处条件收敛，在 \(x = 1\) 处绝对收敛？
+
+练习6.5.3. 解释为什么幂级数最多只能在两个点上条件收敛。
+
+练习6.5.4. (a) 通过引用适当的定理，详细论证在区间(-R, R)上收敛的幂级数必然在每个点 \(x \in  \left( {-R,R}\right)\) 上表示一个连续函数。
+
+(b) 如果级数在端点 \(x = R\) 上收敛，指出我们如何知道连续性扩展到集合 \((R,R\rbrack\) 。
+
+练习6.5.5. 使用WeierstrassM判别法证明定理6.5.2。
+
+练习6.5.6. 展示定理6.5.1、定理6.5.2和Abel定理如何共同暗示，如果幂级数在紧集上逐点收敛，那么收敛实际上在该集上是一致的。
+
+练习 6.5.7. (a) 比值判别法(来自练习 2.7.9)指出，如果 \(\left( {b}_{n}\right)\) 是一个满足 \(\lim \left| {{b}_{n + 1}/{b}_{n}}\right|  = r < 1\) 的非零项序列，那么级数 \(\sum {b}_{n}\) 收敛。利用这一点来论证，如果 \(s\) 满足 \(0 < s < 1\) ，那么 \(n{s}^{n - 1}\) 对所有 \(n \geq  1\) 都是有界的。
+
+(b) 给定任意 \(x \in  \left( {-R,R}\right)\) ，选择 \(t\) 以满足 \(\left| x\right|  < t < R\) 。利用
+
+观察
+
+\[
+\left| {n{a}_{n}{x}^{n - 1}}\right|  = \frac{1}{t}\left( {n\left| \frac{{x}^{n - 1}}{{t}^{n - 1}}\right| }\right) \left| {{a}_{n}{t}^{n}}\right|
+\]
+
+为定理6.5.6构建一个证明。
+
+练习6.5.8。设 \(\sum {a}_{n}{x}^{n}\) 为一个幂级数，且 \({a}_{n} \neq  0\) ，并假设
+
+\[
+L = \mathop{\lim }\limits_{{n \rightarrow  \infty }}\left| \frac{{a}_{n + 1}}{{a}_{n}}\right|
+\]
+
+存在。
+
+(a) 证明如果 \(L \neq  0\) ，则该级数对所有 \(x\) 在 \(\left( {-1/L,1/L}\right)\) 中收敛。(练习2.7.9中的建议可能有所帮助。)
+
+(b) 证明如果 \(L = 0\) ，则该级数对所有 \(x \in  \mathbb{R}\) 收敛。
+
+(c) 证明如果 \(L\) 被极限替换，(a)和(b)仍然成立。
+
+\[
+{L}^{\prime } = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{n}\;\text{ where }\;{s}_{n} = \sup \left\{  {\left| \frac{{a}_{k + 1}}{{a}_{k}}\right|  : k \geq  n}\right\}  .
+\]
+
+值 \({L}^{\prime }\) 被称为序列 \(\left| {{a}_{n + 1}/{a}_{n}}\right|\) 的“上极限”或“lim sup”。当且仅当序列有界时，它存在(练习 2.4.6)。
+
+(d) 证明如果 \(\left| {{a}_{n + 1}/{a}_{n}}\right|\) 无界，则原级数 \(\sum {a}_{n}{x}^{n}\) 仅在 \(x = 0\) 时收敛。
+
+练习 6.5.9。使用定理 6.5.7 论证幂级数是唯一的。如果
+
+我们有
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n} = \mathop{\sum }\limits_{{n = 0}}^{\infty }{b}_{n}{x}^{n}
+\]
+
+对于所有在区间 (-R, R) 内的 \(x\) ，证明对于所有 \(n = 0,1,2,\ldots\) ， \({a}_{n} = {b}_{n}\) 成立。(首先证明 \({a}_{0} = {b}_{0}\) 。)
+
+练习6.5.10。回顾第2.8节中关于级数乘积和Cauchy乘积的定义和结果。在第2.9节的末尾，我们提到了以下结果:如果 \(\sum {a}_{n}\) 和 \(\sum {b}_{n}\) 分别条件收敛于 \(A\) 和 \(B\) ，那么Cauchy乘积有可能发散。
+
+\[
+\sum {d}_{n}\;\text{ where }\;{d}_{n} = {a}_{0}{b}_{n} + {a}_{1}{b}_{n - 1} + \cdots  + {a}_{n}{b}_{0},
+\]
+
+然而，如果 \(\sum {d}_{n}\) 确实收敛，那么它必须收敛于 \({AB}\) 。为了证明这一点，设
+
+\[
+f\left( x\right)  = \sum {a}_{n}{x}^{n},\;g\left( x\right)  = \sum {b}_{n}{x}^{n},\;\text{ and }\;h\left( x\right)  = \sum {d}_{n}{x}^{n}.
+\]
+
+使用Abel定理和练习2.8.8中的结果来建立这一结论。
+
+练习6.5.11。如果幂级数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}\) 被称为Abel可和于 \(L\) ，
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}
+\]
+
+对所有 \(x \in  \lbrack 0,1)\) 和 \(L = \mathop{\lim }\limits_{{x \rightarrow  {1}^{ - }}}f\left( x\right)\) 收敛。
+
+(a) 证明任何收敛到极限 \(L\) 的级数也是Abel可求和到 \(L\) 。
+
+(b) 证明 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{\left( -1\right) }^{n}\) 是Abel可求和的，并求出其和。
+
+练习6.5.12。考虑分支过程开篇讨论中的函数 \(G\) ，并回想概率的递增单调序列 \(\left( {d}_{r}\right)\) 有一个满足 \(G\left( d\right)  = d\) 的极限 \(d = \lim {d}_{r}\) 。假设我们处于有两个固定点的情况: \(G\left( 1\right)  = 1\) 和另一个满足 \(G\left( {d}_{0}\right)  = {d}_{0}\) 的值 \(0 < {d}_{0} < 1\) 。阐述为什么序列 \(\left( {d}_{r}\right)\) 必然收敛到值 \(d = {d}_{0}\) 而不是 \(d = 1\) 的理由。
+
+
+
+\section{Taylor级数}
+\label{sec:6.6}
+我们对幂级数的研究得出了一些关于以下形式函数的性质的有趣结论
+
+\[
+f\left( x\right)  = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + {a}_{4}{x}^{4} + \cdots .
+\]
+
+尽管幂级数具有无限项，但它们可以像多项式一样进行各种操作。在其收敛区间内，幂级数是连续且无限可微的，并且可以通过对级数中的每一项执行所需操作来计算逐次导数，就像对多项式所做的那样。正如我们将在下一章中看到的，幂级数的积分理论同样令人满意。正如初学微积分的学生所熟知的那样，当仅应用于多项式时，积分和微分的过程以及基本的代数操作都相当直接。正是诸如 \(\sin \left( x\right)\) 、 \(\ln \left( x\right)\) 和 \(\arctan \left( x\right)\) 等函数的引入，才需要在一、二学期的微积分课程中教授许多符号技巧。这种现象促使我们思考，像 \(\arctan \left( x\right)\) 这样的函数是否具有幂级数表示。
+
+在本节的示例中，我们将假设所有熟悉的三角函数、反三角函数、指数函数和对数函数的性质。严格定义这些函数是分析中的一个有趣练习。事实上，提供定义的最常见方法之一是通过幂级数。然而，本讨论的重点是从另一个方向来探讨这个问题。假设我们拥有一个无限可微的函数，如 \(\arctan \left( x\right)\) ，我们能否找到合适的系数 \({a}_{n}\) ，使得至少对于一些非零的 \(x\) 值成立：
+
+\[
+\arctan \left( x\right)  = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + {a}_{4}{x}^{4} + \cdots
+\]
+
+\subsection{操作级数}
+
+我们已经有一个熟悉函数的幂级数展开的例子。在第\ref{chap:2}章例\ref{eg:2.7.5}的无穷级数材料中，我们证明了 \(\forall t \in  \left( {-1,1}\right)\)
+
+\begin{equation}
+\label{eq:6.6.1}
+\frac{1}{1 - t} = 1 + t + {t}^{2} + {t}^{3} + {t}^{4} + \cdots
+\end{equation}
+
+将 \(- {t}^{2}\) 代入 \(t\) 得到
+
+\[
+\frac{1}{1 + {t}^{2}} = 1 - {t}^{2} + {t}^{4} - {t}^{6} + {t}^{8} - \cdots .
+\]
+
+但现在我们可以利用以下事实:
+
+\[
+\arctan \left( x\right)  = {\int }_{0}^{x}\frac{1}{1 + {t}^{2}}{dt}
+\]
+
+尽管目前尚未对积分进行严格研究，但我们将在第\ref{chap:7}章中看到，如果 \({f}_{n} \rightarrow  f\) 在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上一致，则 \({\int }_{a}^{b}{f}_{n} \rightarrow  {\int }_{a}^{b}f\) 。这一观察结果，结合微积分基本定理，得出公式
+
+\[
+\arctan \left( x\right)  = x - \frac{1}{3}{x}^{3} + \frac{1}{5}{x}^{5} - \frac{1}{7}{x}^{7} + \cdots .
+\]
+
+练习 6.6.1。第七章即将得出的结果将证明这个方程对所有 \(x \in  \left( {-1,1}\right)\) 都成立，但请注意，当 \(x = 1\) 时，这个级数实际上收敛。假设 \(\arctan \left( x\right)\) 是连续的，解释为什么在 \(x = 1\) 处级数的值必然是 \(\arctan \left( 1\right)\) 。在这种情况下，我们得到了什么有趣的身份？
+
+练习 6.6.2。从本节方程 \eqref{eq:6.6.1} 中的恒等式出发，找到 \(\ln \left( {1 + x}\right)\) 的幂级数表示。对于哪些 \(x\) 值，这个表达式是有效的？
+
+\subsection{Taylor公式的系数}
+
+在17和18世纪，当无穷级数的实用性首次被认识到时，通过操作旧级数来生成新级数是一种非常熟练的技艺。但也出现了一种从“零开始”生成系数的公式——一种仅使用所讨论的函数及其导数来生成幂级数表示的方法。该技术以数学家 Brook Taylor (1685-1731)的名字命名，他于1715年发表了这一方法，尽管在此之前它肯定已经被人们所知。
+
+给定一个在某个以零为中心的区间上定义的无限可微函数 \(f\) ，其思想是假设 \(f\) 具有幂级数展开，并推导出系数必须是什么；即写出
+
+\begin{equation}
+\label{eq:6.6.2}
+f\left( x\right)  = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + {a}_{4}{x}^{4} + {a}_{5}{x}^{5} + \cdots .
+\end{equation}
+
+在此表达式中设置 \(x = 0\) 便得到 \(f\left( 0\right)  = {a}_{0}\) 。
+
+练习6.6.3. (a) 对方程\eqref{eq:6.6.2}的每一边求导，并推导出 \({f}^{\prime }\left( 0\right)  = {a}_{1}\) 。一般来说，证明如果 \(f\) 具有幂级数展开，则系数必须由公式给出
+
+\[
+{a}_{n} = \frac{{f}^{\left( n\right) }\left( 0\right) }{n!}.
+\]
+
+提供证明对公式\eqref{eq:6.6.2}中级数进行操作的定理的参考文献。
+
+练习6.6.4。使用前一个练习中 \({a}_{n}\) 的Taylor公式来生成/验证所谓的 \(\sin \left( x\right)\) 的Taylor级数，其形式为
+
+\[
+\sin \left( x\right)  \sim  x - \frac{{x}^{3}}{3!} + \frac{{x}^{5}}{5!} - \frac{{x}^{7}}{7!} + \cdots .
+\]
+
+\subsection{Lagrange余项}
+
+我们需要非常清楚到目前为止我们证明了什么。为了推导Taylor公式，我们假设 \(f\) 实际上有一个幂级数表示。结论是，如果 \(f\) 在以零为中心的区间上无限可微，并且如果 \(f\) 可以表示为
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}
+\]
+
+那么它必须是
+
+\[
+{a}_{n} = \frac{{f}^{\left( n\right) }\left( 0\right) }{n!}.
+\]
+
+但反过来呢？假设 \(f\) 在零的邻域内无限可微。如果我们令
+
+\[
+{a}_{n} = \frac{{f}^{\left( n\right) }\left( 0\right) }{n!},
+\]
+
+结果级数
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n}
+\]
+
+是否在某些非平凡的点集上收敛到 \(f\left( x\right)\) ？它是否收敛？如果它确实收敛，我们知道极限函数是一个表现良好、无限可微的函数，其在零点的导数与 \(f\) 的导数完全相同。这个极限是否可能不同于 \(f\) ？换句话说，函数 \(f\) 的Taylor级数是否会收敛到错误的东西？令
+
+\[
+{S}_{N}\left( x\right)  = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + \cdots  + {a}_{N}{x}^{N}.
+\]
+
+多项式 \({S}_{N}\left( x\right)\) 是函数 \(f\left( x\right)\) 的Taylor级数展开的部分和。因此，我们感兴趣的是
+
+\[
+\mathop{\lim }\limits_{{N \rightarrow  \infty }}{S}_{N}\left( x\right)  = f\left( x\right)
+\]
+
+对于除零以外的某些 \(x\) 值。Joseph Louis Lagrange (1736-1813)提供了一个强大的工具来分析这个问题。这个想法是考虑差值
+
+\[
+{E}_{N}\left( x\right)  = f\left( x\right)  - {S}_{N}\left( x\right) ,
+\]
+
+它表示 \(f\) 与部分和 \({S}_{N}\) 之间的误差。
+
+\begin{Thm}[Lagrange余项]
+  \label{thm:6.6.1}
+设 \(f\) 在$(-R, R)$上无限可微，定义 \({a}_{n} = {f}^{\left( n\right) }\left( 0\right) /n\) ！，并令
+
+\[
+{S}_{N} = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + \cdots  + {a}_{N}{x}^{N}.
+\]
+
+给定 \(x \neq  0\) ，存在一个点 \(c\) 满足 \(\left| c\right|  < \left| x\right|\) ，其中误差函数 \({E}_{N}\left( x\right)  = f\left( x\right)  - {S}_{N}\left( x\right)\) 满足
+
+\[
+{E}_{N}\left( x\right)  = \frac{{f}^{\left( N + 1\right) }\left( c\right) }{\left( {N + 1}\right) !}{x}^{N + 1}.
+\]
+
+\end{Thm}
+
+在开始证明之前，让我们先审视这一结果的意义。证明 \({S}_{N}\left( x\right)  \rightarrow  f\left( x\right)\) 等同于展示 \({E}_{N}\left( x\right)  \rightarrow  0\) 。对于 \({E}_{N}\left( x\right)\) 的表达式，有三个组成部分。在分母中，我们有 \(\left( {N + 1}\right)\) !，这有助于使 \({E}_{N}\) 随着 \(N\) 趋向于无穷大而变小。在分子中，我们有 \({x}^{N + 1}\) ，它可能会根据 \(x\) 的大小而增长。因此，我们应该预期，Taylor级数在 \(x\) 离原点越远时越不可能收敛。最后，我们有 \({f}^{\left( N + 1\right) }\left( c\right)\) ，这有点神秘。对于具有直接导数的函数，这一项通常可以通过使用适当的上界来处理。
+
+
+\begin{Eg}
+  \label{eg:6.6.2}
+  考虑之前生成的 \(\sin \left( x\right)\) 的Taylor级数：
+\[
+{S}_{5}\left( x\right)  = x - \frac{1}{3!}{x}^{3} + \frac{1}{5!}{x}^{5}
+\]
+  如何很好地在区间 \(\left\lbrack  {-2,2}\right\rbrack\) 上近似 \(\sin \left( x\right)\) 。Lagrange余项定理断言，这两个函数之间的差为
+
+\[
+{E}_{5}\left( x\right)  = \sin \left( x\right)  - {S}_{5}\left( x\right)  = \frac{-\cos \left( c\right) }{6!}{x}^{6}
+\]
+
+对于区间 \(\left( {-\left| x\right| ,\left| x\right| }\right)\) 中的某个 \(c\) ，我们无法知道 \(c\) 的值，但可以非常确定 \(\left| {\cos \left( c\right) }\right|  \leq  1\) 。因为 \(x \in  \left\lbrack  {-2,2}\right\rbrack\) ，我们有
+
+\[
+\left| {{E}_{5}\left( x\right) }\right|  \leq  \frac{{2}^{6}}{6!} \approx  {.089}
+\]  
+\end{Eg}
+
+练习6.6.5。证明 \({S}_{N}\left( x\right)\) 在 \(\left\lbrack  {-2,2}\right\rbrack\) 上一致收敛于 \(\sin \left( x\right)\) 。将此证明推广到证明在形如 \(\left\lbrack  {-R,R}\right\rbrack\) 的任何区间上收敛是一致的。
+
+练习6.6.6。(a) 生成指数函数 \(f\left( x\right)  = {e}^{x}\) 的Taylor系数，然后证明相应的Taylor级数在形如 \(\left\lbrack  {-R,R}\right\rbrack\) 的任何区间上一致收敛于 \({e}^{x}\) 。
+
+(b) 验证公式 \({f}^{\prime }\left( x\right)  = {e}^{x}\) 。
+
+使用代换生成 \({e}^{-x}\) 的级数，然后通过将两个级数相乘并收集 \(x\) 的相同幂次来计算 \({e}^{x} \cdot  {e}^{-x}\) 。
+
+Lagrange余项定理的证明:回顾第5章中的广义中值定理(定理\ref{thm:5.3.5})。
+
+练习 6.6.7. 解释为什么误差函数 \({E}_{N}\left( x\right)  = {f}_{N}\left( x\right)  - {S}_{N}\left( x\right)\) 满足
+
+满足
+
+\[
+{E}_{N}^{\left( n\right) }\left( 0\right)  = 0\;\text{ for all }n = 0,1,2,\ldots ,N.
+\]
+
+为了简化符号，假设 \(x > 0\) 并将广义中值定理应用于函数 \({E}_{N}\left( x\right)\) 和 \({x}^{N + 1}\) 在区间 \(\left\lbrack  {0,x}\right\rbrack\) 上。因此，存在一个点 \({x}_{1} \in  \left( {0,x}\right)\) 使得
+
+\[
+\frac{{E}_{N}\left( x\right) }{{x}^{N + 1}} = \frac{{E}_{N}^{\prime }\left( {x}_{1}\right) }{\left( {N + 1}\right) {x}_{1}^{N}}.
+\]
+
+练习 6.6.8. 完成Lagrange余项定理的证明。
+
+\subsection{一个反例}
+
+Lagrange余项在确定Taylor级数的部分和如何近似原函数方面极为有用，但它未能解决核心问题，即Taylor级数是否必然收敛于生成它的函数。误差公式中出现的第 \(n\) 阶导数 \({f}^{\left( n\right) }\left( c\right)\) 使得任何一般性陈述都变得不可能。事实上，还有其他几种方法可以表示部分和 \({S}_{N}\left( x\right)\) 与函数 \(f\left( x\right)\) 之间的误差，但没有一种方法能够证明 \({S}_{N} \rightarrow  f\) 。这是因为这样的证明根本不存在！
+
+考虑函数
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} {e}^{-1/{x}^{2}} & x \neq  0, \\  0 & x = 0. \end{array}\right.
+\]
+
+在接下来的练习中，我们将需要熟悉的公式 \(\frac{d}{dx}{e}^{x} = {e}^{x}\) 以及 \({e}^{-x} = 1/{e}^{x}\) 的性质。(注意，我们可以使用练习6.6.6中生成的级数作为指数函数 \({e}^{x}\) 的定义。本练习的(b)和(c)部分验证了该级数具有这些性质。)尽管我们已经证明了所有标准的微分规则，但这些规则都不能直接用于计算 \(g\) 在 \(x = 0\) 处的导数。
+
+练习6.6.9。使用 \(\infty /\infty\) 版本的 L'Hospital 法则(定理\ref{thm:5.3.8})证明 \({g}^{\prime }\left( 0\right)  = 0\) 。
+
+练习 6.6.10. 计算 \({g}^{\prime }\left( x\right)\) 对于 \(x \neq  0\) 。计算 \({g}^{\prime \prime }\left( x\right)\) 和 \({g}^{\prime \prime \prime }\left( x\right)\) 对于 \(x \neq  0\) 。利用这些观察结果，并发明所需的符号，给出 \(n\) 阶导数 \({g}^{\left( n\right) }\left( x\right)\) 在非零点的一般描述。
+
+现在，
+
+\[
+{g}^{\prime \prime }\left( 0\right)  = \mathop{\lim }\limits_{{x \rightarrow  0}}\frac{{g}^{\prime }\left( x\right)  - {g}^{\prime }\left( 0\right) }{x - 0} = \mathop{\lim }\limits_{{x \rightarrow  0}}\frac{{g}^{\prime }\left( x\right) }{x}.
+\]
+
+练习 6.6.11. 计算 \({g}^{\prime \prime }\left( 0\right)\) 。从这个例子中，提出一个关于如何计算 \({g}^{\left( n\right) }\left( 0\right)\) 的一般论证。
+
+讨论此示例的后果。 \(g\) 是否无限可微？它的Taylor级数是什么样子的？这个级数在哪些点收敛？收敛到什么？这个示例对每个无限可微函数都可以由其Taylor级数展开表示的猜想有何影响？
+
+\section{结语}
+\label{sec:6.7}
+幂级数在微积分运算中表现得如此完美，这使得寻找Taylor级数展开式成为一项值得的事业。事实证明，微积分中的传统函数列表 \(- \sin \left( x\right)\) 、 \(\ln \left( x\right) ,\arccos \left( x\right) ,\sqrt{1 + x}\) ——所有这些函数都有Taylor级数表示，这些级数在某些非平凡区间上收敛于它们所源自的函数。这一事实在17世纪和18世纪微积分的扩展成就中发挥了重要作用，并理所当然地引发了每个函数都可以以这种方式表示的推测。(当时的“函数”一词隐含地指无限可微的函数。)这种观点在1821年Cauchy发现前一节末尾提出的反例后实际上结束了。那么，在什么条件下Taylor级数必然收敛于生成函数呢？Lagrange余项定理指出，Taylor多项式 \({S}_{N}\left( x\right)\) 与函数 \(f\left( x\right)\) 之间的差异由以下公式给出:
+
+\[
+{E}_{N}\left( x\right)  = \frac{{f}^{\left( N + 1\right) }\left( c\right) }{\left( {N + 1}\right) !}{x}^{N + 1}.
+\]
+
+比值检验表明，分母中的 \(\left( {N + 1}\right)\) !项比分子中的 \({x}^{N + 1}\) 项增长得更快。因此，如果我们知道，$\forall c\in (-R,R)$和$N\in \mathbb{N}$，
+$$
+\left| f^{(N+1)}(c) \right|\le M 
+$$
+
+我们可以确定$E_N(x)\to 0$，从而确定$S_N(x)\to f(x)$。这种情况适用于$\sin(x),\cos(x),e^x$，它们的导数在$N\to \infty$时根本不增长。也可以对$f^{(N+1)}$的增长速度制定较弱的条件，以保证收敛。
+
+\[
+\left| {{f}^{\left( N + 1\right) }\left( c\right) }\right|  \leq  M
+\]
+
+Cauchy的反例是否应该令人惊讶，这一点并不完全清楚。之前每一次寻找Taylor级数都以成功告终，这无疑给人一种印象，即幂级数表示是无限可微函数的内在属性。但请注意我们在这里所说的内容。函数 \(f\) 的Taylor级数是从 \(f\) 及其在原点处的导数值构建的。如果Taylor级数在某个区间$(-R, R)$内收敛到 \(f\) ，那么 \(f\) 在零点附近的行为完全决定了它在$(-R, R)$内每一点的行为。这意味着，如果两个具有Taylor级数的函数在某个小邻域 \(\left( {-\varepsilon ,\varepsilon }\right)\) 上一致，那么这两个函数必须在所有地方都相同。当这样表述时，我们可能不应该期望Taylor级数总是收敛回它从中导出的函数。正如我们所看到的，对于实值函数来说，情况并非如此。然而，令人着迷的是，这种性质的结果确实适用于复变函数。当实数被复数取代时，导数的定义在符号上看起来是相同的，但其含义却截然不同。在这种情况下，在某个开圆盘内每一点都可微的函数必然在该集合上是无限可微的。这为构建Taylor级数提供了条件，该级数在每种情况下都一致收敛于生成它的函数。
+

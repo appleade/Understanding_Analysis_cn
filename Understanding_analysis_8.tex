@@ -1,0 +1,1414 @@
+\chapter{附加主题}
+\label{chap:8}
+前七章提供的分析基础足以作为探索一些高级和历史重要主题的背景。本章的写作风格类似于各章末尾的项目总结部分。讲解中包含了练习，旨在使每一节都成为对分析领域重要成就的叙述性探究。
+
+\section{广义Riemann积分}
+\label{sec:8.1}
+第七章以 Henri Lebesgue 的优雅结论结束，即有界函数是Riemann可积的当且仅当其不连续点形成一个测度为零的集合。为了消除可积性对连续性的依赖，Lebesgue提出了一种新的积分方法，该方法已成为数学中的标准积分。在第七章的结语中，我们简要概述了Lebesgue积分的一些优点和缺点，最后回顾了微积分基本定理(定理\ref{thm:7.5.1})。(Lebesgue的测度零准则并非理解本节内容的先决条件，但\ref{sec:7.7}节的讨论为接下来的内容提供了一些有用的背景信息。)
+
+如果 \(F\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 上的可微函数，那么在理想情况下，我们可能希望证明
+
+\begin{equation}
+\label{eq:8.1}
+{\int }_{a}^{b}{F}^{\prime } = F\left( b\right)  - F\left( a\right)
+\end{equation}
+
+
+请注意，尽管这是定理\ref{thm:7.5.1}第\ref{item:7.5.1}部分的结论，但我们在那里需要额外的条件，即 \({F}^{\prime }\) 必须是Riemann可积的。为了强调这一点，第\ref{sec:7.6}节以一个具有Riemann积分无法处理的导数的函数为例作为结尾。前面提到的Lebesgue积分是一个显著的改进。它可以积分我们在第\ref{sec:7.6}节中的例子，但最终它也面临同样的挫折。无论使用哪种积分，并非每个导数都是可积的。
+
+接下来是对广义Riemann积分的简短介绍，该积分由Jaroslav Kurzweil 和 Ralph Henstock 在1960年左右独立发现。正如第\ref{sec:7.7}节所提到的，这种鲜为人知的 Riemann 积分的修改实际上可以积分比 Lebesgue 无处不在的积分更大类的函数，并且在没有额外假设的情况下，为上述方程\eqref{eq:8.1}提供了一个令人惊讶的简单证明。
+
+\subsection{Riemann积分作为极限}
+
+考虑 $[a,b]$ 的一个分割：
+
+\[
+P = \left\{  {a = {x}_{0} < {x}_{1} < {x}_{2} < \cdots  < {x}_{n} = b}\right\}
+\]
+
+带标记的分割是指除了 \(P\) 之外，我们还在每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 中选择了点 \({c}_{k}\) 。这为Riemann和的概念奠定了基础。给定一个函数 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 和一个带标记的分割 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) ，由该分割生成的Riemann和由下式给出
+
+\[
+R\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}f\left( {c}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right) .
+\]
+
+回顾上和的定义
+
+\[
+U\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}{M}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right) \;\text{ 其中 }\;{M}_{k} = \sup \left\{  {f\left( x\right)  : x \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack  }\right\}  ,
+\]
+
+以及下和
+
+\[
+L\left( {f,P}\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}{m}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right) \;\text{ 其中 }\;{m}_{k} = \inf \left\{  {f\left( x\right)  : x \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack  }\right\}  ,
+\]
+
+应该清楚的是
+
+\[
+L\left( {f,P}\right)  \leq  R\left( {f,P}\right)  \leq  U\left( {f,P}\right)
+\]
+
+对于任何有界函数 \(f\) 。在定义7.2.7中，我们通过要求上确界等于下确界来刻画可积性。任何Riemann和都将落在特定的上和与下和之间。如果上和与下和收敛于某个共同值，那么Riemann和最终也会接近这个值。下一个定理表明，可以使用应用于Riemann和的 \(\varepsilon  - \delta\) 型定义来以与定义\ref{def:7.2.7}等价的方式刻画Riemann可积性。
+
+\begin{Def}
+  \label{def:8.1.1}
+  设 \(\delta  > 0\) 。如果每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 满足 \({x}_{k} - {x}_{k - 1} < \delta\) ，则分割 \(P\) 是 \(\delta\) -细的。换句话说，每个子区间的宽度都小于 \(\delta\) 。
+\end{Def}
+
+
+\begin{Thm}
+  \label{thm:8.1.2}
+  一个有界函数 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 是Riemann可积的且
+
+\[
+{\int }_{a}^{b}f = A
+\]
+
+当且仅当 \(\forall \varepsilon  > 0\) ， \(\exists \delta  > 0\) ，使得对于任何 \(\delta\)-细的带标记分割 \(\left( {P,\left\{  {c}_{k}\right\}  }\right)\) ，都有
+
+\[
+\left| {R\left( {f,P}\right)  - A}\right|  < \varepsilon .
+\]
+\end{Thm}
+
+
+在尝试证明之前，我们应该指出，在某些论述中，定理\ref{thm:8.1.2}中的准则实际上被当作Riemann可积性的定义。事实上，这正是 Riemann 最初定义这一概念的方式。该定理的精神与大多数微积分入门课程中所教授的内容相近。为了近似曲线下的面积，我们构造了Riemann和。我们期望随着分割的细化，相应的近似值会越来越接近积分的值。定理\ref{thm:8.1.2}的内容是：如果函数是可积的，那么无论标签如何选择，这些近似值确实会收敛到积分的值。反之，如果对于越来越细的分割，近似Riemann 和聚集在某个值 \(A\) 附近，那么函数是可积的，并且积分值为 \(A\) 。
+
+\begin{proof}
+\(\left(  \Rightarrow  \right)\) 对于正向方向，我们首先假设 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可积。给定一个 \(\varepsilon  > 0\) ，我们必须生成一个 \(\delta  > 0\) ，使得如果 \(\left( {P,\left\{  {c}_{k}\right\}  }\right)\) 是任何 \(\delta\) -细的带标记分割，则 \(\left| {R\left( {f,P}\right)  - {\int }_{a}^{b}f}\right|  < \varepsilon\) 。
+
+因为 \(f\) 是可积的，我们知道存在一个分割 \({P}_{\varepsilon }\) 使得
+
+\[
+U\left( {f,{P}_{\varepsilon }}\right)  - L\left( {f,{P}_{\varepsilon }}\right)  < \frac{\varepsilon }{3}.
+\]
+
+设 \(M > 0\) 为 \(\left| f\right|\) 的界，并设 \(n\) 为 \({P}_{\varepsilon }\) 的子区间数(因此 \({P}_{\varepsilon }\) 实际上由 \(\left\lbrack  {a,b}\right\rbrack  )\) 中的 \(n + 1\) 个点组成)。我们将论证选择
+
+\[
+\delta  = \varepsilon /{9nM}
+\]
+
+具有所需的性质。
+
+思路如下。设 \(\left( {P,\left\{  {c}_{k}\right\}  }\right)\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的任意标记分割，且该分割是 \(\delta\) -细的，并设 \({P}^{\prime } = P \cup  {P}_{\varepsilon }\) 。关键在于建立以下不等式链
+
+\[
+L\left( {f,{P}^{\prime }}\right)  - \frac{\varepsilon }{3} < L\left( {f,P}\right)  \leq  U\left( {f,P}\right)  < U\left( {f,{P}^{\prime }}\right)  + \frac{\varepsilon }{3}.
+\]
+
+练习 8.1.1. (a) 解释为什么Riemann和 \(R\left( {f,P}\right)\) 和 \({\int }_{a}^{b}f\) 都落在 \(L\left( {f,P}\right)\) 和 \(U\left( {f,P}\right)\) 之间。
+
+(b) 解释为什么 \(U\left( {f,{P}^{\prime }}\right)  - L\left( {f,{P}^{\prime }}\right)  < \varepsilon /3\) 。
+
+根据前面的练习，如果我们能证明 \(U\left( {f,P}\right)  < U\left( {f,{P}^{\prime }}\right)  + \varepsilon /3\) (类似地 \(L\left( {f,{P}^{\prime }}\right)  - \varepsilon /3 < L\left( {f,P}\right)\) )，那么就可以得出
+
+\[
+\left| {R\left( {f,P}\right)  - {\int }_{a}^{b}f}\right|  < \varepsilon
+\]
+
+这便完成了证明。因此，我们将注意力转向估计 \(U\left( {f,P}\right)\) 和 \(U\left( {f,{P}^{\prime }}\right)\) 之间的距离。
+
+练习8.1.2。解释为什么 \(U\left( {f,P}\right)  - U\left( {f,{P}^{\prime }}\right)  \geq  0\) 。
+
+在 \(U\left( {f,P}\right)\) 或 \(U\left( {f,{P}^{\prime }}\right)\) 中的典型项具有 \({M}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right)\) 的形式，其中 \({M}_{k}\) 是 \(f\) 在 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 上的上确界。这些项中有许多出现在上和中，因此相互抵消。
+
+练习 8.1.3. (a) 在 \(n\) 的情况下， \(U\left( {f,P}\right)\) 或 \(U\left( {f,{P}^{\prime }}\right)\) 中可能出现但不在另一个中出现的 \({M}_{k}\left( {{x}_{k} - {x}_{k - 1}}\right)\) 形式的最大项数是多少？
+
+(b)通过论证完成这个方向的证明
+
+\[
+U\left( {f,P}\right)  - U\left( {f,{P}^{\prime }}\right)  < \varepsilon /3.
+\]
+
+\(\left(  \Leftarrow  \right)\) 对于这个方向，我们假设定理8.1.2中的 \(\varepsilon  - \delta\) 准则成立，并论证 \(f\) 是可积的。正如我们所定义的，可积性取决于我们选择分割的能力，使得上和接近下和。我们已经指出，给定任何分割 \(P\) ，无论选择哪些标签来计算 \(R\left( {f,P}\right)\) ，总是存在
+
+\[
+L\left( {f,P}\right)  \leq  R\left( {f,P}\right)  \leq  U\left( {f,P}\right)
+\]
+
+
+
+练习8.1.4。(a)证明如果 \(f\) 是连续的，那么可以选择标签 \({\left\{  {c}_{k}\right\}  }_{k = 1}^{n}\) ，使得
+
+\[
+R\left( {f,P}\right)  = U\left( {f,P}\right) .
+\]
+
+同样，也存在使得 \(R\left( {f,P}\right)  = L\left( {f,P}\right)\) 的标签。
+
+(b) 如果 \(f\) 不连续，可能无法找到满足 \(R\left( {f,P}\right)  = U\left( {f,P}\right)\) 的标签。然而，证明给定任意 \(\varepsilon  > 0\) ，可以为 \(P\) 选择标签，使得
+
+\[
+U\left( {f,P}\right)  - R\left( {f,P}\right)  < \varepsilon .
+\]
+
+类似的陈述适用于下和。
+
+练习 8.1.5. 使用前一个练习的结果来完成定理 8.1.2 的证明。可能更容易先使用定理 7.2.8 中的标准证明 \(f\) 是可积的，然后再证明 \({\int }_{a}^{b}f = A\) 。
+  
+\end{proof}
+
+\subsection{量规和 \(\delta \left( x\right)\) -细分割}
+
+广义Riemann积分的关键是允许定理\ref{thm:8.1.2}中的 \(\delta\) 成为 \(x\) 的函数。
+
+\begin{Def}
+  \label{def:8.1.3}
+   若 \(\forall x \in  \left\lbrack  {a,b}\right\rbrack\) ， \(\delta \left( x\right)  > 0\) 成立，则称函数 \(\delta  : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbf{R}\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 上的一个量规(gauge)。
+\end{Def}
+
+\begin{Def}
+  \label{def:8.1.4}
+  给定一个特定的量规 \(\delta \left( x\right)\) 。称一个带标记分割 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) 是 \(\delta \left( x\right)\) -细的，如果每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 满足 \({x}_{k} - {x}_{k - 1} < \delta \left( {c}_{k}\right)\) 。换言之，每个子区间 \(\left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) 的宽度小于 \(\delta \left( {c}_{k}\right)\) 。
+\end{Def}
+
+
+重要的是要看到，如果 \(\delta \left( x\right)\) 是一个常数函数，那么定义~\ref{def:8.1.4}与定义~\ref{def:8.1.1}说的完全是一回事。在 \(\delta \left( x\right)\) 不是常数的情况下，定义~\ref{def:8.1.4}描述了一种与之前完全不同的测量分割精细度的方法。
+
+练习8.1.6。考虑区间 \(\left\lbrack  {0,1}\right\rbrack\) 。
+
+(a) 如果 \(\delta \left( x\right)  = 1/9\) ，找出 \(\left\lbrack  {0,1}\right\rbrack\) 的一个 \(\delta \left( x\right)\) -细带标记分割。在这种情况下，标记的选择是否重要？
+
+(b) 设
+
+\[
+\delta \left( x\right)  = \left\{  \begin{array}{ll} 1/4 & \text{ if }x = 0 \\  x/3 & \text{ if }0 < x \leq  1. \end{array}\right.
+\]
+
+构造 \(\left\lbrack  {0,1}\right\rbrack\) 的一个 \(\delta \left( x\right)\) -细带标记分割。
+
+练习8.1.6 (b)中所需的调整可能会让人怀疑任意规范是否总是允许存在 \(\delta \left( x\right)\) -精细分割。然而，不难证明事实确实如此。
+
+\begin{Thm}
+  \label{thm:8.1.5}
+  给定区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的量规 \(\delta \left( x\right)\) ，存在一个 \(\delta \left( x\right)\) -细的带标记分割 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) 。
+\end{Thm}
+
+\begin{proof}
+  设 \({I}_{0} = \left\lbrack  {a,b}\right\rbrack\) 。断言：可以找到一个标记点，使得命题对平凡分割 \(P = \left\{  {a = {x}_{0} < {x}_{1} = b}\right\}\) 成立。
+
+  具体来说，如果对于某个 \(x \in  \left\lbrack  {a,b}\right\rbrack\) ， \(b - a < \delta \left( x\right)\) 成立，那么我们可以将 \({c}_{1}\) 取为此 \(x\) ，并注意到 \(\left( {P,\left\{  {c}_{1}\right\}  }\right)\) 是 \(\delta \left( x\right)\) -细的。
+
+  如果不存在这样的 \(x\) ，则将 \(\left\lbrack  {a,b}\right\rbrack\) 二等分为两个相等的部分。
+
+练习8.1.7。将前面的算法应用于每一半，然后解释为什么这个过程必须在有限的步骤后终止。
+\end{proof}
+
+
+\subsection{广义Riemann可积性}
+
+考虑到定理\ref{thm:8.1.2}提供了一种定义Riemann可积性的等价方法，我们现在提出一种定义积分值的新方法。
+
+\begin{Def}[广义Riemann可积性]
+  \label{def:8.1.6}
+  称函数 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上具有广义Riemann积分 \(A\) ，若 \(\forall \varepsilon  > 0\) ， \(\exists \left\lbrack  {a,b}\right\rbrack\) 上的一个量规 \(\delta \left( x\right)\) ，使得对于每个 \(\delta \left( x\right)\) -细的带标记分割 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) ，都有以下条件成立
+
+\[
+\left| {R\left( {f,P}\right)  - A}\right|  < \varepsilon .
+\]
+
+此时，我们记 \(A = {\int }_{a}^{b}f\) 。
+\end{Def}
+
+\begin{Thm}
+  \label{thm:8.1.7}
+  如果一个函数广义Riemann可积，那么该积分的值是唯一的。
+\end{Thm}
+
+\begin{proof}
+假设函数 \(f\) 具有广义Riemann积分 \({A}_{1}\) ，并且它也具有广义Riemann积分 \({A}_{2}\) 。我们必须证明 \({A}_{1} = {A}_{2}\) 。
+
+设 \(\varepsilon  > 0\) 。定义\ref{def:8.1.6}向我们保证存在一个量规 \({\delta }_{1}\left( x\right)\) ，使得下式对所有 $\delta_1(x)$-细的带标记分割成立：
+
+\[
+\left| {R\left( {f,P}\right)  - {A}_{1}}\right|  < \frac{\varepsilon }{2}
+\]
+
+同理，存在另一个量规 \({\delta }_{2}\left( x\right)\) ，使得下式对于所有 \({\delta }_{2}\left( x\right)\) -细的带标记分割成立：
+
+\[
+\left| {R\left( {f,P}\right)  - {A}_{2}}\right|  < \frac{\varepsilon }{2}
+\]
+
+练习 8.1.8. 完成论证。
+\end{proof}
+
+
+定义 \ref{def:8.1.6} 对可积函数类的影响是深远的。考虑到定义 \ref{def:8.1.6} 和定理 \ref{thm:8.1.2} 中的可积性标准差异如此之小，这一点有些令人惊讶。一个应该立即显而易见的观察如下。
+
+练习 8.1.9. 解释为什么每个Riemann可积函数 \({\int }_{a}^{b}f = A\) 也必须具有广义Riemann积分 \(A\) 。
+
+反之则不然，这是重要的一点。我们有一个非Riemann可积函数的例子，即 Dirichlet 函数：
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} 1 & x \in  \mathbf{Q} \\  0 & x \notin  \mathbf{Q} \end{array}\right.
+\]
+
+它在 \(\mathbb{R}\) 的每一点上都有间断。
+
+\begin{Thm}
+  \label{thm:8.1.8}
+  Dirichlet 函数 \(g\left( x\right)\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上广义Riemann可积，且 \({\int }_{0}^{1}g = 0\) 。
+\end{Thm}
+
+\begin{proof}
+  设 \(\varepsilon  > 0\) 。根据定义~\ref{def:8.1.6}，我们必须在 \(\left\lbrack  {0,1}\right\rbrack\) 上构造一个量规 \(\delta \left( x\right)\) ，使得只要 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) 是一个 \(\delta \left( x\right)\) -细带标记分割，便有
+
+\[
+0 \leq  \mathop{\sum }\limits_{{k = 1}}^{n}g\left( {c}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right)  < \varepsilon .
+\]
+
+该量规表示对 \(\Delta {x}_{k} = {x}_{k} - {x}_{k - 1}\) 大小的限制，即 \(\Delta {x}_{k} < \delta \left( {c}_{k}\right)\) 。Riemann和由形式为 \(g\left( {c}_{k}\right) \Delta {x}_{k}\) 的乘积组成。因此，对于无理数标签，无需担心，因为在这种情况下 \(g\left( {c}_{k}\right)  = 0\) 。我们的任务是确保每当标签 \({c}_{k}\) 为有理数时，它来自一个适当薄的子区间。
+
+设 \(\left\{  {{r}_{1},{r}_{2},{r}_{3},\ldots }\right\}\) 为包含在 \(\left\lbrack  {0,1}\right\rbrack\) 中的可数有理数集合的一个枚举。对于每个 \({r}_{k}\) ，设 \(\delta \left( {r}_{k}\right)  = \varepsilon /{2}^{k + 1}\) 。对于 \(x\) 无理数，设 \(\delta \left( x\right)  = 1\) 。
+
+习题 8.1.10。证明如果 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) 是一个 \(\delta \left( x\right)\) -精细标记分割，则 \(R\left( {f,P}\right)  < \varepsilon\) 。请注意，每个有理数 \({r}_{k}\) 最多只能作为 \(P\) 的两个子区间的标记出现。
+\end{proof}
+
+
+
+
+
+Dirichlet函数Riemann不可积，因为给定任何(未标记的)分割，通过选择所有有理数或所有无理数作为标记，可以使 \(R\left( {f,P}\right)  = 1\) 或 \(R\left( {f,P}\right)  = 0\) 。对于广义Riemann积分，选择所有有理数标记会导致一个带标记分割不是 \(\delta \left( x\right)\) -细的(当 \(\delta \left( x\right)\) 在有理点上较小时)，因此不必考虑。一般来说，允许非恒定尺度使我们能够更严格地筛选哪些标记分割符合 \(\delta \left( x\right)\) -细的条件。正如我们刚刚看到的，结果可能是对于通常更小且更精心选择的剩余标记分割集更容易实现不等式
+
+\[
+\left| {R\left( {f,P}\right)  - A}\right|  < \varepsilon
+\]
+
+
+
+\subsection{微积分基本定理}
+
+我们以微积分基本定理的证明来结束对广义Riemann积分的简要介绍。正如之前提到的，以下定理与定理\ref{thm:7.5.1}的第\ref{item:7.5.1}部分最显著的区别在于，这里我们不需要假设导数函数是可积的。使用广义Riemann积分，每个导数都是可积的，并且积分可以以熟悉的方式使用原函数来求值。有趣的是，在定理7.5.1中，中值定理在论证中起到了关键作用，但在这里并不需要。
+
+\begin{Thm}
+  \label{thm:8.1.9}
+  设 \(F : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 中的每个点都可微，并设 \(f\left( x\right)  = {F}^{\prime }\left( x\right)\) 。那么， \(f\) 具有广义Riemann积分
+
+\[
+{\int }_{a}^{b}f = F\left( b\right)  - F\left( a\right) .
+\]
+\end{Thm}
+
+
+\begin{proof}
+设 \(P = \left\{  {a = {x}_{0} < {x}_{1} < {x}_{2} < \cdots  < {x}_{n} = b}\right\}\) 为 \(\left\lbrack  {a,b}\right\rbrack\) 的一个划分。本证明与定理\ref{thm:7.5.1}的证明均利用了以下事实。
+
+练习8.1.11。证明
+
+\[
+F\left( b\right)  - F\left( a\right)  = \mathop{\sum }\limits_{{k = 1}}^{n}\left\lbrack  {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right) }\right\rbrack  .
+\]
+
+如果 \({\left\{  {c}_{k}\right\}  }_{k = 1}^{n}\) 是 \(P\) 的一组标签，则我们可以通过以下方式估计Riemann和 \(R\left( {f,P}\right)\) 与 \(F\left( b\right)  - F\left( a\right)\) 之间的差异
+
+\begin{align*}
+\left| {F\left( b\right)  - F\left( a\right)  - R\left( {f,P}\right) }\right|  = & \left| {\mathop{\sum }\limits_{{k = 1}}^{n}\left\lbrack  {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right)  - f\left( {c}_{k}\right) \left( {{x}_{x} - {x}_{k - 1}}\right) }\right\rbrack  }\right|\\
+\leq & \mathop{\sum }\limits_{{k = 1}}^{n}\left| {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right)  - f\left( {c}_{k}\right) \left( {{x}_{x} - {x}_{k - 1}}\right) }\right| .
+\end{align*}
+
+设 \(\varepsilon  > 0\) 。为了证明该定理，我们必须构造一个量规 \(\delta \left( c\right)\) ，使得下式对所有 $\delta(c)$-细的带标记分割 $(P, \left\{ c_k \right\})$ 成立：
+
+\begin{equation}
+\label{eq:8.1.2}
+\left| {F\left( b\right)  - F\left( a\right)  - R\left( {f,P}\right) }\right|  < \varepsilon
+\end{equation}
+
+(在这种情况下，在量规函数中使用变量 \(c\) 比使用 \(x\) 更为方便。)
+
+练习8.1.12。对于每个 \(c \in  \left\lbrack  {a,b}\right\rbrack\) ，解释为什么存在一个 \(\delta \left( c\right)  > 0\) (一个依赖于 \(c\) 的 \(\delta  > 0\) )使得 $\forall 0 < \left| {x - c}\right|  < \delta \left( c\right)$
+
+\[
+\left| {\frac{F\left( x\right)  - F\left( c\right) }{x - c} - f\left( c\right) }\right|  < \varepsilon
+\]
+
+这个 \(\delta \left( c\right)\) 正是 \(\left\lbrack  {a,b}\right\rbrack\) 上所需的量规。设 \(\left( {P,{\left\{  {c}_{k}\right\}  }_{k = 1}^{n}}\right)\) 是 \(\left\lbrack  {a,b}\right\rbrack\) 的一个 \(\delta \left( c\right)\) -细分割。剩下的只需证明对于这个带标记分割，方程\eqref{eq:8.1.2}成立。
+
+练习8.1.13. (a) 对于 \(P\) 的一组特定标记 \({c}_{k} \in  \left\lbrack  {{x}_{k - 1},{x}_{k}}\right\rbrack\) ，证明
+
+\[
+\left| {F\left( {x}_{k}\right)  - F\left( {c}_{k}\right)  - f\left( {c}_{k}\right) \left( {{x}_{k} - {c}_{k}}\right) }\right|  < \varepsilon \left( {{x}_{k} - {c}_{k}}\right)
+\]
+
+以及
+
+\[
+\left| {F\left( {c}_{k}\right)  - F\left( {x}_{k - 1}\right)  - f\left( {c}_{k}\right) \left( {{c}_{k} - {x}_{k - 1}}\right) }\right|  < \varepsilon \left( {c - {x}_{k - 1}}\right) .
+\]
+
+(b) 现在，论证
+
+\[
+\left| {F\left( {x}_{k}\right)  - F\left( {x}_{k - 1}\right)  - f\left( {c}_{k}\right) \left( {{x}_{k} - {x}_{k - 1}}\right) }\right|  < \varepsilon \left( {{x}_{k} - {x}_{k - 1}}\right) ,
+\]
+
+并利用这一事实完成定理的证明。
+
+\end{proof}
+
+
+如果我们考虑函数
+
+\[
+F\left( x\right)  = \left\{  \begin{array}{ll} {x}^{(3/2)}\sin \left( {1/x}\right) &x \neq  0 \\  0 & x = 0 \end{array}\right.
+\]
+
+那么不难证明 \(F\) 在包括 \(x = 0\) 在内的所有地方都是可微的，且满足
+
+\[
+{F}^{\prime }\left( x\right)  = \left\{  \begin{array}{ll} \left( {3/2}\right) \sqrt{x}\sin \left( {1/x}\right)  - \left( {1/\sqrt{x}}\right) \cos \left( {1/x}\right) & x \neq  0 \\  0 & x = 0. \end{array}\right.
+\]
+
+这里值得注意的是，导数在原点附近是无界的。普通Riemann积分的理论始于我们只考虑闭区间上有界函数的假设，但广义Riemann积分没有这样的限制。定理~\ref{thm:8.1.9}证明了 \({F}^{\prime }\) 具有广义积分。现在，反常Riemann积分已经被创建出来，以将Riemann积分扩展到一些无界函数，但关于广义Riemann积分的另一个有趣事实是，任何具有反常积分的函数在定义~\ref{def:8.1.6}所描述的意义上已经可积。
+
+作为告别的手势，让我们展示定理~\ref{thm:8.1.9}如何从微积分中得出变量替换技术的简短验证。
+
+\begin{Thm}[换元公式]
+  \label{thm:8.1.10}
+  设 \(g : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 的每个点可微，并假设 \(F\) 在集合 \(g\left( \left\lbrack  {a,b}\right\rbrack  \right)\) 上可微。如果对于所有 \(x \in  g\left( \left\lbrack  {a,b}\right\rbrack  \right)\) ， \(f\left( x\right)  = {F}^{\prime }\left( x\right)\) 成立，则
+
+\[
+{\int }_{a}^{b}\left( {f \circ  g}\right)  \cdot  {g}^{\prime } = {\int }_{g\left( a\right) }^{g\left( b\right) }f.
+\]
+
+\end{Thm}
+
+\begin{proof}
+  该定理的假设保证了函数 \(\left( {F \circ  g}\right) \left( x\right)\) 对于所有 \(x \in  \left\lbrack  {a,b}\right\rbrack\) 可微。
+
+练习 8.1.14. (a) 为什么我们确信 \({\left( F \circ  g\right) }^{\prime }\left( x\right)\) 具有广义Riemann积分？
+
+(b) 使用链式法则(定理 5.2.5)和定理 8.1.9 来证明
+
+\[
+{\int }_{a}^{b}\left( {f \circ  g}\right)  \cdot  {g}^{\prime } = F\left( {g\left( b\right) }\right)  - F\left( {g\left( a\right) }\right) .
+\]
+
+(c) 通过证明以下内容来完成证明
+
+\[
+{\int }_{g\left( a\right) }^{g\left( b\right) }f = F\left( {g\left( b\right) }\right)  - F\left( {g\left( a\right) }\right) .
+\]
+
+\end{proof}
+
+广义Riemann积分的令人印象深刻的特性并未止步于此。本节材料的核心来源是 Robert Bartle 的优秀文章 \textit{Return to the Riemann Integral}，该文章发表于1996年10月的 \textit{American Mathematical Monthly}。这篇文章继续概述了广义Riemann积分的收敛定理，其精神类似于定理 \ref{thm:7.4.4}，以及它与Lebesgue积分理论的关系。更详细的发展可以在 Rudolph Výborný 和李秉彝(Lee Peng Yee)最近出版的\textit{Integral: An Easy Approach after Kurzweil and Henstock} 中找到，或者在美国数学学会即将出版的 Robert Bartle 的新书中找到。
+
+
+\section{度量空间与 Baire 纲定理}
+\label{sec:8.2}
+一个自然的问题是，我们关于序列、级数和函数在 \(\mathbb{R}\) 中证明的定理是否在平面 \({\mathbb{R}}^{2}\) 或更高维度中有类似物。回顾这些证明，一个关键的观察是，大多数论证仅依赖于绝对值函数的几个基本性质。将语句“ \(\left| {x - y}\right|\) ”解释为“ \(\mathbb{R}\) 中从 \(x\) 到 \(y\) 的距离”，我们的目标是尝试在其他集合(如 \({\mathbb{R}}^{2}\) 和 \(C\left\lbrack  {0,1}\right\rbrack\) ，即 \(\left\lbrack  {0,1}\right\rbrack\) 上连续函数的空间)上测量“距离”的其他方法。
+
+\begin{Def}
+  \label{def:8.2.1}
+  给定一个集合 \(X\) ，函数 \(d : X \times  X \rightarrow  \mathbb{R}\) 是 \(X\) 上的度量（或 距离），如果
+  \(\forall x,y \in  X\) :
+
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:8.2.1} \(d\left( {x,y}\right)  \geq  0\) ，等号成立当且仅当 \(x = y\) ，
+  \item\label{item:8.2.2} \(d\left( {x,y}\right)  = d\left( {y,x}\right)\) 
+  \item\label{item:8.2.3} \(\forall z \in  X,d\left( {x,y}\right)  \leq  d\left( {x,z}\right)  + d\left( {z,y}\right)\) 
+  \end{enumerate}
+
+度量空间是一个带有度量 \(d\) 的集合 \(X\)。
+\end{Def}
+
+
+前一定义中的性质~\ref{item:8.2.3}是“三角不等式”。接下来的两个练习说明了同一个集合 \(X\) 可以容纳几种不同的度量。在提到度量空间时，我们必须指定集合和特定的距离函数 \(d\) 。
+
+练习8.2.1。判断以下哪些是 \(X = {\mathbb{R}}^{2}\) 上的度量。对于每一个，我们令 \(x = \left( {{x}_{1},{x}_{2}}\right)\) 和 \(y = \left( {{y}_{1},{y}_{2}}\right)\) 为平面中的点。
+\begin{enumerate}[label = (\alph*)]
+\item \(d\left( {x,y}\right)  = \sqrt{{\left( {x}_{1} - {y}_{1}\right) }^{2} + {\left( {x}_{2} - {y}_{2}\right) }^{2}}\) .
+
+\item  \(d\left( {x,y}\right)  = 1\) 如果 \(x \neq  y\) ；并且 \(d\left( {x,x}\right)  = 0\) 。
+
+\item  \(d\left( {x,y}\right)  = \max \left\{  {\left| {{x}_{1} - {y}_{1}}\right| ,\left| {{x}_{2} - {y}_{2}}\right| }\right\}\) .
+
+\item  \(d\left( {x,y}\right)  = \left| {{x}_{1}{x}_{2} + {y}_{1}{y}_{2}}\right|\) .
+\end{enumerate}
+
+
+练习 8.2.2. 设 \(C\left\lbrack  {0,1}\right\rbrack\) 为闭区间 \(\left\lbrack  {0,1}\right\rbrack\) 上的连续函数集合。判断以下哪些是 \(C\left\lbrack  {0,1}\right\rbrack\) 上的度量。
+\begin{enumerate}[label = (\alph*)]
+\item \(d\left( {f,g}\right)  = \sup \{ \left| {f\left( x\right)  - g\left( x\right) }\right|  : x \in  \left\lbrack  {0,1}\right\rbrack  \}\) .
+
+\item  \(d\left( {f,g}\right)  = \left| {f\left( 1\right)  - g\left( 1\right) }\right|\) .
+
+ 
+\item \(d\left( {f,g}\right)  = {\int }_{0}^{1}\left| {f - g}\right|\) .
+\end{enumerate}
+
+
+以下距离函数称为离散度量，可以在任何集合 \(X\) 上定义。对于任意 \(x,y \in  X\) ，令
+
+\[
+\rho \left( {x,y}\right)  = \left\{  \begin{array}{ll} 1 & \text{ if }x \neq  y \\  0 & \text{ if }x = y. \end{array}\right.
+\]
+
+练习 8.2.3. 验证离散度量确实是一个度量。
+
+\subsection{基本定义}
+\begin{Def}
+  \label{def:8.2.2}
+  设 $(X, d)$ 为度量空间。称序列 \(\left( {x}_{n}\right)  \subseteq  X\) 收敛到元素 \(x \in  X\) ，若 \(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得 \(\forall n \geq  N\) 时， \(d\left( {{x}_{n},x}\right)  < \varepsilon\) 。
+\end{Def}
+
+\begin{Def}
+  \label{def:8.2.3}
+  在度量空间$(X, d)$中，序列 \(\left( {x}_{n}\right)\) 被称为Cauchy列，如果 \(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得 \(\forall m,n \geq  N\) ， \(d\left( {{x}_{m},{x}_{n}}\right)  < \varepsilon\) 成立。
+\end{Def}
+
+练习8.2.4. 证明收敛序列是Cauchy序列。
+
+在 \(\mathbb{R}\) 中时，Cauchy 收敛准则是“当且仅当”形式的陈述。然而，在一般的度量空间中，逆命题并不总是成立。回想一下，在 \(\mathbb{R}\) 中，“Cauchy序列收敛”的断言被证明与完备性公理等价。为了将完备性公理引入度量空间，我们需要在空间上有一个序，以便讨论诸如上界之类的事物。一个有趣的观察是，并非每个集合都能以令人满意的方式排序(例如 \({\mathbb{R}}^{2}\) 中的点)。即使没有序，我们仍然希望具有完备性。对于度量空间，Cauchy序列的收敛被作为完备性的定义。
+
+\begin{Def}
+  如果 \(X\) 中的每个 Cauchy 列都收敛到 \(X\) 中的一个元素，则称度量空间$(X, d)$是完备的。
+\end{Def}
+
+
+练习 8.2.5. (a) 考虑 \({\mathbb{R}}^{2}\) 及其在练习 8.2.1 (b) 中定义的度量。在这个空间中，Cauchy序列是什么样的？ \({\mathbb{R}}^{2}\) 关于这个度量是否完备？
+
+(b) 证明 \(C\left\lbrack  {0,1}\right\rbrack\) 关于练习 8.2.2 (a) 中的度量是完备的。
+
+(c) 定义 \({C}^{1}\left\lbrack  {0,1}\right\rbrack\) 为 \(\left\lbrack  {0,1}\right\rbrack\) 上可微且导数也连续的函数集合。 \({C}^{1}\left\lbrack  {0,1}\right\rbrack\) 关于练习 8.2.2 (a) 中定义的度量是否完备？
+
+当我们考虑在练习8.2.3中研究的离散度量 \(\rho \left( {x,y}\right)\) 时， \(\mathbb{R}\) 中的收敛序列是什么样子的？
+
+在练习8.2.2 (a)中， \(C\left\lbrack  {0,1}\right\rbrack\) 上的度量非常重要，以至于获得了“上确界范数”(sup norm)的昵称，并用以下符号表示:
+
+\[
+d\left( {f,g}\right)  = \parallel f - g{\parallel }_{\infty } = \sup \{ \left| {f\left( x\right)  - g\left( x\right) }\right|  : x \in  \left\lbrack  {0,1}\right\rbrack  \} .
+\]
+
+在接下来的所有讨论中，除非另有说明，否则假设空间 \(C\left\lbrack  {0,1}\right\rbrack\) 都配备了这种度量。
+
+\begin{Def}
+  \label{def:8.2.5}
+  设$(X, d)$为度量空间。称函数 \(f : X \rightarrow  \mathbb{R}\) 在点 \(x \in  X\) 处连续，若 \(\forall \varepsilon  > 0\) ， \(\exists \delta  > 0\) ，使得当 \(d\left( {x,y}\right)  < \delta .\) 时， 总有\(\left| {f\left( x\right)  - f\left( y\right) }\right|  < \varepsilon\) 。
+\end{Def}
+
+
+习题8.2.6. 这些函数中哪些在 \(C\left\lbrack  {0,1}\right\rbrack\) 上是连续的？
+\begin{enumerate}[label = (\alph*)]
+\item  \(g\left( f\right)  = {\int }_{0}^{1}{fk}\) ，其中 \(k\) 是 \(C\left\lbrack  {0,1}\right\rbrack\) 中的某个固定函数。
+\item  \(g\left( f\right)  = f\left( {1/2}\right)\) .
+\item  \(g\left( f\right)  = f\left( {1/2}\right)\) ，但这次是关于练习8.2.2 (c)中的度量。
+\end{enumerate}
+
+\subsection{度量空间上的拓扑}
+\begin{Def}
+  \label{def:8.2.6}
+  给定 \(\varepsilon  > 0\) 和度量空间$(X, d)$中的元素 \(x\) ， \(\varepsilon\) -邻域定义为集合 \({V}_{\varepsilon }\left( x\right)  = \{ y \in  X : d\left( {x,y}\right)  < \varepsilon \}\) 。
+\end{Def}
+
+
+练习8.2.7。(a) 描述在 \({\mathbb{R}}^{2}\) 中对于练习8.2.1中描述的不同度量的 \(\varepsilon\) -邻域。对于离散度量又如何？
+
+(b) 使用离散度量 \(\rho \left( {x,y}\right)\) 时， \(\mathbb{R}\) 中的 \(\varepsilon\) -邻域是什么样子的？
+
+通过定义 \(\varepsilon\) 邻域，我们现在可以像之前一样准确定义开集、极限点和闭集。如果对于每一个 \(x \in  O\) ，我们都能找到一个邻域 \({V}_{\varepsilon }\left( x\right)  \subseteq  O\) ，那么集合 \(O \subseteq  X\) 就是开集。如果每一个 \({V}_{\varepsilon }\left( x\right)\) 都与集合 \(A\) 在除 \(x\) 之外的某一点相交，那么点 \(x\) 就是集合 \(A\) 的极限点。如果集合 \(C\) 包含其所有极限点，那么它就是闭集。
+
+练习8.2.8. (a) 设$(X, d)$为度量空间，并选取 \(x \in  X\) 。验证 \(\varepsilon\) 邻域 \({V}_{\varepsilon }\left( x\right)\) 是一个开集。下列集合是闭集吗？
+
+\[
+{C}_{\varepsilon }\left( x\right)  = \{ y \in  X : d\left( {x,y}\right)  \leq  \varepsilon \}
+\]
+
+
+(b) 证明集合 \(Y = \left\{  {f \in  C\left\lbrack  {0,1}\right\rbrack   : \parallel f{\parallel }_{\infty } \leq  1}\right\}\) 在 \(C\left\lbrack  {0,1}\right\rbrack\) 中是闭集。
+
+(c) 集合 \(T = \{ f \in  C\left\lbrack  {0,1}\right\rbrack   : f\left( 0\right)  = 0\}\) 在 \(C\left\lbrack  {0,1}\right\rbrack\) 中是开集、闭集，还是两者都不是？
+
+我们在度量空间中定义紧性，就像我们在 \(\mathbb{R}\) 中所做的那样。
+
+\begin{Def}
+  \label{def:8.2.7}
+  称度量空间$(X, d)$的子集 \(K\) 是紧的，如果 \(K\) 中的每个序列都有一个收敛子列，且该子列收敛到 \(K\) 中的一个极限点。
+\end{Def}
+
+在 \(\mathbb{R}\) 中，紧性的一个极其有用的特征是一个集合是紧的当且仅当它是闭集且有界。对于抽象度量空间，这个命题仅在前向方向上成立。
+
+练习8.2.9. (a) 为度量空间$(X, d)$的有界子集提供一个定义。
+
+(b) 证明如果 \(K\) 是度量空间$(X, d)$的紧子集，则 \(K\) 是闭集且有界。
+
+(c) 证明练习8.2.8 (b)中的 \(Y \subseteq  C\left\lbrack  {0,1}\right\rbrack\) 是闭集且有界但不是紧的。
+
+关于前一练习的(c)部分，可以在第\ref{chap:6}章的练习6.2.15中找到有用的提示。该练习定义了等度连续函数族的概念，这是 Arzela-Ascoli 定理，练习6.2.16 的关键要素。 Arzela-Ascoli 定理指出，在 \(C\left\lbrack  {0,1}\right\rbrack\) 中任何有界且等度连续的函数集合必定存在一个一致收敛的子序列。总结这一著名结果的一种方式——我们在第\ref{chap:6}章中没有使用的语言——是将其描述为 \(C\left\lbrack  {0,1}\right\rbrack\) 中某一类紧子集的陈述。回顾紧性的定义，并记住连续函数的一致极限是连续的，Arzela-Ascoli 定理表明，任何闭的、有界的、等度连续的函数集合都是 \(C\left\lbrack  {0,1}\right\rbrack\) 的紧子集。
+
+\begin{Def}
+  \label{def:8.2.8}
+  给定度量空间$(X, d)$的一个子集 \(E\) ，其闭包 \(\bar{E}\) 是 \(E\) 与其极限点的并集。 \(E\) 的内部记为 \({E}^{ \circ  }\) ，其定义为
+
+\[
+{E}^{ \circ  } = \left\{  {x \in  E : \text{ 存在 }{V}_{\varepsilon }\left( x\right)  \subseteq  E}\right\}  .
+\]
+\end{Def}
+
+闭包和内部是对偶概念。关于这些概念的结果成对出现，展现出一种优雅且有用的对称性。
+
+练习8.2.10。(a) 证明 \(E\) 是闭集当且仅当 \(\bar{E} = E\) 。证明 \(E\) 是开集当且仅当 \({E}^{ \circ  } = E\) 。
+
+(b) 证明 \({\bar{E}}^{c} = {\left( {E}^{c}\right) }^{ \circ  }\) ，类似地证明 \({\left( {E}^{ \circ  }\right) }^{c} = \overline{{E}^{c}}\) 。
+
+对于前一练习的一个好提示是回顾第3章中的证明，其中至少讨论了闭包。将这些概念与 \(\mathbb{R}\) 或 \({\mathbb{R}}^{2}\) 在通常度量下的关系联系起来思考并不是一个坏主意。然而，重要的是要记住，严格的证明必须完全从相关定义中构建。
+
+练习8.2.11。为了避免听起来太熟悉，从前面的讨论中找出一个度量空间的例子，使得在该度量空间 $(X,d)$中，存在一个 $\varepsilon$ 邻域$V_{\varepsilon}$使以下反例成立：
+
+\[
+\overline{{V}_{\varepsilon }\left( x\right) } \neq  \{ y \in  X : d\left( {x,y}\right)  \leq  \varepsilon \}
+\]
+
+我们正在走向Baire纲定理。接下来的定义提供了陈述结果所需的最后一点词汇。
+
+\begin{Def}
+  \label{def:8.2.9}
+  称集合 \(A \subseteq  X\) 在度量空间$(X, d)$中是稠密的，如果 \(\bar{A} = X\) 。称度量空间$(X, d)$的子集 \(E\) 在 \(X\) 中是无处稠密的，如果 \({\bar{E}}^{ \circ  }\) 是空集。
+\end{Def}
+
+练习 8.2.12. 如果 \(E\) 是度量空间$(X, d)$的子空间，证明 \(E\) 在 \(X\) 中是无处稠密的，当且仅当 \({\bar{E}}^{c}\) 在 \(X\) 中是稠密的。
+
+\subsection{Baire纲定理}
+
+在第\ref{sec:3.5}节中，我们证明了Baire定理，该定理指出，不可能将实数 \(\mathbb{R}\) 表示为无处稠密集的可数并集。在此之前，我们知道 \(\mathbb{R}\) 太大，无法表示为单点的可数并集( \(\mathbb{R}\) 是不可数的)，但Baire定理通过断言，要从任意集的可数并集构造 \(\mathbb{R}\) ，唯一的方法是至少其中一个集合的闭包包含一个区间，从而改进了这一点。Baire定理证明的关键是 \(\mathbb{R}\) 的完备性。现在的想法是将 \(\mathbb{R}\) 替换为任意完备度量空间，并在这种更一般的背景下证明该定理。这引出了一个可以用于讨论其他空间(如 \({\mathbb{R}}^{2}\) 和 \(C\left\lbrack  {0,1}\right\rbrack\) )的大小和结构的陈述。在第\ref{chap:3}章末尾，我们提到了这一结果对 \(C\left\lbrack  {0,1}\right\rbrack\) 的一个特别引人入胜的推论，即尽管构造一个例子非常困难，但大多数连续函数都是无处可微的。此时重读第\ref{sec:3.6}节和第\ref{sec:5.5}节将是一个好主意。我们现在已经准备好完成这些讨论中承诺的细节。
+
+\begin{Thm}
+  \label{thm:8.2.10}
+  设$(X, d)$为一个完备度量空间，且设 \(\left\{  {O}_{n}\right\}\) 为 \(X\) 的可数个稠密开子集的集合。那么， \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{O}_{n}\) 不为空。
+\end{Thm}
+
+\begin{proof}
+当我们在 \(\mathbb{R}\) 上证明这个定理时，完备性以嵌套区间性质的形式表现出来。我们可以在度量空间设置中推导出类似于闭区间套的东西，但让我们采用一种利用Cauchy列收敛性的方法(因为这是我们定义完备性的方式)。
+
+选取 \({x}_{1} \in  {O}_{1}\) 。因为 \({O}_{1}\) 是开集，存在一个 \({\varepsilon }_{1} > 0\) 使得 \({V}_{{\varepsilon }_{1}}\left( {x}_{1}\right)  \subseteq\)  \({O}_{1}\) 。
+
+练习 8.2.13. (a) 详细说明为什么我们知道存在一个点 \({x}_{2} \in  {V}_{{\varepsilon }_{1}}\left( {x}_{1}\right)  \cap  {O}_{2}\) 和一个 \({\varepsilon }_{2} > 0\) 满足 \({\varepsilon }_{2} < {\varepsilon }_{1}/2\) ，且 \({V}_{{\varepsilon }_{2}}\left( {x}_{2}\right)\) 包含在 \({O}_{2}\) 中。
+
+\[
+\overline{{V}_{{\varepsilon }_{2}}\left( {x}_{2}\right) } \subseteq  {V}_{{\varepsilon }_{1}}\left( {x}_{1}\right) .
+\]
+
+(b) 沿着这条线继续，并利用 (X, d) 的完备性为每个 \(n \in  \mathbb{N}\) 生成一个点 \(x \in  {O}_{n}\) 。
+\end{proof}
+
+
+\begin{Thm}[Baire 纲定理]
+  \label{thm:8.2.11}
+  一个完备的度量空间不能是可数个无处稠密集的并集。
+\end{Thm}
+
+\begin{proof}
+  设 $(X, d)$ 是一个完备的度量空间。
+
+练习 8.2.14。如果 \(E\) 在 \(X\) 中是无处稠密的，那么我们可以对 \({\left( \bar{E}\right) }^{c}\) 说些什么？现在，完成定理的证明。
+\end{proof}
+
+这个结果被称为Baire纲定理，因为它为度量空间中的子集创建了两种大小的纲。一个“第一纲”的集合可以写成无处稠密集的可数并集。这些是度量空间中小的、直观上薄的子集。我们现在看到，如果我们的度量空间是完备的，那么它必然是“第二纲”的，这意味着它不能写成无处稠密集的可数并集。给定完备度量空间 \(X\) 的一个子集 \(A\) ，证明 \(A\) 是第一纲的，是一种数学上精确的方式来证明 \(A\) 构成了集合 \(X\) 的非常小的部分。术语“疏”(meager)通常用来指代属于第一纲的集合。
+
+在设定好舞台后，我们现在概述一个论点，即在 \(\left\lbrack  {0,1}\right\rbrack\) 的某一点可微的连续函数构成了度量空间 \(C\left\lbrack  {0,1}\right\rbrack\) 的一个疏集。
+
+
+
+\begin{Thm}
+  \label{thm:8.2.12}
+\[
+D = \left\{  {f \in  C\left\lbrack  {0,1}\right\rbrack   : \exists x \in  \left\lbrack  {0,1}\right\rbrack, {f}^{\prime }\left( x\right)} \text{存在}\right\}
+\]
+
+是 \(C\left\lbrack  {0,1}\right\rbrack\) 中的第一纲集。
+\end{Thm}
+
+
+\begin{proof}
+对于每一对自然数 \(m,n\) ，定义
+
+\[
+  {A}_{m,n} = \{ f \in  C\left\lbrack  {0,1}\right\rbrack   : \exists x \in  \left\lbrack  {0,1}\right\rbrack \text{ s.t. }  \forall 0 < \left| {x - t}\right|  < \frac{1}{m},   \left. \left| \frac{f\left( x\right)  - f\left( t\right) }{x - t}\right|  \leq  n\right\}  .
+  \]
+
+这个定义需要一些时间来消化。将 \(1/m\) 视为定义点 \(x\) 周围的 \(\delta\) 邻域，并将 \(n\) 视为通过两点 \(\left( {x,f\left( x\right) }\right)\) 和 \(\left( {t,f\left( t\right) }\right)\) 的直线斜率大小的上限。集合 \({A}_{m,n}\) 包含 \(C\left\lbrack  {0,1}\right\rbrack\) 中的任何函数，对于这些函数，至少可以找到一个点 \(x\) ，其中通过 \(\left( {x,f\left( x\right) }\right)\) 和函数上在 \(1/m\) 范围内的附近点的斜率被 \(n\) 所限制。
+
+练习 8.2.15。证明如果 \(f \in  C\left\lbrack  {0,1}\right\rbrack\) 在点 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 处可微，则对于某对 \(m,n \in  \mathbb{N}\) ， \(f \in  {A}_{m,n}\) 成立。
+
+子集 \(\left\{  {{A}_{m,n} : m,n \in  \mathbb{N}}\right\}\) 的集合是可数的，我们刚刚看到这些集合的并集包含我们的集合 \(D\) 。因为不难看出第一纲集的子集也是第一纲的，所以论证中的最后障碍是证明每个 \({A}_{m,n}\) 在 \(C\left\lbrack  {0,1}\right\rbrack\) 中是无处稠密的。
+
+固定 \(m\) 和 \(n\) 。首要任务是证明 \({A}_{m,n}\) 是一个闭集。为此，设 \(\left( {f}_{k}\right)\) 是 \({A}_{m,n}\) 中的一个序列，并假设 \({f}_{k} \rightarrow  f\) 在 \(C\left\lbrack  {0,1}\right\rbrack\) 中。我们需要证明 \(f \in  {A}_{m,n}\) 。
+
+因为 \({f}_{k} \in  {A}_{m,n}\) ，所以 \(\forall k \in  \mathbb{N}\) ， \(\exists {x}_{k} \in  \left\lbrack  {0,1}\right\rbrack\) 使得 $\forall 0 < \left| {x - t}\right|  < 1/m$，都有
+
+\[
+\left| \frac{{f}_{k}\left( {x}_{k}\right)  - {f}_{k}\left( t\right) }{{x}_{k} - t}\right|  \leq  n
+\]
+
+练习 8.2.16. (a) 序列 \(\left( {x}_{k}\right)\) 不一定收敛，但解释为什么存在一个收敛的子序列 \(\left( {x}_{{k}_{l}}\right)\) 。记 \(x = \lim \left( {x}_{{k}_{l}}\right)\) 。
+
+(b) 证明 \({f}_{{k}_{l}}\left( {x}_{{k}_{l}}\right)  \rightarrow  f\left( x\right)\) 。
+
+(c) 设 \(t \in  \left\lbrack  {0,1}\right\rbrack\) 满足 \(0 < \left| {x - t}\right|  < 1/m\) 。证明
+
+\[
+\left| \frac{f\left( x\right)  - f\left( t\right) }{x - t}\right|  \leq  n
+\]
+
+并得出结论 \({A}_{m,n}\) 是闭的。
+
+因为 \({A}_{m,n}\) 是闭集，所以 \(\overline{{A}_{m,n}} = {A}_{m,n}\) 。为了证明 \({A}_{m,n}\) 是疏集，我们只需证明它不包含任何 \(\varepsilon\) - 邻域，因此任取一个 \(f \in  {A}_{m,n}\) ，令 \(\varepsilon  > 0\) ，并考虑 \(C\left\lbrack  {0,1}\right\rbrack\) 中的 \(\varepsilon\) - 邻域 \({V}_{\varepsilon }\left( f\right)\) 。为了证明这个集合不包含在 \({A}_{m,n}\) 中，我们必须构造一个满足 \(\parallel f - g{\parallel }_{\infty } < \varepsilon\) 且具有如下性质的函数 \(g \in  C\left\lbrack  {0,1}\right\rbrack\) :不存在点 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 使得 $\forall 0 < \left| {x - t}\right|  < 1/m$
+
+\[
+\left| \frac{g\left( x\right)  - g\left( t\right) }{x - t}\right|  \leq  n
+\]
+
+练习8.2.17。如果一个函数的图像由有限数量的线段组成，则该函数被称为分段线性函数。
+
+(a) 证明存在一个分段线性函数 \(p \in  C\left\lbrack  {0,1}\right\rbrack\) 满足 \(\parallel f - p{\parallel }_{\infty } < \varepsilon /2\) 。
+
+(b) 证明如果 \(h\) 是 \(C\left\lbrack  {0,1}\right\rbrack\) 中以 $1$ 为界的函数，那么
+
+函数
+
+\[
+g\left( x\right)  = p\left( x\right)  + \frac{\varepsilon }{2}h\left( x\right)
+\]
+
+满足 \(g \in  {V}_{\varepsilon }\left( f\right)\) 。
+
+(c) 在 \(C\left\lbrack  {0,1}\right\rbrack\) 中构造一个以 $1$ 为界的分段线性函数 \(h\left( x\right)\) ，并得出 \(g \notin  {A}_{m,n}\) 的结论，其中 \(g\) 如(b)中定义。解释这如何完成定理8.2.12的论证。  
+\end{proof}
+
+\section{Fourier级数}
+\label{sec:8.3}
+在其著名的论文《热分析理论》(Theorie Analytique de la Chaleur，1822年)中，Joseph Fourier (1768-1830)大胆断言:“因此，没有任何函数 \(f\left( x\right)\) 或函数的一部分不能用三角级数表示。”\footnote{本节中的引文摘自W.A. Coppel的文章《J.B. Fourier——纪念他诞辰两百周年》，发表于《美国数学月刊》第76卷，1969年。}
+
+很难夸大这一想法的数学丰富性。数学史学家们令人信服地指出，随后对Fourier的猜想有效性的研究，是追求严谨性的根本催化剂，这种严谨性正是19世纪数学的特征。在Fourier工作之前的150年里，幂级数已被广泛使用，主要是因为它们在微积分运算中表现得非常好。用幂级数表示的函数是连续的，可以无限次微分，并且可以像多项式一样进行积分和微分。在这种令人满意的行为面前，数学家们没有迫切理由对“极限”或“收敛”形成更精确的理解，因为没有需要解决的争议。Fourier成功地将三角级数应用于热流研究，改变了这一切。要理解这场争论的真正焦点，我们需要更仔细地审视Fourier所主张的内容，分别关注“函数”、“表达”和“三角级数”这些术语。
+
+\subsection{三角级数}
+
+任何级数表示的基本原理都是将给定函数 \(f\left( x\right)\) 表示为更简单函数的和。对于幂级数，组成函数是 \(\left\{  {1,x,{x}^{2},{x}^{3},\ldots }\right\}\) ，因此级数具有以下形式
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}_{n}{x}^{n} = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + \cdots .
+\]
+
+三角级数是一种非常不同类型的无穷级数，它以函数
+
+\[
+\{ 1,\cos \left( x\right) ,\sin \left( x\right) ,\cos \left( {2x}\right) ,\sin \left( {2x}\right) ,\cos \left( {3x}\right) ,\sin \left( {3x}\right) ,\ldots \}
+\]
+
+作为其组成部分。因此，三角级数具有以下形式
+
+\begin{align*}
+f\left( x\right)  =  &{a}_{0} + {a}_{1}\cos \left( x\right)  + {b}_{1}\sin \left( x\right)  + {a}_{2}\cos \left( {2x}\right)  + {b}_{2}\sin \left( {2x}\right)  + {a}_{3}\cos \left( {3x}\right)  + \cdots\\
+=& {a}_{0} + \mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right) .
+\end{align*}
+
+当Fourier在1807年首次公开提出这种表示函数的方式时，这一想法并非完全新颖。大约50年前， Jean Le Rond d'Alembert (1717-1783)发表了偏微分方程
+
+\begin{equation}
+\label{eq:8.3.1}
+\frac{{\partial }^{2}u}{\partial {x}^{2}} = \frac{{\partial }^{2}u}{\partial {t}^{2}}
+\end{equation}
+
+作为描述振动弦运动的一种方法。在此模型中，函数 \(u\left( {x,t}\right)\) 表示弦在时间 \(t \geq  0\) 和某一点 \(x\) 处的位移，我们将其视为区间 \(\left\lbrack  {0,\pi }\right\rbrack\) 内的点。因为弦在该区间的两端固定，所以我们有 $\forall t \ge 0$
+
+\begin{equation}
+\label{eq:8.3.2}
+u\left( {0,t}\right)  = 0, \quad u\left( {\pi ,t}\right)  = 0
+\end{equation}
+
+现在，在 \(t = 0\) 时刻，弦被位移了某个初始量，并且在释放的瞬间我们假设
+
+\begin{equation}
+\label{eq:8.3.3}
+\frac{\partial u}{\partial t}\left( {x,0}\right)  = 0,
+\end{equation}
+
+
+这意味着，尽管弦立即开始运动，但在任何点都没有初始速度。找到一个满足方程\eqref{eq:8.3.1},\eqref{eq:8.3.2} 和 \eqref{eq:8.3.3}的函数 \(u\left( {x,t}\right)\) 并不太困难。
+
+练习8.3.1. (a) 验证 $\forall n \in \mathbb{N}, b_n \in \mathbb{R}$
+
+\[
+u\left( {x,t}\right)  = {b}_{n}\sin \left( {nx}\right) \cos \left( {nt}\right)
+\]
+
+满足方程 \eqref{eq:8.3.1},\eqref{eq:8.3.2} 和 \eqref{eq:8.3.3}。如果 \(n \notin  \mathbb{N}\) 会出什么问题？
+
+(b) 解释为什么任何形式如(a)部分给出的函数的有限和也会满足\eqref{eq:8.3.1},\eqref{eq:8.3.2} 和 \eqref{eq:8.3.3}。(顺便说一下，通过在一把制作精良的弦乐器上隔离谐波，可以听到(a)部分中 \(n\) 值高达4或5的不同解。)
+
+现在，我们来到真正有趣的问题。我们刚刚看到任何形式如下的函数
+
+\begin{equation}
+\label{eq:8.3.4}
+u\left( {x,t}\right)  = \mathop{\sum }\limits_{{n = 1}}^{N}{b}_{n}\sin \left( {nx}\right) \cos \left( {nt}\right)
+\end{equation}
+
+
+解决了所谓的 d'Alembert 波方程，但我们想要的特定解取决于弦最初是如何“拨动”的。在时间 \(t = 0\) ，我们假设弦被赋予了一些初始位移 \(f\left( x\right)  = u\left( {x,0}\right)\) 。在\eqref{eq:8.3.4}中的解族中设 \(t = 0\) ，并希望初始位移函数 \(f\left( x\right)\) 可以表示为
+
+\begin{equation}
+\label{eq:8.3.5}
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 1}}^{N}{b}_{n}\sin \left( {nx}\right) .
+\end{equation}
+
+这意味着，如果存在合适的系数 \({b}_{1},{b}_{2},\ldots ,{b}_{N}\) ，使得 \(f\left( x\right)\) 可以写成如\eqref{eq:8.3.5}式所示的正弦函数之和，那么振动弦问题就完全由(4)式给出的函数 \(u\left( {x,t}\right)\) 解决了。那么，显而易见的问题是，究竟哪些类型的函数可以构造为函数 \(\{ \sin \left( x\right) ,\sin \left( {2x}\right) ,\sin \left( {3x}\right) ,\ldots \}\) 的线性组合。 \(f\left( x\right)\) 可以有多普遍 Daniel Bernoulli (1700-1782)通常被认为提出了这样的观点:通过在方程\eqref{eq:8.3.5}中取无限和，可能可以表示区间 \(\left\lbrack  {0,\pi }\right\rbrack\) 上的任何初始位置 \(f\left( x\right)\) 。
+
+Fourier 在研究热传导时，三角函数级数以非常相似的方式重新出现在他的工作中。对Fourier来说， \(f\left( x\right)\) 表示施加在某种导热材料边界上的初始温度。描述热流的微分方程与 d'Alembert 的波动方程略有不同，但它们仍然涉及二阶导数，这使得将 \(f\left( x\right)\) 表示为三角函数的和成为求解的关键步骤。
+
+\subsection{周期函数}
+
+在他工作的早期阶段，Fourier将注意力集中在偶函数(即满足 \(f\left( x\right)  = f\left( {-x}\right)\) 的函数)上，并寻找将它们表示为 \(\sum {a}_{n}\cos \left( {nx}\right)\) 形式的级数的方法。最终，他得出了更一般的问题表述，即找到合适的系数 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 以将函数 \(f\left( x\right)\) 表示为
+
+\begin{equation}
+\label{eq:8.3.6}
+f\left( x\right)  = {a}_{0} + \mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right) .
+\end{equation}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_18_419_382_805_278_0.jpg}
+
+  \caption{ 将 \(f\left( x\right)  = {x}^{2}\) 限制于 \(( - \pi ,\pi \rbrack\) ，然后延拓为 \({2\pi }\) 周期。}
+  \label{fig:8.1}
+\end{figure}
+
+当我们开始探讨 \(f\left( x\right)\) 的任意性时，我们首先注意到方程~\eqref{eq:8.3.6}中级数的每个分量都是周期为 \({2\pi }\) 的周期函数。现在再将注意力转向“函数”这一术语，现在可以得出，任何我们希望用三角级数表示的函数也必然是周期性的。我们将主要关注区间 \(( - \pi ,\pi \rbrack\) 。这意味着，给定一个函数（如 \(f\left( x\right)  = {x}^{2}\)） ，我们将把注意力限制在 \(f|_{( - \pi ,\pi \rbrack}\) ，然后通过规则 \(f\left( x\right)  = f\left( {x + {2k\pi }}\right), \quad \forall k \in \mathbb{N}\) 将 \(f\) 周期性地扩展到整个 \(\mathbb{R}\) （图 \ref{fig:8.1}）。
+
+这种仅关注 \(f\left( x\right)\) 在区间 \(( - \pi ,\pi \rbrack\) 上的部分的惯例似乎并不具争议性，但在Fourier 的时代确实引发了一些困惑。在\ref{sec:1.2}节和\ref{sec:4.1}节中，我们提到在19世纪初，“函数”一词的含义更接近于“公式”。当时普遍认为，函数在区间 \(( - \pi ,\pi \rbrack\) 上的行为决定了其在其他所有地方的行为，这一观点自然源于对 Taylor 级数的过度信仰。现代的函数定义，如定义\ref{def:1.2.3}所示，归功于19世纪30年代的Dirichlet，尽管这一概念早先已由其他人提出。在《热的解析理论》中，Fourier通过说明“函数 \(f\left( x\right)\) 代表一系列值或纵坐标，每个值都是任意的……我们并不假设这些纵坐标遵循某种共同规律；它们以任何方式相互接续，每个值都像是单独给出的量”来澄清他对该术语的使用。
+
+最终，我们需要对函数的性质做出一些假设，但我们所需的条件相当温和，尤其是与“无限可微”等限制相比，这些限制对于Taylor级数表示的存在是必要的，但并不充分。
+
+\subsection{收敛的类型}
+
+这让我们开始讨论“表达(express)”这个词。我们最终必须对函数做出的假设取决于我们想要证明的收敛类型。我们该如何理解方程~\eqref{eq:8.3.6}中的等号？我们通常处理无穷级数的做法是首先定义部分和
+
+\begin{equation}
+\label{eq:8.3.7}
+{S}_{N}\left( x\right)  = {a}_{0} + \mathop{\sum }\limits_{{n = 1}}^{N}{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right) .
+\end{equation}
+
+“将 \(f\left( x\right)\) 表示为三角级数”意味着找到系数 \({\left( {a}_{n}\right) }_{n = 0}^{\infty }\) 和 \({\left( {b}_{n}\right) }_{n = 1}^{\infty }\) ，使得
+\begin{equation}
+\label{eq:8.3.8}
+f\left( x\right)  = \mathop{\lim }\limits_{{N \rightarrow  \infty }}{S}_{N}\left( x\right) .
+\end{equation}
+
+问题仍然在于这是一种什么样的极限。Fourier可能想象的是类似于逐点极限的东西，因为一致收敛的概念尚未被提出。除了逐点收敛和一致收敛之外，还有其他方式来解释方程~\eqref{eq:8.3.8}中的极限。尽管这里不会讨论，但事实证明，证明
+
+\[
+{\int }_{-\pi }^{\pi }{\left| {S}_{N}\left( x\right)  - f\left( x\right) \right| }^{2}{dx} \rightarrow  0
+\]
+
+这是理解特定函数类方程~\eqref{eq:8.3.8}的一种自然方法。这被称为 \({L}^{2}\) 收敛。我们将讨论的另一种收敛类型，称为Ces\`aro平均收敛，依赖于证明部分和的平均值收敛，在我们的情况下是平均收敛到 \(f\left( x\right)\) 。
+
+\subsection{Fourier系数}
+
+在接下来的讨论中，我们需要一些微积分知识。
+
+练习 8.3.2. 在必要时使用三角恒等式，验证以下积分。
+
+(a) 对于所有 \(n \in  \mathbb{N}\) ，
+
+\[
+{\int }_{-\pi }^{\pi }\cos \left( {nx}\right) {dx} = 0\;\text{ and }\;{\int }_{-\pi }^{\pi }\sin \left( {nx}\right) {dx} = 0.
+\]
+
+(b) 对于所有 \(n \in  \mathbb{N}\) ，
+
+\[
+{\int }_{-\pi }^{\pi }{\cos }^{2}\left( {nx}\right) {dx} = \pi \;\text{ and }\;{\int }_{-\pi }^{\pi }{\sin }^{2}\left( {nx}\right) {dx} = \pi .
+\]
+
+对于所有 \(m,n \in  \mathbb{N}\) ，
+
+\[
+{\int }_{-\pi }^{\pi }\cos \left( {mx}\right) \sin \left( {nx}\right) {dx} = 0.
+\]
+
+对于 \(m \neq  n\) ，
+
+\[
+{\int }_{-\pi }^{\pi }\cos \left( {mx}\right) \cos \left( {nx}\right) {dx} = 0\;\text{ and }\;{\int }_{-\pi }^{\pi }\sin \left( {nx}\right) \sin \left( {nx}\right) {dx} = 0.
+\]
+
+这些结果的意义比它们的证明更有趣。内积空间的直觉是有用的。将积分解释为一种点积，这个练习可以总结为说这些函数
+
+\[
+\{ 1,\cos \left( x\right) ,\sin \left( x\right) ,\cos \left( {2x}\right) ,\sin \left( {2x}\right) ,\cos \left( {3x}\right) ,\ldots \}
+\]
+
+彼此都是正交的。接下来的内容是它们实际上构成了一大类函数的基。
+
+首要任务是推导出方程~\eqref{eq:8.3.6}中系数 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 的一些合理候选值。给定一个函数 \(f\left( x\right)\) ，技巧是假设我们拥有~\eqref{eq:8.3.6}中描述的表示形式，然后以某种方式操作这个方程，从而得到 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 的公式。这正是我们在第6.6节中处理Taylor级数展开时所采用的方法。Taylor公式中的系数是通过反复对所需表示方程的两边进行微分而得到的。在这里，我们进行积分。
+
+为了计算 \({a}_{0}\) ，将方程~\eqref{eq:8.3.6}的两边从 \(- \pi\) 到 \(\pi\) 进行积分，大胆地将积分带入无限求和，并使用练习8.3.2得到
+\begin{align*}
+{\int }_{-\pi }^{\pi }f\left( x\right) {dx} = &{\int }_{-\pi }^{\pi }\left\lbrack  {{a}_{0} + \mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right) }\right\rbrack  {dx}\\
+=& {\int }_{-\pi }^{\pi }{a}_{0}{dx} + \mathop{\sum }\limits_{{n = 1}}^{\infty }{\int }_{-\pi }^{\pi }\left\lbrack  {{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right) }\right\rbrack  {dx}\\
+=& {a}_{0}\left( {2\pi }\right)  + \mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}0 + {b}_{n}0 = {a}_{0}\left( {2\pi }\right) .
+\end{align*}
+
+因此，
+
+\begin{equation}
+\label{eq:8.3.9}
+{a}_{0} = \frac{1}{2\pi }{\int }_{-\pi }^{\pi }f\left( x\right) {dx}.
+\end{equation}
+
+在前述计算的第二步中，求和符号与积分符号的交换确实会引起一些质疑，但请记住，我们实际上是从假设的 \(f\left( x\right)\) 表示出发，反向推导出 \({a}_{0}\) 的提议。重点不在于证明公式的推导过程，而在于展示使用这个 \({a}_{0}\) 值最终能给出我们想要的表示。真正的难点还在后面。
+
+现在，考虑一个固定的 \(m \geq  1\) 。为了计算 \({a}_{m}\) ，我们首先将方程(6)的每一边乘以 \(\cos \left( {mx}\right)\) ，然后在区间 \(\left\lbrack  {-\pi ,\pi }\right\rbrack\) 上再次积分。
+
+练习8.3.3. 推导公式：$\forall m\ge 1$
+
+\begin{equation}
+\label{eq:8.3.10}
+{a}_{m} = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( x\right) \cos \left( {mx}\right) {dx}\;\text{ and }\;{b}_{m} = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( x\right) \sin \left( {mx}\right) {dx}
+\end{equation}
+
+让我们稍作休息，通过实验在几个简单函数上测试我们的 \(\left( {a}_{m}\right)\) 和 \(\left( {b}_{m}\right)\) 配方。
+
+\begin{Eg}
+  \label{eg:8.3.1}
+设
+
+\[
+f\left( x\right)  = \left\{  \begin{array}{ll} 1 & 0 < x < \pi \\  0 & x = 0\text{ 或 }x = \pi \\   - 1 & - \pi  < x < 0 \end{array}\right.
+\]
+
+\(f\) 是奇函数(即 \(f\left( {-x}\right)  =  - f\left( x\right)\) )这一事实意味着我们可以暂时避免进行任何积分，只需借助对称性论证得出结论
+
+\[
+{a}_{0} = \frac{1}{2\pi }{\int }_{-\pi }^{\pi }f\left( x\right) {dx} = 0,\quad{a}_{n} = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( x\right) \cos \left( {nx}\right)  = 0
+\]
+
+ \(\forall n \geq  1\) 。我们还可以通过如下方式简化 \({b}_{n}\) 的积分
+\begin{align*}
+{b}_{n} = & \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( x\right) \sin \left( {nx}\right)  = \frac{2}{\pi }{\int }_{0}^{\pi }\sin \left( {nx}\right) {dx}\\
+= & \frac{2}{\pi }\left( {\frac{-1}{n}\cos \left( {nx}\right) { \mid  }_{0}^{\pi }}\right)\\
+= & \left\{  \begin{array}{ll} 4/{n\pi } & n\text{ 为奇数 } \\  0 & n\text{ 为偶数. } \end{array}\right.
+\end{align*}
+
+在盲目自信的情况下，我们将这些结果代入方程~\eqref{eq:8.3.6}以获得表示
+
+\[
+f\left( x\right)  = \frac{4}{\pi }\mathop{\sum }\limits_{{n = 0}}^{\infty }\frac{1}{{2n} + 1}\sin \left( {\left( {{2n} + 1}\right) x}\right) .
+\]
+
+该系列部分和的图象(图\ref{fig:8.2})应该会让人对正在发生的事情的合法性产生一些乐观情绪。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_22_464_393_710_363_0.jpg}
+  \caption{\(\left\lbrack  {-\pi ,\pi }\right\rbrack\) 上的 \(f,{S}_{4}\) ，以及 \({S}_{20}\) 。}
+  \label{fig:8.2}
+\end{figure}
+\end{Eg}
+
+练习 8.3.4. (a) 参考前面的例子，解释为什么我们可以确定部分和收敛到 \(f\left( x\right)\) 在任何包含 0 的区间上不是一致的。
+
+(b) 对函数 \(g\left( x\right)  = \left| x\right|\) 重复例 8.3.1 的计算，并检查一些部分和的图形。这次，利用 \(g\) 是偶函数 \(\left( {g\left( x\right)  = g\left( {-x}\right) }\right)\) 这一事实来简化计算。仅通过查看系数，我们如何知道这个级数一致收敛到某个函数？
+
+(c) 使用图形收集一些关于我们到目前为止的两个例子中逐项微分问题的经验证据。通过查看得到的系数，是否可以得出任一微分级数的收敛或发散性？在第 6 章中，我们有一个关于逐项微分合法性的定理。它是否可以应用于这些例子中的任何一个？
+
+
+
+\subsection{Riemann-Lebesgue引理}
+
+在我们目前看到的例子中，Fourier系数序列 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 都随着 \(n \rightarrow  \infty\) 趋向于 $0$。这总是成立的。理解为什么会发生这种情况对我们即将进行的收敛证明至关重要。
+
+我们从简单的观察开始。注意到
+
+\[
+{\int }_{-\pi }^{\pi }\sin \left( x\right) {dx} = 0
+\]
+
+此式成立是因为正弦曲线的正负部分相互抵消。同样的论证也适用于
+
+\[
+{\int }_{-\pi }^{\pi }\sin \left( {nx}\right) {dx} = 0.
+\]
+
+现在，当 \(n\) 很大时， \(\sin \left( {nx}\right)\) 的振荡周期变得非常短——准确来说是 \({2\pi }/n\) 。如果 \(h\left( x\right)\) 是一个连续函数，那么 \(h\) 的值在 \(\sin \left( {nx}\right)\) 的每个短周期内变化不大。结果是，乘积 \(h\left( x\right) \sin \left( {nx}\right)\) (图\ref{fig:8.3})的连续正负振荡几乎相同，因此抵消使下式的结果变为一个很小的值：
+
+\[
+{\int }_{-\pi }^{\pi }h\left( x\right) \sin \left( {nx}\right) {dx}
+\]
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_23_623_393_712_362_0.jpg}
+  \caption{\(n\) 很大时 \(h\left( x\right)\) 和 \(h\left( x\right) \sin \left( {nx}\right)\) 的图像 }
+  \label{fig:8.3}
+\end{figure}
+
+
+\begin{Thm}[Riemann-Lebesgue引理]
+  \label{thm:8.3.2}
+  设 \(h\left( x\right)\) 在 \(( - \pi ,\pi \rbrack\) 上连续。那么，
+
+\[
+{\int }_{-\pi }^{\pi }h\left( x\right) \sin \left( {nx}\right) {dx} \rightarrow  0\;\text{ 且 }\;{\int }_{-\pi }^{\pi }h\left( x\right) \cos \left( {nx}\right) {dx} \rightarrow  0
+\]
+\end{Thm}
+
+\begin{proof}
+  请记住，从现在开始，我们所有的函数都在心理上将 \(h\) 扩展为 \({2\pi }\) 周期函数。因此，虽然我们的注意力通常集中在区间 \(( - \pi ,\pi \rbrack\) 上，但连续性的假设意味着周期扩展后的 \(h\) 在整个 \(\mathbb{R}\) 上都是连续的。请注意，除了在 \(( - \pi ,\pi \rbrack\) 上的连续性外，这还相当于坚持 \(\mathop{\lim }\limits_{{x \rightarrow   - {\pi }^{ + }}}h\left( x\right)  = h\left( \pi \right)\) 。
+
+  
+练习8.3.5。解释为什么 \(h\) 在 \(\mathbb{R}\) 上是一致连续的。
+
+给定 \(\varepsilon  > 0\) ，选择 \(\delta  > 0\) 使得 \(\left| {x - y}\right|  < \delta\) 蕴含 \(\left| {h\left( x\right)  - h\left( y\right) }\right|  < \varepsilon /2\) 。 \(\sin \left( {nx}\right)\) 的周期为 \({2\pi }/n\) ，因此选择足够大的 \(N\) ，使得每当 \(n \geq  N\) 时， \({2\pi }/n < \delta\) 。现在，考虑一个特定区间 \(\left\lbrack  {a,b}\right\rbrack\) ，其长度为 \({2\pi }/n\) ，在该区间内 \(\sin \left( {nx}\right)\) 完成一次完整的振荡。
+
+练习 8.3.6。证明 \({\int }_{a}^{b}h\left( x\right) \sin \left( {nx}\right) {dx} < \varepsilon /n\) ，并利用这一事实完成证明。
+\end{proof}
+
+
+
+Fourier级数的应用不仅限于连续函数(例\ref{eg:8.3.1})。尽管我们的特定证明利用了连续性，但Riemann-Lebesgue引理在更弱的假设下仍然成立。然而，任何关于这一事实的证明最终都会利用正负分量的抵消。回顾第\ref{chap:2}章，这种类型的抵消是区分条件收敛与绝对收敛的机制。最终，我们发现，与幂级数不同，Fourier级数可以条件收敛。这可能使它们不那么稳健，但更加通用，能够表现出更有趣的行为。
+
+\subsection{逐点收敛证明}
+
+让我们再次回到Fourier的断言，即每个“函数”都可以“表达”为三角级数。
+
+我们在方程~\eqref{eq:8.3.9}和~\eqref{eq:8.3.10}中给出的Fourier系数公式隐含地要求函数是可积的。这是Riemann修改Cauchy积分定义的主要动机。因为可积性是生成Fourier级数的先决条件，我们希望可积函数的类别尽可能大。现在要问的自然问题是，Riemann可积性是否足够，或者我们是否需要对 \(f\) 做出一些额外的假设，以确保Fourier级数收敛回 \(f\) 。答案取决于我们希望建立的收敛类型。
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_24_510_794_689_372_0.jpg}
+\end{center}
+\hspace*{3em} 
+
+目前尚无简洁的方式来总结这一情况。对于逐点收敛，可积性并不足够。目前，对我们来说，“可积”意味着Riemann可积，我们仅对有界函数进行了严格定义。1966年，Lennart Carleson 通过极其复杂的论证证明了，对于此类函数，其Fourier级数在定义域内的每一点都逐点收敛（至多排除一个测度为零的集合）。这一术语在我们讨论Cantor 集(第\ref{sec:3.1}节)时出现，并在第\ref{sec:7.6}节中进行了严格定义。测度为零的集合在某种意义上是小的，但它们可以是不可数的，并且存在一些连续函数的Fourier级数在不可数多个点上发散的例子。1901年，Lebesgue 对 Riemann 积分的修改被证明是Fourier 分析的一个更为自然的框架。Carleson 的证明实际上是关于Lebesgue可积函数的，这些函数允许无界，但 \({\int }_{-\pi }^{\pi }{\left| f\right| }^{2}\) 是有限的。在这一领域中最简洁的定理之一指出，对于这类平方Lebesgue可积函数，如果我们按照前面描述的 \({L}^{2}\) 意义来理解收敛，Fourier级数总是收敛到其来源的函数。作为对情况脆弱性的最后警告，A. Kolmogorov (1903-1987)给出了一个Lebesgue可积函数的例子，其Fourier级数在任何点都不收敛。
+
+尽管所有这些结果都需要更多的背景知识才能以任何严格的方式深入研究，但我们有能力证明一些重要的定理，这些定理需要对该函数做出一些额外的假设。我们将满足于在这一领域中的两个有趣结果。
+
+\begin{Thm}
+  \label{thm:8.3.3}
+  设 \(f\left( x\right)\) 在 \(( - \pi ,\pi \rbrack\) 上连续，且 \({S}_{N}\left( x\right)\) 为方程 \eqref{eq:8.3.7} 中描述的Fourier级数的第 \(N\) 项部分和，其中系数 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 由方程 \eqref{eq:8.3.9} 和 \eqref{eq:8.3.10} 给出。由此可得
+
+\[
+\mathop{\lim }\limits_{{N \rightarrow  \infty }}{S}_{N}\left( x\right)  = f\left( x\right)
+\]
+
+在 \({f}^{\prime }\left( x\right)\) 存在的任何 \(x \in  ( - \pi ,\pi \rbrack\) 点处逐点成立。
+\end{Thm}
+
+\begin{proof}
+整理一些初步事实可以使论证更加顺畅。
+
+事实1:(a) \(\cos \left( {\alpha  - \theta }\right)  = \cos \left( \alpha \right) \cos \left( \theta \right)  + \sin \left( \alpha \right) \sin \left( \theta \right)\) 。
+
+(b) \(\sin \left( {\alpha  + \theta }\right)  = \sin \left( \alpha \right) \cos \left( \theta \right)  + \cos \left( \alpha \right) \sin \left( \theta \right)\) .
+
+事实2:$\forall \theta\ne 2n\pi$， \(\frac{1}{2} + \cos \left( \theta \right)  + \cos \left( {2\theta }\right)  + \cos \left( {3\theta }\right)  + \cdots  + \cos \left( {N\theta }\right)  = \frac{\sin \left( {\left( {N + 1/2}\right) \theta }\right) }{2\sin \left( {\theta /2}\right) }\)
+
+
+事实1(a)和1(b)是熟悉的三角恒等式。事实2则不那么为人熟知。其证明(我们省略)最容易通过取复指数几何和的实部来推导。事实2中的函数被称为Dirichlet核，以纪念这位数学家，他首次给出了此类收敛性的严格证明。对该恒等式两边积分将引出我们下一个重要事实。
+
+事实3:设
+
+\[
+{D}_{N}\left( \theta \right)  = \left\{  \begin{array}{ll} \frac{\sin \left( {\left( {N + 1/2}\right) \theta }\right) }{2\sin \left( {\theta /2}\right) }, & \theta  \neq  {2n\pi } \\  1/2 + N, & \theta  = {2n\pi } \end{array}\right.
+\]
+
+从事实2出发，我们看到
+
+\[
+{\int }_{-\pi }^{\pi }{D}_{N}\left( \theta \right) {d\theta } = \pi
+\]
+
+尽管我们不会重述，但我们将使用的最后一个事实是Riemann-Lebesgue引理。
+
+固定一个点 \(x \in  ( - \pi ,\pi \rbrack\) 。第一步是简化 \({S}_{N}\left( x\right)\) 的表达式。现在 \(x\) 是一个固定的常数，因此我们将使用 \(t\) 作为积分变量来写出方程~\eqref{eq:8.3.9}和~\eqref{eq:8.3.10}中的积分。留意事实1(a)和，我们得到
+
+\begin{align*}
+{S}_{N}\left( x\right)  = & {a}_{0} + \mathop{\sum }\limits_{{n = 1}}^{N}{a}_{n}\cos \left( {nx}\right)  + {b}_{n}\sin \left( {nx}\right)\\
+=& \left\lbrack  {\frac{1}{2\pi }{\int }_{-\pi }^{\pi }f\left( t\right) {dt}}\right\rbrack   + \mathop{\sum }\limits_{{n = 1}}^{N}\left\lbrack  {\frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( t\right) \cos \left( {nt}\right) {dt}}\right\rbrack  \cos \left( {nx}\right)\\
+& + \mathop{\sum }\limits_{{n = 1}}^{N}\left\lbrack  {\frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( t\right) \sin \left( {nt}\right) {dt}}\right\rbrack  \sin \left( {nx}\right)\\
+= & \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( t\right) \left\lbrack  {\frac{1}{2} + \mathop{\sum }\limits_{{n = 1}}^{N}\cos \left( {nt}\right) \cos \left( {nx}\right)  + \sin \left( {nt}\right) \sin \left( {nx}\right) }\right\rbrack  {dt}\\
+= & \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( t\right) \left\lbrack  {\frac{1}{2} + \mathop{\sum }\limits_{{n = 1}}^{N}\cos \left( {{nt} - {nx}}\right) }\right\rbrack  {dt}\\
+= & \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( t\right) {D}_{N}\left( {t - x}\right) {dt}.
+\end{align*}
+
+作为最后的化简，设 \(u = t - x\) 。然后，
+
+\[
+{S}_{N}\left( x\right)  = \frac{1}{\pi }{\int }_{-\pi  - x}^{\pi  - x}f\left( {u + x}\right) {D}_{N}\left( u\right) {du} = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( {u + x}\right) {D}_{N}\left( u\right) {du}.
+\]
+
+最后一个等式是我们约定将 \(f\) 扩展为 \({2\pi }\) 周期的结果。因为 \({D}_{N}\) 也是周期性的(它是余弦函数的和)，所以只要覆盖一个完整的周期，我们在哪个区间计算积分并不重要。
+
+为了证明 \({S}_{N}\left( x\right)  \rightarrow  f\left( x\right)\) ，我们必须证明当 \(N\) 变大时， \(\left| {{S}_{N}\left( x\right)  - f\left( x\right) }\right|\) 会变得任意小。将 \({S}_{N}\left( x\right)\) 表示为涉及 \({D}_{N}\left( u\right)\) 的积分后，我们有动力对 \(f\left( x\right)\) 做类似的事情。根据事实3，
+
+\[
+f\left( x\right)  = f\left( x\right) \frac{1}{\pi }{\int }_{-\pi }^{\pi }{D}_{N}\left( u\right) {du} = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( x\right) {D}_{N}\left( u\right) {du},
+\]
+
+由此可得
+\begin{equation}
+\label{eq:8.3.11}
+{S}_{N}\left( x\right)  - f\left( x\right)  = \frac{1}{\pi }{\int }_{-\pi }^{\pi }\left( {f\left( {u + x}\right)  - f\left( x\right) }\right) {D}_{N}\left( u\right) {du}.
+\end{equation}
+
+我们的目标是证明当 \(N \rightarrow  \infty\) 时，这个量趋于零。图~\ref{fig:8.4}中 \({D}_{N}\left( u\right)\) 的草图展示了为什么这可能会发生。对于较大的 \(N\) ，Dirichlet核 \({D}_{N}\left( u\right)\) 在 \(u = 0\) 附近有一个高而薄的尖峰，但这正是 \(f\left( {u + x}\right)  - f\left( x\right)\) 较小的地方(因为 \(f\) 是连续的)。在远离零的地方， \({D}_{N}\left( u\right)\) 表现出快速的振荡，这让人联想到Riemann-Lebesgue引理(定理~\ref{thm:8.3.2})。让我们看看如何利用这个定理来完成论证。
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_27_625_392_703_363_0.jpg}
+  \caption{\({D}_{6}\left( u\right)\) 和 \({D}_{16}\left( u\right)\) 。}
+  \label{fig:8.4}
+\end{figure}
+
+利用事实1(b)，我们可以将Dirichlet核重写为
+
+\[
+{D}_{N}\left( u\right)  = \frac{\sin \left( {\left( {N + 1/2}\right) u}\right) }{2\sin \left( {u/2}\right) } = \frac{1}{2}\left\lbrack  {\frac{\sin \left( {Nu}\right) \cos \left( {u/2}\right) }{\sin \left( {u/2}\right) } + \cos \left( {Nu}\right) }\right\rbrack  .
+\]
+
+然后，方程~\eqref{eq:8.3.11}变为
+\begin{align*}
+{S}_{N}\left( x\right)  - f\left( x\right)  = & \frac{1}{2\pi }{\int }_{-\pi }^{\pi }\left( {f\left( {u + x}\right)  - f\left( x\right) }\right) \left\lbrack  {\frac{\sin \left( {Nu}\right) \cos \left( {u/2}\right) }{\sin \left( {u/2}\right) } + \cos \left( {Nu}\right) }\right\rbrack  {du}\\
+= & \frac{1}{2\pi }{\int }_{-\pi }^{\pi }\left( {f\left( {u + x}\right)  - f\left( x\right) }\right) \left( \frac{\sin \left( {Nu}\right) \cos \left( {u/2}\right) }{\sin \left( {u/2}\right) }\right)\\
+& + \left( {f\left( {u + x}\right)  - f\left( x\right) }\right) \cos \left( {Nu}\right) {du}\\
+= & \frac{1}{2\pi }{\int }_{-\pi }^{\pi }{p}_{x}\left( u\right) \sin \left( {Nu}\right) {du} + \frac{1}{2\pi }{\int }_{-\pi }^{\pi }{q}_{x}\left( u\right) \cos \left( {Nu}\right) {du},
+\end{align*}
+
+在最后一步中，我们设
+
+\[
+{p}_{x}\left( u\right)  = \frac{\left( {f\left( {u + x}\right)  - f\left( x\right) }\right) \cos \left( {u/2}\right) }{\sin \left( {u/2}\right) }, \quad{q}_{x}\left( u\right)  = f\left( {u + x}\right)  - f\left( x\right) .
+\]
+
+练习 8.3.7. (a) 首先，解释为什么涉及 \({q}_{x}\left( u\right)\) 的积分在 \(N \rightarrow  \infty\) 时趋于零。
+
+(b) 第一个积分稍微复杂一些，因为函数 \({p}_{x}\left( u\right)\) 在分母中有 \(\sin \left( {u/2}\right)\) 项。利用 \(f\) 在 \(x\) 处可微(以及微积分中一个熟悉的极限)来证明第一个积分也趋于零。
+
+这完成了在任何点 \(x\) 处 \(f\) 可微时 \({S}_{N}\left( x\right)  \rightarrow  f\left( x\right)\) 成立的论证。如果导数处处存在，那么我们显然得到 \({S}_{N} \rightarrow  f\) 逐点成立。如果我们加上 \({f}^{\prime }\) 连续的假设，那么不难证明收敛是一致性的。事实上，Fourier级数的收敛速度与 \(f\) 的光滑性之间存在非常强的关系。 \(f\) 拥有的导数越多，部分和 \({S}_{N}\) 收敛到 \(f\) 的速度就越快。  
+\end{proof}
+
+
+\subsection{Ces\`aro平均收敛}
+
+与其在这个有趣的方向上继续证明，我们将通过观察一种称为Ces\`aro平均收敛的不同类型的收敛来结束这个非常简短的Fourier级数介绍。
+
+练习 8.3.8. 证明如果实数序列 \(\left( {x}_{n}\right)\) 收敛，那么算术平均
+
+\[
+{y}_{n} = \frac{{x}_{1} + {x}_{2} + {x}_{3} + \cdots  + {x}_{n}}{n}
+\]
+
+也收敛到相同的极限。举一个例子说明，即使原始序列 \(\left( {x}_{n}\right)\) 不收敛，均值序列 \(\left( {y}_{n}\right)\) 也可能收敛。
+
+在定理\ref{thm:8.3.3}之前的讨论旨在让人们意识到理解Fourier级数行为的固有困难，尤其是在所讨论的函数不可微的情况下。正是从这种谦逊的心态出发，才能最好地欣赏到L. Fejér在1904年提出的以下优雅结果。
+
+
+\begin{Thm}[Fej\'er 定理]
+  \label{thm:8.3.4}
+  设 \({S}_{N}\left( x\right)\) 为函数 \(f\) 在 \(( - \pi ,\pi \rbrack\) 上的Fourier级数的第 \(N\) 个部分和。定义
+
+\[
+{\sigma }_{N}\left( x\right)  = \frac{1}{N + 1}\mathop{\sum }\limits_{{n = 0}}^{N}{S}_{N}\left( x\right) .
+\]
+
+如果 \(f\) 在 \(( - \pi ,\pi \rbrack\) 上连续，则 \({\sigma }_{N}\left( x\right)  \rightarrow  f\left( x\right)\) 一致收敛。
+\end{Thm}
+
+\begin{proof}
+  
+此论证仿照定理~\ref{thm:8.3.3}的证明，但实际上更为简单。除了事实1和2中列出的三角公式外，我们还需要一个关于正弦函数的事实2的版本，其形式如下
+
+\[
+\sin \left( \theta \right)  + \sin \left( {2\theta }\right)  + \sin \left( {3\theta }\right)  + \cdots  + \sin \left( {N\theta }\right)  = \frac{\sin \left( \frac{N\theta }{2}\right) \sin \left( {\left( {N + 1}\right) \frac{\theta }{2}}\right) }{\sin \left( \frac{\theta }{2}\right) }.
+\]
+
+练习8.3.9。利用前面的恒等式证明
+
+\[
+\frac{1/2 + {D}_{1}\left( \theta \right)  + {D}_{2}\left( \theta \right)  + \cdots  + {D}_{N}\left( \theta \right) }{N + 1} = \frac{1}{2\left( {N + 1}\right) }{\left\lbrack  \frac{\sin \left( {\left( {N + 1}\right) \frac{\theta }{2}}\right) }{\sin \left( \frac{\theta }{2}\right) }\right\rbrack  }^{2}.
+\]
+
+练习8.3.9中的表达式称为Fej\'er核，并将用 \({F}_{N}\left( \theta \right)\) 表示。类似于定理8.3.3证明中的Dirichlet核 \({D}_{N}\left( \theta \right)\) ， \({F}_{N}\) 用于极大地简化 \({\sigma }_{N}\left( x\right)\) 的公式。
+
+练习8.3.10。(a) 证明
+
+\[
+{\sigma }_{N}\left( x\right)  = \frac{1}{\pi }{\int }_{-\pi }^{\pi }f\left( {u + x}\right) {F}_{N}\left( u\right) {du}.
+\]
+
+(b) 绘制函数 \({F}_{N}\left( u\right)\) 在多个 \(N\) 值下的图像。 \({F}_{N}\) 在何处较大，在何处接近零？将此函数与Dirichlet核) \({D}_{N}\left( u\right)\) 进行比较。现在，证明 \({F}_{N} \rightarrow  0\) 在形式为 \(\{ u : \left| u\right|  \geq  \delta \}\) 的任何集合上一致收敛，其中 \(\delta  > 0\) 是固定的(且 \(u\) 被限制在区间 \(\left( {-\pi ,\pi \rbrack }\right)\) 内)。
+
+(c) 证明 \({\int }_{-\pi }^{\pi }{F}_{N}\left( u\right) {du} = \pi\) 。
+
+(d) 为了完成定理的证明，首先选择一个 \(\delta  > 0\) 使得
+
+\[
+\left| u\right|  < \delta \Rightarrow \left| {f\left( {x + u}\right)  - f\left( x\right) }\right|  < \varepsilon .
+\]
+
+建立一个表示误差 \({\sigma }_{N}f\left( x\right)  - f\left( x\right)\) 的单一积分，并将该积分划分为 \(\left| u\right|  \leq  \delta\) 和 \(\left| u\right|  \geq  \delta\) 的集合。解释为什么可以独立于 \(x\) 的选择，使每个积分都足够小。
+\end{proof}
+
+\subsection{Weierstrass逼近定理}
+
+证明 Fej\'er 定理的艰苦工作有许多回报，其中之一是可以获得一个相对简短的论证，用于证明Weierstrass在1885年发现的一个极其重要的定理。
+
+\begin{Thm}
+  \label{thm:8.3.5}
+  如果 \(f\) 是闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的连续函数，则存在一个多项式序列在 \(\left\lbrack  {a,b}\right\rbrack\) 上一致收敛于 \(f\left( x\right)\) 。
+\end{Thm}
+
+\begin{proof}
+我们实际上在第\ref{sec:6.6}节关于Taylor级数的内容中已经见过这个结果的一个特例。虽然这部分内容在本书中尚未涉及，读者很可能已从微积分课程中熟悉下列公式：
+
+\begin{equation}
+\label{eq:8.3.12}
+\sin \left( x\right)  = x - \frac{{x}^{3}}{3!} + \frac{{x}^{5}}{5!} - \frac{{x}^{7}}{7!} + \frac{{x}^{9}}{9!} - \cdots
+\end{equation}
+
+第\ref{sec:6.6}节的内容是，通过使用 Lagrange 余项定理，我们可以证明~\eqref{eq:8.3.12}中的Taylor级数在 \(\mathbb{R}\) 的任何有界子集上一致收敛于 \(\sin \left( x\right)\) 。级数的一致收敛意味着部分和一致收敛，而在此情况下的部分和是多项式。请注意，这正是定理~\ref{thm:8.3.5}要求我们证明的，只是我们必须用任意连续函数代替 \(\sin \left( x\right)\) 来完成证明。
+
+使用Taylor级数通常并不奏效。主要问题在于，要构造Taylor级数，我们需要函数是无限可微的，即使在这种情况下，我们得到的级数可能不收敛或收敛到错误的结果。然而，我们确实计划使用Taylor级数。对于本次讨论，关于Taylor级数的重要点是， \(\sin \left( x\right)\) 和 \(\cos \left( x\right)\) 的Taylor级数在任何有界集上一致收敛到正确的极限。
+
+练习8.3.11. (a) 利用前面的评论，并使用 Fej\'er's 定理在附加假设下完成定理~\eqref{eq:8.3.5}的证明，即取区间 \(\left\lbrack  {a,b}\right\rbrack\) 为 \(\left\lbrack  {0,\pi }\right\rbrack\) 。
+
+(b) 展示如何从这种情况推导出任意区间 \(\left\lbrack  {a,b}\right\rbrack\) 的情况。  
+\end{proof}
+
+
+将Weierstrass的这一结果与他关于连续但无处可微函数的证明并列起来看是很有趣的。尽管存在一些连续函数，它们的振荡如此剧烈以至于在任何点都没有导数，但这些难以驾驭的函数始终在无限可微多项式的 \(\varepsilon\) 范围内均匀分布。
+
+\subsection{近似作为一个统一主题}
+
+将本章的最后一节视为一种附录(旨在澄清第一章中关于实数定义的一些未解问题)，Weierstrass逼近定理为我们对一些分析瑰宝的初步调查提供了一个恰当的结尾。
+
+近似的思想贯穿了整个主题。每个实数都可以用有理数来近似。无穷和的值用部分和来近似，连续函数的值可以用其附近的值来近似。当直线是曲线的良好近似时，函数是可微的；当有限个矩形是曲线下面积的良好近似时，函数是可积的。现在，我们了解到每个连续函数都可以用多项式任意好地近似。在每种情况下，近似对象都是具体且易于理解的，问题在于这些性质在极限过程中如何保持。通过用有限对象构建的路径来看待数学中的不同无穷，Weierstrass 和其他分析学的创始人创造了一种范式，将数学探索的范围扩展到以前无法触及的领域。虽然我们的旅程到此结束，但道路漫长且仍在继续书写。
+
+\section{从$\mathbb{Q}$构造$\mathbb{R}$}
+\label{sec:8.4}
+
+本节专门用于构建以下定理的证明:
+\begin{Thm}
+  \label{thm:8.4.1}
+  存在一个有序域，其中每个有上界的非空集都有一个最小上界。此外，该域包含 \(\mathbb{Q}\) 作为子域。
+\end{Thm}
+
+在正确理解和证明这一陈述之前，需要定义一些术语，但它基本上可以解释为“实数存在”。在\ref{sec:1.1}节中，我们遇到了有理数系统作为分析场所的一个主要缺陷。没有$2$的平方根(以及不可数多个其他无理数)，我们无法自信地从Cauchy序列移动到其极限，因为在 \(\mathbb{Q}\) 中无法保证这样的数存在。(此时强烈建议回顾\ref{sec:1.1}节和\ref{sec:1.1}节。)我们在第\ref{chap:1}章中提出的解决方案是完备性公理的形式，我们在此重申。
+
+\paragraph{完备性公理} 每个有上界的非空实数集都有一个最小上界。
+
+现在让我们明确一下我们在第一章中实际是如何进行的。这是将 \(\mathbb{Q}\) 与 \(\mathbb{R}\) 区分开来的属性，但通过将此属性称为公理，我们强调的是它不需要被证明。实数被简单地定义为有理数的扩展，其中有界集合具有最小上界，但并未尝试证明这种扩展实际上是可能的。现在，时机终于到来。通过明确地从有理数构建实数，我们将能够证明完备性公理根本不需要是公理；它是一个定理！
+
+本书的最后一节竟然是构建数系，而数系正是前面每一页的潜在主题，这有些讽刺，但也非常恰当。从Cantor定理到Baire纲定理的八章中，我们已经看到完备性的加入如何深刻地改变了局面。我们从小都相信实数的存在，但只有通过经典分析的研究，我们才意识到它们那难以捉摸和神秘的本质。正是因为完备性如此重要，并且因为它导致了如此令人困惑的现象，我们现在才感到有义务——实际上是不得不——回到起点，去验证这种东西是否真的存在。
+
+正如我们在第一章中提到的，按照这个顺序进行使我们与历史上的伟大人物为伍。Cauchy、Bolzano、Abel、Dirichlet、Weiestrass 和 Riemann 的开创性工作先于——并且在很大程度上导致了——1872年提出的关于 \(\mathbb{R}\) 的一系列严格定义。Georg Cantor 是这些定义之一的提出者，但实数系统的其他构造也来自Charles Meray(1835-1911)、Heinrich Heine (1821-1881)和 Richard Dedekind (1831-1916)。接下来的表述是Dedekind提出的。在某种意义上，这是最抽象的方法，但对我们来说是最合适的，因为完备性的验证是通过最小上界来完成的。
+
+\subsection{Dedekind分割}
+
+我们开始讨论时假设有理数以及所有熟悉的加法、乘法和序的性质都是可用的。目前，还没有实数这样的东西。
+
+\begin{Def}
+  \label{def:8.4.2}
+  有理数的一个子集 \(A\) 被称为一个分割，如果它具有以下三个性质:
+\begin{enumerate}[label = (c\arabic*)]
+\item\label{item:8.4.01}  \(A \neq  \varnothing\) 且 \(A \neq  \mathbb{Q}\) 。
+\item\label{item:8.4.02}  如果 \(r \in  A\) ，那么 \(A\) 也包含每一个满足\(q < r\) 的有理数 $q$。
+\item\label{item:8.4.03}  \(A\) 没有最大值；也就是说，如果 \(r \in  A\) ，那么存在 \(s \in  A\) 使得 \(r < s\) 。
+\end{enumerate}
+\end{Def}
+
+练习8.4.1. (a) 固定 \(r \in  \mathbb{Q}\) 。证明集合 \({C}_{r} = \{ t \in  \mathbb{Q} : t < r\}\) 是一个分割。
+
+应避免将所有分割都视为这种形式的诱惑。以下 \(\mathbb{Q}\) 的子集中哪些是分割？
+
+(b) \(S = \{ t \in  \mathbb{Q} : t \leq  2\}\)
+
+(c) \(T = \left\{  {t \in  \mathbb{Q} : {t}^{2} < 2}\right.\) 或 \(\left. {t < 0}\right\}\)
+
+(d) \(U = \left\{  {t \in  \mathbb{Q} : {t}^{2} \leq  2}\right.\) 或 \(\left. {t < 0}\right\}\)
+
+练习 8.4.2. 设 \(A\) 为一个分割。证明如果 \(r \in  A\) 且 \(s \notin  A\) ，则 \(r < s\) 。
+
+为了消除悬念，让我们直接切入正题。
+\begin{Def}
+  \label{def:8.4.3}
+  定义实数 \(\mathbb{R}\) 为 \(\mathbb{Q}\) 中所有分割的集合。
+\end{Def}
+
+起初这可能让人感到不适——实数应该是数字，而不是有理数的集合。这里的反驳是，当我们在数学基础上工作时，集合是我们拥有的最基本的构建块。我们已经定义了一个集合 \(\mathbb{R}\) ，其元素是 \(\mathbb{Q}\) 的子集。我们现在必须着手在 \(\mathbb{R}\) 上施加一些代数结构，使其行为方式对我们来说很熟悉。这究竟意味着什么？如果我们认真地为定理\ref{thm:8.4.1}构建证明，我们需要更具体地说明“有序域”的含义。
+
+\subsection{域和序性质}
+
+给定一个集合 \(F\) 和两个元素 \(x,y \in  F\) ，在 \(F\) 上的操作是一个函数，它将有序对(x, y)映射到第三个元素 \(z \in  F\) 。用 \(x + y\) 或 \({xy}\) 表示不同的操作，提醒我们正在尝试模拟的两种操作。
+\begin{Def}
+  \label{def:8.4.4}
+  若一个集合 \(F\) 存在两种运算加法 \(\left( {x + y}\right)\) 和乘法$(xy)$，且满足以下条件列表，则称其为域:
+  \begin{enumerate}[label = (f\arabic*)]
+  \item\label{item:8.4.11}  (交换律) \(x + y = y + x\) 和 \({xy} = {yx}\) 对所有 \(x,y \in  F\) 成立。
+
+  \item\label{item:8.4.12}  (结合律) \(\left( {x + y}\right)  + z = x + \left( {y + z}\right)\) 和 \(\left( {xy}\right) z = x\left( {yz}\right)\) 对所有 \(x,y,z \in  F\) 成立。
+
+  \item\label{item:8.4.13}  (存在单位元) 存在两个特殊元素0和1，使得 \(0 \neq  1\) 对所有 \(x \in  F\) 满足 \(x + 0 = 0\) 和 \({x1} = x\) 。
+
+  \item\label{item:8.4.14} (逆元存在)给定 \(x \in  F\) ，存在一个元素 \(- x \in  F\) ，使得 \(x + \left( {-x}\right)  = 0\) 。如果 \(x \neq  0\) ，存在一个元素 \({x}^{-1}\) ，使得 \(x{x}^{-1} = 1\) 。
+
+  \item\label{item:8.4.15} (分配律)对于所有 \(x,y,z \in  F\) ， \(x\left( {y + z}\right)  = {xy} + {xz}\) 。
+  \end{enumerate}
+\end{Def}
+
+练习 8.4.3. 使用通常的加法和乘法定义，分别确定 \(\mathbb{N},\mathbb{Z}\) 和 \(\mathbb{Q}\) 分别具有上述哪些性质。
+
+尽管我们不会在这里深入探讨，但 \(\mathbb{Q}\) 中所有熟悉的代数操作(例如， \(x + y = x + z\Rightarrow y = z\) )都可以从这一简短的性质列表中推导出来。
+
+\begin{Def}
+  \label{def:8.4.5}
+  称集合 \(F\) 上的一个关系是序（由 \(\leq\) 表示），若其具有以下三个性质:
+\begin{enumerate}[label = (o\arabic*)]
+\item\label{item:8.4.1} 对于任意的 \(x,y \in  F\) ，至少有一个陈述 \(x \leq  y\) 或 \(y \leq  x\) 为真。
+
+\item\label{item:8.4.2}  如果 \(x \leq  y\) 且 \(y \leq  x\) ，则 \(x = y\) 。
+
+\item\label{item:8.4.3}  如果 \(x \leq  y\) 且 \(y \leq  z\) ，则 \(x \leq  z\) 。
+\end{enumerate}
+\end{Def}
+
+
+我们有时会用 \(y \geq  x\) 代替 \(x \leq  y\) ，并用严格不等式 \(x < y\) 表示 \(x \leq  y\) 但 \(x \neq  y\) 。
+
+如果域 \(F\) 被赋予一个满足以下条件的序 \(\leq\) ，则称其为有序域。
+\begin{enumerate}[label=(o\arabic*), start=4]
+\item\label{item:8.4.4} 如果 \(y \leq  z\) ，那么 \(x + y \leq  x + z\) 。
+
+\item\label{item:8.4.5} 如果 \(x \geq  0\) 和 \(y \geq  0\) ，那么 \({xy} \geq  0\) 。
+\end{enumerate}
+
+
+让我们总结一下当前的情况。为了证明定理~\ref{thm:8.4.1}，我们接受有理数是一个有序域。我们已经将实数 \(\mathbb{R}\) 定义为 \(\mathbb{Q}\) 中的割集，现在的挑战是发明加法、乘法和序，使得每个操作都具有前两个定义中概述的性质。其中最简单的是序。设 \(A\) 和 \(B\) 是 \(\mathbb{R}\) 的两个任意元素，定义
+
+\[
+A \leq  B \Leftrightarrow A \subseteq  B\text{ . }
+\]
+
+练习8.4.4。通过验证定义8.4.5中的性质\ref{item:8.4.1}、\ref{item:8.4.2}和\ref{item:8.4.3}，证明这在 \(\mathbb{R}\) 上定义了一个序。
+
+\subsection{\(\mathbb{R}\) 中的代数}
+
+给定 \(\mathbb{R}\) 中的 \(A\) 和 \(B\) ，定义
+
+\[
+A + B = \{ a + b : a \in  A\text{ and }b \in  B\} .
+\]
+
+在验证加法性质\ref{item:8.4.11}-\ref{item:8.4.15}之前，我们必须首先确认我们的定义确实定义了一个操作。 \(A + B\) 实际上是一个分割吗？为了了解这些论证的风格，让我们验证定义~\ref{def:8.4.2}中集合 \(A + B\) 的性质\ref{item:8.4.02}。
+
+设 \(a + b \in  A + B\) 为任意值，并设 \(s \in  \mathbb{Q}\) 满足 \(s < a + b\) 。那么， \(s - b < a\) ，这意味着 \(s - b \in  A\) ，因为 \(A\) 是一个分割。但随后
+
+\[
+s = \left( {s - b}\right)  + b \in  A + B,
+\]
+
+于是\ref{item:8.4.02}得证。
+
+练习8.4.5。(a) 证明\ref{item:8.4.01}和\ref{item:8.4.03}也适用于 \(A + B\) 。得出结论 \(A + B\) 是一个分割。
+
+(b) 检查 \(\mathbb{R}\) 中的加法是否满足交换律\ref{item:8.4.11}和结合律\ref{item:8.4.12}。
+
+证明该分割
+
+\[
+O = \{ p \in  \mathbb{Q} : p < 0\}
+\]
+
+成功地扮演了加法恒等元\ref{item:8.4.13}的角色。(证明 \(A + O = O\) 相当于证明这两个集合是相同的。证明此类问题的标准方法是展示两个包含关系: \(A + O \subseteq  O\) 和 \(O \subseteq  A + O\) 。)
+
+关于加法逆元呢？给定 \(A \in  \mathbb{R}\) ，我们必须生成一个分割 \(- A\) ，其性质为 \(A + \left( {-A}\right)  = O\) 。这比听起来要难一些。从概念上讲，分割 \(- A\) 由所有小于 \(- \sup A\) 的有理数组成。问题是如何在不使用上确界的情况下定义这个集合，而目前上确界是严格禁止的。(我们正在构建它们存在的域！)
+
+给定 \(A \in  \mathbb{R}\) ，定义
+$$
+-A = \left\{ r \in \mathbb{Q}: \exists t\notin A, t<-r \right\}
+$$
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/01955a92-2dd5-7adc-8d37-040ba4c1a4fb_34_423_1568_790_224_0.jpg}
+\end{center}
+\hspace*{3em} 
+
+练习8.4.6。(a) 证明 \(- A\) 定义了一个分割。
+
+(b) 如果我们设置 \(- A = \{ r \in  \mathbb{Q} :  - r \notin  A\}\) ，会出现什么问题？
+
+(c) 如果 \(a \in  A\) 且 \(r \in   - A\) ，证明 \(a + r \in  O\) 。这表明 \(A + \left( {-A}\right)  \subseteq  O\) 。现在，完成定义 8.4.4 中加法性质 (f4) 的证明。
+
+(d) 证明性质 \ref{item:8.4.3} 成立。
+
+尽管思路相似，但当我们尝试为 \(\mathbb{R}\) 中的乘法创建定义时，技术难度会增加。这主要是由于两个负数的乘积为正数。标准的解决方法是首先在正分割上定义乘法。
+
+给定 \(A \geq  O\) 和 \(B \geq  O\) 在 \(\mathbb{R}\) 中，定义乘积
+
+\[
+{AB} = \{ {ab} : a \in  A,b \in  B\text{ with }a,b \geq  0\}  \cup  \{ q \in  \mathbb{Q} : q < 0\} .
+\]
+
+练习 8.4.7. (a) 证明 \({AB}\) 是一个割。
+
+(b) 证明定义~\ref{def:8.4.5} 中的性质 \ref{item:8.4.4}。
+
+(c) 为 \(\mathbb{R}\) 上的乘法单位元(1)提出一个合适的候选，并证明这对所有分割 \(A \geq  O\) 都有效。
+
+(d) 证明对于所有分割 \(A \geq  O\) ， \({AO} = O\) 成立。
+
+涉及至少一个负因子的乘积可以通过观察 \(- A \geq  0\) 来定义，只要 \(A \leq  O\) 成立。(给定 \(A \leq  O\) ，性质\ref{item:8.4.4}意味着 \(A + \left( {-A}\right)  \leq  O + \left( {-A}\right)\) ，从而得到 \(O \leq   - A\) 。)
+
+对于 \(\mathbb{R}\) 中的任意 \(A\) 和 \(B\) ，定义
+
+\[
+{AB} = \left\{  \begin{array}{ll} \text{ 已定义} & A \geq  O\text{ 且 }B \geq  O \\   - \left\lbrack  {A\left( {-B}\right) }\right\rbrack  & A \geq  O\text{ 且 }B < O \\   - \left\lbrack  {\left( {-A}\right) B}\right\rbrack  & A < O\text{ 且 }B \geq  O \\  \left( {-A}\right) \left( {-B}\right) & A < O\text{ 且 }B < O. \end{array}\right.
+\]
+
+验证以这种方式定义的乘法是否满足所有所需的域性质是重要的，但并无波澜。证明通常分为项为正或负的情况，并遵循与加法类似的模式。我们将它们留作非正式练习，继续讨论关键点。
+
+\subsection{最小上界}
+
+在证明了 \(\mathbb{R}\) 是一个有序域之后，我们现在将目标转向证明这个域是完备的。我们在第一章中通过最小上界定义了完备性。以下是该讨论中相关定义的总结。
+
+\begin{Def}
+  \label{def:8.4.6}
+  如果存在一个 \(B \in  \mathbb{R}\) ，使得对于所有的 \(A \in  \mathcal{A}\) 都有 \(A \leq  B\) ，则集合 \(\mathcal{A} \subseteq  \mathbb{R}\) 被称为有上界。数 \(B\) 被称为 \(\mathcal{A}\) 的上界。
+
+一个实数 \(S \in  \mathbb{R}\) 是集合 \(\mathcal{A} \subseteq  \mathbb{R}\) 的最小上界，如果它满足以下两个条件:
+\begin{enumerate}[label = (\roman*)]
+\item  \(S\) 是 \(\mathcal{A}\) 的上界，并且
+\item  如果 \(B\) 是 \(\mathcal{A}\) 的任何上界，则 \(S \leq  B\) 。
+\end{enumerate}
+\end{Def}
+
+
+练习 8.4.8。设 \(\mathcal{A} \subseteq  \mathbb{R}\) 为非空且有上界，且 \(S\) 为所有 \(A \in  \mathcal{A}\) 的并集。
+
+(a) 首先，通过证明它是一个分割来证明 \(S \in  \mathbb{R}\) 。
+
+(b) 现在，证明 \(S\) 是 \(\mathcal{A}\) 的最小上界。
+
+这完成了 \(\mathbb{R}\) 完备性的证明。注意到我们本可以在定义 \(\mathbb{R}\) 上的序关系后立即证明最小上界的存在，但将其留到最后赋予了它在论证中应有的特殊地位。然而，仍有一个未解之处需要处理。定理~\ref{thm:8.4.1}的陈述提到我们的完备有序域包含 \(\mathbb{Q}\) 作为子域。这是一种轻微的术语滥用。它应该说 \(\mathbb{R}\) 包含一个子域，该子域在各方面都与 \(\mathbb{Q}\) 完全相同。
+
+练习8.4.9。考虑形式为所谓的“有理”分割的集合
+
+\[
+{C}_{r} = \{ t \in  \mathbb{Q} : t < r\}
+\]
+
+其中 \(r \in  \mathbb{Q}\) 。(参见练习8.4.1。)
+
+(a) 证明对于所有 \(r,s \in  \mathbb{Q}\) ， \({C}_{r} + {C}_{s} = {C}_{r + s}\) 成立。验证当 \(r,s \geq  0\) 时， \({C}_{r}{C}_{s} = {C}_{rs}\) 成立。
+
+(b) 证明当且仅当在 \(\mathbb{Q}\) 中 \(r \leq  s\) 时， \({C}_{r} \leq  {C}_{s}\) 成立。
+
+\subsection{Cantor的方法}
+
+为了让 Georg Cantor 的观点得到最后的阐述，让我们简要地看一下他在从有理数( \(\mathbb{Q}\) )中构造实数( \(\mathbb{R}\) )时所采用的截然不同的方法。完备性的众多等价定义之一是通过断言“Cauchy序列收敛”来描述的。给定一个有理数的Cauchy序列，我们现在已经意识到，这个序列可能会收敛到一个不在有理数( \(\mathbb{Q}\) )中的值。与之前一样，目标是创建一种称为实数的对象，它可以作为这个序列的极限。Cantor的想法本质上是将实数定义为整个Cauchy序列。采用这种方法时遇到的第一个问题是，人们意识到两个不同的Cauchy序列可以收敛到同一个实数。因此，实数( \(\mathbb{R}\) )中的元素更恰当地定义为Cauchy序列的等价类，其中两个序列 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 属于同一个等价类，当且仅当 \(\left( {{x}_{n} - {y}_{n}}\right)  \rightarrow  0\) 。
+
+与 Dedekind 的方法一样，用像 Cauchy 列的等价类这样难以驾驭的概念来取代我们相对简单的实数作为小数展开的概念，可能会让人一时感到困惑。但我们究竟该如何理解小数展开？又该如何理解数字 \(1/2\) 既是0.5000...又是0.4999...？我们将其留作练习。

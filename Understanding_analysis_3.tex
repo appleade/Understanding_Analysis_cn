@@ -1,0 +1,903 @@
+\chapter{\(\mathbb{R}\) 的基本拓扑结构}
+\label{chap:3}
+\section{讨论:Cantor集}
+\label{sec:3.1}
+
+接下来是一个由 Georg Cantor 提出的迷人的数学构造，它对于扩展我们对实数集的子集的性质的直觉极为有用。Cantor的名字已经在第一章关于不可数集的讨论中出现过。需要特别指出的是，Cantor证明实数集不可数的突破性工作，已然跻身于揭示数学无穷本质最重要的研究成果之列。用 David Hilbert 的话来说，“没有人能把我们从Cantor为我们创造的天堂中驱逐出去。”
+
+设 \({C}_{0}\) 为闭区间 \(\left\lbrack  {0,1}\right\rbrack\) ，并定义 \({C}_{1}\) 为移除中间三分之一（的开区间）后得到的集合；即，
+
+\[
+{C}_{1} = {C}_{0} \smallsetminus  \left( {\frac{1}{3},\frac{2}{3}}\right)  = \left\lbrack  {0,\frac{1}{3}}\right\rbrack   \cup  \left\lbrack  {\frac{2}{3},1}\right\rbrack  .
+\]
+
+现在，通过移除 \({C}_{1}\) 的两个组成部分的中间三分之一，以类似的方式构造 \({C}_{2}\) :
+
+\[
+{C}_{2} = \left( {\left\lbrack  {0,\frac{1}{9}}\right\rbrack   \cup  \left\lbrack  {\frac{2}{9},\frac{1}{3}}\right\rbrack  }\right)  \cup  \left( {\left\lbrack  {\frac{2}{3},\frac{7}{9}}\right\rbrack   \cup  \left\lbrack  {\frac{8}{9},1}\right\rbrack  }\right) .
+\]
+
+如果我们通过归纳法继续这个过程，那么对于每个 \(n = 0,1,2,\ldots\) ，我们得到一个由 \({2}^{n}\) 个闭区间组成的集合 \({C}_{n}\) ，其中每个闭区间的长度为 \(1/{3}^{n}\) 。最后，我们将Cantor集 \(C\) (图\ref{fig:3.1})定义为交集
+
+\[
+C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}
+\]
+
+理解$C$的一种有效方式是：将区间$[0,1]$无限次重复移除中间开三分之一区间后，最终\textit{剩下}的集合。
+
+\[
+C = \left\lbrack  {0,1}\right\rbrack   \smallsetminus  \left\lbrack  {\left( {\frac{1}{3},\frac{2}{3}}\right)  \cup  \left( {\frac{1}{9},\frac{2}{9}}\right)  \cup  \left( {\frac{7}{9},\frac{8}{9}}\right)  \cup  \cdots }\right\rbrack  .
+\]
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a90-d646-7b9f-ac92-791fd6cfb6f1_1_518_346_922_302_0.jpg}
+  \caption{定义Cantor集； \(C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}\) }
+  \label{fig:3.1}
+\end{figure}
+
+
+最初我们可能会感到疑惑：这样做还有剩下什么吗？但注意到因为我们总是移除中间三分之一的开区间，故 \( \forall n \in  \mathbb{N}\) ， \(0 \in  {C}_{n}\) ，因此 \(0 \in  C\) 。同样的论证表明 \(1 \in  C\) 。事实上，如果 \(y\) 是某个特定集合 \({C}_{n}\) 的某个闭区间的端点，那么它也是 \({C}_{n + 1}\) 的某个区间的端点。因为在每个阶段，端点从未被移除，所以 \(\forall n\) ， \(y \in  {C}_{n}\) 成立。因此， \(C\) 至少包含构成每个集合 \({C}_{n}\) 的所有区间的端点。
+
+还有其他问题吗？ \(C\) 是可数的吗？ \(C\) 包含区间吗？包含无理数吗？目前这些都是难题。前面提到的所有端点都是有理数(它们的形式为 \(m/{3}^{n}\) )，这意味着如果 \(C\) 确实仅由这些端点组成，那么 \(C\) 将是 \(\mathbb{Q}\) 的子集，因此是可数的。我们将对此进行探讨。如果我们考虑被移除区间的总长度，有一些强有力的证据表明 \(C\) 中剩下的内容不多。为了形成 \({C}_{1}\) ，我们移除了一个长度为 \(1/3\) 的开区间。在第二步中，我们移除了两个长度为 \(1/9\) 的区间，而在构造 \({C}_{n}\) 时，我们移除了 \({2}^{n - 1}\) 个长度为 \(1/{3}^{n}\) 的中间三分之一。因此，将 \(C\) 的“长度”定义为1减去总长度是有一定逻辑的。
+
+\[
+\frac{1}{3} + 2\left( \frac{1}{9}\right)  + 4\left( \frac{1}{27}\right)  + \cdots  + {2}^{n - 1}\left( \frac{1}{{3}^{n}}\right)  + \cdots  = \frac{\frac{1}{3}}{1 - \frac{2}{3}} = 1.
+\]
+
+故Cantor集的长度为零。
+
+到目前为止，我们收集的信息表明， \(C\) 在直观上被描绘成一个相对较小且薄的集合。因此，集合 \(C\) 常被称为Cantor“尘埃(dust)”。但有一些强有力的反论点暗示了一幅截然不同的图景。首先， \(C\) 实际上是不可数的，其基数等于 \(R\) 的基数。一个稍微直观但令人信服的方法是建立 \(C\) 与形式为 \({\left( {a}_{n}\right) }_{n = 1}^{\infty }\) 的序列之间的一一对应关系，其中 \({a}_{n} = 0\) 或 $1$。 \(\forall c \in  C\) ，如果 \(c\) 落在 \({C}_{1}\) 的左侧部分，则设置 \({a}_{1} = 0\) ；如果 \(c\) 落在 \({C}_{1}\) 的右侧部分，则设置 \({a}_{1} = 1\) 。在确定了 \({C}_{1}\) 中 \(c\) 的位置后，现在 \({C}_{2}\) 中分开的两个部分中哪一个包含 $c$ 有两种可能。这一次，我们根据 \(c\) 是否落在 \({C}_{2}\) 这两个部分的左侧或右侧来设置 \({a}_{2} = 0\) 或 $1$。通过这种方式继续下去，我们发现每个元素 \(c \in  C\) 都会生成一个由零和一组成的序列 \(\left( {{a}_{1},{a}_{2},{a}_{3},\ldots }\right)\) ，该序列充当了在 \(C\) 中定位 \(c\) 的指示集。同样，每个这样的序列都对应于Cantor集合中的一个点。由于由零和一组成的序列集是不可数的(练习 1.5.4)，我们必须得出结论， \(C\) 也是不可数的。
+
+
+这意味着什么？首先，由于渐近集合 \({C}_{n}\) 的端点形成一个可数集，我们不得不接受这样一个事实:不仅在 \(C\) 中存在其他点，而且这些点的数量是不可数的。从基数的角度来看， \(C\) 实际上与 \(\mathbb{R}\) 一样大。这一点应与“从长度的角度来看， \(C\) 的尺寸与单个点相同”的事实互参。我们通过这样一个演示来结束这个讨论：从维数的角度来看， \(C\) 奇怪地介于两者之间。
+
+有一种合理的共识认为，点的维数为零，线段的维数为一，正方形的维数为二，立方体的维数为三。尽管我们并未尝试对维度进行正式定义(存在多种定义)，但通过观察维度如何影响将每个特定集合放大3倍的结果(图\ref{fig:3.2})，我们仍能对维度的定义有所理解。(选择$3$这个数是因为我们同时要关注Cantor集)。单个点在放大后没有任何变化，而线段的长度则变为原来的三倍。对于正方形，将每条边放大3倍会得到一个包含9个原始正方形副本的更大正方形。最后，放大后的立方体在其体积内包含27个原始立方体的副本。注意到，在每种情况下，计算新集合的“大小”时，维度表现为放大因数的指数。
+
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a90-d646-7b9f-ac92-791fd6cfb6f1_2_339_350_947_331_0.jpg}
+  \caption{将集合放大3倍}
+  \label{fig:3.2}
+\end{figure}
+
+
+现在，将此变换应用于Cantor集。集合 \({C}_{0} = \left\lbrack  {0,1}\right\rbrack\) 变为区间 \(\left\lbrack  {0,3}\right\rbrack\) 。删除中间三分之一后，留下 \(\left\lbrack  {0,1}\right\rbrack   \cup  \left\lbrack  {2,3}\right\rbrack\) ，这与我们在原始构造中的起点相同，只是我们现在将在区间 \(\left\lbrack  {2,3}\right\rbrack\) 中生成了 \(C\) 的额外副本。将Cantor集放大$3$倍会生成原始集的两个副本。因此，如果 \(x\) 是 \(C\) 的维度，那么 \(x\) 应满足 \(2 = {3}^{x}\) ，或 \(x = \ln 2/\ln 3 \approx  {0.631}\) (表\ref{fig:3.3})。
+
+
+\begin{table}[t]
+  \centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & 维数 & $\times3$ & 副本数 \\
+\hline
+点 & 0 & $\to$ & $1 = 3^{0}$ \\
+\hline
+线段 & 1 & $\to$ & $3 = 3^{1}$ \\
+\hline
+正方形 & 2 & $\to$ & $9 = 3^{2}$ \\
+\hline
+立方体 & 3 & $\to$ & $27 = 3^{3}$ \\
+\hline
+$C$ & $x$ & $\to$ & $2 = 3^{x}$ \\
+\hline
+\end{tabular}
+  \caption{ \(C;2 = {3}^{x} \Rightarrow  x = \ln 2/\ln 3\) 的维度}
+  \label{fig:3.3}
+\end{table}
+
+
+非整数或分数维度的概念是“分形”一词背后的推动力，该词由 Benoit Mandlebrot 于1975年创造，用于描述一类与Cantor集具有许多共同复杂结构的集合。然而，Cantor的构造已有百年历史，对我们来说，它为我们研究关于实数的子集神秘性质提供了的宝贵的试验场。
+
+\section{开集与闭集}
+\label{sec:3.2}
+
+给定 \(a \in  \mathbb{R}\) 和 \(\varepsilon  > 0\) ，回想一下 \(a\) 的 \(\varepsilon\) 邻域是集合
+
+\[
+{V}_{\varepsilon }\left( a\right)  = \{ x \in  \mathbb{R} : \left| {x - a}\right|  < \varepsilon \} .
+\]
+
+换句话说， \({V}_{\varepsilon }\left( a\right)\) 是以 \(a\) 为中心、半径为 \(\varepsilon\) 的开区间 \(\left( {a - \varepsilon ,a + \varepsilon }\right)\) 。
+
+\begin{Def}
+  \label{def:3.2.1}
+  称一个集合 \(O \subseteq  \mathbb{R}\) 是开的，若 \(\forall a \in  O\) ，存在一个 \(\varepsilon\) -邻域 \({V}_{\varepsilon }\left( a\right)  \subseteq  O\) 。
+\end{Def}
+
+
+\begin{Eg}
+  \label{eg:3.2.2}
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:3.2.1}或许开集最简单的例子就是 \(\mathbb{R}\) 本身。给定任意元素 \(a \in  \mathbb{R}\) ，我们可以自由选择任何 \(\varepsilon\) -邻域，并且 \({V}_{\varepsilon }\left( a\right)  \subseteq  \mathbb{R}\) 始终成立。
+
+    此外，定义~\ref{def:3.2.1}的逻辑结构（空真地）要求我们将空集 \(\varnothing\) 分类为实数集的一个开子集。
+  \item \label{item:3.2.2} 对于更有用例子，考虑开区间
+
+\[
+\left( {c,d}\right)  = \{ x \in  \mathbb{R} : c < x < d\} .
+\]
+
+要证明$(c, d)$在刚刚定义的意义下是开集，任取 \(x \in  \left( {c,d}\right)\) 。如果我们取 \(\varepsilon  = \min \{ x - c,d - x\}\) ，那么可以得出 \({V}_{\varepsilon }\left( x\right)  \subseteq  \left( {c,d}\right)\) 。注意，如果区间包含其任一端点，此论证将失效。
+  \end{enumerate}
+\end{Eg}
+
+开区间的并集是开集的另一个例子。这一观察引出了下一个结果。
+
+
+\begin{Thm}
+  \label{thm:3.2.3}
+  
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:3.2.3} 任意多个开集的并集是开集。
+  \item \label{item:3.2.4}有限多个开集的交集是开集。
+  \end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  为了证明~\ref{item:3.2.3}，我们设 \(\left\{  {{O}_{\lambda } : \lambda  \in  \Lambda }\right\}\) 为一个开集的集族，并设 \(O = \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{O}_{\lambda }\) 。设 \(a\) 为 \(O\) 的任意元素。为了证明 \(O\) 是开集，定义~\ref{def:3.2.1}要求我们构造一个 \(a\) 的 \(\varepsilon\) -邻域，使得其完全包含在 \(O\) 中。但 \(a \in  O\) 表明 \(a\) 至少是某个特定 \({O}_{{\lambda }^{\prime }}\) 的元素。因为我们假设 \({O}_{{\lambda }^{\prime }}\) 是开集，我们可以使用定义~\ref{def:3.2.1}来断言存在 \({V}_{\varepsilon }\left( a\right)  \subseteq  {O}_{{\lambda }^{\prime }}\) 。 \({O}_{{\lambda }^{\prime }} \subseteq  O\) 的事实使我们能够得出结论 \({V}_{\varepsilon }\left( a\right)  \subseteq  O\) 。这就完成了~\ref{item:3.2.3}的证明。
+
+对于~\ref{item:3.2.4}，设 \(\left\{  {{O}_{1},{O}_{2},\ldots ,{O}_{N}}\right\}\) 为有限个开集的集族。现在，设 \(a \in  \mathop{\bigcap }\limits_{{k = 1}}^{N}{O}_{k}\) ，那么 \(a\) 是每个开集的元素。根据开集的定义，我们知道，对于每个 \(1 \leq  k \leq  N\) ，存在 \({V}_{{\varepsilon }_{k}}\left( a\right)  \subseteq  {O}_{k}\) 。我们需要寻找一个单一的 \(\varepsilon\) -邻域，使得该邻域包含在每一个 \({O}_{k}\) 中。技巧是取最小的一个。令 \(\varepsilon  = \min \left\{  {{\varepsilon }_{1},{\varepsilon }_{2},\ldots ,{\varepsilon }_{N}}\right\}\) ，则 \(\forall k\) ，有 \({V}_{\varepsilon }\left( a\right)  \subseteq  {V}_{{\varepsilon }_{k}}\left( a\right)\) ，因此 \({V}_{\varepsilon }\left( a\right)  \subseteq  \mathop{\bigcap }\limits_{{k = 1}}^{N}{O}_{k}\) ，得证。
+\end{proof}
+
+\subsection{闭集}
+\begin{Def}
+  \label{def:3.2.4}
+  称点 \(x\) 是集合 \(A\) 的极限点，若 \(x\) 的每个 \(\varepsilon\) -邻域 \({V}_{\varepsilon }\left( x\right)\) 与集合 \(A\) 的交都不为空。
+\end{Def}
+
+
+极限点也常被称为“聚点”或“累积点”，但术语“ \(x\) 是 \(A\) 的极限点”的优势在于明确提醒我们， \(x\) 实际上是 \(A\) 中某个序列的极限。
+
+\begin{Thm}
+  \label{thm:3.2.5}
+  点 \(x\) 是集合 \(A\) 的极限点，当且仅当存在 $A$ 中的序列 $a_n$ 满足
+  \begin{itemize}
+  \item $\forall n\in \mathbb{N}, a_n\ne x$
+  \item $x = \lim\limits_{}a_n$
+  \end{itemize}
+\end{Thm}
+
+\begin{proof}
+  \(\left(  \Rightarrow  \right)\) 假设 \(x\) 是 \(A\) 的一个极限点。为了构造一个收敛于 \(x\) 的序列 \(\left( {a}_{n}\right)\) ，我们将考虑使用 \(\varepsilon  = 1/n\) 得到的特定 \(\varepsilon\) -邻域。根据定义~\ref{def:3.2.4}， \(x\) 的每个邻域都在 \(A\) 中与 \(x\) 以外的某点相交。这意味着，对于每个 \(n \in  \mathbb{N}\) ，我们有理由选择一个点
+
+\[
+{a}_{n} \in  {V}_{1/n}\left( x\right)  \cap  A
+\]
+
+并规定 \({a}_{n} \neq  x\) 。不难看出为什么 \(\left( {a}_{n}\right)  \rightarrow  x\) 。给定任意 \(\varepsilon  > 0\) ，选择 \(N\) 使得 \(1/N < \varepsilon\) 。由此可得， \( \forall n \geq  N\) ， \(\left| {{a}_{n} - x}\right|  < \varepsilon\) 。
+
+$\Leftarrow$ 若存在序列 \(\{a_n\} \subseteq A\) 满足 \(\forall n,\, a_n \neq x\) 且  \(a_n \to x\)，则 \(\forall \varepsilon > 0\)，由收敛性知存在 \(N \in \mathbb{N}\)，使得当 \(n \geq N\) 时，\(|x - a_n| < \varepsilon\)。此时 \(a_N \in A\) 且 \(a_N \neq x\)，故在邻域 \(V_{\varepsilon}\) 中存在 \(A\) 的非 \(x\) 的元素，满足极限点定义。
+\end{proof}
+
+
+定理~\ref{thm:3.2.5}中关于 \({a}_{n} \neq  x\) 的限制值得评论。给定一个点 \(a \in  A\) ，如果我们允许考虑常数序列 \(\left( {a,a,a,\ldots }\right)\) ，那么 \(a\) 总是 \(A\) 中某个序列的极限。在某些情况下，我们希望避免这种相对无趣的情况，因此拥有一个能够区分集合的极限点和孤立点的术语非常重要。
+
+\begin{Def}
+  \label{def:3.2.6}
+  称一个点 \(a \in  A\) 是 \(A\) 的孤立点，如果它不是 \(A\) 的极限点。
+\end{Def}
+
+
+作为提醒，我们需要稍微谨慎地理解这些概念之间的关系。虽然一个孤立点总是相关集合 \(A\) 的一个元素，但 \(A\) 的极限点很可能不属于 \(A\) 。例如，考虑一个开区间的端点。这种情形是下面的重要定义的主题。
+
+\begin{Def}
+  \label{def:3.2.7}
+  称集合 \(F \subseteq  \mathbb{R}\) 为闭集，若其包含其所有极限点。
+\end{Def}
+
+当形容词“闭”出现在数学语境中时，它通常用于表示对给定集合元素的操作不会使我们离开该集合。例如，在线性代数中，向量空间是在加法和标量乘法下“闭”的集合。在分析中，我们关注的操作是极限操作。从拓扑学上讲，闭集是指集合内的收敛序列的极限也在集合中。
+
+\begin{Thm}
+  \label{thm:3.2.8}
+  一个集合 \(F \subseteq  \mathbb{R}\) 是闭的，当且仅当包含在 \(F\) 中的每个Cauchy序列都有一个极限，且该极限也是 \(F\) 的一个元素。
+\end{Thm}
+
+\begin{proof}
+必要性（闭集 $\Rightarrow$ 极限在 $F$）：
+若 \(F\) 是闭集，则其包含所有极限点。对于 \(F\) 中的任一Cauchy序列 \(\{x_n\}\)，该序列收敛于某点 \(x \in \mathbb{R}\)。根据闭集的定义，\(x\) 作为序列的极限点必属于 \(F\)，故极限 \(x \in F\)。
+
+充分性（极限在 $F\Rightarrow$  闭集）：
+若 \(F\) 中的每个Cauchy序列的极限均在 \(F\)，则需证明 \(F\) 包含所有极限点。设 \(x\) 是 \(F\) 的极限点，必存在序列 \(\{x_n\} \subseteq F\)（可能不包含 \(x\)）收敛于 \(x\)。由条件知 \(x \in F\)，故 \(F\) 包含所有极限点。因此 \(F\) 是闭集。
+\end{proof}
+
+
+\begin{Eg}
+  \label{eg:3.2.9}
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:3.2.5} 考虑
+
+\[
+A = \left\{  {\frac{1}{n} : n \in  \mathbb{N}}\right\}  .
+\]
+
+让我们证明 \(A\) 的每个点都是孤立的。给定 \(1/n \in  A\) ，选择 \(\varepsilon  = 1/n -\)  \(1/\left( {n + 1}\right)\) 。那么，
+
+\[
+{V}_{\varepsilon }\left( {1/n}\right)  \cap  A = \left\{  \frac{1}{n}\right\}  .
+\]
+
+根据定义~\ref{def:3.2.4}， \(1/n\) 不是一个极限点，因此是孤立的。尽管 \(A\) 的所有点都是孤立的，但该集合确实有一个极限点，即0。这是因为以零为中心的每个邻域，无论多小，都会包含 \(A\) 的点。因为 \(0 \notin  A,A\) 不是闭集。集合 \(F = A \cup  \{ 0\}\) 是闭集的一个例子，被称为 \(A\) 的闭包。(稍后将讨论集合的闭包。)
+  \item \label{item:3.2.6}让我们用定义~\ref{def:3.2.7}证明闭区间
+
+\[
+\left\lbrack  {c,d}\right\rbrack   = \{ x \in  \mathbb{R} : c \leq  x \leq  d\}
+\]
+
+是一个闭集。如果 \(x\) 是 \(\left\lbrack  {c,d}\right\rbrack\) 的极限点，那么根据定理~\ref{thm:3.2.5}，存在 \(\left( {x}_{n}\right)  \subseteq  \left\lbrack  {c,d}\right\rbrack\) 且 \(\left( {x}_{n}\right)  \rightarrow  x\) 。我们需要证明 \(x \in  \left\lbrack  {c,d}\right\rbrack\) 。
+
+这一论证的关键在于序极限定理(定理\ref{thm:2.3.4})，它总结了不等式与极限过程之间的关系。因为 \(c \leq  {x}_{n} \leq  d\) ，根据定理2.3.4(iii)， \(c \leq  x \leq  d\) 也成立。因此， \(\left\lbrack  {c,d}\right\rbrack\) 是闭的。
+
+  \item \label{item:3.2.7}考虑有理数集 \(\mathbb{Q} \subseteq  \mathbb{R}\) 。 \(\mathbb{Q}\) 的一个极其重要的性质是，它的极限点集实际上是整个 \(\mathbb{R}\) 。要理解这一点，回顾第1章中的定理\ref{thm:1.4.3}，该定理被称为 \(\mathbb{Q}\) 在 \(\mathbb{R}\) 中的稠密性。
+  \end{enumerate}
+\end{Eg}
+ 
+
+设 \(y \in  \mathbb{R}\) 为任意实数，并考虑任意邻域 \({V}_{\varepsilon }\left( y\right)  = \left( {y - \varepsilon ,y + \varepsilon }\right)\) 。定理\ref{thm:1.4.3}使我们能够得出结论，存在一个有理数 \(r \neq  y\) 落在这个邻域内。因此， \(y\) 是 \(\mathbb{Q}\) 的一个极限点。 \(\mathbb{Q}\) 的稠密性现在可以重新表述如下。
+
+\begin{Thm}[\(\mathbb{Q}\) 在 \(\mathbb{R}\) 中的稠密性]
+  \label{thm:3.2.10}
+  给定任意 \(y \in  \mathbb{R}\) ，存在一个有理数序列收敛于 \(y\) 。
+\end{Thm}
+
+\begin{proof}
+  结合前面的讨论与定理~\ref{thm:3.2.5}。
+\end{proof}
+
+同样的论证也可用于证明每个实数都是无理数序列的极限。除这一有趣性质外，有理数的吸引力还在于，除了在 \(\mathbb{R}\) 中稠密外，它们还是可数的。正如我们将看到的， \(\mathbb{Q}\) 的这一具体特性使其成为一个非常有用的集合——无论是在证明定理时还是在构造有趣的反例时。
+
+\subsection{闭包}
+\begin{Def}
+  \label{def:3.2.11}
+  给定集合 \(A \subseteq  \mathbb{R}\) ，令 \(L\) 为 \(A\) 的所有极限点的集合。 \(A\) 的闭包定义为 \(\bar{A} = A \cup  L\) 。
+\end{Def}
+
+
+在例~\ref{eg:3.2.9}~\ref{item:3.2.5}中，我们看到如果 \(A = \{ 1/n : n \in  \mathbb{N}\}\) ，那么 \(A\) 的闭包是 \(\bar{A} = A \cup  \{ 0\}\) 。例~\ref{eg:3.2.9}~\ref{item:3.2.7}验证了 \(\overline{\mathbb{Q}} = \mathbb{R}\) 。如果 \(A\) 是一个开区间$(a, b)$，那么 \(\bar{A} = \left\lbrack  {a,b}\right\rbrack\) 。如果 \(A\) 是一个闭区间，那么 \(\bar{A} = A\) 。在这些例子中， \(\bar{A}\) 始终是一个闭集。这并不是因为我们缺乏想象力（导致举不出反例）。
+
+\begin{Thm}
+  \label{thm:3.2.12}
+  \(\forall A \subseteq  \mathbb{R}\) ，闭包 \(\bar{A}\) 是一个闭集，并且是包含 \(A\) 的最小闭集。
+\end{Thm}
+
+\begin{proof}
+  设 \(x\) 为 \(\bar{A} = A \cup L\) 的极限点。若存在无限多个点 \(y_n \in A\) 趋近于 \(x\)，则 \(x \in L\)，故 \(x \in \bar{A}\)。若 \(y_n \in L\) 趋近于 \(x\)，则对每个 \(y_n\)，存在 \(z_k \in A\) 趋近于 \(y_n\)。构造序列 \(\{z_k\}\) 趋近于 \(x\)，则 \(x \in L\)。综上，\(\bar{A}\) 包含所有自身极限点，故为闭集。
+
+  现在，任何包含 \(A\) 的闭集也必须包含 \(L\) 。这表明 \(\bar{A} = A \cup  L\) 是包含 \(A\) 的最小闭集。
+\end{proof}
+
+
+
+
+
+\subsection{补集}
+
+数学中的开集和闭集并不是自然语言意义下的反义词。如果一个集合不是开集，这并不意味着它必须是闭集。许多集合，如半开区间 \((c,d\rbrack  = \{ x \in  \mathbb{R} : c < x \leq  d\}\) ，既不是开集也不是闭集。集合 \(\mathbb{R}\) 和 \(\varnothing\) 同时是开集和闭集。幸运的是，这些是唯一具有这种不美观性质的集合。同时，开集和闭集之间存在重要的关系。回想一下，集合 \(A \subseteq  \mathbb{R}\) 的补集被定义为集合
+
+\[
+{A}^{c} = \{ x \in  \mathbb{R} : x \notin  A\} .
+\]
+
+\begin{Thm}
+  \label{thm:3.2.13}
+  一个集合 \(O\) 是开集当且仅当 \({O}^{c}\) 是闭集。同样，一个集合 \(F\) 是闭集当且仅当 \({F}^{c}\) 是开集。
+\end{Thm}
+
+\begin{proof}
+给定一个开集 \(O \subseteq  \mathbb{R}\) ，我们首先证明 \({O}^{c}\) 是一个闭集。为了证明 \({O}^{c}\) 是闭集，我们需要证明它包含所有的极限点。如果 \(x\) 是 \({O}^{c}\) 的一个极限点，那么 \(x\) 的每个邻域都包含 \({O}^{c}\) 的某个点。但这足以得出结论， \(x\) 不可能在开集 \(O\) 中，因为 \(x \in  O\) 将意味着存在一个邻域 \({V}_{\varepsilon }\left( x\right)  \subseteq  O\) 。因此， \(x \in  {O}^{c}\) ，得证。
+
+对于逆命题，我们假设 \({O}^{c}\) 是闭集，并论证 \(O\) 是开集。因此，给定任意点 \(x \in  O\) ，我们必须构造一个 \(\varepsilon\) -邻域 \({V}_{\varepsilon }\left( x\right)  \subseteq  O\) 。由于 \({O}^{c}\) 是闭集，我们可以确定 \(x\) 不是 \({O}^{c}\) 的极限点。查看极限点的定义，我们发现这意味着必定存在 \(x\) 的某个邻域 \({V}_{\varepsilon }\left( x\right)\) ，该邻域不与集合 \({O}^{c}\) 相交。但这意味着 \({V}_{\varepsilon }\left( x\right)  \subseteq  O\) ，得证。
+  
+\end{proof}
+
+定理~\ref{thm:3.2.13}中的第二个陈述可以通过使用如下观察结果快速从第一个陈述得出：对于任何集合 \(E \subseteq  \mathbb{R}\) ， \({\left( {E}^{c}\right) }^{c} = E\) 成立。
+
+本节的最后一个定理应与定理~\ref{thm:3.2.3}进行比较。
+
+\begin{Thm}
+  \label{thm:3.2.14}
+  \begin{enumerate}
+  \item 有限个闭集的并集是闭集。
+  \item 任意个闭集的交集是闭集。
+  \end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  De Morgan 定律指出，对于任何集合的集合 \(\left\{  {{E}_{\lambda } : \lambda  \in  \Lambda }\right\}\) ，以下陈述成立:
+
+\[
+{\left( \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }\right) }^{c} = \mathop{\bigcap }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }^{c},\quad {\left( \mathop{\bigcap }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }\right) }^{c} = \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }^{c}.
+\]
+
+结果直接由这些陈述和定理~\ref{item:3.2.3}得出。
+\end{proof}
+
+
+\subsection{练习}
+
+习题3.2.1. (a) 在定理3.2.3第(ii)部分的证明中，假设开集集合是有限的这一条件在何处被使用？
+
+(b) 给出一个无限嵌套开集集合的例子
+
+\[
+{O}_{1} \supseteq  {O}_{2} \supseteq  {O}_{3} \supseteq  {O}_{4} \supseteq  \cdots
+\]
+
+其交集 \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{O}_{n}\) 是闭集且非空。
+
+习题3.2.2. 设
+
+\[
+B = \left\{  {\frac{{\left( -1\right) }^{n}n}{n + 1} : n = 1,2,3,\ldots }\right\}  .
+\]
+
+(a) 找出 \(B\) 的极限点。
+
+(b) \(B\) 是一个闭集吗？
+
+(c) \(B\) 是一个开集吗？
+
+(d) \(B\) 是否包含任何孤立点？
+
+(e) 求 \(\bar{B}\) 。
+
+练习 3.2.3. 判断以下集合是开集、闭集还是两者都不是。如果集合不是开集，找出集合中的一个点，使得该点没有包含在集合中的 \(\varepsilon\) -邻域。如果集合不是闭集，找出一个不在集合中的极限点。
+
+(a) \(\mathbb{Q}\) .
+
+(b) \(\mathbb{N}\) .
+
+(c) \(\{ x \in  \mathbb{R} : x > 0\}\) .
+
+(d) \((0,1\rbrack  = \{ x \in  \mathbb{R} : 0 < x \leq  1\}\) .
+
+(e) \(\left\{  {1 + 1/4 + 1/9 + \cdots  + 1/{n}^{2} : n \in  \mathbb{N}}\right\}\) .
+
+练习 3.2.4. 通过证明如果 \(x =\)  \(\lim {a}_{n}\) 对于包含在 \(A\) 中的某个序列 \(\left( {a}_{n}\right)\) 满足 \({a}_{n} \neq  x\) ，则 \(x\) 是 \(A\) 的极限点，来证明定理 3.2.5 的逆命题。
+
+练习 3.2.5. 设 \(a \in  A\) 。证明 \(a\) 是 \(A\) 的孤立点，当且仅当存在一个 \(\varepsilon\) 邻域 \({V}_{\varepsilon }\left( a\right)\) ，使得 \({V}_{\varepsilon }\left( x\right)  \cap  A = \{ a\}\) 。
+
+练习 3.2.6. 证明定理 3.2.8。
+
+练习 3.2.7. 设 \(x \in  O\) ，其中 \(O\) 是一个开集。如果 \(\left( {x}_{n}\right)\) 是一个收敛到 \(x\) 的序列，证明 \(\left( {x}_{n}\right)\) 中除有限项外的所有项都包含在 \(O\) 中。
+
+练习 3.2.8. 给定 \(A \subseteq  \mathbb{R}\) ，设 \(L\) 为 \(A\) 的所有极限点的集合。
+
+(a) 证明集合 \(L\) 是闭集。
+
+(b) 论证如果 \(x\) 是 \(A \cup  L\) 的极限点，则 \(x\) 也是 \(A\) 的极限点。利用这一观察为定理3.2.12提供证明。
+
+练习3.2.9. (a) 如果 \(y\) 是 \(A \cup  B\) 的极限点，证明 \(y\) 要么是 \(A\) 的极限点，要么是 \(B\) 的极限点(或两者都是)。
+
+(b) 证明 \(\overline{A \cup  B} = \bar{A} \cup  \bar{B}\) 。
+
+(c) (b)中关于闭包的结果是否适用于集合的无限并集？
+
+练习3.2.10(德摩根定律)。在练习1.2.3中概述了德摩根定律在两组情况下的证明。一般情况的论证类似。
+
+(a) 给定一组集合 \(\left\{  {{E}_{\lambda } : \lambda  \in  \Lambda }\right\}\) ，证明
+
+\[
+{\left( \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }\right) }^{c} = \mathop{\bigcap }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }^{c}\;\text{ and }\;{\left( \mathop{\bigcap }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }\right) }^{c} = \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{E}_{\lambda }^{c}.
+\]
+
+(b) 现在，提供定理3.2.14的证明细节。
+
+练习3.2.11。设 \(A\) 有上界，使得 \(s = \sup A\) 存在。证明 \(s \in  \bar{A}\) 。
+
+练习3.2.12。判断以下陈述是真还是假。为假的陈述提供反例，为真的陈述提供证明。
+
+(a) 对于任何集合 \(A \subseteq  \mathbb{R},{\bar{A}}^{c}\) ，它是开集。
+
+(b) 如果一个集合 \(A\) 有一个孤立点，它不能是开集。
+
+(c) 一个集合 \(A\) 是闭集当且仅当 \(\bar{A} = A\) 。
+
+如果 \(A\) 是一个有界集，那么 \(s = \sup A\) 是 \(A\) 的一个极限点。
+
+每个有限集都是闭集。
+
+一个包含所有有理数的开集必定是整个 \(\mathbb{R}\) 。
+
+习题3.2.13。证明既是开集又是闭集的唯一集合是 \(\mathbb{R}\) 和空集 \(\varnothing\) 。
+
+习题3.2.14。一个集合 \(A\) 被称为 \({F}_{\sigma }\) 集，如果它可以写成闭集的可数并集。一个集合 \(B\) 被称为 \({G}_{\delta }\) 集，如果它可以写成开集的可数交集。
+
+证明闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 是一个 \({G}_{\delta }\) 集。
+
+(b) 证明半开区间 \((a,b\rbrack\) 既是 \({G}_{\delta }\) 集又是 \({F}_{\sigma }\) 集。
+
+证明 \(\mathbb{Q}\) 是一个 \({F}_{\sigma }\) 集，且无理数集 \(\mathbb{R}\setminus\mathbb{Q}\) 构成一个 \({G}_{\delta }\) 集。(我们将在3.5节中看到， \(\mathbb{Q}\) 不是一个 \({G}_{\delta }\) 集， \(\mathbb{R}\setminus\mathbb{Q}\) 也不是一个 \({F}_{\sigma }\) 集。)
+
+\section{紧集}
+\label{sec:3.3}
+\begin{Def}
+  \label{def:3.3.1}
+  称集合 \(K \subseteq  \mathbb{R}\) 是紧的，若其中的每个序列都有一个收敛于 \(K\) 中极限的子序列。
+\end{Def}
+
+\begin{Eg}
+  \label{eg:3.3.2}
+  紧集的最基本例子是闭区间。要理解这一点，注意到如果 \(\left( {a}_{n}\right)\) 包含在区间 \(\left\lbrack  {c,d}\right\rbrack\) 中，那么Bolzano-Weierstrass定理保证我们可以找到一个收敛的子序列 \(\left( {a}_{{n}_{k}}\right)\) 。因为闭区间是闭集(例~\ref{eg:3.2.9}~\ref{item:3.2.6})，我们知道这个子序列的极限也在 \(\left\lbrack  {c,d}\right\rbrack\) 中。
+\end{Eg}
+
+
+我们在前面的论证中使用了闭区间的哪些性质？Bolzano-Weierstrass定理要求有界性，并且我们使用了闭集包含其极限点的事实。正如我们将要看到的，这两个性质完全刻画了 \(\mathbb{R}\) 中的紧集。到目前为止，“有界”一词仅用于描述序列(定义\ref{def:2.3.1})，但类似的陈述可以很容易地应用于集合。
+
+\begin{Def}
+  \label{def:3.3.3}
+  称一个集合 \(A \subseteq  \mathbb{R}\) 是有界的，若存在 \(M > 0\) 使得 \(\forall a \in  A\) 都有 \(\left| a\right|  \leq  M\) 。
+\end{Def}
+
+
+
+\begin{Thm}[Heine-Borel定理]
+  \label{thm:3.3.4}
+  一个集合 \(K \subseteq  \mathbb{R}\) 是紧的，当且仅当它是闭的且有界的。
+\end{Thm}
+
+\begin{proof}
+设 \(K\) 为紧集。我们首先证明 \(K\) 必须是有界的。反设 \(K\) 不是有界集。我们的想法是在 \(K\) 中构造一个序列，使其趋向于无穷大，从而无法拥有紧集定义所要求的收敛子序列。为此，注意到由于 \(K\) 无界，必存在元素 \({x}_{1} \in  K\) 满足 \(\left| {x}_{1}\right|  > 1\) 。同样地，必存在 \({x}_{2} \in  K\) 满足 \(\left| {x}_{2}\right|  > 2\) ，一般而言，给定任意 \(n \in  \mathbb{N}\) ，我们可以构造 \({x}_{n} \in  K\) 使得 \(\left| {x}_{n}\right|  > n\) 。
+
+现在，因为假设 \(K\) 是紧的， \(\left( {x}_{n}\right)\) 应该有一个收敛的子序列 \(\left( {x}_{{n}_{k}}\right)\) 。但子序列的元素必须满足 \(\left| {x}_{{n}_{k}}\right|  > {n}_{k}\) ，因此 \(\left( {x}_{{n}_{k}}\right)\) 是无界的。因为收敛序列是有界的(定理\ref{thm:2.3.2})，我们得到了一个矛盾。因此， \(K\) 至少必须是一个有界集。
+
+接下来，我们将证明 \(K\) 也是闭的。为了说明 \(K\) 包含其极限点，我们令 \(x = \lim {x}_{n}\) ，其中 \(\left( {x}_{n}\right)\) 包含在 \(K\) 中。我们要论证 \(x\) 也必须在 \(K\) 中。根据定义~\ref{def:3.3.1}，序列 \(\left( {x}_{n}\right)\) 有一个收敛子序列 \(\left( {x}_{{n}_{k}}\right)\) ，并且根据定理\ref{thm:2.5.2}，我们知道 \(\left( {x}_{{n}_{k}}\right)\) 收敛到相同的极限 \(x\) 。最后，定义~\ref{def:3.3.1}要求 \(x \in  K\) 。这证明了 \(K\) 是闭的。
+
+
+反过来，设 \( A \subset \mathbb{R} \) 为有界闭集。取任意序列 \(\{x_n\} \subseteq A\)，由 A 有界知 \(\{x_n\}\) 也是有界的。根据 Bolzano-Weierstrass 定理，存在收敛的子序列 \(\{x_{n_k}\}\)，记其极限为 \( x \)。由于 \( A \) 是闭集，\( x \in A \)。因此，任意序列在 \( A \) 中均有收敛子序列且极限属于 \( A \)，故 \( A \) 是紧集。
+\end{proof}
+
+可能会有人倾向于将闭区间视为紧集的一种标准原型，但这种看法是误导性的。紧集的结构可能更加复杂和有趣。例如，Heine-Borel定理(定理~\ref{thm:3.3.4})的一个推论是Cantor集是紧的(练习3.3.3)。将紧集视为闭区间的推广更为有用。每当涉及闭区间的事实成立时，通常用“紧集”替换“闭区间”后，同样的结果也成立。作为一个例子，让我们尝试使用它来证明第一章中的闭区间套定理。
+
+\begin{Thm}
+  \label{thm:3.3.5}
+  如果 \({K}_{1} \supseteq  {K}_{2} \supseteq  {K}_{3} \supseteq  {K}_{4} \supseteq  \cdots\) 是一个非空紧集套序列，那么交集 \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{K}_{n}\) 不为空。
+\end{Thm}
+
+\begin{proof}
+  为了利用每个 \({K}_{n}\) 的紧性，我们将构造一个最终位于这些集合中的每一个集合里的序列。为此，对于每个 \(n \in  \mathbb{N}\) ，选取一个点 \({x}_{n} \in  {K}_{n}\) 。由于这些紧集是嵌套的，所以序列 \(\left( {x}_{n}\right)\) 包含在 \({K}_{1}\) 中。根据定义~\ref{def:3.3.1}， \(\left( {x}_{n}\right)\) 有一个收敛子序列 \(\left( {x}_{{n}_{k}}\right)\) ，其极限 \(x = \lim {x}_{{n}_{k}}\) 是 \({K}_{1}\) 中的一个元素。
+
+事实上， \(x\) 是每个 \({K}_{n}\) 的元素，原因基本相同。给定一个特定的 \({n}_{0} \in  \mathbb{N}\) ，序列 \(\left( {x}_{n}\right)\)$_{n>n_0}$ 中的项包含在 \({K}_{{n}_{0}}\) 中。忽略$x_{n_k}$ 中 $n_k<n_0$ 的有限多项，则相同的子序列 \(\left( {x}_{{n}_{k}}\right)_{n_k>n_0}\) 也包含在 \({K}_{{n}_{0}}\) 中。这便得到结论： \(x = \lim {x}_{{n}_{k}}\) 是 \({K}_{{n}_{0}}\) 的一个元素。因为 \({n}_{0}\) 是任意的， \(x \in  \mathop{\bigcap }\limits_{{n = 1}}^{\infty }{K}_{n}\) ，得证。
+\end{proof}
+
+
+\subsection{开覆盖}
+在 \(\mathbb{R}\) 中定义集合的紧性，让人联想到我们在完备性方面遇到的情况——存在多种等价的方式来描述这一现象。我们在定理~\ref{thm:3.3.4}中证明了两种这样的表征的等价性。该定理的含义是，我们本可以决定将紧集定义为闭且有界的集合，然后证明紧集中包含的序列具有收敛子序列，且其极限在集合内。决定定义应该是什么涉及一些更大的问题。但此刻重要的是，我们需要足够灵活，面对给定的情况，使用最合适的对紧性的描述。
+
+更令人高兴的是，还有第三种有用的紧性的表征。它与前两种等价，它是通过开覆盖和有限子覆盖来描述的。
+
+\begin{Def}
+  \label{def:3.3.6}
+  设 \(A \subseteq  \mathbb{R}\) 。\(A\) 的一个开覆盖是一个(可能无限的)开集族 \(\left\{  {{O}_{\lambda } : \lambda  \in  \Lambda }\right\}\)，其并集包含集合 \(A\) ；即 \(A \subseteq  \mathop{\bigcup }\limits_{{\lambda  \in  \Lambda }}{O}_{\lambda }\) 。
+
+  给定 \(A\) 的一个开覆盖，称一个从原始开覆盖中选取的有限个开集的子集族为“有限子覆盖”，若其并集仍然完全包含 \(A\) 。
+\end{Def}
+
+\begin{Eg}
+  \label{eg:3.3.7}
+考虑开区间$(0,1)$。对于每个点 \(x \in  \left( {0,1}\right)\) ，令 \({O}_{x}\) 为开区间 \(\left( {x/2,1}\right)\) 。所有这些无限集合 \(\left\{  {{O}_{x} : x \in  \left( {0,1}\right) }\right\}\) 构成了开区间$(0,1)$的一个开覆盖。然而，注意到不可能找到一个有限的子覆盖。给定任何提出的有限子集合
+
+\[
+\left\{  {{O}_{{x}_{1}},{O}_{{x}_{2}},\ldots ,{O}_{{x}_{n}}}\right\}
+\]
+
+设 \({x}^{\prime } = \min \left\{  {{x}_{1},{x}_{2},\ldots ,{x}_{n}}\right\}\) 。我们观察到任何满足 \(0 < y \leq  {x}^{\prime }/2\) 的实数 \(y\) 都不包含在并集 \(\mathop{\bigcup }\limits_{{i = 1}}^{n}{O}_{{x}_{i}}\) 中。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/01955a90-d646-7b9f-ac92-791fd6cfb6f1_11_584_1474_785_246_0.jpg}
+\end{figure}
+
+
+现在，考虑闭区间 \(\left\lbrack  {0,1}\right\rbrack\) 的一个类似覆盖。对于 \(x \in  \left( {0,1}\right)\) ，集合 \({O}_{x} = \left( {x/2,1}\right)\) 很好地覆盖$(0,1)$，但为了得到闭区间 \(\left\lbrack  {0,1}\right\rbrack\) 的一个开覆盖，我们还必须覆盖端点。为了解决这个问题，我们可以固定 \(\varepsilon  > 0\) ，并令 \({O}_{0} = \left( {-\varepsilon ,\varepsilon }\right)\) 和 \({O}_{1} = \left( {1 - \varepsilon ,1 + \varepsilon }\right)\) 。于是，下列集合是 \(\left\lbrack  {0,1}\right\rbrack\) 的一个开覆盖：
+
+\[
+\left\{  {{O}_{0},{O}_{1},{O}_{x} : x \in  \left( {0,1}\right) }\right\}
+\]
+
+但这次，注意到存在一个有限子覆盖。由于集合 \({O}_{0}\) 的加入，我们可以选择 \({x}^{\prime }\) ，使得 \({x}^{\prime }/2 < \varepsilon\) 。因此， \(\left\{  {{O}_{0},{O}_{{x}^{\prime }},{O}_{1}}\right\}\) 是闭区间 \(\left\lbrack  {0,1}\right\rbrack\) 的一个有限子覆盖。
+  
+\end{Eg}
+
+\begin{Thm}
+  \label{thm:3.3.8}
+  设 \(K\) 是 \(\mathbb{R}\) 的一个子集。以下三个命题等价。
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:3.3.1}\(K\) 是紧的。
+\item \label{item:3.3.2}\(K\) 是闭的且有界的。
+\item \label{item:3.3.3} \(K\) 的任何开覆盖都有一个有限子覆盖。
+\end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  \ref{item:3.3.1} 和 \ref{item:3.3.2} 的等价性是定理\ref{thm:3.3.4}的内容。下面的任务是证明 \ref{item:3.3.2} 和 \ref{item:3.3.3} 等价。
+
+  \ref{item:3.3.2} $\Leftarrow$ \ref{item:3.3.3}：为了证明 \(K\) 是有界的，我们通过定义 \({O}_{x}\) 为每个点 \(x \in  K\) 周围半径为$1$的开区间，为 \(K\) 构造一个开覆盖。用邻域的语言， \({O}_{x} = {V}_{1}\left( x\right)\) 。开覆盖 \(\left\{  {{O}_{x} : x \in  K}\right\}\) 必须有一个有限子覆盖 \(\left\{  {{O}_{{x}_{1}},{O}_{{x}_{2}},\ldots ,{O}_{{x}_{n}}}\right\}\) 。因为 \(K\) 包含在有界集的有限并集中， \(K\) 本身必须是有界的。
+
+证明 \(K\) 是闭集的过程更为微妙，我们通过反证法来论证。设 \(\left( {y}_{n}\right)\) 是包含在 \(K\) 中的一个Cauchy序列，且 \(\lim {y}_{n} = y\) 。为了证明 \(K\) 是闭集，我们必须证明 \(y \in  K\) 。反设其不成立：设 \(y \notin  K\) ，那么每个 \(x \in  K\) 都与 \(y\) 保持一定的正距离。我们现在通过取 \({O}_{x}\) 为以点 \(x\in K\) 为中心、半径为 \(\left| {x - y}\right| /2\) 的区间来构造一个开覆盖。由于我们假设了\ref{item:3.3.3}，得到的开覆盖 \(\left\{  {{O}_{x} : x \in  K}\right\}\) 必须有一个有限子覆盖 \(\left\{  {{O}_{{x}_{1}},{O}_{{x}_{2}},\ldots ,{O}_{{x}_{n}}}\right\}\) 。当我们意识到，按照例~\ref{eg:3.3.7}的思路，这个有限子覆盖无法包含序列 \(\left( {y}_{n}\right)\) 的所有元素时，矛盾便产生了。为了明确这一点，设
+
+\[
+{\varepsilon }_{0} = \min \left\{  {\frac{\left| {x}_{i} - y\right| }{2} : 1 \leq  i \leq  n}\right\}  .
+\]
+
+因为 \(\left( {y}_{n}\right)  \rightarrow  y\) ，我们肯定可以找到一个项 \({y}_{N}\) 满足 \(\left| {{y}_{N} - y}\right|  < {\varepsilon }_{0}\) 。但这样的 \({y}_{N}\) 必须从每个 \({O}_{{x}_{i}}\) 中排除，这意味着
+
+\[
+{y}_{N} \notin  \mathop{\bigcup }\limits_{{i = 1}}^{n}{O}_{{x}_{i}}
+\]
+
+因此，我们假设的子覆盖实际上并没有覆盖所有的 \(K\) 。这个矛盾意味着 \(y \in  K\) ，因此 \(K\) 是闭且有界的。
+
+\ref{item:3.3.2} $\Rightarrow$ \ref{item:3.3.3}：设 \(K \subset [a, b]\)。反设开覆盖 \(\{U_i\}\) 无有限子覆盖，则递归二分 \([a, b]\)：每次分割区间为两半，至少一侧与 \(K\) 的交集（仍为闭集）无法被有限覆盖。无限递归产生嵌套闭区间序列，长度趋零。由闭区间套定理，存在极限点 \(x \in K\)（因 \(K\) 闭）。存在某个 \(U_j\) 包含 \(x\)，其开性覆盖足够小的递归区间，与该区间“无法有限覆盖”矛盾。 
+\end{proof}
+
+
+\subsection{习题}
+
+习题3.3.1。证明如果 \(K\) 是紧的，那么 \(\sup K\) 和 \(\inf K\) 都存在并且是 \(K\) 的元素。
+
+习题3.3.2。通过证明如果一个集合 \(K \subseteq  \mathbb{R}\) 是闭且有界的，那么它是紧的，来证明定理3.3.4的逆命题。
+
+练习 3.3.3. 证明第 3.1 节中定义的Cantor集(Cantor set)是一个紧集(compact set)。
+
+练习 3.3.4. 证明如果 \(K\) 是紧集(compact)且 \(F\) 是闭集(closed)，那么 \(K \cap  F\) 是紧集(compact)。
+
+练习 3.3.5. 判断以下哪些集合是紧集(compact)。对于那些不是紧集的集合，说明定义 3.3.1 为何不成立。换句话说，给出一个包含在给定集合中的序列，该序列不具有收敛到集合中某个极限的子序列。
+
+(a) \(\mathbb{Q}\) .
+
+(b) \(\mathbb{Q} \cap  \left\lbrack  {0,1}\right\rbrack\) .
+
+(c) \(\mathbb{R}\) .
+
+(d) \(\mathbb{R} \cap  \left\lbrack  {0,1}\right\rbrack\) .
+
+(e) \(\{ 1,1/2,1/3,1/4,1/5,\ldots \}\) .
+
+(f) \(\{ 1,1/2,2/3,3/4,4/5,\ldots \}\) .
+
+练习 3.3.6. 作为Cantor集(Cantor set)令人惊讶性质的更多证据，按照以下步骤证明和 \(C + C = \{ x + y : x,y \in  C\}\) 等于闭区间 \(\left\lbrack  {0,2}\right\rbrack\) 。(请记住， \(C\) 的长度为零且不包含任何区间。)
+
+观察到 \(\{ x + y : x,y \in  C\}  \subseteq  \left\lbrack  {0,2}\right\rbrack\) 被认为是显而易见的，因此我们只需证明反向包含 \(\left\lbrack  {0,2}\right\rbrack   \subseteq  \{ x + y : x,y \in  C\}\) 。因此，给定 \(s \in  \left\lbrack  {0,2}\right\rbrack\) ，我们必须找到两个元素 \(x,y \in  C\) 满足 \(x + y = s\) 。
+
+(a) 证明存在 \({x}_{1},{y}_{1} \in  {C}_{1}\) 使得 \({x}_{1} + {y}_{1} = s\) 。一般情况下，对于任意 \(n \in  \mathbb{N}\) ，我们总能找到 \({x}_{n},{y}_{n} \in  {C}_{n}\) 使得 \({x}_{n} + {y}_{n} = s\) 。
+
+(b) 考虑到序列 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 不一定收敛，展示如何利用它们生成所需的 \(x\) 和 \(y\) 以满足 \(C\) 中的 \(x + y = s\) 。
+
+练习 3.3.7. 判断以下命题是真还是假。如果命题成立，提供一个简短的证明；如果命题不成立，提供一个反例。
+
+(a) 任意紧集的交集是紧集。
+
+(b) 设 \(A \subseteq  \mathbb{R}\) 为任意集合，且 \(K \subseteq  \mathbb{R}\) 为紧集。那么，交集 \(A \cap  K\) 是紧集。
+
+(c) 如果 \({F}_{1} \supseteq  {F}_{2} \supseteq  {F}_{3} \supseteq  {F}_{4} \supseteq  \cdots\) 是一个非空闭集的嵌套序列，那么交集 \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{F}_{n} \neq  \varnothing\) 。
+
+(d) 有限集总是紧的。
+
+(e) 可数集总是紧的。
+
+练习 3.3.8. 按照以下步骤证明定理 3.3.8 中的最后一个蕴涵。
+
+假设 \(K\) 满足条件(i)和(ii)，并令 \(\left\{  {{O}_{\lambda } : \lambda  \in  \Lambda }\right\}\) 为 \(K\) 的一个开覆盖。为了引出矛盾，我们假设不存在有限的子覆盖。令 \({I}_{0}\) 为一个包含 \(K\) 的闭区间，并将 \({I}_{0}\) 二等分为两个闭区间 \({A}_{1}\) 和 \({B}_{1}\) 。
+
+(a) 为什么 \({A}_{1} \cap  K\) 或 \({B}_{1} \cap  K\) (或两者)必须没有由 \(\left\{  {{O}_{\lambda } : \lambda  \in  \Lambda }\right\}\) 中的集合组成的有限子覆盖？
+
+(b) 证明存在一个闭区间嵌套序列 \({I}_{0} \supseteq  {I}_{1} \supseteq\)  \({I}_{2} \supseteq  \cdots\) ，其性质为，对于每个 \(n,{I}_{n} \cap  K\) 无法被有限覆盖且 \(\lim \left| {I}_{n}\right|  = 0\) 。
+
+(c) 证明存在一个 \(x \in  K\) ，使得对于所有 \(n\) ， \(x \in  {I}_{n}\) 成立。
+
+(d) 由于 \(x \in  K\) ，原始集合中必须存在一个包含 \(x\) 作为元素的开集 \({O}_{{\lambda }_{0}}\) 。论证必须存在一个足够大的 \({n}_{0}\) ，以保证 \({I}_{{n}_{0}} \subseteq  {O}_{{\lambda }_{0}}\) 。解释为什么这为我们提供了所需的矛盾。
+
+练习3.3.9。考虑练习3.3.5中列出的每个集合。对于每个非紧的集合，找到一个没有有限子覆盖的开覆盖。
+
+练习3.3.10。我们称一个集合为“闭紧”的，如果它具有以下性质:每个闭覆盖(即由闭集组成的覆盖)都允许一个有限子覆盖。描述 \(\mathbb{R}\) 的所有闭紧子集。
+
+\section{完备集与连通集}
+\label{sec:3.4}
+拓扑学的一个基本目标是剥离掉所有与我们对实数的直观理解相关的多余信息，只保留那些对我们所研究现象有影响的属性。例如，我们很快注意到任何闭区间都是紧集。然而，定理~\ref{thm:3.3.4}表明，闭区间的紧性与该集合是否是一个区间无关，而是和该集合是否是有界闭的有关。在第一章中，我们论证了$0$到$1$之间的实数集是一个不可数集。事实证明，任何不包含孤立点的非空闭集都是这种情况。
+
+
+\subsection{完备集}
+\begin{Def}
+  一个集合 \(P \subseteq  \mathbb{R}\) 是完备的，如果它是闭集且不包含孤立点。
+\end{Def}
+ 
+闭区间(除了单点集 \(\left\lbrack  {a,a}\right\rbrack\) )是最明显的完备集例子，但实际上不难证明第\ref{sec:3.1}节中的Cantor集是另一个例子。
+
+\begin{Thm}
+  \label{thm:3.4.2}
+  Cantor集是完备的。
+\end{Thm}
+
+\begin{proof}
+Cantor集定义为交集 \(C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}\) ，其中每个 \({C}_{n}\) 是闭区间的有限并集。根据定理~\ref{thm:3.2.14}，每个 \({C}_{n}\) 都是闭集，并且根据同一定理， \(C\) 也是闭集。剩下的任务是证明 \(C\) 中没有孤立点。
+
+设 \(x \in  C\) 为任意值。为了证明 \(x\) 不是孤立的，我们必须构造一个在 \(C\) 中的点序列 \(\left( {x}_{n}\right)\) ，该序列不同于 \(x\) ，并且收敛于 \(x\) 。根据我们之前的讨论，我们知道 \(C\) 至少包含构成每个 \({C}_{n}\) 的区间的端点。
+
+考虑 \(x\) 的三进制展开 \(x = \sum_{k=1}^{\infty} a_k 3^{-k}\)，其中每个系数 \(a_k \in \{0, 2\}\)。对每个自然数 \(n\)，定义 \(x_n\) 为将 \(x\) 的第 \(n+1\) 位系数取反（即若 \(a_{n+1}=0\)，则令其为$2$；反之则令其为$0$），其余位保持不变。这样构造的点 \(x_n\) 满足：
+
+\begin{itemize}
+\item  \(x_n \neq x\)：由于第 \(n+1\) 位被修改，\(x_n\) 与 \(x\) 在该位不同，故二者差异至少为 \(3^{-(n+1)}\)。
+\item \(x_n \in C\)：\(x_n\) 的三进制展开仍仅含0和2，符合Cantor集的定义。
+\item 收敛性：\(|x_n - x| = 3^{-(n+1)}\)，当 \(n \to \infty\) 时，\(3^{-(n+1)} \to 0\)，故序列 \((x_n)\) 收敛于 \(x\)。
+\end{itemize}
+因此，对任意 \(x \in C\)，总能构造这样的非平凡收敛序列，说明 \(x\) 非孤立。综上，Cantor集 \(C\) 完备。
+\end{proof}
+
+
+关于Cantor集不可数性的一个论证在第\ref{sec:3.1}节中已经给出。通过下面的定理，我们可以得到更令人满意的论证。
+
+\begin{Thm}
+  \label{thm:3.4.3}
+  一个非空的完备集是不可数的。
+\end{Thm}
+
+\begin{proof}
+如果 \(P\) 是完备且非空的，那么它必须是无限的，因为否则它将仅由孤立点组成。反设 \(P\) 是可数的，我们可以把它写成
+
+\[
+P = \left\{  {{x}_{1},{x}_{2},{x}_{3},\ldots }\right\}  ,
+\]
+
+其中 \(P\) 的每个元素都出现在这个列表中。其思想是构造一系列嵌套的紧集 \({K}_{n}\) ，它们都包含在 \(P\) 中，并且具有 \({x}_{1} \notin  {K}_{2}\) 、 \({x}_{2} \notin  {K}_{3},{x}_{3} \notin  {K}_{4},\ldots\) 的性质。必须小心确保每个 \({K}_{n}\) 都是非空的，这样我们就可以使用定理~\ref{thm:3.3.5}来生成一个
+
+\[
+x \in  \mathop{\bigcap }\limits_{{n = 1}}^{\infty }{K}_{n} \subseteq  P
+\]
+
+使得 \(x\not\in \left\{  {{x}_{1},{x}_{2},{x}_{3},\ldots }\right\}\)。
+
+设 \({I}_{1}\) 为一个闭区间，其内部包含 \({x}_{1}\) (即 \({x}_{1}\) 不是 \({I}_{1}\) 的端点)。现在， \({x}_{1}\) 不是孤立的，因此存在另一个点 \({y}_{2} \in  P\) 也在 \({I}_{1}\) 的内部。构造一个以 \({y}_{2}\) 为中心的闭区间 \({I}_{2}\) ，使得 \({I}_{2} \subseteq  {I}_{1}\) 但 \({x}_{1} \notin  {I}_{2}\) 。更明确地说，如果 \({I}_{1} = \left\lbrack  {a,b}\right\rbrack\) ，设
+
+\[
+\varepsilon  = \min \left\{  {{y}_{2} - a,b - {y}_{2},\left| {{x}_{1} - {y}_{2}}\right| }\right\}  .
+\]
+
+那么，区间 \({I}_{2} = \left\lbrack  {y - \varepsilon /2,y + \varepsilon /2}\right\rbrack\) 具有所需的性质。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a90-d646-7b9f-ac92-791fd6cfb6f1_15_672_1583_608_171_0.jpg}
+\end{figure}
+
+这个过程可以继续。因为 \({y}_{2} \in  P\) 不是孤立的，所以在 \({I}_{2}\) 的内部必须存在另一个点 \({y}_{3} \in  P\) ，我们可以设 \({y}_{3} \neq  {x}_{2}\) 。现在，构造以 \({y}_{3}\) 为中心的 \({I}_{3}\) ，并且使其长度足够小，以至于 \({x}_{2} \notin  {I}_{3}\) 且 \({I}_{3} \subseteq  {I}_{2}\) 。观察到 \({I}_{3} \cap  P \neq  \varnothing\) ，因为这个交集至少包含 \({y}_{3}\) 。
+
+如果我们归纳地进行这个构造，结果是一个满足条件的闭区间序列 \({I}_{n}\) 。
+\begin{itemize}
+\item \({I}_{n + 1} \subseteq  {I}_{n}\) ,
+\item \({x}_{n} \notin  {I}_{n + 1}\) ，
+\item \({I}_{n} \cap  P \neq  \varnothing\) 。
+\end{itemize}
+
+为了完成证明，我们令 \({K}_{n} = {I}_{n} \cap  P\) 。对于每个 \(n \in  \mathbb{N}\) ，我们有 \({K}_{n}\) 是闭集（因为它是闭集的交集），并且是有界的（因为它包含在有界集 \({I}_{n}\) 中）。因此， \({K}_{n}\) 是紧的。通过构造， \({K}_{n}\) 非空且 \({K}_{n + 1} \subseteq  {K}_{n}\) 。因此，我们可以使用定理\ref{thm:3.3.5}得出结论：
+
+\[
+\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{K}_{n} \neq  \varnothing
+\]
+
+但每个 \({K}_{n}\) 都是 \(P\) 的子集，而 \({x}_{n} \notin  {I}_{n + 1}\) 的事实导致我们得出结论 \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{K}_{n} = \varnothing\) ，矛盾！  
+\end{proof}
+
+
+\subsection{连通集}
+尽管两个开区间$(1,2)$和$(2,5)$有共同的极限点 \(x = 2\) ，但在某种意义上它们之间仍然存在一些空间，因为其中一个区间的极限点实际上并不包含在另一个区间中。换句话说，$(1,2)$的闭包(见定义~\ref{def:3.2.11})与$(2,5)$不相交，且$(2,5)$的闭包也不与$(1,2)$相交。注意，对于 \((1,2\rbrack\) 和$(2,5)$，即使后者是不相交的，也不能做出同样的观察。
+
+
+\begin{Def}
+  \label{def:3.4.4}
+  如果 \(\bar{A} \cap  B\) 和 \(A \cap  \bar{B}\) 都为空，则称两个非空集合 \(A,B \subseteq  \mathbb{R}\) 是分离的。
+
+  如果一个集合 \(E \subseteq  \mathbb{R}\) 可以写成 \(E = A \cup  B\) ，其中 \(A\) 和 \(B\) 是非空分离集合，则该集合是非连通的。
+
+  称一个集合是连通的，若它不是非连通的。
+\end{Def}
+
+
+\begin{Eg}
+  \label{eg:3.4.5}
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:3.4.1}如果我们令 \(A = \left( {1,2}\right)\) 和 \(B = \left( {2,5}\right)\) ，那么不难验证 \(E = \left( {1,2}\right)  \cup  \left( {2,5}\right)\) 是非连通的。注意集合 \(C = (1,2\rbrack\) 和 \(D = \left( {2,5}\right)\) 不是分离的，因为 \(C \cap  \bar{D} = \{ 2\}\) 不是空的。这是符合直觉的：并集 \(C \cup  D\) 等于区间$(1,5)$，它最好不被视为非连通集。我们稍后将证明每个区间都是 \(\mathbb{R}\) 的连通子集，反之亦然。
+  \item \label{item:3.4.2}让我们证明有理数集是非连通的。如果我们令
+\[
+A = \mathbb{Q} \cap  \left( {-\infty ,\sqrt{2}}\right) , \quad B = \mathbb{Q} \cap  \left( {\sqrt{2},\infty }\right) ,
+\]
+
+那么我们肯定有 \(\mathbb{Q} = A \cup  B\) 。 \(A \subseteq  \left( {-\infty ,\sqrt{2}}\right)\) 的事实意味着(根据序极限定理)， \(A\) 的任何极限点必然落在 \(( - \infty ,\sqrt{2}\rbrack\) 中。因为这与 \(B\) 不相交，我们得到 \(\bar{A} \cap  B = \varnothing\) 。我们可以类似地证明 \(A \cap  \bar{B} = \varnothing\) ，这意味着 \(A\) 和 \(B\) 是分离的。 
+  \end{enumerate}
+\end{Eg}
+
+连通的定义被表述为非连通的否定，但稍微注意定义~\ref{def:3.4.4}中量词的逻辑否定，可以得到连通性的正面特征：称集合 \(E\) 是连通的，若无论它如何被划分为两个非空不相交的集合，总是可以证明至少其中一个集合包含另一个集合的极限点。
+
+\begin{Thm}
+  \label{thm:3.4.6}
+  一个集合 \(E \subseteq  \mathbb{R}\) 是连通的，当且仅当对于所有满足 \(E = A \cup  B\) 的非空不相交集合 \(A\) 和 \(B\) ，总存在一个收敛序列 \(\left( {x}_{n}\right)  \rightarrow  x\) ，使得 \(\left( {x}_{n}\right)\) 包含在 \(A\) 或 \(B\) 之一中，而 \(x\) 是另一个集合的元素。
+\end{Thm}
+
+
+\begin{proof}
+$\Rightarrow$：若 \(E\) 连通，则根据定义无法将其写成两个分离的非空集合的并。因此，任意分解 \(E = A \cup B\)（非空且不相交），必有 \(\bar{A} \cap B \neq \emptyset\) 或 \(A \cap \bar{B} \neq \emptyset\)。不妨设 \(\bar{A} \cap B \neq \emptyset\)，则存在 \(x \in B\) 且 \(x \in \bar{A}\)，故存在序列 \((x_n) \subseteq A\) 收敛于 \(x \in B\)。同理若另一种情况成立，可得收敛序列于另一方，故定理成立。
+
+$\Leftarrow$： 若对任意分解 \(E = A \cup B\)（非空不相交），均存在上述收敛序列，则不存在分离的分割（否则若存在分离分割 \(A,B\)，其闭包无交集，任何收敛序列 \((x_n) \subseteq A\) 的极限 \(x \in \bar{A} \cap B = \emptyset\)），矛盾。故 \(E\) 不可非连通，即 \(E\) 是连通的。
+\end{proof}
+
+连通性的概念在处理平面和其他高维空间的子集时更为相关。这是因为在 \(\mathbb{R}\) 中，连通集恰好与区间的集合一致(包括像 \(\left( {-\infty ,3}\right)\) 和 \(\lbrack 0,\infty )\) 这样的无界区间)。
+
+\begin{Thm}
+  \label{thm:3.4.7}
+  一个集合 \(E \subseteq  \mathbb{R}\) 是连通的，当且仅当 \(\forall a < c < b\in \mathbb{R}\)  且 \(a,b \in  E\) ，有 \(c \in  E\) 。
+\end{Thm}
+\begin{proof}
+设 \(E\) 是连通的，且设 \(a,b \in  E\) 和 \(a < c < b\) 。令
+
+\[
+A = \left( {-\infty ,c}\right)  \cap  E, \quad B = \left( {c,\infty }\right)  \cap  E.
+\]
+
+因为 \(a \in  A, b \in  B\) ，这两个集合都不是空的，并且正如例~\ref{eg:3.4.5}~\ref{item:3.4.2}中所述，这两个集合都不包含对方的极限点。如果 \(E = A \cup  B\) ，那么我们将得出 \(E\) 是非连通的，但事实并非如此。因此， \(A \cup  B\) 必定缺少 \(E\) 的某个元素，而 \(c\) 是唯一的可能性。因此， \(c \in  E\) 。
+
+反之，假设 \(E\) 是一个区间，即每当有某个 $c\in \mathbb{R}$ 满足 \(a < c < b, a,b\in E\) ，便有 \(c \in  E\) 。我们的意图是使用定理~\ref{thm:3.4.6}中连通集的刻画，因此设 \(E = A \cup  B\) ，其中 \(A\) 和 \(B\) 非空且不相交。我们需要证明其中一个集合包含另一个集合的极限点。选取 \({a}_{0} \in  A\) 和 \({b}_{0} \in  B\) ，并且为了论证方便起见，不妨设 \({a}_{0} < {b}_{0}\) 。由于 \(E\) 本身是一个区间，区间 \({I}_{0} = \left\lbrack  {{a}_{0},{b}_{0}}\right\rbrack\) 包含在 \(E\) 中。现在，将 \({I}_{0}\) 平分为两半。 \({I}_{0}\) 的中点必须位于 \(A\) 或 \(B\) 中，因此选择 \({I}_{1} = \left\lbrack  {{a}_{1},{b}_{1}}\right\rbrack\) 为允许我们拥有 \({a}_{1} \in  A\) 和 \({b}_{1} \in  B\) 的那一半。继续这一过程将产生一系列区间套 \({I}_{n} = \left\lbrack  {{a}_{n},{b}_{n}}\right\rbrack\) ，其中 \({a}_{n} \in  A,{b}_{n} \in  B\) ，且长度 \(\left( {{b}_{n} - {a}_{n}}\right)  \rightarrow  0\) 。剩下的论证都是我们所熟悉的了。根据嵌套区间性质，存在一个
+
+\[
+x \in  \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{I}_{n}
+\]
+
+并且很容易证明端点序列各自满足 \(\lim {a}_{n} = x\) 和 \(\lim {b}_{n} = x\) 。但现在 \(x \in  E\) 必须属于 \(A\) 或 \(B\) ，从而使其成为另一个的极限点。得证。
+\end{proof}
+
+
+\subsection{练习}
+
+练习3.4.1。如果 \(P\) 是一个完备集且 \(K\) 是紧的，那么交集 \(P \cap  K\) 是否总是紧的？是否总是完备的？
+
+练习3.4.2。是否存在一个仅由有理数组成的完备集？
+
+练习3.4.3。回顾定理3.4.2给出的证明部分，并按照这些步骤完成论证。
+
+(a) 因为 \(x \in  {C}_{1}\) ，论证存在一个 \({x}_{1} \in  C \cap  {C}_{1}\) 满足 \({x}_{1} \neq  x\) 且满足 \(\left| {x - {x}_{1}}\right|  \leq  1/3\) 。
+
+(b) 通过证明对于每个 \(n \in  \mathbb{N}\) ，存在一个不同于 \(x\) 的 \({x}_{n} \in  C \cap  {C}_{n}\) 满足 \(\left| {x - {x}_{n}}\right|  \leq  1/{3}^{n}\) ，来完成证明。
+
+练习 3.4.4. 重复第 3.1 节中的Cantor(Cantor)构造，这次从开区间 \(\left\lbrack  {0,1}\right\rbrack\) 开始。然而，这次从每个组成部分中移除开中间四分之一。
+
+(a) 结果集是紧的吗？是完备的吗？
+
+使用第3.1节中的算法，计算这个类Cantor集(Cantor-like set)的长度和维度。
+
+习题3.4.5。设 \(A\) 和 \(B\) 是 \(\mathbb{R}\) 的子集。证明如果存在不相交的开集 \(U\) 和 \(V\) ，使得 \(A \subseteq  U\) 和 \(B \subseteq  V\) ，则 \(A\) 和 \(B\) 是分离的。
+
+习题3.4.6。证明定理3.4.6。
+
+习题3.4.7。(a) 找出一个闭包连通但非连通的集合的例子。
+
+(b) 如果 \(A\) 是连通的， \(\bar{A}\) 是否必然连通？如果 \(A\) 是完备的， \(\bar{A}\) 是否必然完备？
+
+练习3.4.8。一个集合 \(E\) 是完全非连通的，如果给定任意两点 \(x,y \in\)  \(E\) ，存在分离的集合 \(A\) 和 \(B\) ，使得 \(x \in  A,y \in  B\) ，且 \(E = A \cup  B\) 。
+
+(a) 证明 \(\mathbb{Q}\) 是完全非连通的。
+
+(b) 无理数集是完全非连通的吗？
+
+练习3.4.9。按照以下步骤证明第3.1节中描述的Cantor集 \(C = \mathop{\bigcap }\limits_{{n = 0}}^{\infty }{C}_{n}\) 在练习3.4.8所描述的意义下是完全非连通的。
+
+(a) 给定 \(x,y \in  C\) ，其中 \(x < y\) ，设 \(\varepsilon  = y - x\) 。对于每个 \(n = 0,1,2,\ldots\) ，集合 \({C}_{n}\) 由有限数量的闭区间组成。解释为什么必须存在一个足够大的 \(N\) ，使得 \(x\) 和 \(y\) 不可能同时属于 \({C}_{N}\) 的同一个闭区间。
+
+(b) 论证存在一个点 \(z \notin  C\) 使得 \(x < z < y\) 。解释这如何证明不存在形式为(a, b)且包含 \(a < b\) 的区间 \(C\) 。
+
+(c) 证明 \(C\) 是完全非连通的。
+
+练习 3.4.10. 设 \(\left\{  {{r}_{1},{r}_{2},{r}_{3},\ldots }\right\}\) 为有理数的一个枚举，对于每个 \(n \in  \mathbb{N}\) 设 \({\varepsilon }_{n} = 1/{2}^{n}\) 。定义 \(O = \mathop{\bigcup }\limits_{{n = 1}}^{\infty }{V}_{{\varepsilon }_{n}}\left( {r}_{n}\right)\) ，并设 \(F = {O}^{c}.\)
+
+(a) 论证 \(F\) 是一个闭的、非空的集合，且仅由无理数组成。
+
+(b) \(F\) 是否包含任何非空开区间？ \(F\) 是否是完全非连通的？(定义见练习 3.4.8。)
+
+(c) 是否有可能知道 \(F\) 是否是完全的？如果不能，我们能否修改此构造以生成一个非空的完全无理数集？
+
+\section{Baire 定理}
+\label{sec:3.5}
+实数的本质可能具有欺骗性的难以捉摸。我们越仔细观察， \(\mathbb{R}\) 就越显得复杂和神秘，这提醒我们在关于 \(\mathbb{R}\) 子集性质的所有结论中要谨慎行事(即，以公理化的方式)。开集的结构相对简单。每个开集都是开区间的有限或可数并集。与所有开集的这种整洁描述相对立的是Cantor集。Cantor集是一个闭的、不可数的集合，不包含任何类型的区间。因此，不应期待闭集有类似的描述。
+
+回想一下，开集的任意并集始终是开集。同样，闭集的任意交集是闭集。然而，通过取闭集的并集或开集的交集，可以获得 \(\mathbb{R}\) 的相当广泛的子集选择。在练习 3.2.14 中，我们引入了以下两类集合。
+
+\begin{Def}
+  \label{def:3.5.1}
+  一个集合 \(A \subseteq  \mathbb{R}\) 被称为 \({F}_{\sigma }\) 集合，如果它可以表示为闭集的可数并集。一个集合 \(B \subseteq  \mathbb{R}\) 被称为 \({G}_{\delta }\) 集合，如果它可以表示为开集的可数交集。
+\end{Def}
+
+练习3.5.1。论证一个集合 \(A\) 是 \({G}_{\delta }\) 集合当且仅当它的补集是 \({F}_{\sigma }\) 集合。
+
+练习3.5.2。根据哪个更合适，将每个\_\_\_\_\_替换为单词“有限”或“可数”。
+
+(a) \({F}_{\sigma }\) 集合的\_\_\_\_\_并集是一个 \({F}_{\sigma }\) 集合。
+
+(b) \({F}_{\sigma }\) 集合的\_\_\_\_\_交集是一个 \({F}_{\sigma }\) 集合。
+
+(c) \({G}_{\delta }\) 集合的\_\_\_\_\_并集是一个 \({G}_{\delta }\) 集合。
+
+(d)\_\_\_\_\_ 集合的交集是一个 \({G}_{\delta }\) 集合。
+
+练习 3.5.3。(此练习已作为练习 3.2.14 出现过。)
+
+(a) 证明闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 是一个 \({G}_{\delta }\) 集合。
+
+(b) 证明半开区间 \((a,b\rbrack\) 既是一个 \({G}_{\delta }\) 集合，也是一个 \({F}_{\sigma }\) 集合。
+
+(c) 证明 \(\mathbb{Q}\) 是一个 \({F}_{\sigma }\) 集合，且无理数集 \(\mathbb{R}\setminus\mathbb{Q}\) 构成一个 \({G}_{\delta }\) 集合。
+
+并不明显的是，类 \({F}_{\sigma }\) 并不包含 \(\mathbb{R}\) 的每个子集，但我们现在准备论证 \(\mathbb{R}\setminus\mathbb{Q}\) 不是一个 \({F}_{\sigma }\) 集(因此 \(\mathbb{Q}\) 也不是一个 \({G}_{\delta }\) 集)。这将由 René Louis Baire (1874-1932)的一个定理得出。
+
+回忆：如果给定任意两个实数 \(a < b\) ，可以在 \(\mathbb{R}\) 中找到一个点 \(x \in  G\) 使得 \(a < x < b\) ，则集合 \(G \subseteq  \mathbb{R}\) 在 \(\mathbb{R}\) 中是稠密的。
+
+\begin{Thm}
+  \label{thm:3.5.2}
+  如果 \(\left\{  {{G}_{1},{G}_{2},{G}_{3},\ldots }\right\}\) 是一个可数的稠密开集族，那么交集 \(\mathop{\bigcap }\limits_{{n = 1}}^{\infty }{G}_{n}\) 非空。
+\end{Thm}
+
+在开始证明之前，注意到我们之前已经见过类似的结论。定理~\ref{thm:3.3.5}断言，紧集的嵌套序列具有非平凡的交集。在这个定理中，我们处理的是稠密开集，但事实证明，我们将使用定理~\ref{thm:3.3.5}，实际上，仅使用闭区间套定理作为论证的关键步骤。
+
+\begin{proof}
+  练习 3.5.4. (a) 从 \(n = 1\) 开始，归纳地构造一个满足 \({I}_{n} \subseteq  {G}_{n}\) 的闭区间嵌套序列 \({I}_{1} \supseteq  {I}_{2} \supseteq  {I}_{3} \supseteq  \cdots\) 。特别注意每个 \({I}_{n}\) 的端点问题。
+
+(b) 现在，使用定理 3.3.5 或闭区间套性质来完成证明。
+\end{proof}
+
+练习 3.5.5. 证明不可能写成
+
+\[
+\mathbb{R} = \mathop{\bigcup }\limits_{{n = 1}}^{\infty }{F}_{n}
+\]
+
+其中对于每个 \(n \in  \mathbb{N},{F}_{n}\) 是一个不包含任何非空开区间的闭集。
+
+练习 3.5.6. 展示前一个练习如何暗示无理数集 \(\mathbb{R}\setminus\mathbb{Q}\) 不能是一个 \({F}_{\sigma }\) 集，且 \(\mathbb{Q}\) 不能是一个 \({G}_{\delta }\) 集。
+
+练习 3.5.7. 使用练习 3.5.6 和练习 3.5.2 中的陈述版本，构造一个既不在 \({F}_{\sigma }\) 也不在 \({G}_{\delta }\) 中的集合。
+
+\subsection{无处稠密集}
+
+我们已经遇到了几种等价的方式来断言某个集合 \(G\) 在 \(\mathbb{R}\) 中是稠密的。在第 \ref{sec:3.2} 节中，我们观察到 \(G\) 在 \(\mathbb{R}\) 中是稠密的，当且仅当 \(\mathbb{R}\) 的每个点都是 \(G\) 的极限点。因为任何集合的闭包都是通过取该集合及其极限点的并集得到的，所以我们有：\(G\) 在 \(\mathbb{R}\) 中是稠密的，当且仅当 \(\bar{G} = \mathbb{R}\) 。
+
+集合 \(\mathbb{Q}\) 在 \(\mathbb{R}\) 中是稠密的；集合 \(\mathbb{Z}\) 显然不是。事实上，在分析的术语中， \(\mathbb{Z}\) 在 \(\mathbb{R}\) 中是“无处稠密”的。
+
+\begin{Def}
+  \label{def:3.5.3}
+  如果 \(\bar{E}\) 不包含任何非空开区间，则集合 \(E\) 是无处稠密的。
+\end{Def}
+
+练习3.5.8。证明集合 \(E\) 在 \(\mathbb{R}\) 中是无处稠密的，当且仅当 \(\bar{E}\) 的补集在 \(\mathbb{R}\) 中是稠密的。
+
+练习3.5.9。判断以下集合在 \(\mathbb{R}\) 中是稠密的、无处稠密的，还是介于两者之间。
+
+(a) \(A = \mathbb{Q} \cap  \left\lbrack  {0,5}\right\rbrack\) .
+
+(b) \(B = \{ 1/n : n \in  \mathbb{N}\}\) .
+
+(c) 无理数集。
+
+(d) Cantor集。
+
+我们现在可以用稍微更一般的形式重新表述定理3.5.2。
+
+\begin{Thm}[Baire]
+  \label{thm:3.5.4}
+  实数集 \(\mathbb{R}\) 不能表示为无处稠密集的可数并集。
+\end{Thm}
+
+\begin{proof}
+  假设 \({E}_{1},{E}_{2},{E}_{3},\ldots\) 都是无处稠密的，并且满足 \(\mathbb{R} = \mathop{\bigcup }\limits_{{n = 1}}^{\infty }{E}_{n}\) ，从而引出矛盾。
+
+  练习3.5.10。通过找到与本节结果相矛盾的结论来完成证明。
+\end{proof}
+
+
+
+\section{结语}
+\label{sec:3.6}
+Baire 定理是关于 \(\mathbb{R}\) 大小的另一种表述。我们已经遇到了几种描述无限集大小的方法。就基数而言，可数集相对较小，而不可数集则较大。我们还在第\ref{sec:3.1}节简要讨论了“长度”或“测度”的概念。Baire 定理提供了第三种视角。从这个角度来看，无处稠密集被认为是“薄”集。任何作为这些小型集的可数并集——即不太大的并集——被称为“疏集”或“第一纲”集。不属于第一纲的集称为“第二纲”集。直观上，第二纲集是“厚”子集。通常所称的Baire 纲定理指出， \(\mathbb{R}\) 属于第二纲。
+
+Baire 纲定理的重要性目前难以充分理解，因为我们只看到了这一结果的一个特例。实数集是完备度量空间的一个例子。度量空间的概念在第\ref{sec:8.2}节中有详细讨论，但这里给出基本思想。给定一组数学对象，如实数、平面上的点或定义在 \(\left\lbrack  {0,1}\right\rbrack\) 上的连续函数，“度量”是一种规则，它为集合中的两个元素分配“距离”。在 \(\mathbb{R}\) 中，我们一直使用 \(\left| {x - y}\right|\) 作为实数 \(x\) 和 \(y\) 之间的距离。关键在于，如果我们能在这些其他空间上创建一个令人满意的“距离”概念(例如，我们需要满足三角不等式)，那么诸如收敛、Cauchy序列和开集等概念就可以自然地转移过来。完备度量空间是指任何具有适当定义度量的集合——该度量使其中Cauchy序列都有极限。我们花了大量时间讨论 \(\mathbb{R}\) 是完备度量空间，而 \(\mathbb{Q}\) 不是这一事实。
+
+Baire 纲定理的更一般形式指出，任何完备度量空间都太大，以至于不能表示为无处稠密子集的可数并集。一个特别有趣的完备度量空间的例子是定义在区间 \(\left\lbrack  {0,1}\right\rbrack\) 上的连续函数集合。(在这个空间中，两个函数 \(f\) 和 \(g\) 之间的距离定义为 \(\sup \left| {f\left( x\right)  - g\left( x\right) }\right|\) ，其中 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 。)现在，在这个空间中，我们可以看到，即使在某一点可微的连续函数集合也可以表示为无处稠密集的可数并集。因此，Baire 定理在这一背景下的一个引人入胜的结论是，大多数连续函数在任何点都没有导数。第5章以构造一个这样的函数作为结尾。这种奇特的情况反映了 \(\mathbb{Q}\) 和 \(\mathbb{R}\setminus\mathbb{Q}\) 作为 \(\mathbb{R}\) 子集的作用。正如熟悉的有理数只占实数轴的极小部分一样，微积分中的可微函数在一般情况下也是连续函数中极其不典型的。
+

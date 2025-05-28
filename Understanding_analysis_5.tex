@@ -1,0 +1,762 @@
+\chapter{导数}
+\label{chap:5}
+\section{讨论:导数是否连续？}
+\label{sec:5.1}
+导数的几何动机来自我们非常熟悉的问题。给定一个函数 \(g\left( x\right)\) ，导数 \({g}^{\prime }\left( x\right)\) 被理解为函数 \(g\) 在定义域内每个点 \(x\) 处的图形斜率。图 \ref{fig:5.1} 揭示了数学定义背后的动机。
+
+\[
+{g}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{g\left( x\right)  - g\left( c\right) }{x - c}.
+\]
+
+差商 $\dfrac{g(x) - g(c)}{x-c}$ 表示通过两点 \(\left( {x,g\left( x\right) }\right)\) 和 \(\left( {c,g\left( c\right) }\right)\) 的直线斜率。通过取 \(x\) 趋近于 \(c\) 的极限，我们得到了在 \(x = c\) 处切线斜率的明确定义的数学意义。
+
+导数函数的广泛应用是微积分序列以及数学中其他几门高级课程的主要课题。这里不会详细探讨这些应用问题，但应该指出的是，本章中推导出的微分的严格基础是任何应用研究的重要基础。最终，随着导数被应用于越来越复杂的操作，准确了解微分的定义以及它与其他数学运算的相互作用变得至关重要。
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_0_601_1570_405_317_0.jpg}
+  \caption{\({g}^{\prime }\left( c\right)\) 的定义}
+  \label{fig:5.1}
+\end{figure}
+
+尽管没有明确讨论物理应用，但在理论发展过程中，我们会遇到一些更具抽象性质的问题。其中大多数问题涉及微分与连续性之间的关系。连续函数是否总是可微的？如果不是，连续函数可以有多不可微？可微函数是否连续？假设函数 \(f\) 在其定义域内的每一点都有导数，我们能对函数 \({f}^{\prime }\) 说些什么？ \({f}^{\prime }\) 是否连续？我们能否准确描述所有可能导数的集合，还是说它有什么限制？换言之，给定一个任意函数 \(g\) ，是否总能找到一个可微函数 \(f\) ，使得 \({f}^{\prime } = g\) ，还是说 \(g\) 必须具备某些属性才能实现这一点？在我们对连续性的研究中，我们发现：将注意力限制在单调函数上，有助于得出关于不连续点集合的问题的答案。同样的限制对我们研究关于不可微点集合的问题有何影响？这些问题中有些比其他的更难解决，有些至今仍未有令人满意的答案。
+
+对于本次讨论特别有用的一类例子是函数具有如下形式
+
+
+
+\[
+{g}_{n}\left( x\right)  = \left\{  \begin{array}{ll} {x}^{n}\sin \left( {1/x}\right) & x \neq  0 \\  0 & x = 0. \end{array}\right.
+\]
+
+当 \(n = 0\) 时，我们已经看到(例\ref{eg:4.2.6}) \(\sin \left( {1/x}\right)\) 的振荡阻止 \({g}_{0}\left( x\right)\) 在 \(x = 0\) 处连续。当 \(n = 1\) 时，这些振荡被压缩在 \(\left| x\right|\) 和 \(- \left| x\right|\) 之间，结果是 \({g}_{1}\) 在 \(x = 0\) 处连续(例4.3.6)。 \({g}_{1}^{\prime }\left( 0\right)\) 是否良定义？使用前面的定义，我们得到
+
+\[
+{g}_{1}^{\prime }\left( 0\right)  = \mathop{\lim }\limits_{{x \rightarrow  0}}\frac{{g}_{1}\left( x\right) }{x} = \mathop{\lim }\limits_{{x \rightarrow  0}}\sin \left( {1/x}\right) ,
+\]
+
+正如我们现在所知，它并不存在。因此， \({g}_{1}\) 在 \(x = 0\) 处不可微。另一方面，同样的计算表明 \({g}_{2}\) 在零处可微。事实上，我们有
+
+\[
+{g}_{2}^{\prime }\left( 0\right)  = \mathop{\lim }\limits_{{x \rightarrow  0}}x\sin \left( {1/x}\right)  = 0.
+\]
+
+在非零点处，我们可以使用熟悉的微分规则(即将被证明)来得出结论: \({g}_{2}\) 在 \(\mathbb{R}\) 内处处可微，且
+
+\[
+{g}_{2}^{\prime }\left( x\right)  = \left\{  \begin{array}{ll}  - \cos \left( {1/x}\right)  + {2x}\sin \left( {1/x}\right) & x \neq  0 \\  0 & x = 0. \end{array}\right.
+\]
+
+但现在考虑
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  0}}{g}_{2}^{\prime }\left( x\right)
+\]
+
+由于 \(\cos \left( {1/x}\right)\) 项前面没有 \(x\) 的因子，我们只得得出结论：这个极限不存在，因此导数函数不连续。总结来说，函数 \({g}_{2}\left( x\right)\) 在 \(\mathbb{R}\) 上处处连续且可微(图5.2)，因此导数函数 \({g}_{2}^{\prime }\) 在 \(\mathbb{R}\) 上处处有定义，但 \({g}_{2}^{\prime }\) 在零点处有一个间断点。结论是，导数通常不需要是连续的！
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_2_420_393_799_363_0.jpg}
+  \caption{函数 \({g}_{2}\left( x\right)  = {x}^{2}\sin \left( {1/x}\right)\) 在零点附近的行为}
+  \label{fig:5.2}
+\end{figure}
+
+\({g}_{2}^{\prime }\) 中的间断性是本质的，意味着 \(\mathop{\lim }\limits_{{x \rightarrow  0}}{g}^{\prime }\left( x\right)\) 不存在单侧极限。但是，对于具有简单跳跃间断性的函数呢？例如，是否存在一个函数 \(h\) 使得
+
+\[
+{h}^{\prime }\left( x\right)  = \left\{  \begin{array}{ll}  - 1 & x \leq  0 \\  1 & x > 0. \end{array}\right.
+\]
+
+第一印象可能会让人想到绝对值函数，它在零的左侧点的斜率为$-1$，在零的右侧点的斜率为$1$。然而，绝对值函数在零处不可微。我们想找一个在所有地方都可微的函数，包括零点。同时我们坚持要求该点处的斜率为$-1$。这个要求的难度应该开始显现出来。在不牺牲任何点的可微性的情况下，我们要求斜率从$-1$跳到$1$，并且不取得任何中间值。
+
+尽管我们已经看到连续性不是导数的必需属性，但介值性将被证明是一个更难以忽视的特性。
+
+\section{导数与介值性}
+\label{sec:5.2}
+尽管从技术上讲，这个定义对于更复杂的领域也是有意义的，但所有关于函数与其导数之间关系的有趣结果都要求给定函数的定义域是一个区间。从几何角度将导数视为变化率，我们不难理解为什么希望将自变量限制在一个连通的定义域内。
+
+第\ref{sec:4.2}节中的函数极限理论足以提供导数的严格定义。
+
+\begin{Def}
+  \label{def:5.2.1}
+  设 \(g : A \rightarrow  \mathbb{R}\) 为定义在区间 \(A\) 上的函数。给定 \(c \in  A\) ， \(g\) 在 \(c\) 处的导数定义为（如果该极限存在）
+
+\[
+{g}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{g\left( x\right)  - g\left( c\right) }{x - c},
+\]
+
+如果$\forall c\in A$，极限 \({g}^{\prime }\) 都存在，我们说 \(g\) 在 \(A\) 上是可微的。
+\end{Def}
+
+\begin{Eg}\label{eg:5.2.2}
+  \begin{enumerate}[label = (\alph*)]
+  \item\label{item:5.2.1} 考虑 \(f\left( x\right)  = {x}^{n}\) ，其中 \(n \in  \mathbb{N}\) ，并设 \(c\) 为 \(\mathbb{R}\) 中的任意一点。使用代数恒等式
+
+\[
+{x}^{n} - {c}^{n} = \left( {x - c}\right) \left( {{x}^{n - 1} + c{x}^{n - 2} + {c}^{2}{x}^{n - 3} + \cdots  + {c}^{n - 1}}\right) ,
+\]
+
+我们可以计算出熟悉的公式
+\begin{align*}
+{f}^{\prime }\left( c\right)  = & \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{{x}^{n} - {c}^{n}}{x - c} = \mathop{\lim }\limits_{{x \rightarrow  c}}\left( {{x}^{n - 1} + c{x}^{n - 2} + {c}^{2}{x}^{n - 3} + \cdots  + {c}^{n - 1}}\right)\\
+= & {c}^{n - 1} + {c}^{n - 1} + \cdots  + {c}^{n - 1} = n{c}^{n - 1}.
+\end{align*}
+
+\item \label{item:5.2.2}
+设 \(g\left( x\right)  = \left| x\right|\) 。试在 \(c = 0\) 处计算导数：
+\[
+{g}^{\prime }\left( 0\right)  = \mathop{\lim }\limits_{{x \rightarrow  0}}\frac{\left| x\right| }{x},
+\]
+
+根据 \(x\) 是从右侧还是左侧趋近于零，该极限为$+1$或$-1$。因此，该极限不存在，我们得出结论: \(g\) 在$0$处不可微。
+  \end{enumerate}
+\end{Eg}
+ 
+例~\ref{eg:5.2.2}~\ref{item:5.2.2}提醒我们， \(g\) 的连续性并不意味着 \(g\) 必然可微。另一方面，如果 \(g\) 在某点可微，那么 \(g\) 在该点必定连续。
+
+\begin{Def}\label{def:5.2.3}
+  若 \(g : A \rightarrow  \mathbb{R}\) 在点 \(c \in  A\) 处可微，则 \(g\) 在 \(c\) 处也连续。
+\end{Def}
+
+\begin{proof}
+我们假设
+
+\[
+{g}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{g\left( x\right)  - g\left( c\right) }{x - c}
+\]
+
+存在，并且我们想要证明 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  = g\left( c\right)\) 。但请注意，函数极限的代数极限定理允许我们写出
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  c}}\left( {g\left( x\right)  - g\left( c\right) }\right)  = \mathop{\lim }\limits_{{x \rightarrow  c}}\left( \frac{g\left( x\right)  - g\left( c\right) }{x - c}\right) \left( {x - c}\right)  = {g}^{\prime }\left( c\right)  \cdot  0 = 0.
+\]
+
+由此可得 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  = g\left( c\right)\) 。  
+\end{proof}
+
+\subsection{可微函数的组合}
+
+代数极限定理(定理2.3.3)很容易得出连续函数的代数组合也是连续的结论。只需稍加努力，我们就可以得出关于可微函数的和、积和商的类似结论。
+
+\begin{Thm}\label{thm:5.2.4}
+  设 \(f\) 和 \(g\) 是定义在区间 \(A\) 上的函数，并假设两者在某点 \(c \in  A\) 处都可微。那么，
+\begin{enumerate}[label=(\roman*)]
+\item\label{item:5.2.3}\({\left( f + g\right) }^{\prime }\left( c\right)  = {f}^{\prime }\left( c\right)  + {g}^{\prime }\left( c\right)\) 
+\item \label{item:5.2.4} \(\forall k\in \mathbb{R}, {\left( kf\right) }^{\prime }\left( c\right)  = k{f}^{\prime }\left( c\right)\) 
+\item \label{item:5.2.5}\({\left( fg\right) }^{\prime }\left( c\right)  = {f}^{\prime }\left( c\right) g\left( c\right)  + f\left( c\right) {g}^{\prime }\left( c\right)\) 
+\item \label{item:5.2.6} $g(c)\ne 0$时， \({\left( f/g\right) }^{\prime }\left( c\right)  = \dfrac{g\left( c\right) {f}^{\prime }\left( c\right)  - f\left( c\right) {g}^{\prime }\left( c\right) }{{\left\lbrack  g\left( c\right) \right\rbrack  }^{2}}\) 
+\end{enumerate}
+\end{Thm}
+
+\begin{proof}
+\ref{item:5.2.3}和\ref{item:5.2.4}留作练习。为了证明\ref{item:5.2.5}，我们将差商重写为
+\begin{align*}
+\frac{\left( {fg}\right) \left( x\right)  - \left( {fg}\right) \left( c\right) }{x - c} =& \frac{f\left( x\right) g\left( x\right)  - f\left( x\right) g\left( c\right)  + f\left( x\right) g\left( c\right)  - f\left( c\right) g\left( c\right) }{x - c}\\
+= & f\left( x\right) \left\lbrack  \frac{g\left( x\right)  - g\left( c\right) }{x - c}\right\rbrack   + g\left( c\right) \left\lbrack  \frac{f\left( x\right)  - f\left( c\right) }{x - c}\right\rbrack  .
+\end{align*}
+
+
+因为 \(f\) 在 \(c\) 处可微，所以它在 \(c\) 处连续，因此 \(\mathop{\lim }\limits_{{x \rightarrow  c}}f\left( x\right)  =\)  \(f\left( c\right)\) 。这一事实，连同代数极限定理(定理4.2.4)的函数极限版本，证明了结论
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  c}}\frac{\left( {fg}\right) \left( x\right)  - \left( {fg}\right) \left( c\right) }{x - c} = f\left( c\right) {g}^{\prime }\left( c\right)  + {f}^{\prime }\left( c\right) g\left( c\right) .
+\]
+
+\ref{item:5.2.6} 也可以作类似证明，或者我们基于下文的结论进行论证。
+  
+\end{proof}
+
+两个可微函数的复合幸运地产生了另一个可微函数。这一事实被称为链式法则。为了推导复合函数 \(g \circ  f\) 的导数的正确公式，我们可以写成
+\begin{align*}
+{\left(g \circ  f\right) }^{\prime }\left( c\right)  = &\mathop{\lim }\limits_{{x \rightarrow  c}}\frac{g\left( {f\left( x\right) }\right)  - g\left( {f\left( c\right) }\right) }{x - c} = \mathop{\lim }\limits_{{x \rightarrow  c}}\frac{g\left( {f\left( x\right) }\right)  - g\left( {f\left( c\right) }\right) }{f\left( x\right)  - f\left( c\right) } \cdot  \frac{f\left( x\right)  - f\left( c\right) }{x - c}\\
+=& {g}^{\prime }\left( {f\left( c\right) }\right)  \cdot  {f}^{\prime }\left( c\right) \text{ . }
+\end{align*}
+
+
+稍加润色，这一连串的等式就可以算得上是一个证明了，不过有个麻烦的问题:如果在某 \(c\) 的小邻域内有 \(f\left( x\right)  = f\left( c\right)\) ，那么 \(f\left( x\right)  - f\left( c\right)\) 表达式会使分母出现问题。(\ref{sec:5.1}节中讨论的函数 \({g}_{2}\left( x\right)\) 在 \(c = 0\) 附近就表现出这种特性。)接下来对链式法则的证明将设法巧妙地解决这个问题，但其本质上就是刚才给出的论证。
+
+\begin{Thm}\label{thm:5.2.5}
+  设 \(f : A \rightarrow  \mathbb{R}\) 和 \(g : B \rightarrow  \mathbb{R}\) 满足 \(f\left( A\right)  \subseteq\)  \(B\) （这使得复合函数 \(g \circ  f\) 有定义）。如果 \(f\) 在 \(c \in  A\) 处可微，且 \(g\) 在 \(f\left( c\right)  \in  B\) 处可微，则 \(g \circ  f\) 在 \(c\) 处可微，且 \({\left( g \circ  f\right) }^{\prime }\left( c\right)  = {g}^{\prime }\left( {f\left( c\right) }\right)  \cdot  {f}^{\prime }\left( c\right) .\)
+\end{Thm}
+
+\begin{proof}
+因为 \(g\) 在 \(f\left( c\right)\) 处可微，我们知道
+
+\[
+{g}^{\prime }\left( {f\left( c\right) }\right)  = \mathop{\lim }\limits_{{y \rightarrow  f\left( c\right) }}\frac{g\left( y\right)  - g\left( {f\left( c\right) }\right) }{y - f\left( c\right) }.
+\]
+
+另一种表达这一事实的方法是让 \(d\left( y\right)\) 表示差值
+\begin{equation}
+\label{eq:5.2.1}
+d\left( y\right)  = \frac{g\left( y\right)  - g\left( {f\left( c\right) }\right) }{y - f\left( c\right) } - {g}^{\prime }\left( {f\left( c\right) }\right) ,
+\end{equation}
+
+并观察到 \(\mathop{\lim }\limits_{{y \rightarrow  f\left( c\right) }}d\left( y\right)  = 0\) 。目前，当 \(y = f\left( c\right)\) 时， \(d\left( y\right)\) 尚未定义，但声明 \(d\left( {f\left( c\right) }\right)  = 0\) 似乎是自然的——这使得 \(d\) 在 \(f\left( c\right)\) 处连续。
+
+现在，我们进入细节部分。方程\eqref{eq:5.2.1}可以重写为
+
+\begin{equation}
+\label{eq:5.2.2}
+g\left( y\right)  - g\left( {f\left( c\right) }\right)  = \left\lbrack  {{g}^{\prime }\left( {f\left( c\right) }\right)  + d\left( y\right) }\right\rbrack  \left( {y - f\left( c\right) }\right) .
+\end{equation}
+
+注意到这个方程对全部的 \(y \in  B\) （包括 \(y = f\left( c\right)\) ）都成立。因此，我们可以自由地作替换 \(y = f\left( t\right)\) ，其中 $t\in A$。如果 \(t \neq  c\) ，我们可以将方程\eqref{eq:5.2.2}除以$(t - c)$得到：$\forall t\ne c$
+
+\[
+\frac{g\left( {f\left( t\right) }\right)  - g\left( {f\left( c\right) }\right) }{t - c} = \left\lbrack  {{g}^{\prime }\left( {f\left( c\right) }\right)  + d\left( {f\left( t\right) }\right) }\right\rbrack  \frac{\left( f\left( t\right)  - f\left( c\right) \right) }{t - c}
+\]
+
+最后，取 \(t \rightarrow  c\) 的极限并应用代数极限定理，得到所需的公式。  
+\end{proof}
+
+\subsection{Darboux定理}
+
+本章引言的一个结论是，虽然连续性是导数存在的必要条件，但导数函数本身并不总是连续的。我们的具体例子是 \({g}_{2}\left( x\right)  = {x}^{2}\sin \left( {1/x}\right)\) ，其中我们设 \({g}_{2}\left( 0\right)  = 0\) 。通过调整主导 \({x}^{2}\) 因子的指数，可以构造出具有无界导数的可微函数，或具有不连续二阶导数的二次可微函数的例子(练习5.2.5)。所有这些例子中的基本原理是，通过控制原始函数的振荡大小，我们可以使斜率的相应振荡足够剧烈，从而阻止相关极限的存在。
+
+值得注意的是，对于这类例子，出现的间断点从来不是简单的跳跃间断点。(“跳跃间断点”的精确定义在第\ref{sec:4.6}节中给出。)我们现在可以确认我们之前的怀疑，即尽管导数通常不必连续，但它们确实具有介值性。(参见定义\ref{def:4.5.3}。)这一令人惊讶的观察是更明显观察的一个相当直接的推论，即可微函数在导数等于零的点处达到最大值和最小值(图~\ref{fig:5.3})。
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_6_601_353_403_315_0.jpg}
+  \caption{内部极值定理}
+  \label{fig:5.3}
+\end{figure}
+
+
+\begin{Thm}[内部极值定理，Fermat原理]
+  \label{thm:5.2.6}
+  设 \(f\) 在开区间$(a, b)$上可微。如果 \(f\) 在某点 \(c \in  \left( {a,b}\right)\) 处取得最大值(即对所有 \(x \in  \left( {a,b}\right)\) ， \(f\left( c\right)  \geq  f\left( x\right)\) )，则 \({f}^{\prime }\left( c\right)  = 0\) 。如果 \(f\left( c\right)\) 是最小值，命题同样成立。
+\end{Thm}
+
+\begin{proof}
+  因为 \(c\) 在开区间$(a, b)$内，我们可以构造两个序列 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\)  ，使它们收敛于 \(c\) ，且 \( \forall n \in  \mathbb{N}, {x}_{n} < c < {y}_{n}\) 。 \(f\left( c\right)\) 是最大值的事实意味着 \(\forall n, f\left( {y}_{n}\right)  - f\left( c\right)  \leq  0\) ，因此根据序极限定理(定理\ref{thm:2.3.4})
+
+\[
+{f}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{n \rightarrow  \infty }}\frac{f\left( {y}_{n}\right)  - f\left( c\right) }{{y}_{n} - c} \leq  0
+\]
+
+类似地，
+
+\[
+{f}^{\prime }\left( c\right)  = \mathop{\lim }\limits_{{n \rightarrow  \infty }}\frac{f\left( {x}_{n}\right)  - f\left( c\right) }{{x}_{n} - c} \geq  0,
+\]
+
+因此 \({f}^{\prime }\left( c\right)  = 0\) ，是为所求。
+\end{proof}
+
+
+内部极值定理是使用导数作为解决应用优化问题工具的基本原理。这一由 Pierre de Fermat 发现并利用的思想，与导数本身一样古老。从某种意义上说，寻找最大值和最小值可以说是Fermat发明其求切线斜率方法的初衷。200年后，法国数学家 Gaston Darboux (1842-1917)指出，Fermat寻找最大值和最小值的方法隐含了一个结论:如果一个导数函数取得两个不同的值 \({f}^{\prime }\left( a\right)\) 和 \({f}^{\prime }\left( b\right)\) ，那么它也必须取得介于两者之间的所有值。这些发现之间明显的时间间隔反映了这两个时代所关注的数学问题类型的差异。Fermat当时是在为解决计算问题创造工具，而到了19世纪中叶，数学变得更加内省。数学家们将精力投入到理解数学本身的意义上。
+
+\begin{Thm}[Darboux定理]
+  \label{thm:5.2.7}
+  如果 \(f\) 在区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可微，且如果 \(\alpha\) 满足 \({f}^{\prime }\left( a\right)  < \alpha  < {f}^{\prime }\left( b\right)\) (或 \({f}^{\prime }\left( a\right)  > \alpha  > {f}^{\prime }\left( b\right)\) )，则存在一个点 \(c \in  \left( {a,b}\right)\) ，使得 \({f}^{\prime }\left( c\right)  = \alpha\) 。
+\end{Thm}
+
+\begin{proof}
+  我们首先通过定义一个新函数 \(g\left( x\right)  = f\left( x\right)  - {\alpha x}\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上来简化问题。注意到 \(g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上是可微的，且 \({g}^{\prime }\left( x\right)  = {f}^{\prime }\left( x\right)  - \alpha\) 。就 \(g\) 而言，我们的假设表明 \({g}^{\prime }\left( a\right)  < 0 < {g}^{\prime }\left( b\right)\) ，我们希望证明对于某个 \(c \in  \left( {a,b}\right)\) ， \({g}^{\prime }\left( c\right)  = 0\) 成立。
+
+  由于 \(g\) 在 $[a,b]$ 上连续，由极值定理，$g$ 在该区间上必取到最小值与最大值。
+
+  若 \(g'(a) < 0\)，则在 \(a\) 的右邻域存在点 \(x\) 使得 \(g(x) < g(a)\)；同理，若 \(g'(b) > 0\)，则在 \(b\) 的左邻域存在点 \(x\) 使得 \(g(x) < g(b)\)。因此，端点 \(a\) 和 \(b\) 均非 \(g\) 的最小值点，故最小值必于开区间 \((a,b)\) 内某点 \(c\) 处取得。
+
+  根据 Fermat 原理，若 \(g\) 在 \(c \in (a,b)\) 处取得极值，则其导数 \(g'(c) = 0\)，即 \(f'(c) = \alpha\)。同理，当 \(g'(a) > 0\) 且 \(g'(b) < 0\) 时，\(g\) 的最大值点位于 \((a,b)\) 内，导数同样为零。
+
+  综上，总存在 \(c \in (a,b)\) 使得 \(f'(c) = \alpha\)。
+\end{proof}
+
+
+\subsection{练习}
+
+练习 5.2.1. 为定理 5.2.4 的 (i) 和 (ii) 部分提供证明。
+
+练习 5.2.2. (a) 使用定义 5.2.1 为 \(f\left( x\right)  = 1/x\) 的导数生成正确的公式。
+
+(b) 将 (a) 部分的结果与链式法则(定理 5.2.5)结合，为定理 5.2.4 的 (iv) 部分提供证明。
+
+(c) 通过代数操作 \(\left( {f/g}\right)\) 的差商，以类似于定理 5.2.4 (iii) 的证明风格，直接证明定理 5.2.4 (iv)。
+
+练习 5.2.3. 通过模仿第 4.1 节中的Dirichlet构造，在 \(\mathbb{R}\) 上构造一个在单点可微的函数。
+
+练习 5.2.4. 设 \({f}_{a}\left( x\right)  = \left\{  \begin{array}{ll} {x}^{a} & x \geq  0 \\  0 & x < 0. \end{array}\right.\)
+
+(a) 对于哪些 \(a\) 的值， \(f\) 在零处连续？
+
+(b) 对于哪些 \(a\) 的值， \(f\) 在零处可微？在这种情况下，导数函数是否连续？
+
+(c) 对于哪些 \(a\) 的值， \(f\) 是二次可微的？
+
+练习 5.2.5. 设
+
+\[
+{g}_{a}\left( x\right)  = \left\{  \begin{array}{ll} {x}^{a}\sin \left( {1/x}\right) & x \neq  0 \\  0 & x = 0. \end{array}\right.
+\]
+
+找到一个特定的(可能为非整数的) \(a\) 的值，使得
+
+(a) \({g}_{a}\) 在 \(\mathbb{R}\) 上可微，但 \({g}_{a}^{\prime }\) 在 \(\left\lbrack  {0,1}\right\rbrack\) 上无界。
+
+(b) \({g}_{a}\) 在 \(\mathbb{R}\) 上可微，且 \({g}_{a}^{\prime }\) 连续但在零点不可微。
+
+(c) \({g}_{a}\) 在 \(\mathbb{R}\) 上可微，且 \({g}_{a}^{\prime }\) 在 \(\mathbb{R}\) 上可微，但 \({g}_{a}^{\prime \prime }\) 在零点不连续。习题 5.2.6. (a) 假设 \(g\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上可微，并满足 \({g}^{\prime }\left( a\right)  <\)  \(0 < {g}^{\prime }\left( b\right)\) 。证明存在一个点 \(x \in  \left( {a,b}\right)\) 使得 \(g\left( a\right)  > g\left( x\right)\) ，以及一个点 \(y \in  \left( {a,b}\right)\) 使得 \(g\left( y\right)  < g\left( b\right)\) 。
+
+(b) 现在完成之前开始的Darboux定理(Darboux's Theorem)的证明。
+
+练习5.2.7。回顾一致连续性(定义4.4.5)的定义以及定理4.4.8的内容，该定理指出紧集上的连续函数是一致连续的。
+
+(a) 提出一个定义，说明 \(f : A \rightarrow  \mathbb{R}\) 在 \(A\) 上是一致可微的。
+
+(b) 给出一个在 \(\left\lbrack  {0,1}\right\rbrack\) 上一致可微的函数的例子。
+
+(c) 是否存在一个类似于定理4.4.8的微分定理？在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可微的函数是否必然是一致可微的？第5.1节讨论的示例类可能有用。
+
+练习5.2.8。判断每个猜想是真还是假。为真猜想提供论证，为假猜想提供反例。
+
+(a) 如果导数函数不是常数，那么导数必须取某些无理数值。
+
+(b) 如果 \({f}^{\prime }\) 存在于一个开区间上，并且存在某个点 \(c\) 使得 \({f}^{\prime }\left( c\right)  > 0\) ，那么在 \(c\) 周围存在一个 \(\delta\) 邻域 \({V}_{\delta }\left( c\right)\) ，在该邻域内对于所有 \(x \in  {V}_{\delta }\left( c\right)\) 都有 \({f}^{\prime }\left( x\right)  > 0\) 。
+
+(c) 如果 \(f\) 在包含零的区间上可微，并且如果 \(\mathop{\lim }\limits_{{x \rightarrow  0}}{f}^{\prime }\left( x\right)  =\)  \(L\) ，那么必然有 \(L = {f}^{\prime }\left( 0\right)\) 。
+
+(d) 重复猜想 (c)，但放弃 \({f}^{\prime }\left( 0\right)\) 必然存在的假设。如果 \({f}^{\prime }\left( x\right)\) 对所有 \(x \neq  0\) 都存在，并且如果 \(\mathop{\lim }\limits_{{x \rightarrow  0}}{f}^{\prime }\left( x\right)  = L\) ，那么 \({f}^{\prime }\left( 0\right)\) 存在且等于 \(L\) 。
+
+\section{中值定理}
+\label{sec:5.3}
+中值定理(图\ref{fig:5.4})在几何上提出了一个合理的断言：在一个区间 \(\left\lbrack  {a,b}\right\rbrack\) 上的可微函数 \(f\) ，会在某个点上取到与通过端点 \(\left( {a,f\left( a\right) }\right)\) 和 \(\left( {b,f\left( b\right) }\right)\) 的直线斜率相等的斜率。
+
+更简洁地说，至少存在一个点 \(c \in  \left( {a,b}\right)\) ，使得
+\[
+{f}^{\prime }\left( c\right)  = \frac{f\left( b\right)  - f\left( a\right) }{b - a}
+\]
+
+
+
+从表面上看，这一观察似乎并没有什么特别引人注目之处。其有效性似乎无可否认，就像连续函数的介值定理一样——而且其证明相当简短。然而，证明的简易性具有误导性，因为它是建立在极限和连续性研究中的一些艰难成果之上的。在这方面，中值定理是对一项工作圆满完成的一种奖励。正如我们将看到的，它是一个具有非凡价值的奖项。尽管结果本身在几何上是显而易见的，但中值定理是几乎所有与微分相关的主要定理的基石。我们将用它来证明关于可微函数商的极限的L'Hospital法则。对无限函数级数在微分时如何行为的严格分析需要中值定理(定理\ref{thm:6.4.3})，并且它是微积分基本定理（定理 \ref{thm:7.5.1}）证明中的关键步骤。它也是Lagrange余项定理(定理\ref{thm:6.6.1})的基本概念，该定理近似估计了Taylor多项式与生成它的函数之间的误差。
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_9_746_358_519_341_0.jpg}
+  \caption{中值定理}
+  \label{fig:5.4}
+\end{figure}
+
+中值定理可以以不同程度的普遍性表述，每一种都重要到足以赋予其特殊的名称。回想一下，极值定理(定理\ref{thm:4.4.3})指出，紧集上的连续函数总是达到最大值和最小值。将这一观察与可微函数的内极值定理(定理~\ref{thm:5.2.4})结合起来，得到了由数学家 Michel Rolle (1652-1719)首次指出的中值定理的一个特例(图\ref{fig:5.5})。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_10_574_382_519_287_0.jpg}
+  \caption{Rolle定理}
+  \label{fig:5.5}
+\end{figure}
+
+\begin{Thm}[Rolle定理]
+  \label{thm:5.3.1}
+  设 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，在$(a, b)$内可导。如果 \(f\left( a\right)  = f\left( b\right)\) ，则存在一点 \(c \in\) ∈(a, b)，使得 \({f}^{\prime }\left( c\right)  = 0\) 。
+\end{Thm}
+
+\begin{proof}
+  因为 \(f\) 在紧集上连续， \(f\) 取到最大值和最小值。
+
+  如果最大值和最小值都出现在端点，那么 \(f\) 必然是一个常数函数，此时 $\forall x\in (a,b)$，恒有 \({f}^{\prime }\left( x\right)  = 0\) 。此时，我们可以任取 \(c\in (a,b)\) 为我们所需的点。
+
+  如果最大值或最小值出现在内部$(a, b)$的某个点 \(c\) ，那么根据内部极值定理(定理~\ref{thm:5.2.6})， \({f}^{\prime }\left( c\right)  = 0\) 。
+\end{proof}
+
+\begin{Thm}
+  \label{thm:5.3.2}
+  如果 \(f : \left\lbrack  {a,b}\right\rbrack   \rightarrow  \mathbb{R}\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续且在$(a, b)$上可微，那么存在一个点 \(c \in  \left( {a,b}\right)\) 使得
+
+\[
+{f}^{\prime }\left( c\right)  = \frac{f\left( b\right)  - f\left( a\right) }{b - a}.
+\]
+\end{Thm}
+
+\begin{proof}
+注意到在 \(f\left( a\right)  = f\left( b\right)\) 的情况下，中值定理简化为Rolle定理。证明的策略是将更一般的陈述简化为这个特殊情况。
+
+通过 \(\left( {a,f\left( a\right) }\right)\) 和 \(\left( {b,f\left( b\right) }\right)\) 的直线方程为
+
+\[
+y = \left( \frac{f\left( b\right)  - f\left( a\right) }{b - a}\right) \left( {x - a}\right)  + f\left( a\right) .
+\]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_10_589_1087_462_343_0.jpg}
+\end{figure}
+
+我们希望考虑这条直线与函数 \(f\left( x\right)\) 之间的差。为此，设
+
+\[
+d\left( x\right)  = f\left( x\right)  - \left\lbrack  {\left( \frac{f\left( b\right)  - f\left( a\right) }{b - a}\right) \left( {x - a}\right)  + f\left( a\right) }\right\rbrack  ,
+\]
+
+并观察到 \(d\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，在$(a, b)$上可微，且满足 \(d\left( a\right)  = 0 = d\left( b\right)\) 。因此，根据Rolle定理，存在一个点 \(c \in  \left( {a,b}\right)\) ，使得 \({d}^{\prime }\left( c\right)  = 0\) 。因为
+
+\[
+{d}^{\prime }\left( x\right)  = {f}^{\prime }\left( x\right)  - \frac{f\left( b\right)  - f\left( a\right) }{b - a},
+\]
+
+我们得到
+
+\[
+0 = {f}^{\prime }\left( c\right)  - \frac{f\left( b\right)  - f\left( a\right) }{b - a},
+\]
+
+这便完成了证明。
+\end{proof}
+
+有人指出，中值定理几乎出现在所有与导数几何性质相关的命题证明中。举一个简单的例子，如果 \(f\) 是某个区间 \(A\) 上的常数函数 \(f\left( x\right)  = k\) ，那么根据定义~\ref{def:5.2.1}对 \({f}^{\prime }\) 的直接计算表明， \(\forall x \in  A, {f}^{\prime }\left( x\right)  = 0\) 成立。但我们如何证明其逆命题呢？如果我们知道一个可微函数 \(g\) 在 \(A\) 上处处满足 \({g}^{\prime }\left( x\right)  = 0\) ，我们的直觉告诉我们，应该能够证明 \(g\left( x\right)\) 是常数。为严格表达这种几何直观，我们所使用的语言，正是中值定理。
+
+\begin{Cor}
+  \label{cor:5.3.3}
+  如果 \(g : A \rightarrow  \mathbb{R}\) 在区间 \(A\) 上可微，并且 \(\forall x \in  A, {g}^{\prime }\left( x\right)  = 0\) ，那么对于某个常数 \(k \in  R\) ， \(g\left( x\right)  = k\) 成立。
+\end{Cor}
+
+\begin{proof}
+取 \(x,y \in  A\) 并假设 \(x < y\) 。将中值定理应用于区间 \(\left\lbrack  {x,y}\right\rbrack\) 上的 \(g\) ，我们看到 $\exists c\in A$ 使得
+
+\[
+{g}^{\prime }\left( c\right)  = \frac{g\left( y\right)  - g\left( x\right) }{y - x}
+\]
+
+现在， \({g}^{\prime }\left( c\right)  = 0\) ，因此我们得出结论 \(g\left( y\right)  = g\left( x\right)\) 。设 \(k\) 等于这个共同值。因为 \(x\) 和 \(y\) 是任意的，所以 \(\forall x \in  A,  g\left( x\right)  = k\) 成立。
+\end{proof}
+
+
+\begin{Cor}
+  \label{cor:5.3.4}
+  如果 \(f\) 和 \(g\) 是区间 \(A\) 上的可微函数，并且 \(\forall x \in  A, {f}^{\prime }\left( x\right)  = {g}^{\prime }\left( x\right)\) ，那么 \(\exists k \in  \mathbb{R}\) 使得 \(f\left( x\right)  = g\left( x\right)  + k\) 成立。
+\end{Cor}
+
+\begin{proof}
+  令 \(h\left( x\right)  = f\left( x\right)  - g\left( x\right)\) ，并对可微函数 \(h\) 应用推论~\ref{cor:5.3.3}。
+\end{proof}
+
+Cauchy给出了中值定理的更一般形式。这个广义版本的定理被用来分析L'Hospital法则和Lagrange余项定理。
+
+\begin{Thm}[广义中值定理]
+  \label{thm:5.3.5}
+如果 \(f\) 和 \(g\) 在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，在开区间$(a, b)$上可微，则存在一点 \(c \in  \left( {a,b}\right)\) 使得
+
+\[
+\left\lbrack  {f\left( b\right)  - f\left( a\right) }\right\rbrack  {g}^{\prime }\left( c\right)  = \left\lbrack  {g\left( b\right)  - g\left( a\right) }\right\rbrack  {f}^{\prime }\left( c\right) .
+\]  
+\end{Thm}
+
+如果 \({g}^{\prime }\) 在$(a, b)$上恒不为零，则结论可以表示为
+
+\[
+\frac{{f}^{\prime }\left( c\right) }{{g}^{\prime }\left( c\right) } = \frac{f\left( b\right)  - f\left( a\right) }{g\left( b\right)  - g\left( a\right) }.
+\]
+
+\begin{proof}
+  构造函数 \(h(x) = [f(b) - f(a)]g(x) - [g(b) - g(a)]f(x)\)。计算端点值：
+  \[
+  h(a) = [f(b)-f(a)]g(a) - [g(b)-g(a)]f(a) = f(b)g(a) - g(b)f(a),
+  \]
+  \[
+  h(b) = [f(b)-f(a)]g(b) - [g(b)-g(a)]f(b) = f(a)g(b) - g(a)f(b).
+  \]
+  易见 \(h(a) = h(b)\)。由 Rolle 定理，存在 \(c \in (a,b)\) 使得 \(h'(c) = 0\)。计算导数：
+  \[
+  h'(x) = [f(b)-f(a)]g'(x) - [g(b)-g(a)]f'(x),
+  \]
+  代入 \(c\) 得 \([f(b)-f(a)]g'(c) = [g(b)-g(a)]f'(c)\)，即证。
+\end{proof}
+
+
+\subsection{L'Hospital法则}
+
+代数极限定理断言，在取函数的商的极限时，假设每个单独的极限存在且 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)\) 不为零，则我们可以写成下面的形式：
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  c}}\frac{f\left( x\right) }{g\left( x\right) } = \frac{\mathop{\lim }\limits_{{x \rightarrow  c}}f\left( x\right) }{\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right) },
+\]
+
+但如果分母确实收敛到零而分子不收敛，那么不难论证，当 \(x\) 趋近于 \(c\) 时，商 \(f\left( x\right) /g\left( x\right)\) 的绝对值会无界增长(练习5.3.9)。L'Hospital法则以 Marquis de L'Hospital(1661-1704)命名，他从他的导师 Johann Bernoulli (1667-1748)那里\textit{学}到了这些结果，并于1696年将其发表，这被认为是第一本微积分教材。尽管其不同陈述方式的一般性不尽相同\footnote{指 L'Hospital 法则可以用上下极限的语言来表述。（译者注）}，总之它们是处理当分子和分母都趋近于零或同时趋近于无穷大时的不定情况的首选工具。
+
+\begin{Thm}[L'Hospital法则: \(0/0\) 型]
+  \label{thm:5.3.6}
+假设 \(f\) 和 \(g\) 是定义在包含 \(a\) 的区间上的连续函数，并且假设 \(f\) 和 \(g\) 在该区间上除 $a$ 的点外可微。如果 \(f\left( a\right)  = 0\) 和 \(g\left( a\right)  = 0\) ，那么
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  a}}\frac{{f}^{\prime }\left( x\right) }{{g}^{\prime }\left( x\right) } = L \Rightarrow \mathop{\lim }\limits_{{x \rightarrow  a}}\frac{f\left( x\right) }{g\left( x\right) } = L.
+\]  
+\end{Thm}
+
+\begin{proof}
+  对任意 \(x\) 趋近于 \(a\)，应用 Cauchy 中值定理于区间 \([a, x]\)（或 \([x, a]\)）。因 \(f(a) = g(a) = 0\)，存在 \(c \in (a, x)\) 满足
+  \[
+  f(x)g'(c) = g(x)f'(c),
+  \]
+  即 \(\frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)}\)。当 \(x \rightarrow a\) 时，\(c \rightarrow a\)，故
+  \[
+  \lim_{x \rightarrow a} \frac{f(x)}{g(x)} = \lim_{c \rightarrow a} \frac{f'(c)}{g'(c)} = L.
+  \]
+\end{proof}
+
+
+如果我们用假设 \(\mathop{\lim }\limits_{{x \rightarrow  a}}g\left( x\right)  = \infty\) 替换假设 \(f\left( a\right)  =\)  \(g\left( a\right)  = 0\) ，L'Hospital法则仍然成立。到目前为止，我们还没有明确说明极限等于 \(\infty\) 的含义。这种定义的逻辑结构与有限函数极限的逻辑结构完全相同。不同之处在于，我们不是试图强制函数在某个小的 \(\varepsilon\) 邻域内取值，而是必须证明 \(g\left( x\right)\) 最终超过任何给定的上限。任意小的 \(\varepsilon  > 0\) 被任意大的 \(M > 0\) 所取代。
+
+\begin{Def}
+  \label{def:5.3.7}
+  给定 \(g : A \rightarrow  \mathbb{R}\) 和 \(A\) 的一个极限点 \(c\) 。称 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  = \infty\) ，若 \(\forall M > 0\) ， \(\exists \delta  > 0\) ，使得每当 \(0 < \left| {x - c}\right|  < \delta\) 时，就有 \(g\left( x\right)  \geq  M\) 。
+\end{Def}
+
+我们可以用类似的方式定义 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  =  - \infty\) 。
+
+以下版本的L'Hospital法则被称为 \(\infty /\infty\) 情况，尽管假设仅要求分母中的函数趋向于无穷大。如果分子有界，那么证明所得商趋向于零是一个简单的练习(练习5.3.10)。与 \(0/0\) 情况相比，一般情况的论证相对复杂。为了简化证明的符号，我们使用单侧极限来陈述结果。
+
+\begin{Thm}[L'Hospital法则: \(\infty /\infty\) 型]
+  \label{thm:5.3.8}
+  假设 \(f\) 和 \(g\) 在$(a, b)$上可微，且 \(\mathop{\lim }\limits_{{x \rightarrow  a}}g\left( x\right)  = \infty\) (或 \(- \infty\) )。则
+
+\[
+\mathop{\lim }\limits_{{x \rightarrow  a}}\frac{{f}^{\prime }\left( x\right) }{{g}^{\prime }\left( x\right) } = L\Rightarrow \mathop{\lim }\limits_{{x \rightarrow  a}}\frac{f\left( x\right) }{g\left( x\right) } = L.
+\]
+\end{Thm}
+
+\begin{proof}
+因为 \(\mathop{\lim }\limits_{{x \rightarrow  a}}\frac{{f}^{\prime }\left( x\right) }{{g}^{\prime }\left( x\right) } = L\) ，存在一个 \({\delta }_{1} > 0\) 使得 $\forall a < x < a + {\delta }_{1}$
+
+\[
+\left| {\frac{{f}^{\prime }\left( x\right) }{{g}^{\prime }\left( x\right) } - L}\right|  < \frac{\varepsilon }{2}
+\]
+
+为了记号之便利，设 \(t = a + {\delta }_{1}\) ，并在心中记住 \(t\) 在接下来的论证中是固定的。
+
+我们的函数在 \(a\) 处未定义，但 \(\forall a < x < t\) ，我们可以在区间 \(\left\lbrack  {x,t}\right\rbrack\) 上应用广义中值定理得到 $\exists c\in (x,t)$
+
+\[
+\frac{f\left( x\right)  - f\left( t\right) }{g\left( x\right)  - g\left( t\right) } = \frac{{f}^{\prime }\left( c\right) }{{g}^{\prime }\left( c\right) }
+\]
+
+对于某个 \(c \in  \left( {x,t}\right)\) 。我们对 \(t\) 的选择意味着 $\forall x\in (a,t)$
+
+\begin{equation}
+\label{eq:5.3.1}
+L - \frac{\varepsilon }{2} < \frac{f\left( x\right)  - f\left( t\right) }{g\left( x\right)  - g\left( t\right) } < L + \frac{\varepsilon }{2}
+\end{equation}
+
+为了分离分数 \(\frac{f\left( x\right) }{g\left( x\right) }\) ，策略是将方程\eqref{eq:5.3.1}乘以 \(\left( {g\left( x\right)  - g\left( t\right) }\right) /g\left( x\right)\) 。然而，我们需要确保这个量是正的，这相当于确保 \(1 \geq  g\left( t\right) /g\left( x\right)\) 。因为 \(t\) 是固定的且 \(\mathop{\lim }\limits_{{x \rightarrow  a}}g\left( x\right)  = \infty\) ，我们可以选择 \({\delta }_{2} > 0\) ，使得 \(\forall a < x < a + {\delta }_{2}\) ， \(g\left( x\right)  \geq  g\left( t\right)\) 成立。执行所需的乘法后，结果为
+
+\[
+\left( {L - \frac{\varepsilon }{2}}\right) \left( {1 - \frac{g\left( t\right) }{g\left( x\right) }}\right)  < \frac{f\left( x\right)  - f\left( t\right) }{g\left( x\right) } < \left( {L + \frac{\varepsilon }{2}}\right) \left( {1 - \frac{g\left( t\right) }{g\left( x\right) }}\right) ,
+\]
+
+经过一些代数操作后，得到
+
+\[
+L - \frac{\varepsilon }{2} + \frac{-{Lg}\left( t\right)  + \frac{\varepsilon }{2}g\left( t\right)  + f\left( t\right) }{g\left( x\right) } < \frac{f\left( x\right) }{g\left( x\right) } < L + \frac{\varepsilon }{2} + \frac{{Lg}\left( t\right)  - \frac{\varepsilon }{2}g\left( t\right)  + f\left( t\right) }{g\left( x\right) }.
+\]
+
+再次提醒自己， \(t\) 是固定的，且 \(\mathop{\lim }\limits_{{x \rightarrow  a}}g\left( x\right)  = \infty\) 。因此，我们可以选择一个 \({\delta }_{3}\) ，使得 \(\forall a < x < a + {\delta }_{3}, g\left( x\right)\) 足够大以确保以下两者成立：
+
+\[
+\frac{-{Lg}\left( t\right)  + \frac{\varepsilon }{2}g\left( t\right)  + f\left( t\right) }{g\left( x\right) }< \frac{\varepsilon}{2},\quad\frac{{Lg}\left( t\right)  - \frac{\varepsilon }{2}g\left( t\right)  + f\left( t\right) }{g\left( x\right) }< \frac{\varepsilon}{2}
+\]
+
+将所有这些结合起来并选择 \(\delta  = \min \left\{  {{\delta }_{1},{\delta }_{2},{\delta }_{3}}\right\}\)。这足以保证 $\forall a < x < a + \delta$
+
+\[
+\left| {\frac{f\left( x\right) }{g\left( x\right) } - L}\right|  < \varepsilon
+\]
+\end{proof}
+
+\subsection{练习}
+
+练习5.3.1。从练习4.4.9中回忆，函数 \(f : A \rightarrow  \mathbb{R}\) 在 \(A\) 上是“利普希茨的”，如果存在一个 \(M > 0\) 使得
+
+\[
+\left| \frac{f\left( x\right)  - f\left( y\right) }{x - y}\right|  \leq  M
+\]
+
+对于所有 \(x,y \in  A\) 。证明如果 \(f\) 在闭区间 \(\left\lbrack  {a,b}\right\rbrack\) 上可微，且 \({f}^{\prime }\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上连续，则 \(f\) 在 \(\left\lbrack  {a,b}\right\rbrack\) 上是利普希茨(Lipschitz)的。
+
+练习5.3.2。回顾练习4.3.9，函数 \(f\) 在集合 \(A\) 上是压缩的，如果存在常数 \(0 < s < 1\) 使得
+
+\[
+\left| {f\left( x\right)  - f\left( y\right) }\right|  \leq  s\left| {x - y}\right|
+\]
+
+对于所有 \(x,y \in  A\) 。证明如果 \(f\) 可微且 \({f}^{\prime }\) 连续并在闭区间上满足 \(\left| {{f}^{\prime }\left( x\right) }\right|  < 1\) ，则 \(f\) 在该集合上是压缩的。
+
+练习 5.3.3. 设 \(h\) 为定义在区间 \(\left\lbrack  {0,3}\right\rbrack\) 上的可微函数，并假设 \(h\left( 0\right)  = 1,h\left( 1\right)  = 2\) 和 \(h\left( 3\right)  = 2\) 。
+
+(a) 论证存在一个点 \(d \in  \left\lbrack  {0,3}\right\rbrack\) 使得 \(h\left( d\right)  = d\) 。
+
+(b) 论证在某个点 \(c\) 我们有 \({h}^{\prime }\left( c\right)  = 1/3\) 。
+
+(c) 论证在定义域中的某个点 \({h}^{\prime }\left( x\right)  = 1/4\) 。
+
+练习 5.3.4. (a) 提供Cauchy广义中值定理(定理 5.3.5)证明的细节。
+
+(b) 给出广义中值定理的图形解释，类似于第5.3节开头为中值定理提供的解释。(将 \(f\) 和 \(g\) 视为曲线的参数方程。)
+
+练习 5.3.5。函数 \(f\) 的不动点是一个值 \(x\) ，其中 \(f\left( x\right)  = x\) 。证明如果 \(f\) 在一个区间上可微且 \({f}^{\prime }\left( x\right)  \neq  1\) ，则 \(f\) 最多只能有一个不动点。
+
+练习5.3.6。设 \(g : \left\lbrack  {0,1}\right\rbrack   \rightarrow  \mathbb{R}\) 为二阶可微函数(即 \(g\) 和 \({g}^{\prime }\) 都是可微函数)，且对所有 \(x \in  \left\lbrack  {0,1}\right\rbrack\) 有 \({g}^{\prime \prime }\left( x\right)  > 0\) 。如果 \(g\left( 0\right)  > 0\) 且 \(g\left( 1\right)  = 1\) ，证明存在某点 \(d \in  \left( {0,1}\right)\) 使得 \(g\left( d\right)  = d\) 当且仅当 \({g}^{\prime }\left( 1\right)  >\) 1。(这一几何上合理的事实在第6章的介绍性讨论中被使用。)
+
+练习 5.3.7. (a) 回忆一下，函数 \(f : \left( {a,b}\right)  \rightarrow  \mathbb{R}\) 在(a, b)上递增，如果 \(f\left( x\right)  \leq  f\left( y\right)\) 当 \(x < y\) 在(a, b)内时。假设 \(f\) 在(a, b)上可微。证明 \(f\) 在(a, b)上递增当且仅当 \({f}^{\prime }\left( x\right)  \geq  0\) 对所有 \(x \in  \left( {a,b}\right)\) 成立。
+
+(b) 证明函数
+
+\[
+g\left( x\right)  = \left\{  \begin{array}{ll} x/2 + {x}^{2}\sin \left( {1/x}\right) & x \neq  0 \\  0 & x = 0 \end{array}\right.
+\]
+
+在 \(\mathbb{R}\) 上可微且满足 \({g}^{\prime }\left( 0\right)  > 0\) 。现在，证明 \(g\) 在任何包含0的开区间上不递增。
+
+练习 5.3.8. 假设 \(g : \left( {a,b}\right)  \rightarrow  \mathbb{R}\) 在某点 \(c \in  \left( {a,b}\right)\) 可微。如果 \({g}^{\prime }\left( c\right)  \neq  0\) ，证明存在一个 \(\delta\) -邻域 \({V}_{\delta }\left( c\right)  \subseteq  \left( {a,b}\right)\) ，使得对于所有 \(x \in  {V}_{\delta }\left( c\right)\) ， \(g\left( x\right)  \neq  g\left( c\right)\) 。将此结果与练习 5.3.7 进行比较。
+
+练习 5.3.9. 假设 \(\mathop{\lim }\limits_{{x \rightarrow  c}}f\left( x\right)  = L\) ，其中 \(L \neq  0\) ，并假设 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  = 0\) 。证明 \(\mathop{\lim }\limits_{{x \rightarrow  c}}\left| {f\left( x\right) /g\left( x\right) }\right|  = \infty\) 。
+
+练习 5.3.10. 设 \(f\) 为有界函数，并假设 \(\mathop{\lim }\limits_{{x \rightarrow  c}}g\left( x\right)  = \infty\) 。证明 \(\mathop{\lim }\limits_{{x \rightarrow  c}}f\left( x\right) /g\left( x\right)  = 0\) 。
+
+练习 5.3.11. 使用广义中值定理来证明L'Hospital法则(定理 5.3.6)的 0/0 情况。
+
+练习 5.3.12. 假设 \(f\) 和 \(g\) 如定理 5.3.6 所述，但现在增加假设 \(f\) 和 \(g\) 在 \(a\) 处可微，且 \({f}^{\prime }\) 和 \({g}^{\prime }\) 在 \(a\) 处连续。在此更强的假设下，为L'Hospital法则的 \(0/0\) 情况找到一个简短的证明。
+
+练习5.3.13。回顾定理5.3.6的假设。如果我们不假设 \(f\left( a\right)  = g\left( a\right)  = 0\) ，而只假设 \(\mathop{\lim }\limits_{{x \rightarrow  a}}f\left( x\right)  = 0\) 和 \(\mathop{\lim }\limits_{{x \rightarrow  a}}g\left( x\right)  = 0\) ，会发生什么？假设我们有一个按照原样写的定理5.3.6的证明，解释如何在这个稍弱的假设下构建一个有效的证明。
+
+\section{一个处处不可导的连续函数}
+\label{sec:5.4}
+探索连续性与可微性之间的关系既带来了丰硕的成果，也产生了一些病态的反例。到目前为止，大部分讨论都集中在导数的连续性上，但历史上，关于连续函数是否必然可微的问题引发了大量争论。在本章的开头，我们看到了连续性是可微性的一个必要条件，但正如绝对值函数所展示的那样，这个命题的逆命题并不成立。一个函数可以在某一点连续但不可微。但一个连续函数究竟可以有多不可微？给定一个有限的点集，不难想象如何构造一个在每个点都有尖角的图形，从而使相应的函数在这个有限集上不可微。然而，当集合变为无限时，这个技巧就变得更加困难。例如，是否有可能构造一个在整个 \(\mathbb{R}\) 上连续但在每个有理点都不可微的函数？这不仅是可能的，而且情况甚至更加有趣。1872年，Karl Weierstrass 提出了一个在任何点都不可微的连续函数的例子。(似乎早在1830年，Bernhard Bolzano 就已经有了自己的例子，但直到很久以后才发表。)Weierstrass实际上发现了一类无处可微的函数，其形式为
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}^{n}\cos \left( {{b}^{n}x}\right)
+\]
+
+其中 \(a\) 和 \(b\) 的值经过精心选择。这些函数是第\ref{sec:8.3}节中讨论的Fourier级数的具体示例。如果我们用具有类似于 \(\cos \left( x\right)\) 振荡的分段线性函数替换余弦函数，Weierstrass论证的细节将得到简化。
+
+
+定义 $[-1,1]$ 上的函数
+
+\[
+h\left( x\right)  = \left| x\right|
+\]
+
+并通过 \(h\left( {x + 2}\right)  = h\left( x\right)\) 将 \(h\) 的定义扩展到整个 \(\mathbb{R}\) 。结果是一个周期性的“锯齿”函数(图\ref{fig:5.6})。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_16_358_350_920_290_0.jpg}
+  \caption{函数 \(h\left( x\right)\) }
+  \label{fig:5.6}
+\end{figure}
+
+
+练习5.4.1。在 \(\left\lbrack  {-2,3}\right\rbrack\) 上绘制 \(\left( {1/2}\right) h\left( {2x}\right)\) 的图形，并随着 \(n\) 增大对这些函数进行定性描述。
+
+\[
+{h}_{n}\left( x\right)  = \frac{1}{{2}^{n}}h\left( {{2}^{n}x}\right)
+\]
+
+
+现在，定义
+
+\[
+g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{h}_{n}\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }\frac{1}{{2}^{n}}h\left( {{2}^{n}x}\right) .
+\]
+
+断言： \(g\left( x\right)\) 在 \(\mathbb{R}\) 上连续，但在任何点都不可微。
+
+\subsection{函数无穷级数与连续性}
+
+\(g\left( x\right)\) 的定义与我们通常定义函数的方式有显著不同。对于每个 \(x \in  \mathbb{R},g\left( x\right)\) ，它被定义为一个无穷级数的值。
+
+练习5.4.2。固定 \(x \in  \mathbb{R}\) 。论证该级数
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }\frac{1}{{2}^{n}}h\left( {{2}^{n}x}\right)
+\]
+
+绝对收敛，因此 \(g\left( x\right)\) 是良定的。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/01955a91-5705-778e-9175-f40107f5ae74_17_568_394_813_383_0.jpg}
+  \caption{\(g\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }\left( {1/{2}^{n}}\right) h\left( {{2}^{n}x}\right)\) 的示意图}
+  \label{fig:5.7}
+\end{figure}
+
+
+练习5.4.3。假设 \(h\left( x\right)\) 的连续性已知，参考第\ref{chap:4}章中适当的定理，这些定理暗示了有限和
+
+\[
+{g}_{m}\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{m}\frac{1}{{2}^{n}}h\left( {{2}^{n}x}\right)
+\]
+
+在 \(\mathbb{R}\) 上是连续的。
+
+这让我们回到了分析中的一个典型问题:在有限情况下有效的结论何时可以推广到无限情况？有限个连续函数的和当然是连续的，但对于无限个连续函数的和，这一结论是否仍然成立？一般来说，我们会发现情况并非总是如此。然而，对于这个特定的和，极限函数 \(g\left( x\right)\) 的连续性是可以证明的。解读关于有限函数和的结果何时可以推广到无限函数和，是第\ref{chap:6}章的基本主题之一。尽管在这一点上，我们完全有能力独立证明 \(g\) 的连续性，但我们仍将推迟这一证明(习题6.4.4)，将其作为对即将学习的一致收敛性的动机(或作为已经学过这一内容的读者的练习)。
+
+\subsection{不可微性}
+
+有了适当的工具，证明 \(g\) 是连续的相当直接。更困难的任务是证明 \(g\) 在 \(\mathbb{R}\) 中的任何点都不可微。
+
+让我们首先看 \(x = 0\) 点。我们的函数 \(g\) 在这里似乎不可微(图~\ref{fig:5.7})，严格的证明并不太难。考虑序列 \({x}_{m} = 1/{2}^{m}\) ，其中 \(m = 0,1,2,\ldots\) 。
+
+练习5.4.4。证明
+
+\[
+\frac{g\left( {x}_{m}\right)  - g\left( 0\right) }{{x}_{m} - 0} = m + 1,
+\]
+
+并利用这一点证明 \({g}^{\prime }\left( 0\right)\) 不存在。
+
+任何想要说类似 \({g}^{\prime }\left( 0\right)  = \infty\) 的冲动都应被抵制。在前面的论证中设置 \({x}_{m} =  - \left( {1/{2}^{m}}\right)\) 会产生趋向于 \(- \infty\) 的差商。其几何表现是在 \(x = 0\) 处出现的“尖点”，这在 \(g\) 的图中可见。
+
+练习5.4.5. (a) 修改前面的论证以证明 \({g}^{\prime }\left( 1\right)\) 不存在。证明 \({g}^{\prime }\left( {1/2}\right)\) 不存在。
+
+(b) 证明对于任何形式为 \(x = p/{2}^{k}\) 的有理数， \({g}^{\prime }\left( x\right)\) 不存在，其中 \(p \in  \mathbb{Z}\) 和 \(k \in  \mathbb{N} \cup  \{ 0\}\) 。
+
+练习5.4.5 (b)中描述的点被称为“二进”点。如果 \(x = p/{2}^{k}\) 是一个二进有理数，那么函数 \({h}_{n}\) 在 \(x\) 处有一个拐点，只要 \(n \geq  k\) 。因此， \(g\) 在这种形式的点上不可微并不太令人惊讶。在二进点之间的点上，论证更为复杂。
+
+假设 \(x\) 不是一个二进数。对于固定的 \(m \in  \mathbb{N} \cup  \{ 0\} ,x\) 值，它落在两个相邻的二进点之间，
+
+\[
+\frac{p}{{2}^{m}} < x < \frac{p + 1}{{2}^{m}}.
+\]
+
+设 \({x}_{m} = p/{2}^{m}\) 和 \(y = \left( {p + 1}\right) /{2}^{m}\) 。对每个 \(m\) 重复此操作，得到两个序列 \(\left( {x}_{m}\right)\) 和 \(\left( {y}_{m}\right)\) ，满足
+
+\[
+\lim {x}_{m} = \lim {y}_{m} = x\;\text{ and }\;{x}_{m} < x < {y}_{m}.
+\]
+
+练习 5.4.6. (a) 无需过多计算，解释为什么部分和 \({g}_{m} = {h}_{0} + {h}_{1} + \cdots  + {h}_{m}\) 在 \(x\) 处可微。现在，证明对于每一个 \(m\) 的值，我们有
+
+\[
+\left| {{g}_{m + 1}^{\prime }\left( x\right)  - {g}_{m}^{\prime }\left( x\right) }\right|  = 1.
+\]
+
+(b) 证明这两个不等式
+
+\[
+\frac{g\left( {y}_{m}\right)  - g\left( x\right) }{{y}_{m} - x} < {g}_{m}^{\prime }\left( x\right)  < \frac{g\left( {x}_{m}\right)  - g\left( x\right) }{{x}_{m} - x}.
+\]
+
+(c) 使用 (a) 和 (b) 部分来证明 \({g}^{\prime }\left( x\right)\) 不存在。
+
+Weierstrass 1872年的原始论文中包含了这样一个证明：只要 \(0 < a < 1\) 且 \(b\) 是一个满足 \({ab} > 1 + {3\pi }/2\) 的奇数，无限和
+
+\[
+f\left( x\right)  = \mathop{\sum }\limits_{{n = 0}}^{\infty }{a}^{n}\cos \left( {{b}^{n}x}\right)
+\]
+
+便定义了一个处处连续但无处可微的函数。关于 \(a\) 的条件很容易理解。如果 \(0 < a < 1\) ，那么 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{a}^{n}\) 是一个收敛的几何级数，并且即将提到的Weierstrass-M 判别法(定理\ref{cor:6.4.5})可以用来证明 \(f\) 是连续的。关于 \(b\) 的限制则更为神秘。1916年，G.H. Hardy 将Weierstrass的结果扩展到包括任何满足 \({ab} \geq  1\) 的 \(b\) 值。尽管我们没有详细研究这些论证的细节，但我们仍然可以感受到导数的缺失与压缩因子(参数 \(a\) )和振荡频率增加速率(参数 \(b\) )之间的关系密切相关。
+
+练习5.4.7。回顾 \(g\left( x\right)\) 在非二进点不可微的论证。如果我们用求和 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }\left( {1/{2}^{n}}\right) h\left( {{3}^{n}x}\right)\) 替换 \(g\left( x\right)\) ，这个论证是否仍然成立？这个论证对于函数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }\left( {1/{3}^{n}}\right) h\left( {{2}^{n}x}\right)\) 是否有效？
+
+\section{结语}
+\label{sec:5.5}
+Weierstrass的例子及其类似案例，远非应被边缘化为我们对连续函数理解的异常现象，实际上应作为我们直觉的指南。我们脑海中连续性作为平滑曲线的形象严重歪曲了实际情况，这是过度接触更小的可微函数类所导致的偏见的结果。这里的教训是，连续性是一个比可微性严格更弱的概念。在第\ref{sec:3.6}节中，我们提到了 Baire 纲定理的一个推论，该推论断言Weierstrass的构造实际上是连续函数的典型特征。我们将看到，大多数连续函数在任何地方都不可微，因此可微函数是作为（而非规则）存在的。如何更严谨地表述这一观察的细节在第\ref{sec:8.2}节中详细说明。
+
+说前一节中构造的处处不可微函数 \(g\) 在其定义域的每一点都有“角”略微偏离了重点。Weierstrass 最初构造的处处不可微函数类是由无限多个光滑三角函数的和构成的。正是这种密集嵌套的振荡结构使得切线的定义变得不可能。那么，当我们把注意力限制在单调函数上时会发生什么？一个递增函数可以有多不可微？给定一个有限的点集，不难拼凑出一个在每个给定点都有实际角——因此不可微——的单调函数。一个自然的问题是，是否存在一个连续、单调且处处不可微的函数。Weierstrass怀疑这样的函数存在，但只成功地构造了一个在可数稠密集上不可微的连续递增函数的例子(习题7.5.11)。1903年，法国数学家 Henri Lebesgue (1875-1941)证明了Weierstrass的直觉在这方面是错误的。Lebesgue 证明了一个连续单调函数在其定义域的“几乎”每一点都必须是可微的。具体来说，Lebesgue 表明，对于每一个 \(\varepsilon  > 0\) ，这种函数不可微的点集可以被一个长度总和小于 \(\varepsilon\) 的可数区间并集覆盖。这种“零长度”或“零测度”的概念在我们讨论Cantor集时遇到过，并在第\ref{sec:7.6}节中更全面地探讨，那里讨论了Lebesgue对积分理论的重大贡献。
+
+随着 \(f\) 的连续性与 \({f}^{\prime }\) 的存在性之间的关系得到一定程度的掌握，我们再次回到描述所有导数集合的问题。并非每个函数都是导数。Darboux定理迫使我们得出结论，即存在一些函数——特别是那些具有跳跃间断点的函数——不能作为其他函数的导数出现。Darboux定理的另一种表述方式是，所有导数必须满足介值性质。连续函数确实具有介值性质，因此很自然地会问，是否每个连续函数都必然是导数。对于这个较小的函数类，答案是肯定的。微积分基本定理在第\ref{chap:7}章中讨论，它指出，给定一个连续函数 \(f\) ，函数 \(F\left( x\right)  = {\int }_{a}^{x}f\) 满足 \({F}^{\prime } = f\) 。这便解决了问题。导数的集合至少包含连续函数。然而，对所有可能导数的简洁描述仍然在很大程度上未能实现。
+
+作为最后的评论，我们将看到，通过巧妙地选择 \(f\) ，这种通过 \(F\left( x\right)  = {\int }_{a}^{x}f\) 定义 \(F\) 的技术可以用来生成在有趣集合上不可微的连续函数的例子，前提是我们能证明 \({\int }_{a}^{x}f\) 被定义。如何定义积分的问题成为19世纪后半叶分析学的中心主题，并一直延续至今。这一故事的大部分内容在第\ref{chap:7}章和第\ref{sec:8.1}节中详细讨论。

@@ -1,0 +1,1810 @@
+\chapter{序列与级数}
+\label{chap:2}
+\section{讨论:无穷级数的重排}
+\label{sec:2.1}
+考虑无穷级数
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n + 1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \cdots .
+\]
+
+如果我们从左侧开始简单相加，就会得到一系列所谓的部分和。换句话说，令 \({s}_{n}\) 等于级数前 \(n\) 项的和，因此 \({s}_{1} = 1,{s}_{2} = 1/2,{s}_{3} = 5/6,{s}_{4} = 7/{12}\) ，以此类推。一个直接的观察是，连续的和在一个逐渐变窄的空间中振荡。奇数和减少 \(\left( {{s}_{1} > {s}_{3} > {s}_{5} > \ldots }\right)\) ，而偶数和增加 \(\left( {{s}_{2} < {s}_{4} < {s}_{6} < \ldots }\right)\) 。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_0_339_1414_958_134_0.jpg}
+\end{figure}
+
+
+\[
+{s}_{2} < {s}_{4} < {s}_{6} < \cdots S\cdots  < {s}_{5} < {s}_{3} < {s}_{1}
+\]
+
+这似乎是合理的——我们很快将证明——序列 \(\left( {s}_{n}\right)\) 最终会收敛到一个值，记之为 \(S\) ，奇数和偶数的部分和在那里“相遇”。目前，我们无法精确计算 \(S\) ，但我们知道它落在 \(7/{12}\) 和 \(5/6\) 之间。计算几百项后可以发现 \(S \approx  {.69}\) 。无论其值是多少，现在都有一种强烈的冲动想要写下
+
+\begin{equation}
+\label{eq:2.1}
+S = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \cdots
+\end{equation}
+
+这或许意味着，如果我们真的能够将所有无限多的这些数字相加，那么和将等于 \(S\) 。这种类型的方程中，一个更熟悉的例子可能是
+
+\[
+2 = 1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \frac{1}{32} + \frac{1}{64} + \cdots ,
+\]
+
+唯一的区别在于，在第二个方程中，我们有一个更易识别的和的值。
+
+但现在到了问题的关键。尽管+、-、=这些符号在之前的方程中显得司空见惯，但它们在此处的运用方式并不常规。问题的关键在于，对于有限和来说，加法和等式的性质在应用于无限对象(如方程\eqref{eq:2.1})时是否仍然有效。正如我们即将看到的，答案有些模棱两可。
+
+以标准的代数方式处理方程\eqref{eq:2.1}，让我们将其乘以 \(1/2\) 并将其加回到方程\ref{eq:2.1}中:
+
+\begin{align}
+  \frac{1}{2}S = & &\frac{1}{2}&& - \frac{1}{4} &&+ \frac{1}{6}&& - \frac{1}{8} &&+ \frac{1}{10} &&- \frac{1}{12} &&+ \cdots\nonumber\\
+  + S = & 1 &- \frac{1}{2} &+ \frac{1}{3}& - \frac{1}{4}& + \frac{1}{5}& - \frac{1}{6}& + \frac{1}{7}& - \frac{1}{8}& + \frac{1}{9}& - \frac{1}{10}& + \frac{1}{11}& - \frac{1}{12}& + \frac{1}{13}& - \cdots\nonumber\\[10pt]
+  \hline
+  \frac{3}{2}S = & 1 &&+ \frac{1}{3}& - \frac{1}{2}& + \frac{1}{5} &&+ \frac{1}{7}& - \frac{1}{4}& + \frac{1}{9}&&+ \frac{1}{11} &- \frac{1}{6}& + \frac{1}{13}&\cdots\label{eq:2.2}
+\end{align}
+
+
+现在，仔细观察结果。方程~\eqref{eq:2.2}中的和恰好由与原始方程~\eqref{eq:2.1}中相同的项组成，只是顺序不同。具体来说，~\eqref{eq:2.2}中的级数是~\eqref{eq:2.1}的重排：先列出前两个正项 \(\left( {1 + \frac{1}{3}}\right)\) ，接着是第一个负项 \(\left( {-\frac{1}{2}}\right)\) ，然后是接下来的两个正项 \(\left( {\frac{1}{5} + \frac{1}{7}}\right)\) ，再接着是下一个负项 \(\left( {-\frac{1}{4}}\right)\) ，继续这样下去……
+
+显然~\eqref{eq:2.2}中的每一项都出现在~\eqref{eq:2.1}中，反之亦然。问题在于：方程~\eqref{eq:2.2}断言该重排和等于 \(3/2\) 倍的原始值！实际上，计算方程~\eqref{eq:2.2}的几百项会产生接近$1.03$的部分和。在这种无限的情况下，加法是不可交换的！
+
+让我们来看一个类似的级数重排
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }{\left( -1/2\right) }^{n}
+\]
+
+这是一个首项为1、公比为 \(r =  - 1/2\) 的几何级数。使用几何级数求和的公式 \(1/\left( {1 - r}\right)\) (例2.7.5)，我们得到
+
+\[
+1 - \frac{1}{2} + \frac{1}{4} - \frac{1}{8} + \frac{1}{16} - \frac{1}{32} + \frac{1}{64} - \frac{1}{128} + \frac{1}{256}\cdots  = \frac{1}{1 - \left( {-\frac{1}{2}}\right) } = \frac{2}{3}.
+\]
+
+这次，对“两正一负”重排进行一些计算实验
+
+\[
+1 + \frac{1}{4} - \frac{1}{2} + \frac{1}{16} + \frac{1}{64} - \frac{1}{8} + \frac{1}{256} + \frac{1}{1024} - \frac{1}{32}\cdots
+\]
+
+得到的部分和非常接近 \(2/3\) 。例如，前$30$项的和等于$0.666667$。在某些情况下，无限加法是可交换的，但在其他情况下则不然。
+
+这种现象远不止是无限级数中一个迷人的理论奇观，它在许多实际应用中可能引发极大的困扰。例如，应该如何定义两个索引变量的双重求和？假设我们有一个实数网格 \(\left\{  {{a}_{ij} : i,j \in  \mathbb{N}}\right\}\) ，其中
+$$
+a_{ij} =
+\begin{cases}
+  1/{2}^{j - i} & j> i \\ -1 & j=i \\ 0 & j<i
+\end{cases}
+$$
+
+
+\[
+\left\lbrack  \begin{matrix}  - 1 & \frac{1}{2} & \frac{1}{4} & \frac{1}{8} & \frac{1}{16} & \cdots \\  0 &  - 1 & \frac{1}{2} & \frac{1}{4} & \frac{1}{8} & \cdots \\  0 & 0 &  - 1 & \frac{1}{2} & \frac{1}{4} & \cdots \\  0 & 0 & 0 &  - 1 & \frac{1}{2} & \cdots \\  0 & 0 & 0 & 0 &  - 1 & \cdots \\  \vdots & \vdots & \vdots & \vdots & \vdots &  \ddots   \end{matrix}\right\rbrack
+\]
+
+我们希望为下列求和赋予数学意义
+
+\[
+\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij}
+\]
+
+即我们希望将前面数组中的每一项都包含在总和中。一个自然的想法是暂时固定 \(i\) 并对每一行进行求和。稍加思考表明，每一行的和为$0$。将这些行的和相加，我们得到
+
+\[
+\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij} = \mathop{\sum }\limits_{{i = 1}}^{\infty }\left( {\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}}\right)  = \mathop{\sum }\limits_{{i = 1}}^{\infty }\left( 0\right)  = 0.
+\]
+
+我们同样可以决定先固定 \(j\) 并对每一列进行求和。在这种情况下，我们有
+
+\[
+\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij} = \mathop{\sum }\limits_{{j = 1}}^{\infty }\left( {\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij}}\right)  = \mathop{\sum }\limits_{{j = 1}}^{\infty }\left( \frac{-1}{{2}^{j - 1}}\right)  =  - 2.
+\]
+
+改变求和的顺序会改变和的值。双重求和(尽管不是这个特定的例子)通常来自于两个级数的乘法。人们自然希望写成
+
+\[
+\left( {\sum {a}_{i}}\right) \left( {\sum {b}_{j}}\right)  = \mathop{\sum }\limits_{{i,j}}{a}_{i}{b}_{j}
+\]
+
+只是目前右边的表达式还没有意义。
+
+正是这些异常情况引发了严格性的需求。要令人满意地解决所提出的问题，我们需要在我们处理这些无限对象时，对我们所表达的意思使用绝对精确的描述。起初，进展可能看起来缓慢，但这是因为我们不想陷入让直觉的偏见腐蚀我们论证的陷阱。严格的证明旨在检验直觉。最终我们会发现它们实际上改善了我们对数学无限的思维图景。作为最后一个例子，考虑一些像加法结合律这样直观上基本的东西，并将其应用于级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{\left( -1\right) }^{n}\) 。一种方式分组得到
+
+\[
+\left( {-1 + 1}\right)  + \left( {-1 + 1}\right)  + \left( {-1 + 1}\right)  + \left( {-1 + 1}\right)  + \cdots  = 0 + 0 + 0 + 0 + \cdots  = 0,
+\]
+
+而另一种分组则得到
+
+\[
+- 1 + \left( {1 - 1}\right)  + \left( {1 - 1}\right)  + \left( {1 - 1}\right)  + \left( {1 - 1}\right)  + \cdots  =  - 1 + 0 + 0 + 0 + 0 + \cdots  =  - 1.
+\]
+
+在有限语境中合法的操作并不总是能扩展到无限语境中。决定它们何时可以扩展以及为何不能扩展是分析的核心主题之一。
+
+\section{序列的极限}
+\label{sec:2.2}
+理解无穷级数在很大程度上依赖于对序列理论的清晰理解。事实上，分析中的大多数概念都可以简化为关于序列行为的陈述。因此，在探讨无穷级数之前，我们将花费大量时间研究序列。
+
+\begin{Def}
+  \label{def:2.2.1}
+  序列是一个定义域为 \(\mathbb{N}\) 的函数。
+\end{Def}
+
+这个正式定义立即引出了将序列视为有序实数列表的熟悉描述。给定一个函数 \(f : \mathbb{N} \rightarrow  \mathbb{R},f\left( n\right)\) 就是列表中的第 \(n\) 项。序列的符号强化了这种熟悉的理解。
+
+\begin{Eg}
+  \label{eg:2.2.2}
+  以下是描述序列的常见方式。
+  \begin{enumerate}[label = (\roman*)]
+  \item\(\left( {1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\cdots }\right)\) ,
+  \item \({\left( \frac{1 + n}{n}\right) }_{n = 1}^{\infty } = \left( {\frac{2}{1},\frac{3}{2},\frac{4}{3},\cdots }\right)\) ,
+  \item \(\left( {a}_{n}\right)\) ,其中 \(\forall n\in \mathbb{N}, {a}_{n} = {2}^{n}\) 
+  \item  \(\left( {x}_{n}\right)\) ，其中 \({x}_{1} = 2\) ， \({x}_{n + 1} = \frac{{x}_{n} + 1}{2}\) 
+  \end{enumerate}
+\end{Eg}
+
+
+有时，从某个不同于$1$的自然数 \({n}_{0}\) 开始，用 \(n = 0\) 或 \(n = {n}_{0}\) 来索引序列会更方便。这些微小的变化不应引起混淆。关键的是，序列是一个无限的实数列表。在大多数情况下，列表的起始部分并不重要。分析的核心在于研究给定序列的无限“尾部”行为。
+
+我们现在将介绍本书中可以说是最重要的定义。
+
+
+\begin{Def}[序列的收敛性]
+  \label{def:2.2.3}
+  称一个序列 \(\left( {a}_{n}\right)\) 收敛到一个实数 \(a\) ，如果 \(\forall \varepsilon>0\) ， \(\exists N \in  \mathbb{N}\) ，使得每当 \(n \geq  N\) 时，都有 \(\left| {{a}_{n} - a}\right|  < \varepsilon\) 。
+
+  为了表示 \(\left( {a}_{n}\right)\) 收敛到 \(a\) ，我们写作 \(\lim {a}_{n} = a\) 或 \(\left( {a}_{n}\right)  \rightarrow  a\) 。
+\end{Def}
+
+
+
+
+为了理解这个复杂的定义，首先考虑结尾的短语“ \(\left| {{a}_{n} - a}\right|  < \varepsilon\) ”，并思考满足这种不等式类型的点是有帮助的。
+
+\begin{Def}
+  \label{def:2.2.4}
+  给定一个实数 \(a \in  \mathbb{R}\) 和一个正数 \(\varepsilon  > 0\) ，集合
+
+\[
+{V}_{\varepsilon }\left( a\right)  = \{ x \in  \mathbb{R} : \left| {x - a}\right|  < \varepsilon \}
+\]
+
+称为 \(a\) 的 \(\varepsilon\) 邻域。
+\end{Def}
+
+
+注意， \({V}_{\varepsilon }\left( a\right)\) 由所有与 \(a\) 的距离小于 \(\varepsilon\) 的点组成。换句话说， \({V}_{\varepsilon }\left( a\right)\) 是一个以 \(a\) 为中心、半径为 \(\varepsilon\) 的区间。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.2\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_4_633_1121_370_143_0.jpg}
+\end{figure}
+
+
+
+用 \(\varepsilon\) 邻域重新表述收敛的定义，可以更直观地理解所描述的内容。
+
+\addtocounter{Thm}{-2}
+
+\begin{Def}
+  称一个序列 \(\left( {a}_{n}\right)\) 收敛到 \(a\) ，如果给定 \(a\) 的任意 \(\varepsilon\) -邻域 \({V}_{\varepsilon }\left( a\right)\) ，存在序列中的一个点，使得该点之后的所有项都在 \({V}_{\varepsilon }\left( a\right)\) 中。
+\end{Def}
+换言之，每个 \(\varepsilon\) -邻域都包含 \(\left( {a}_{n}\right)\) 的除有限项之外的所有项。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_4_427_1600_754_163_0.jpg}
+\end{figure}
+
+\addtocounter{Thm}{1}
+
+两种定义表述的内容完全相同；原版定义中的自然数 \(N\) 是序列 \(\left( {a}_{n}\right)\) 进入 \({V}_{\varepsilon }\left( a\right)\) 并永不离开的点。显然， \(N\) 的值取决于 \(\varepsilon\) 的选择。 \(\varepsilon\) 邻域越小， \(N\) 可能需要越大。
+
+\begin{Eg}
+  \label{eg:2.2.5}
+考虑序列 \(\left( {a}_{n}\right)\) ，其中 \({a}_{n} = 1/\sqrt{n}\) 。
+
+我们对极限的直观理解坚定地指向下面的结论
+
+\[
+\lim \left( \frac{1}{\sqrt{n}}\right)  = 0.
+\]
+
+在尝试证明这个不太令人印象深刻的事实之前，让我们首先探讨收敛定义中 \(\varepsilon\) 和 \(N\) 之间的关系。暂时将 \(\varepsilon\) 设为 \(1/{10}\) 。这为序列中的项定义了一种“目标区域”。通过声称 \(\left( {a}_{n}\right)\) 的极限为0，我们是在说这个序列中的项最终会无限接近0。有多接近？我们所说的“最终”是什么意思？我们已经将 \(\varepsilon  = 1/{10}\) 设为我们接近的标准，这导致了以极限0为中心的 \(\varepsilon\) -邻域 \(\left( {-1/{10},1/{10}}\right)\) 。我们必须看到序列的哪一部分，才能让项落入这个区间？第100项 \({a}_{100} = 1/{10}\) 将我们正好放在边界上，稍加思考表明
+
+\[
+\text{ 若 }n > {100}\text{ , 则 }{a}_{n} \in  \left( {-\frac{1}{10},\frac{1}{10}}\right) \text{ . }
+\]
+
+因此，对于 \(\varepsilon  = 1/{10}\) ，我们选择 \(N = {101}\) (或更大的值)作为我们的响应。
+
+现在，我们对 \(\varepsilon  = 1/{10}\) 的选择相当随意，我们可以再次这样做，让 \(\varepsilon  = 1/{50}\) 。在这种情况下，我们的目标邻域缩小到 \(\left( {-1/{50},1/{50}}\right)\) ，显然，我们必须进一步深入到序列中，直到 \({a}_{n}\) 落入这个区间。多远？本质上，我们要求
+
+\[
+\text{ 只要 }\;n > {50}^{2} = {2500}, \frac{1}{\sqrt{n}} < \frac{1}{50}.
+\]
+
+因此， \(N = {2501}\) 是对 \(\varepsilon  = 1/{50}\) 挑战的合适响应。
+
+看起来这场对决似乎可以永远持续下去，不同的 \(\varepsilon\) 挑战一个接一个地摆在我们面前，每一个都需要一个合适的 \(N\) 值来应对。从某种意义上说，这是正确的，除了在我们认识到如何根据任意 \(\varepsilon  > 0\) 选择 \(N\) 的规则的那一刻，游戏实际上已经结束了。对于这个问题，所需的算法隐含在计算 \(N = {2501}\) 先前响应的代数运算中。无论 \(\varepsilon\) 是什么，我们都希望
+
+\[
+\frac{1}{\sqrt{n}} < \varepsilon \;(\text{ 而这等价于 }n > \frac{1}{{\varepsilon }^{2}}.)
+\]
+
+有了这个观察，我们准备写出正式的论证。
+
+我们声称
+
+\[
+\lim \left( \frac{1}{\sqrt{n}}\right)  = 0.
+\]
+
+\begin{proof}
+设 \(\varepsilon  > 0\) 为任意正数。选择一个自然数 \(N\) 满足
+
+\[
+N > \frac{1}{{\varepsilon }^{2}}.
+\]
+
+我们现在验证这个 \(N\) 的选择具有所需的性质。设 \(n \geq  N\) 。那么，
+
+\[
+n > \frac{1}{{\varepsilon }^{2}}\Rightarrow\frac{1}{\sqrt{n}} < \varepsilon \;\text{ 于是 }\;\left| {{a}_{n} - 0}\right|  < \varepsilon .
+\]  
+\end{proof}
+\end{Eg}
+
+\subsection{量词}
+
+之前给出的收敛定义是数百年来将直观的极限概念提炼为数学上严谨陈述的结果。所涉及的逻辑复杂，并且与使用“对于所有”和“存在”这两个量词密切相关。学习如何写出语法正确的收敛证明，与深入理解为什么量词以特定顺序出现是密不可分的。
+
+定义以这句话开始，
+
+\HRule
+
+\[
+\forall\varepsilon >0 , \exists N \in  \mathbb{N}\text{ 使得…… }
+\]
+
+\HRule
+
+回顾我们的第一个例子，我们看到我们的正式证明以“设 \(\varepsilon  > 0\) 为任意正数”开始，继以 \(N\) 的构造，最后才证明这个 \(N\) 的选择具有所需的性质。事实上，这是每个收敛证明应如何呈现的基本框架。
+
+\HRule
+
+\[
+\text{ 证明 }\left( {x}_{n}\right)  \rightarrow  x\text{ 的框架}
+\]
+
+\HRule
+
+\begin{itemize}
+\item “任取 \(\varepsilon  > 0\) 。”
+\item 展示 \(N \in  \mathbb{N}\) 的选择。这一步通常需要最多的工作，几乎所有这些工作都在正式撰写证明之前完成。
+\item 现在，证明 \(N\) 确实有效。
+\item “假设 \(n \geq  N\) 。”
+\item 如果 \(N\) 选择得当，应该可以推导出不等式 \(\left| {{x}_{n} - x}\right|  < \varepsilon\) 。
+\end{itemize}
+
+\begin{Eg}
+  \label{eg:2.2.6}
+证明
+
+\[
+\lim \left( \frac{n + 1}{n}\right)  = 1
+\]
+
+如前所述，在尝试正式证明之前，我们首先需要做一些初步的草稿工作。在第一个例子中，我们通过为 \(\varepsilon\) 分配特定值进行了实验(再次这样做并不是一个坏主意)，但让我们直接跳到代数的高潮部分。我们证明的最后一行应该是，对于足够大的 \(n\) 值，
+
+\[
+\left| {\frac{n + 1}{n} - 1}\right|  < \varepsilon
+\]
+
+因为
+
+\[
+\left| {\frac{n + 1}{n} - 1}\right|  = \frac{1}{n}
+\]
+
+这等价于不等式 \(1/n < \varepsilon\) 或 \(n > 1/\varepsilon\) 。因此，选择 \(N\) 为大于 \(1/\varepsilon\) 的整数就足够了。
+
+证明工作完成后，剩下的就是正式的撰写。
+
+\begin{proof}
+  任取 \(\varepsilon  > 0\) 。选择 \(N \in  \mathbb{N}\) 使得 \(N > 1/\varepsilon\) 。为了验证 \(N\) 的选择是恰当的，设 \(n \in  \mathbb{N}\) 满足 \(n \geq  N\) 。那么， \(n \geq  N\) 意味着 \(n > 1/\varepsilon\) ，这等同于说 \(1/n < \varepsilon\) 。最后，这意味着
+
+\[
+\left| {\frac{n + 1}{n} - 1}\right|  < \varepsilon
+\]
+
+得证。
+\end{proof}
+\end{Eg}
+
+\subsection{发散}
+
+通过研究一个没有极限的序列的例子，可以深入理解量词在收敛定义中的作用。
+
+
+\begin{Eg}
+  \label{eg:2.2.7}
+考虑序列
+
+\[
+\left( {1, - \frac{1}{2},\frac{1}{3}, - \frac{1}{4},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\cdots }\right) .
+\]
+
+我们如何论证这个序列不收敛于零？观察前几项，初步证据似乎支持这一结论。给定一个挑战 \(\varepsilon  = 1/2\) ，稍加思考后发现，在 \(N = 3\) 之后，所有项都落入邻域 \(\left( {-1/2,1/2}\right)\) 。我们还可以处理 \(\varepsilon  = 1/4\) 。(在这种情况下，最小的 \(N\) 是多少？)
+
+但收敛的定义说“对于所有 \(\varepsilon  > 0\ldots\) ”，例如，对于 \(\varepsilon  = 1/{10}\) 的选择，显然没有响应。这使我们得出关于序列收敛定义逻辑否定的一个重要观察。要证明特定数字 \(x\) 不是序列 \(\left( {x}_{n}\right)\) 的极限，我们必须生成一个 \(\varepsilon\) 的值，对于该值，没有 \(N \in  \mathbb{N}\) 起作用。更一般地说，以“对于所有P，存在Q...”开头的陈述的否定是“对于至少一个P，没有Q是可能的...”例如，我们如何反驳“在美国的每所大学，都有一个至少七英尺高的学生”这一虚假声明？
+
+我们已经论证了前面的序列不收敛于0。让我们反驳它收敛于 \(1/5\) 的论点。选择 \(\varepsilon  = 1/{10}\) 会产生邻域 \(\left( {1/{10},3/{10}}\right)\) 。尽管序列不断重新访问这个邻域，但并没有一个点使它进入并永远不离开，如定义所要求的那样。因此，对于 \(\varepsilon  = 1/{10}\) 不存在 \(N\) ，所以序列不收敛于 \(1/5\) 。
+\end{Eg}
+
+当然，这个序列不收敛于任何其他实数，更令人满意的说法是，这个序列不收敛。 
+
+
+\begin{Def}
+  \label{def:2.2.8}
+  称一个序列是发散的，若它不收敛。
+\end{Def}
+
+尽管这并不太难，但我们将推迟一般情况下的发散论证，直到我们在第2.5节中发展出一个更经济的发散准则。
+
+\subsection{练习}
+
+练习2.2.1。使用序列收敛的定义，验证以下序列收敛于所提出的极限。
+
+(a) \(\lim \frac{1}{\left( 6{n}^{2} + 1\right) } = 0\) .
+
+(b) \(\lim \frac{{3n} + 1)}{\left( 2n + 5\right) } = \frac{3}{2}\) .
+
+(c) \(\lim \frac{2}{\sqrt{n + 3}} = 0\) .
+
+练习2.2.2。如果我们在定义2.2.3中颠倒量词的顺序，会发生什么？
+
+定义:一个序列 \(\left( {x}_{n}\right)\) verconges到 \(x\) ，如果存在一个 \(\varepsilon  > 0\) ，使得对于所有 \(N \in  \mathbb{N}\) ， \(n \geq  N\) 蕴含 \(\left| {{x}_{n} - x}\right|  < \varepsilon\) 成立。
+
+给出一个vercongent序列的例子。你能给出一个发散但vergonent序列的例子吗？这个奇怪的定义到底在描述什么？
+
+练习2.2.3。描述为了反驳以下每个陈述，我们需要证明什么。
+
+(a) 在美国的每一所大学里，都有一个至少七英尺高的学生。
+
+(b) 对于美国的所有大学，都存在一位教授给每个学生A或B的成绩。
+
+在美国有一所大学，那里的每个学生都至少有六英尺高。
+
+练习 2.2.4. 论证该序列
+
+\[
+1,0,1,0,0,1,0,0,0,1,0,0,0,0,1,\left( {5\text{ zeros }}\right) ,1,\ldots
+\]
+
+不收敛于零。对于哪些 \(\varepsilon  > 0\) 值存在响应 \(N\) 。对于哪些 \(\varepsilon  > 0\) 值没有合适的响应？
+
+练习 2.2.5. 设 \(\left\lbrack  \left\lbrack  x\right\rbrack  \right\rbrack\) 为小于或等于 \(x\) 的最大整数。例如， \(\left\lbrack  \left\lbrack  \pi \right\rbrack  \right\rbrack   = 3\) 和 \(\left\lbrack  \left\lbrack  3\right\rbrack  \right\rbrack   = 3\) 。求 \(\lim {a}_{n}\) 并为每个结论提供证明，如果
+
+(a) \({a}_{n} = \left\lbrack  \left\lbrack  {1/n}\right\rbrack  \right\rbrack\) ,
+
+(b) \({a}_{n} = \left\lbrack  \left\lbrack  {\left( {{10} + n}\right) /{2n}}\right\rbrack  \right\rbrack\) .
+
+反思这些例子，评论定义 2.2.3 之后的陈述:“ \(\varepsilon\) -邻域越小， \(N\) 可能需要越大。”
+
+练习2.2.6. 假设对于特定的 \(\varepsilon  > 0\) ，我们已经找到了一个合适的 \(N\) 值，该值在定义2.2.3的意义上对给定序列“有效”。
+
+(a) 那么，任何更大/更小(选择一个)的 \(N\) 也将对相同的 \(\varepsilon  > 0\) 有效。
+
+(b) 那么，相同的 \(N\) 也将对任何更大/更小的 \(\varepsilon\) 值有效。
+
+练习2.2.7. 非正式地说，序列 \(\sqrt{n}\) “收敛到无穷大”。
+
+(a) 模仿定义2.2.3的逻辑结构，为数学陈述 \(\lim {x}_{n} = \infty\) 创建一个严格的定义。使用这个定义来证明 \(\lim \sqrt{n} = \infty\) 。
+
+(b) 你在(a)中的定义对特定序列 \(\left( {1,0,2,0,3,0,4,0,5,0,\ldots }\right)\) 说了什么？
+
+练习 2.2.8. 这里有两个有用的定义:
+
+(i) 一个序列 \(\left( {a}_{n}\right)\) 最终在一个集合 \(A \subseteq  \mathbb{R}\) 中，如果存在一个 \(N \in  \mathbb{N}\) 使得对于所有 \(n \geq  N\) ， \({a}_{n} \in  A\) 。
+
+(ii) 一个序列 \(\left( {a}_{n}\right)\) 频繁在一个集合 \(A \subseteq  \mathbb{R}\) 中，如果对于每一个 \(N \in  \mathbb{N}\) ，存在一个 \(n \geq  N\) 使得 \({a}_{n} \in  A\) 。
+
+(a) 序列 \({\left( -1\right) }^{n}\) 是最终还是频繁在集合 \(\{ 1\}\) 中？
+
+(b) 哪个定义更强？频繁是否意味着最终，还是最终意味着频繁？
+
+(c) 使用频繁或最终重新表述定义 2.2.3B。我们想要的是哪个术语？
+
+(d) 假设一个序列 \(\left( {x}_{n}\right)\) 的无限多项等于2。 \(\left( {x}_{n}\right)\) 是否必然最终在区间(1.9,2.1)内？它是否频繁出现在(1.9,2.1)内？
+
+\section{代数极限定理与序极限定理}
+\label{sec:3.3}
+为序列收敛建立严格定义的真实目的并不是为了拥有一个验证计算语句(如 \(\lim {2n}/\left( {n + 2}\right)  = 2\) )的工具。历史上，像定义~\ref{def:2.2.3}这样的极限定义在微积分创始人开始使用直观的收敛概念的150年后才出现。拥有如此逻辑严密的收敛描述的意义在于，我们可以自信地陈述和证明关于收敛序列的一般性命题。我们最终试图解决关于极限行为在数学操作下的真实性的争论。
+
+作为第一个例子，让我们证明收敛序列是有界的。“有界”这个术语有一个相当熟悉的含义，但像其他所有事物一样，我们需要明确它在此上下文中的含义。
+
+\begin{Def}
+  \label{def:2.3.1}
+  称序列 \(\left( {x}_{n}\right)\) 是有界的，若存在一个数 \(M > 0\) ，使得 \( \forall n \in  \mathbb{N}\) ， \(\left| {x}_{n}\right|  \leq  M\) 成立。
+\end{Def}
+
+从几何上讲，这意味着我们可以找到一个区间 \(\left\lbrack  {-M,M}\right\rbrack\) ，它包含序列 \(\left( {x}_{n}\right)\) 中的每一项。
+
+\begin{Thm}
+  \label{thm:2.3.2}
+  每个收敛序列都是有界的。
+\end{Thm}
+
+\begin{proof}
+设 \(\left( {x}_{n}\right)\) 收敛到极限 \(l\) 。这意味着给定一个特定的 \(\varepsilon\) 值，比如 \(\varepsilon  = 1\) ，我们知道必须存在一个 \(N \in  \mathbb{N}\) ，使得只要\(n \geq  N\) ，那么 \({x}_{n}\) 就在区间 \(\left( {l - 1,l + 1}\right)\) 内。由于不知道 \(l\) 是正还是负，我们可以肯定地得出结论：$\forall n\ge  N$
+
+\[
+\left| {x}_{n}\right|  < \left| l\right|  + 1
+\]
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_10_486_695_663_151_0.jpg}
+\end{figure}
+
+我们仍然需要(稍微)担心序列中在 \(N\) 项之前的项。因为这些项只有有限的数量，我们设
+
+\[
+M = \max \left\{  {\left| {x}_{1}\right| ,\left| {x}_{2}\right| ,\left| {x}_{3}\right| ,\ldots ,\left| {x}_{N - 1}\right| ,\left| l\right|  + 1}\right\}  .
+\]
+
+由此得出，对于所有 \(n \in  \mathbb{N}\) ， \(\left| {x}_{n}\right|  \leq  M\) ，得证。  
+\end{proof}
+
+本章首先展示了如何将熟悉的代数性质(加法的交换性)应用于无限对象(级数)可能导致悖论性结果。这些例子旨在让我们保持谨慎，并证明我们在得出结论时所采取的极度小心是合理的。以下定理说明，序列在加法、乘法、除法和顺序运算方面表现得非常好。
+
+\begin{Thm}[代数极限定理]
+  \label{thm:2.3.3}
+  设 \(\lim {a}_{n} = a\) ，和 \(\lim {b}_{n} =\) b，则
+  \begin{enumerate}[label = (\roman*)]
+  \item\label{item:2.3.1}\(\lim \left( {c{a}_{n}}\right)  = {ca}\) ，对于所有 \(c \in  \mathbb{R}\) ；
+  \item \label{item:2.3.2}\(\lim \left( {{a}_{n} + {b}_{n}}\right)  = a + b\) ；
+  \item \label{item:2.3.3} \(\lim \left( {{a}_{n}{b}_{n}}\right)  = {ab}\) ;
+  \item \label{item:2.3.4} 当 $b\ne 0$ 时，\(\lim \left( {{a}_{n}/{b}_{n}}\right)  = a/b\) 
+  \end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  \ref{item:2.3.1}考虑 \(c \neq  0\) 的情况。我们想要证明序列 \(\left( {c{a}_{n}}\right)\) 收敛于 \({ca}\) ，因此证明的结构遵循我们在第\ref{sec:2.2}节中描述的模板。首先，我们设 \(\varepsilon\) 为某个任意的正数。我们的目标是找到序列 \(\left( {c{a}_{n}}\right)\) 中的某个点，在此之后我们有
+
+\[
+\left| {c{a}_{n} - {ca}}\right|  < \varepsilon
+\]
+
+同时，
+
+\[
+\left| {c{a}_{n} - {ca}}\right|  = \left| c\right| \left| {{a}_{n} - a}\right| .
+\]
+
+我们已知 \(\left( {a}_{n}\right)  \rightarrow  a\) ，因此我们知道我们可以使 \(\left| {{a}_{n} - a}\right|\) 尽可能小。特别地，我们可以选择一个 \(N\) 使得 $\forall n> N$
+
+\[
+\left| {{a}_{n} - a}\right|  < \frac{\varepsilon }{\left| c\right| }
+\]
+
+要验证这个 \(N\) 确实有效，可以观察到， \(\forall n \geq  N\) ，
+
+\[
+\left| {c{a}_{n} - {ca}}\right|  = \left| c\right| \left| {{a}_{n} - a}\right|  < \left| c\right| \frac{\varepsilon }{\left| c\right| } = \varepsilon .
+\]
+
+情况 \(c = 0\) 简化为证明常数序列 \(\left( {0,0,0,\ldots }\right)\) 收敛于0。这在练习2.3.1中得到了解决。
+
+在继续讨论~\ref{item:2.3.2}、~\ref{item:2.3.3}和~\ref{item:2.3.4}部分之前，我们应该指出，~\ref{item:2.3.1}的证明虽然有些简短，但非常典型地体现了收敛证明的特点。在开始正式论证之前，最好先列出我们希望使其小于 \(\varepsilon\) 的内容，以及我们可以在适当选择 \(n\) 的情况下使其变小的内容。对于之前的证明，我们希望使 \(\left| {c{a}_{n} - {ca}}\right|  < \varepsilon\) ，并且我们得到了对于较大的 $n$ 值，我们有 \(\left| {{a}_{n} - a}\right|  <\) \textit{任意的我们想要的值}。注意到在~\ref{item:2.3.1}以及所有后续的论证中，每次的策略都是通过一些我们可以控制的量的代数组合，限制我们希望小于 \(\varepsilon\) 的量。
+
+\ref{item:2.3.2} 为了证明这一陈述，我们需要论证量
+
+\[
+\left| {\left( {{a}_{n} + {b}_{n}}\right)  - \left( {a + b}\right) }\right|
+\]
+
+可以使其小于任意 \(\varepsilon\) ，利用 \(\left| {{a}_{n} - a}\right|\) 和 \(\left| {{b}_{n} - b}\right|\) 对于大 \(n\) 可以任意小的假设。第一步是使用三角不等式(例\ref{eg:1.2.5})来说明
+
+\[
+\left| {\left( {{a}_{n} + {b}_{n}}\right)  - \left( {a + b}\right) }\right|  = \left| {\left( {{a}_{n} - a}\right)  + \left( {{b}_{n} - b}\right) }\right|  \leq  \left| {{a}_{n} - a}\right|  + \left| {{b}_{n} - b}\right| .
+\]
+
+然后，我们任取 \(\varepsilon  > 0\) 。这次的技术是将 \(\varepsilon\) 分配到前一个不等式中右侧的两个表达式之间。利用 \(\left( {a}_{n}\right)  \rightarrow  a\) 的假设，我们知道存在一个 \({N}_{1}\) 使得 $\forall n> N_1$
+
+\[
+\left| {{a}_{n} - a}\right|  < \frac{\varepsilon }{2}
+\]
+
+同样地，假设 \(\left( {b}_{n}\right)  \rightarrow  b\) 意味着我们可以选择一个 \({N}_{2}\) ，使得 $\forall n>N_2$
+
+\[
+\left| {{b}_{n} - b}\right|  < \frac{\varepsilon }{2}
+\]
+
+现在的问题是，我们应该选择 \({N}_{1}\) 还是 \({N}_{2}\) 作为 \(N\) 的选择。通过选择 \(N = \max \left\{  {{N}_{1},{N}_{2}}\right\}\) ，我们确保只要 \(n \geq  N\) ，就有 \(n \geq  {N}_{1}\) 和 \(n \geq  {N}_{2}\) 。这使我们能够得出结论: $\forall n\ge N$
+
+\begin{align*}
+  \left| {\left( {{a}_{n} + {b}_{n}}\right)  - \left( {a + b}\right) }\right|  \leq  &\left| {{a}_{n} - a}\right|  + \left| {{b}_{n} - b}\right|\\
+  <& \frac{\varepsilon }{2} + \frac{\varepsilon }{2} = \varepsilon
+\end{align*}
+
+得证。
+
+\ref{item:2.3.3} 为了证明 \(\left( {{a}_{n}{b}_{n}}\right)  \rightarrow  {ab}\) ，我们首先观察到
+
+\begin{align*}
+\left| {{a}_{n}{b}_{n} - {ab}}\right|  = & \left| {{a}_{n}{b}_{n} - a{b}_{n} + a{b}_{n} - {ab}}\right|\\
+\leq &  \left| {{a}_{n}{b}_{n} - a{b}_{n}}\right|  + \left| {a{b}_{n} - {ab}}\right|\\
+= & \left| {b}_{n}\right| \left| {{a}_{n} - a}\right|  + \left| a\right| \left| {{b}_{n} - b}\right| 
+\end{align*}
+
+
+在第一步中，我们首先减去然后加上 \(a{b}_{n}\) ，这为使用三角不等式创造了机会。本质上，我们通过一个中间点将 \({a}_{n}{b}_{n}\) 到 \({ab}\) 的距离分解，并利用两个距离的和来高估原始距离。这个巧妙的技巧将在后续的论证中成为一种熟悉的方法。
+
+任取 \(\varepsilon  > 0\) ，我们再次采用使前面不等式中的每一部分都小于 \(\varepsilon /2\) 的策略。对于右侧的部分 \(\left( {\left| a\right| \left| {{b}_{n} - b}\right| }\right)\) ，如果 \(a \neq  0\) ，我们可以选择 \({N}_{1}\) ，使得 $\forall n\ge N_1$
+
+\[
+\left| {{b}_{n} - b}\right|  < \frac{1}{\left| a\right| }\frac{\varepsilon }{2}.
+\]
+
+(当 \(a = 0\) 时的情况在练习2.3.7中处理。)
+
+使左侧的项 \(\left( {\left| {b}_{n}\right| \left| {{a}_{n} - a}\right| }\right)\) 小于 \(\varepsilon /2\) 的工作则比较复杂。这是因为我们有一个变量量 \(\left| {b}_{n}\right|\) 需要处理（而不是像在右侧项中遇到的常数 \(\left| a\right|\) 那样）。思路是用一个最坏情况的估计值替换 \(\left| {b}_{n}\right|\) 。利用收敛序列有界的事实(定理~\ref{thm:2.3.2})，我们知道存在一个界 \(M > 0\) 满足 \(\forall n\in \mathbb{N}, \left| {b}_{n}\right|  \leq  M\) 。现在，我们可以选择 \({N}_{2}\) ，使得 $\forall n\ge N_2$
+
+\[
+\left| {{a}_{n} - a}\right|  < \frac{1}{M}\frac{\varepsilon }{2}
+\]
+
+为了完成论证，选择 \(N = \max \left\{  {{N}_{1},{N}_{2}}\right\}\) ，并观察到如果 \(n \geq  N\) ，那么
+\begin{align*}
+\left| {{a}_{n}{b}_{n} - {ab}}\right|  \leq & \left| {{a}_{n}{b}_{n} - a{b}_{n}}\right|  + \left| {a{b}_{n} - {ab}}\right|\\
+= &\left| {b}_{n}\right| \left| {{a}_{n} - a}\right|  + \left| a\right| \left| {{b}_{n} - b}\right|\\
+\leq & M\left| {{a}_{n} - a}\right|  + \left| a\right| \left| {{b}_{n} - b}\right|\\
+< & M\left( \frac{1 }{M}\frac{\varepsilon}{2}\right)  + \left| a\right| \left( \frac{\varepsilon }{\left| a\right| 2}\right)  = \varepsilon .
+\end{align*}
+
+
+\ref{item:2.3.4} 如果我们能证明下面这一点，便可以利用~\ref{item:2.3.3}得出结论：当 $b\ne 0$ 时
+
+\[
+\left( {b}_{n}\right)  \rightarrow  b \Rightarrow \left( \frac{1}{{b}_{n}}\right)  \rightarrow  \frac{1}{b}
+\]
+
+我们首先观察到
+
+\[
+\left| {\frac{1}{{b}_{n}} - \frac{1}{b}}\right|  = \frac{\left| b - {b}_{n}\right| }{\left| b\right| \left| {b}_{n}\right| }.
+\]
+
+因为 \(\left( {b}_{n}\right)  \rightarrow  b\) ，我们可以通过选择较大的 \(n\) 使前面的分子尽可能小。问题在于我们需要对 \(1/\left( {\left| b\right| \left| {b}_{n}\right| }\right)\) 的大小进行最坏情况估计。由于 \({b}_{n}\) 项在分母中，我们不再对 \(\left| {b}_{n}\right|\) 的上界感兴趣，而是对形式为 \(\left| {b}_{n}\right|  \geq  \delta  > 0\) 的不等式感兴趣。这将进而导致对 \(1/\left( {\left| b\right| \left| {b}_{n}\right| }\right)\) 大小的界。
+
+关键在于观察序列 \(\left( {b}_{n}\right)\) 足够远的部分，项 $b_n$ 将更接近 \(b\) 而不是 0。考虑特定值 \({\varepsilon }_{0} = \left| b\right| /2\) 。因为 \(\left( {b}_{n}\right)  \rightarrow  b\) ， \(\exists {N}_{1}\in \mathbb{N}\) 使得 \(\forall n \geq  {N}_{1}\) ， \(\left| {{b}_{n} - b}\right|  < \left| b\right| /2\) 成立。这意味着 \(\left| {b}_{n}\right|  > \left| b\right| /2\) 。
+
+接下来，选择 \({N}_{2}\) 使得 \(\forall n \geq  {N}_{2}\) 
+
+\[
+\left| {{b}_{n} - b}\right|  < \frac{\varepsilon {\left| b\right| }^{2}}{2}.
+\]
+
+最后，取 \(N = \max \left\{  {{N}_{1},{N}_{2}}\right\}\) ，那么 \(\forall n \geq  N\) 
+
+\[
+\left| {\frac{1}{{b}_{n}} - \frac{1}{b}}\right|  = \left| {b - {b}_{n}}\right| \frac{1}{\left| b\right| \left| {b}_{n}\right| } < \frac{\varepsilon {\left| b\right| }^{2}}{2}\frac{1}{\left| b\right| \frac{\left| b\right| }{2}} = \varepsilon .
+\]
+
+\end{proof}
+
+\subsection{极限与序}
+
+尽管存在一些需要避免的危险(见练习2.3.8)，代数极限定理证实了序列的代数组合与极限过程之间的关系如我们所希望的那样顺利。只要每个分量的极限存在，极限可以从各个分量序列中计算出来。
+
+极限过程在对序关系的操作上也表现良好。
+
+\begin{Thm}[序极限定理]
+  \label{thm:2.3.4}
+设 \(\lim {a}_{n} = a\) 和 \(\lim {b}_{n} =\)  \(b\) 。
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:2.3.5} 如果 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \geq  0\) 成立，那么 \(a \geq  0\) 。
+\item \label{item:2.3.6}如果 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \leq  {b}_{n}\) 成立，那么 \(a \leq  b\) 。
+\item \label{item:2.3.7}如果存在 \(c \in  \mathbb{R}\) ，使得 \(\forall n \in  \mathbb{N}\) ， \(c \leq  {b}_{n}\) 成立，那么 \(c \leq  b\) 。类似地，如果 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \leq  c\) 成立，那么 \(a \leq  c\) 。  
+\end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  \ref{item:2.3.5} 我们将通过反证法来证明这一点。反设 \(a < 0\) 。我们的目标是产生序列 \(\left( {a}_{n}\right)\) 中的一个项，它也小于零。为此，我们考虑特定值 \({\varepsilon }_{0} = \left| a\right|\) 。收敛的定义保证我们可以找到一个 \(N\) ，使得 \(\forall n \geq  N\) ， \(\left| {{a}_{n} - a}\right|  < \left| a\right|\) 成立。特别地，这意味着 \(\left| {{a}_{N} - a}\right|  < \left| a\right|\) ，从而推出 \({a}_{N} < 0\) 。这与我们的假设 \({a}_{N} \geq  0\) 相矛盾。因此，我们得出结论 \(a \geq  0\) 。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_13_671_1855_611_109_0.jpg}
+  \end{figure}
+  
+\ref{item:2.3.6} 代数极限定理确保了序列 \(\left( {{b}_{n} - {a}_{n}}\right)\) 收敛于 \(b - a\) 。因为 \({b}_{n} - {a}_{n} \geq  0\) ，我们可以应用\ref{item:2.3.5}得出 \(b - a \geq  0\) 。
+
+\ref{item:2.3.7} 对所有 \(n \in  \mathbb{N}\) 取 \({a}_{n} = c\) (或 \({b}_{n} = c\) )，并应用\ref{item:2.3.6}。
+\end{proof}
+
+
+关于“尾部”概念的解释是必要的。粗略地说，极限及其性质完全不依赖于序列开始时的行为，而是严格由当 \(n\) 趋近于无穷大时的行为决定。改变序列中前十项或前十万项的值对极限没有影响。例如，定理~\ref{thm:2.3.4}的\ref{item:2.3.5}假设 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \geq  0\) 成立。然而，这一假设的条件可以弱化到仅假设存在某个点 \({N}_{1}\) ，使得 \(\forall n \geq  {N}_{1}\) ， \({a}_{n} \geq  0\) 成立，此时该定理仍然成立。事实上，只要在选择 \(N\) 时确保 \(N\ge {N}_{1}\) ，相同的证明依然有效。
+
+在分析学的语言中，当某个性质(如非负性)对于有限数量的初始项不一定成立，但在某个点 \(N\) 之后的所有项都成立时，我们说该序列最终具有这个性质。(参见练习2.2.8。)定理~\ref{thm:2.3.4}的\ref{item:2.3.5}可以重新表述为“最终非负的收敛序列收敛到非负的极限。”\ref{item:2.3.6}\ref{item:2.3.7}也有类似的修改，许多即将出现的结果也是如此。
+
+\subsection{练习}
+
+练习2.3.1. 证明常数序列 \(\left( {a,a,a,a,\ldots }\right)\) 收敛到 \(a\) 。
+
+练习2.3.2. 设 \({x}_{n} \geq  0\) 对于所有 \(n \in  \mathbb{N}\) 。
+
+(a) 如果 \(\left( {x}_{n}\right)  \rightarrow  0\) ，证明 \(\left( \sqrt{{x}_{n}}\right)  \rightarrow  0\) 。
+
+(b) 如果 \(\left( {x}_{n}\right)  \rightarrow  x\) ，证明 \(\left( \sqrt{{x}_{n}}\right)  \rightarrow  \sqrt{x}\) 。
+
+习题 2.3.3(夹逼定理)。证明如果对于所有 \(n \in\)  \(\mathbb{N}\) 有 \({x}_{n} \leq  {y}_{n} \leq  {z}_{n}\) ，且如果 \(\lim {x}_{n} = \lim {z}_{n} = l\) ，则 \(\lim {y}_{n} = l\) 也成立。
+
+习题 2.3.4。证明极限如果存在，则必须是唯一的。换句话说，假设 \(\lim {a}_{n} = {l}_{1}\) 和 \(\lim {a}_{n} = {l}_{2}\) ，并证明 \({l}_{1} = {l}_{2}\) 。
+
+练习 2.3.5. 设给定 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) ，并定义 \(\left( {z}_{n}\right)\) 为“混洗”序列 \(\left( {{x}_{1},{y}_{1},{x}_{2},{y}_{2},{x}_{3},{y}_{3},\ldots ,{x}_{n},{y}_{n},\ldots }\right)\) 。证明 \(\left( {z}_{n}\right)\) 收敛当且仅当 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 都收敛且 \(\lim {x}_{n} = \lim {y}_{n}\) 。
+
+练习 2.3.6. (a) 证明如果 \(\left( {b}_{n}\right)  \rightarrow  b\) ，则绝对值序列 \(\left| {b}_{n}\right|\) 收敛到 \(\left| b\right|\) 。
+
+(b) 部分(a)的逆命题是否成立？如果我们知道 \(\left| {b}_{n}\right|  \rightarrow  \left| b\right|\) ，能否推断出 \(\left( {b}_{n}\right)  \rightarrow  b\) ？
+
+练习2.3.7. (a) 设 \(\left( {a}_{n}\right)\) 为有界(不一定收敛)序列，并假设 \(\lim {b}_{n} = 0\) 。证明 \(\lim \left( {{a}_{n}{b}_{n}}\right)  = 0\) 。为什么我们不能使用代数极限定理来证明这一点？
+
+(b) 如果我们假设 \(\left( {b}_{n}\right)\) 收敛到某个非零极限 \(b\) ，能否得出关于 \(\left( {{a}_{n}{b}_{n}}\right)\) 收敛性的任何结论？
+
+(c) 使用(a)来证明定理2.3.3的第(iii)部分，当 \(a = 0\) 时的情况。
+
+练习2.3.8. 给出以下每种情况的例子，或通过引用适当的定理说明这样的请求是不可能的:
+
+(a) 序列 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) ，两者都发散，但它们的和 \(\left( {{x}_{n} + {y}_{n}}\right)\) 收敛；
+
+(b) 序列 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) ，其中 \(\left( {x}_{n}\right)\) 收敛， \(\left( {y}_{n}\right)\) 发散，且 \(\left( {{x}_{n} + }\right.\)  \(\left. {y}_{n}\right)\) 收敛；
+
+(c) 一个收敛的序列 \(\left( {b}_{n}\right)\) ，对于所有 \(n\) 满足 \({b}_{n} \neq  0\) ，使得 \(\left( {1/{b}_{n}}\right)\) 发散；
+
+(d) 一个无界序列 \(\left( {a}_{n}\right)\) 和一个收敛序列 \(\left( {b}_{n}\right)\) ，其中 \(\left( {{a}_{n} - }\right.\)  \(\left. {b}_{n}\right)\) 有界；
+
+(e) 两个序列 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) ，其中 \(\left( {{a}_{n}{b}_{n}}\right)\) 和 \(\left( {a}_{n}\right)\) 收敛但 \(\left( {b}_{n}\right)\) 不收敛。
+
+练习 2.3.9。如果所有不等式都假设为严格不等式，定理 2.3.4 是否仍然成立？例如，如果我们假设一个收敛序列 \(\left( {x}_{n}\right)\) 对所有 \(n \in  \mathbb{N}\) 满足 \({x}_{n} > 0\) ，我们可以得出关于极限的什么结论？
+
+练习 2.3.10。如果 \(\left( {a}_{n}\right)  \rightarrow  0\) 且 \(\left| {{b}_{n} - b}\right|  \leq  {a}_{n}\) ，则证明 \(\left( {b}_{n}\right)  \rightarrow  b\) 。
+
+练习 2.3.11(切萨罗均值)。证明如果 \(\left( {x}_{n}\right)\) 是一个收敛序列，则由平均值给出的序列
+
+\[
+{y}_{n} = \frac{{x}_{1} + {x}_{2} + \cdots  + {x}_{n}}{n}
+\]
+
+也收敛到相同的极限。
+
+举一个例子说明，即使 \(\left( {x}_{n}\right)\) 不收敛，平均值序列 \(\left( {y}_{n}\right)\) 也可能收敛。
+
+练习2.3.12。考虑双索引数组 \({a}_{m,n} = m/\left( {m + n}\right)\) 。
+
+(a) 直观地说， \(\mathop{\lim }\limits_{{m,n \rightarrow  \infty }}{a}_{m,n}\) 应该代表什么？计算“迭代”极限
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}\mathop{\lim }\limits_{{m \rightarrow  \infty }}{a}_{m,n}\;\text{ and }\;\mathop{\lim }\limits_{{m \rightarrow  \infty }}\mathop{\lim }\limits_{{n \rightarrow  \infty }}{a}_{m,n}.
+\]
+
+(b) 以定义2.2.3的风格为以下陈述制定一个严格的定义
+
+\[
+\mathop{\lim }\limits_{{m,n \rightarrow  \infty }}{a}_{m,n} = l
+\]
+
+\section{单调收敛定理与无穷级数初探}
+\label{sec:2.4}
+我们在定理~\ref{thm:2.3.2}中证明了收敛序列是有界的。反之则显然不成立。构造一个不收敛的有界序列的例子并不太难。另一方面，如果一个有界序列是单调的，那么它实际上确实会收敛。
+
+\begin{Def}
+  \label{def:2.4.1}
+  称序列 $a_n$ 是单调递增的，若 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \leq  {a}_{n + 1}\) 成立；称序列 $a_n$ 是单调递减的，若 \(\forall n \in  \mathbb{N}\) ， \({a}_{n} \geq  {a}_{n + 1}\) 成立。一个序列称为单调的，若它单调递增或单调递减。
+\end{Def}
+
+\begin{Thm}[单调收敛定理]
+  \label{thm:2.4.2}
+  如果一个序列是单调且有界的，那么它是收敛的。
+\end{Thm}
+
+\begin{proof}
+设 \(\left( {a}_{n}\right)\) 为单调且有界。为了使用收敛的定义证明 \(\left( {a}_{n}\right)\) 收敛，我们需要一个极限的候选值。假设序列是递增的(递减的情况可类似处理)，考虑点集 \(\left\{  {{a}_{n} : n \in  \mathbb{N}}\right\}\) 。据假设，这个集合是有界的，因此我们可以设
+
+\[
+s = \sup \left\{  {{a}_{n} : n \in  \mathbb{N}}\right\}  .
+\]
+
+断言 \(\lim \left( {a}_{n}\right)  = s\) 似乎是合理的。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_16_515_936_573_92_0.jpg}
+\end{figure}
+
+
+为了证明这一点，任取 \(\varepsilon  > 0\) 。因为 \(s\) 是 \(\left\{  {{a}_{n} : n \in  \mathbb{N}}\right\}\) 的最小上界， \(s - \varepsilon\) 不是上界，所以存在序列 \({a}_{N}\) 中的一个点，使得 \(s - \varepsilon  < {a}_{N}\) 。现在， \(\left( {a}_{n}\right)\) 递增的事实意味着只要 \(n \geq  N\) ，便有 \({a}_{N} \leq  {a}_{n}\) 。因此，
+
+\[
+s - \varepsilon  < {a}_{N} \leq  {a}_{n} \leq  s < s + \varepsilon ,
+\]
+
+这意味着 \(\left| {{a}_{n} - s}\right|  < \varepsilon\) ，得证。  
+\end{proof}
+
+单调收敛定理在研究无穷级数时颇为有用。这主要是因为它断言了序列的收敛性，而无需明确提及实际极限。这是一个进行初步研究的好时机，因此现在是时候形式化序列与级数之间的关系了。
+
+\begin{Def}
+  \label{def:2.4.3}
+  设 \(\left( {b}_{n}\right)\) 为一个序列。无穷级数是形如以下形式表达式
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n} = {b}_{1} + {b}_{2} + {b}_{3} + {b}_{4} + {b}_{5} + \cdots .
+\]
+
+我们通过以下方式定义相应的部分和序列 \(\left( {s}_{m}\right)\)
+
+\[
+{s}_{m} = {b}_{1} + {b}_{2} + {b}_{3} + \cdots  + {b}_{m},
+\]
+
+称级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 收敛于 \(B\) ，若部分和序列 \(\left( {s}_{m}\right)\) 收敛于 \(B\) 。此时，记 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n} = B\) 。
+\end{Def}
+
+\begin{Eg}
+  \label{eg:2.4.4}
+考虑
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{1}{{n}^{2}}
+\]
+
+由于求和中的项均为正数，由以下给出的部分和序列
+
+\[
+{s}_{m} = 1 + \frac{1}{4} + \frac{1}{9} + \cdots  + \frac{1}{{m}^{2}}
+\]
+
+是递增的。问题在于我们是否能找到 \(\left( {s}_{m}\right)\) 的某个上界。为此，注意到
+\begin{align*}
+{s}_{m} = & 1 + \frac{1}{2 \cdot  2} + \frac{1}{3 \cdot  3} + \frac{1}{4 \cdot  4} + \cdots  + \frac{1}{{m}^{2}}\\
+<& 1 + \frac{1}{2 \cdot  1} + \frac{1}{3 \cdot  2} + \frac{1}{4 \cdot  3} + \cdots  + \frac{1}{m\left( {m - 1}\right) }\\
+= &1 + \left( {1 - \frac{1}{2}}\right)  + \left( {\frac{1}{2} - \frac{1}{3}}\right)  + \left( {\frac{1}{3} - \frac{1}{4}}\right)  + \cdots  + \left( {\frac{1}{\left( m - 1\right) } - \frac{1}{m}}\right)\\
+= & 1 + 1 - \frac{1}{m}\\
+  < & 2
+\end{align*}
+
+因此，$2$是部分和序列的一个上界，根据单调收敛定理， \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/{n}^{2}\) 收敛于某个(目前未知)小于$2$的极限。  
+\end{Eg}
+
+
+\begin{Eg}[调和级数]
+  \label{eg:2.4.5}
+这次，考虑所谓的调和级数
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{1}{n}
+\]
+
+同样，我们有一个递增的部分和序列，
+
+\[
+{s}_{m} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots  + \frac{1}{m},
+\]
+
+乍一看它似乎可能有界。然而，$2$不再是上界，因为
+
+\[
+{s}_{4} = 1 + \frac{1}{2} + \left( {\frac{1}{3} + \frac{1}{4}}\right)  > 1 + \frac{1}{2} + \left( {\frac{1}{4} + \frac{1}{4}}\right)  = 2.
+\]
+
+类似的计算表明 \({s}_{8} > \frac{5}{2}\) ，并且我们可以看到一般情况下
+
+\begin{align*}
+{s}_{{2}^{k}} = & 1 + \frac{1}{2} + \left( {\frac{1}{3} + \frac{1}{4}}\right)  + \left( {\frac{1}{5} + \cdots  + \frac{1}{8}}\right)  + \cdots  + \left( {\frac{1}{{2}^{k - 1} + 1} + \cdots  + \frac{1}{{2}^{k}}}\right)\\
+> &1 + \frac{1}{2} + \left( {\frac{1}{4} + \frac{1}{4}}\right)  + \left( {\frac{1}{8} + \cdots  + \frac{1}{8}}\right)  + \cdots  + \left( {\frac{1}{{2}^{k}} + \cdots  + \frac{1}{{2}^{k}}}\right)\\
+= & 1 + \frac{1}{2} + 2\left( \frac{1}{4}\right)  + 4\left( \frac{1}{8}\right)  + \cdots  + {2}^{k - 1}\left( \frac{1}{{2}^{k}}\right)\\
+=&  1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} + \cdots  + \frac{1}{2}\\
+=& 1 + k\left( \frac{1}{2}\right)
+\end{align*}
+
+
+这是无界的。因此，尽管速度极其缓慢， \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/n\) 的部分和序列最终会超过正实数轴上的每一个数。因为收敛序列是有界的，所以调和级数发散。  
+\end{Eg}
+
+前面的例子是一个通用论证的特殊情况，该论证可用于确定一大类无穷级数的收敛或发散。
+
+
+\begin{Thm}[Cauchy判敛法]
+  \label{thm:2.4.6}
+假设 \(\left( {b}_{n}\right)\) 是递减的，并且 \(\forall n \in  \mathbb{N}\) 满足 \({b}_{n} \geq  0\) 。那么，级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 收敛当且仅当以下级数收敛：
+
+\[
+\mathop{\sum }\limits_{{n = 0}}^{\infty }{2}^{n}{b}_{{2}^{n}} = {b}_{1} + 2{b}_{2} + 4{b}_{4} + 8{b}_{8} + {16}{b}_{16} + \cdots
+\]
+
+\end{Thm}
+
+
+\begin{proof}
+首先，假设 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{2}^{n}{b}_{{2}^{n}}\) 收敛。定理~\ref{thm:2.3.2}保证了下述部分和是有界的：
+
+\[
+{t}_{k} = {b}_{1} + 2{b}_{2} + 4{b}_{4} + \cdots  + {2}^{k}{b}_{{2}^{k}}
+\]
+
+即存在一个 \(M > 0\) ，使得对于所有 \(k \in  \mathbb{N}\) ， \({t}_{k} \leq  M\) 成立。我们想要证明 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 收敛。因为 \({b}_{n} \geq  0\) ，我们知道部分和是递增的，所以我们只需要证明下式是有界的：
+
+\[
+{s}_{m} = {b}_{1} + {b}_{2} + {b}_{3} + \cdots  + {b}_{m}
+\]
+
+固定 \(m\) ，并取 \(k\) 足够大以确保 \(m \leq  {2}^{k + 1} - 1\) 。于是， \({s}_{m} \leq  {s}_{{2}^{k + 1} - 1}\) 且
+
+\begin{align*}
+{s}_{{2}^{k + 1} - 1} = & {b}_{1} + \left( {{b}_{2} + {b}_{3}}\right)  + \left( {{b}_{4} + {b}_{5} + {b}_{6} + {b}_{7}}\right)  + \cdots  + \left( {{b}_{{2}^{k}} + \cdots  + {b}_{{2}^{k + 1} - 1}}\right)\\
+\leq & {b}_{1} + \left( {{b}_{2} + {b}_{2}}\right)  + \left( {{b}_{4} + {b}_{4} + {b}_{4} + {b}_{4}}\right)  + \cdots  + \left( {{b}_{{2}^{k}} + \cdots  + {b}_{{2}^{k}}}\right)\\
+= & {b}_{1} + 2{b}_{2} + 4{b}_{4} + \cdots  + {2}^{k}{b}_{{2}^{k}} = {t}_{k}.
+\end{align*}
+
+
+因此， \({s}_{m} \leq  {t}_{k} \leq  M\) ，且序列 \(\left( {s}_{m}\right)\) 有界。根据单调收敛定理，我们可以得出结论 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 收敛。
+  
+证明 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{2}^{n}{b}_{{2}^{n}}\) 发散意味着 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 发散的过程与例~\ref{eg:2.4.5}类似。具体细节在习题2.4.1中要求。
+\end{proof}
+
+
+
+
+\begin{Cor}
+  \label{cor:2.4.7}
+  级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/{n}^{p}\) 收敛当且仅当 \(p > 1\) 。
+\end{Cor}
+
+对这一推论进行严谨论证需要几何级数的一些基本知识。证明将在第\ref{sec:2.7}节末尾的练习2.7.7中要求，该节讨论了几何级数。
+
+\subsection{练习}
+
+练习2.4.1。通过证明如果级数 \(\mathop{\sum }\limits_{{n = 0}}^{\infty }{2}^{n}{b}_{{2}^{n}}\) 发散，那么 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 也发散，来完成定理2.4.6的证明。示例2.4.5可能是一个有用的参考。
+
+练习2.4.2。(a) 证明由 \({x}_{1} = 3\) 定义的序列
+
+\[
+{x}_{n + 1} = \frac{1}{4 - {x}_{n}}
+\]
+
+收敛。
+
+(b) 既然我们知道 \(\lim {x}_{n}\) 存在，解释为什么 \(\lim {x}_{n + 1}\) 也必须存在并且等于相同的值。
+
+取本练习(a)部分中递归方程两边的极限，以显式计算 \(\lim {x}_{n}\) 。
+
+练习2.4.3。按照练习2.4.2的模型，证明由 \({y}_{1} = 1\) 和 \({y}_{n + 1} = 4 - 1/{y}_{n}\) 定义的序列收敛并求出极限。
+
+练习2.4.4。证明
+
+\[
+\sqrt{2},\sqrt{2\sqrt{2}},\sqrt{2\sqrt{2\sqrt{2}}},\ldots
+\]
+
+收敛并求出极限。
+
+练习2.4.5(计算平方根)。设 \({x}_{1} = 2\) ，并定义
+
+\[
+{x}_{n + 1} = \frac{1}{2}\left( {{x}_{n} + \frac{2}{{x}_{n}}}\right) .
+\]
+
+(a) 证明 \({x}_{n}^{2}\) 总是大于2，然后利用这一点证明 \({x}_{n} - {x}_{n + 1} \geq  0\) 。由此得出结论 \(\lim {x}_{n} = \sqrt{2}\) 。
+
+(b) 修改序列 \(\left( {x}_{n}\right)\) 使其收敛到 \(\sqrt{c}\) 。
+
+练习 2.4.6 (上极限)。设 \(\left( {a}_{n}\right)\) 是一个有界序列。
+
+(a) 证明由 \({y}_{n} = \sup \left\{  {{a}_{k} : k \geq  n}\right\}\) 定义的序列收敛。
+
+(b) \(\left( {a}_{n}\right)\) 的上极限，或 \(\limsup {a}_{n}\) ，定义为
+
+\[
+\lim \sup {a}_{n} = \lim {y}_{n},
+\]
+
+其中 \({y}_{n}\) 是本练习部分 (a) 中的序列。为 \(\liminf {a}_{n}\) 提供一个合理的定义，并简要解释为什么它对任何有界序列总是存在。
+
+(c) 证明对于每个有界序列 \(\liminf {a}_{n} \leq  \limsup {a}_{n}\) ，并给出一个不等式严格成立的序列示例。
+
+证明 \(\liminf {a}_{n} = \limsup {a}_{n}\) 当且仅当 \(\lim {a}_{n}\) 存在。在这种情况下，三者共享相同的值。
+
+\section{子列与Bolzano-Weierstrass定理}
+\label{sec:2.5}
+在例 \ref{eg:2.4.5} 中，我们通过关注原序列的一个特定子列 \(\left( {s}_{{2}^{k}}\right)\) ，证明了调和级数的部分和序列 \(\left( {s}_{m}\right)\) 不收敛。现在，我们将无穷级数的话题放在一边，更全面地发展子列这一重要概念。
+
+\begin{Def}
+  \label{def:2.5.1}
+设 \(\left( {a}_{n}\right)\) 是一个实数序列，且 \({n}_{1} < {n}_{2} <\)  \({n}_{3} < {n}_{4} < {n}_{5} < \cdots\) 是一个递增的自然数序列。那么序列
+
+\[
+{a}_{{n}_{1}},{a}_{{n}_{2}},{a}_{{n}_{3}},{a}_{{n}_{4}},{a}_{{n}_{5}},\cdots
+\]
+
+被称为 \(\left( {a}_{n}\right)\) 的子列，并用 \(\left( {a}_{{n}_{j}}\right)\) 表示，其中 \(j \in  \mathbb{N}\) 索引子列 。
+\end{Def}
+
+请注意，子列中项的顺序与原始序列中的顺序相同，且不允许重复。因此，如果
+
+\[
+\left( {a}_{n}\right)  = \left( {1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\frac{1}{5},\frac{1}{6},\cdots }\right) ,
+\]
+
+那么
+
+\[
+\left( {\frac{1}{2},\frac{1}{4},\frac{1}{6},\frac{1}{8},\cdots }\right) \text{ 和 }\left( {\frac{1}{10},\frac{1}{100},\frac{1}{1000},\frac{1}{10000},\cdots }\right)
+\]
+
+是合法子列的例子，而
+
+\[
+\left( {\frac{1}{10},\frac{1}{5},\frac{1}{100},\frac{1}{50},\frac{1}{1000},\frac{1}{500},\cdots }\right) \text{ 和 }\left( {1,1,\frac{1}{3},\frac{1}{5},\frac{1}{7},\frac{1}{9},\cdots }\right)
+\]
+
+则不是。
+
+\begin{Thm}
+  \label{thm:2.5.2}
+  收敛序列的子列收敛到与原序列相同的极限。
+\end{Thm}
+
+
+\begin{proof}
+  设 \(\lim_{n \to \infty} a_n = L\)，即对任意 \(\varepsilon > 0\)，存在 \(N \in \mathbb{N}\)，当 \(n \geq N\) 时，\(|a_n - L| < \varepsilon\)。考虑子列 \(\{a_{n_k}\}\)，由于子列指标 \(\{n_k\}\) 严格递增，故 \(n_k \geq k\)。取 \(K = N\)，则当 \(k \geq K\) 时，\(n_k \geq k \geq N\)，从而 \(|a_{n_k} - L| < \varepsilon\)。因此，\(\lim_{k \to \infty} a_{n_k} = L\)。证毕。
+\end{proof}
+
+
+这个并不太令人惊讶的结果有几个有些令人惊讶的应用。它是理解无限和何时具有结合性的关键要素(练习 2.5.2)。我们还可以用以下巧妙的方式来计算一些熟悉极限的值。
+
+\begin{Eg}
+  \label{eg:2.5.3}
+设 \(0 < b < 1\) 。因为
+
+\[
+b > {b}^{2} > {b}^{3} > {b}^{4} > \cdots  > 0,
+\]
+
+序列 \(\left( {b}^{n}\right)\) 是递减且有下界的。单调收敛定理使我们能够得出结论， \(\left( {b}^{n}\right)\) 收敛到某个满足 \(b > l \geq  0\) 的 \(l\) 。为了计算 \(l\) ，注意到 \(\left( {b}^{2n}\right)\) 是一个子列，因此根据定理2.5.2， \(\left( {b}^{2n}\right)  \rightarrow  l\) 。但 \(\left( {b}^{2n}\right)  = \left( {b}^{n}\right) \left( {b}^{n}\right)\) ，所以根据代数极限定理， \(\left( {b}^{2n}\right)  \rightarrow  l \cdot  l = {l}^{2}\) 。由于极限是唯一的， \({l}^{2} = l\) ，因此 \(l = 0\) 。  
+\end{Eg}
+
+不难说明(练习2.5.5)，我们将这个例子推广到 \(\forall -1<b<1, \left( {b}^{n}\right)  \rightarrow  0\) 。
+
+
+\begin{Eg}[发散准则]
+  \label{eg:2.5.4}
+定理~\ref{thm:2.5.2}在提供发散的有效证明方面也很有用。在例~\ref{eg:2.2.7}中，我们非常确定
+
+\[
+\left( {1, - \frac{1}{2},\frac{1}{3}, - \frac{1}{4},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\frac{1}{5}, - \frac{1}{5},\cdots }\right)
+\]
+
+没有收敛到任何的极限。注意到
+
+\[
+\left( {\frac{1}{5},\frac{1}{5},\frac{1}{5},\frac{1}{5},\frac{1}{5},\cdots }\right)
+\]
+
+是一个收敛到 \(1/5\) 的子列。同样，
+
+\[
+\left( {-\frac{1}{5}, - \frac{1}{5}, - \frac{1}{5}, - \frac{1}{5}, - \frac{1}{5},\cdots }\right)
+\]
+
+是原始序列的另一个子列，收敛到 \(- 1/5\) 。因为我们有两个子列收敛到两个不同的极限，我们可以严格地得出结论，原始序列发散。
+\end{Eg}
+
+\subsection{Bolzano-Weierstrass定理}
+在前面的例子中，很容易发现原始序列中隐藏着一个(或两个)收敛子列。对于有界序列，事实证明总是可以找到至少一个这样的收敛子列。
+
+\begin{Thm}[Bolzano-Weierstrass]
+每个有界序列都包含一个收敛子列。  
+\end{Thm}
+
+\begin{proof}
+设 \(\left( {a}_{n}\right)\) 为一个有界序列，使得 \(\exists M > 0\) 满足 \(\forall n \in  \mathbb{N}\) ， \(\left| {a}_{n}\right|  \leq  M\) 成立。将闭区间 \(\left\lbrack  {-M,M}\right\rbrack\) 二等分为两个闭区间 \(\left\lbrack  {-M,0}\right\rbrack\) 和 \(\left\lbrack  {0,M}\right\rbrack\) (中点同时包含在两半中)。现在，这两个闭区间中至少有一个包含序列 \(\left( {a}_{n}\right)\) 中的无限多个点。选择一个满足此条件的半区间，并将其标记为 \({I}_{1}\) 。然后，令 \({a}_{{n}_{1}}\) 为序列 \(\left( {a}_{n}\right)\) 中满足 \({a}_{{n}_{1}} \in  {I}_{1}\) 的某个点。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/01955a90-8665-7754-bda7-5e5e1d0217df_22_336_673_964_221_0.jpg}
+\end{figure}
+
+
+
+接下来，我们将 \({I}_{1}\) 等分为长度相等的闭区间，并令 \({I}_{2}\) 为其中再次包含原序列无限多个点的一半。由于从 \(\left( {a}_{n}\right)\) 中有无限多个点可供选择，我们可以从原序列中选取一个 \({a}_{{n}_{2}}\) ，使得 \({n}_{2} > {n}_{1}\) 且 \({a}_{{n}_{2}} \in  {I}_{2}\) 。一般来说，我们通过取 \({I}_{k - 1}\) 中包含 \(\left( {a}_{n}\right)\) 无限多个点的一半来构造闭区间 \({I}_{k}\) ，然后选择 \({n}_{k} > {n}_{k - 1} > \cdots  > {n}_{2} > {n}_{1}\) 使得 \({a}_{{n}_{k}} \in  {I}_{k}\) 。
+
+我们想论证 \(\left( {a}_{{n}_{k}}\right)\) 是一个收敛子列，但我们需要一个极限的候选者。这些集合
+
+\[
+{I}_{1} \supseteq  {I}_{2} \supseteq  {I}_{3} \supseteq  \cdots
+\]
+
+形成了闭区间套。根据闭区间套定理，存在至少一个点 \(x \in  \mathbb{R}\) 包含在每个 \({I}_{k}\) 中。这为我们提供了我们一直在寻找的候选者。剩下的就是证明 \(\left( {a}_{{n}_{k}}\right)  \rightarrow  x\) 。
+
+任取 \(\varepsilon  > 0\) 。根据构造， \({I}_{k}\) 的长度为 \(M{\left( 1/2\right) }^{k - 1}\) ，其收敛于零(这由例~\ref{eg:2.5.3}和代数极限定理得出)。选择 \(N\) ，使得 \(k \geq  N\) 意味着 \({I}_{k}\) 的长度小于 \(\varepsilon\) 。因为 \(x\) 和 \({a}_{{n}_{k}}\) 都在 \({I}_{k}\) 中，所以 \(\left| {{a}_{{n}_{k}} - x}\right|  < \varepsilon\) 。
+\end{proof}
+
+\subsection{练习}
+
+练习2.5.1。证明定理2.5.2。
+
+练习2.5.2. (a) 证明如果一个无穷级数收敛，则结合律成立。假设 \({a}_{1} + {a}_{2} + {a}_{3} + {a}_{4} + {a}_{5} + \cdots\) 收敛到极限 \(L\) (即，部分和序列 \(\left( {s}_{n}\right)  \rightarrow  L\) )。证明任何对项的重组
+
+\[
+\left( {{a}_{1} + {a}_{2} + \cdots  + {a}_{{n}_{1}}}\right)  + \left( {{a}_{{n}_{1} + 1} + \cdots  + {a}_{{n}_{2}}}\right)  + \left( {{a}_{{n}_{2} + 1} + \cdots  + {a}_{{n}_{3}}}\right)  + \cdots
+\]
+
+都会导致一个同样收敛到 \(L\) 的级数。
+
+(b) 将此结果与第2.1节末尾讨论的例子进行比较，其中无穷加法被证明不满足结合律。为什么我们在(a)中的证明不适用于这个例子？
+
+练习2.5.3. 给出以下每种情况的例子，或论证这样的请求是不可能的。
+
+(a) 一个不包含0或1作为项的序列，但包含收敛到这些值的子列。
+
+(b) 一个单调但发散的序列，且具有收敛的子列。
+
+(c) 一个包含收敛到无限集 \(\{ 1,1/2,1/3,1/4,1/5,\ldots \}\) 中每个点的子列的序列。
+
+一个具有收敛子列的无界序列。
+
+一个具有有界子列但不包含任何收敛子列的序列。
+
+习题 2.5.4。假设 \(\left( {a}_{n}\right)\) 是一个有界序列，且其每个收敛子列都收敛到相同的极限 \(a \in  \mathbb{R}\) 。证明 \(\left( {a}_{n}\right)\) 必须收敛到 \(a\) 。
+
+习题 2.5.5。将例 2.5.3 中证明的结果推广到 \(\left| b\right|  < 1\) 的情况。证明当 \(- 1 < b < 1\) 时， \(\lim \left( {b}^{n}\right)  = 0\) 成立。
+
+习题 2.5.6。设 \(\left( {a}_{n}\right)\) 是一个有界序列，并定义集合
+
+\[
+S = \left\{  {x \in  \mathbb{R} : x < {a}_{n}\text{ for infinitely many terms }{a}_{n}}\right\}  .
+\]
+
+证明存在一个子列 \(\left( {a}_{{n}_{k}}\right)\) 收敛于 \(s = \sup S\) 。(这是利用完备性公理对Bolzano-Weierstrass定理的直接证明。)
+
+\section{Cauchy准则}
+\label{sec:2.6}
+以下定义与序列收敛的定义有着惊人的相似之处。
+
+\begin{Def}
+  \label{def:2.6.1}
+  称一个序列 \(\left( {a}_{n}\right)\) 为Cauchy列，如果对于每一个 \(\varepsilon  > 0\) ，存在一个 \(N \in  \mathbb{N}\) ，使得每当 \(m,n \geq  N\) 时，就有 \(\left| {{a}_{n} - {a}_{m}}\right|  < \varepsilon\) 。
+\end{Def}
+
+
+为了便于比较，让我们重新陈述收敛的定义。
+
+\begingroup
+\renewcommand{\theThm}{} % 清空定理编号
+\begin{Def}[序列的收敛性]
+称一个序列 \(\left( {a}_{n}\right)\) 收敛到一个实数 \(a\) ，如果 \(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得每当 \(n \geq  N\) 时，就有 \(\left| {{a}_{n} - a}\right|  < \varepsilon\) 。
+\end{Def}
+\endgroup
+
+\addtocounter{Thm}{-1}
+
+正如我们所讨论的，收敛的定义断言，给定任意正数 \(\varepsilon\) ，可以在序列中找到一点，使得该点之后的序列项都离极限 \(a\) 比给定的 \(\varepsilon\) 更近。另一方面，如果对于每一个 \(\varepsilon\) ，在序列中都能找到一点，使得该点之后的序列项彼此之间的距离都比给定的 \(\varepsilon\) 更近，那么这个序列就是Cauchy列。为了揭示这个惊喜，我们将在本节中论证这两个定义实际上是等价的:收敛序列是Cauchy列，而Cauchy列也是收敛的。Cauchy列定义的重要性在于它没有提到极限。这有点像单调收敛定理的情况，即我们将有另一种方法来证明序列收敛，而无需明确知道极限可能是什么。
+
+\begin{Thm}
+  \label{thm:2.6.2}
+  每一个收敛序列都是Cauchy列。
+\end{Thm}
+
+\begin{proof}
+  假设 \(\left( {x}_{n}\right)\) 收敛于 \(x\) 。为了证明 \(\left( {x}_{n}\right)\) 是Cauchy列，我们必须找到序列中的一个点，在此之后我们有 \(\left| {{x}_{n} - {x}_{m}}\right|  < \varepsilon\) 。这可以通过应用三角不等式来完成：
+
+已知 \(\forall \varepsilon > 0\)， \(\exists N\in \mathbb{N}\) 使得当 \(n \geq N\) 时，\(|x_{n} - x| < \frac{\varepsilon}{2}\)。对任意 \(m, n \geq N\)，由三角不等式得  
+  \[
+  |x_{n} - x_{m}| \leq |x_{n} - x| + |x - x_{m}| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon,
+  \]
+  故 \(\left( x_{n} \right)\) 是Cauchy列。
+\end{proof}
+
+
+逆命题的证明稍微困难一些，主要是因为在证明序列收敛时，我们必须有一个提议的极限供序列趋近。我们在单调收敛定理和Bolzano-Weierstrass定理的证明中曾遇到过这种情况。我们的策略是使用Bolzano-Weierstrass定理。这就是下一个引理的原因。(与定理~\ref{thm:2.3.2}进行比较。)
+
+\begin{Lem}
+  \label{lem:2.6.3}
+  Cauchy列是有界的。
+\end{Lem}
+
+\begin{proof}
+给定 \(\varepsilon  = 1\) ，存在一个 \(N\) ，使得对于所有 \(m,n \geq  N\) ，有 \(\left| {{x}_{m} - {x}_{n}}\right|  < 1\) 。因此， \(\forall n \geq  N\) ，我们必须有 \(\left| {x}_{n}\right|  < \left| {x}_{N}\right|  + 1\) 。由此可得
+
+\[
+M = \max \left\{  {\left| {x}_{1}\right| ,\left| {x}_{2}\right| ,\left| {x}_{3}\right| ,\ldots ,\left| {x}_{N - 1}\right| ,\left| {x}_{N}\right|  + 1}\right\}
+\]
+
+是序列 \(\left( {x}_{n}\right)\) 的一个界。  
+\end{proof}
+
+
+\begin{Thm}[Cauchy准则]
+  \label{thm:2.6.4}
+  一个序列收敛当且仅当它是一个Cauchy列。
+\end{Thm}
+
+\begin{proof}
+  $\Rightarrow$ :即为定理 \ref{thm:2.6.2}。
+
+  $\Leftarrow$:  对于这个方向，我们从Cauchy列 \(\left( {x}_{n}\right)\) 开始。引理~\ref{lem:2.6.3}保证了 \(\left( {x}_{n}\right)\) 是有界的，因此我们可以使用Bolzano-Weierstrass定来生成一个收敛的子列 \(\left( {x}_{{n}_{k}}\right)\) 。设
+
+\[
+x = \lim {x}_{{n}_{k}}.
+\]
+
+我们的目标是证明原始序列 \(\left( {x}_{n}\right)\) 收敛到相同的极限。再次，我们将使用三角不等式的论证。我们知道子列中的项正在接近极限 \(x\) ，而 \(\left( {x}_{n}\right)\) 是Cauchy列的假设意味着序列“尾部”中的项彼此接近。因此，我们希望使这些距离中的每一个都小于规定的 \(\varepsilon\) 的一半。
+
+设 \(\varepsilon  > 0\) 。因为 \(\left( {x}_{n}\right)\) 是Cauchy列，存在 \(N\) 使得 $\forall m,n \ge N$
+
+\[
+\left| {{x}_{n} - {x}_{m}}\right|  < \frac{\varepsilon }{2}
+\]
+
+现在，我们也知道 \(\left( {x}_{{n}_{k}}\right)  \rightarrow  x\) ，所以在这个子列中选择一项，称为 \({x}_{{n}_{K}}\) ，满足 \({n}_{K} \geq  N\) 且
+
+\[
+\left| {{x}_{{n}_{K}} - x}\right|  < \frac{\varepsilon }{2}.
+\]
+
+为了验证 \({n}_{K}\) 具有（证明 $x_n$ 收敛）所需性质，观察到如果 \(n \geq  {n}_{K}\) ，则
+
+\begin{align*}
+\left| {{x}_{n} - x}\right|  = & \left| {{x}_{n} - {x}_{{n}_{K}} + {x}_{{n}_{K}} - x}\right|\\
+\leq&  \left| {{x}_{n} - {x}_{{n}_{K}}}\right|  + \left| {{x}_{{n}_{K}} - x}\right|\\
+<& \frac{\varepsilon }{2} + \frac{\varepsilon }{2} = \varepsilon
+\end{align*}
+
+\end{proof}
+
+
+
+Cauchy准则(Cauchy Criterion)以法国数学家 Augustin Louis Cauchy 的名字命名。Cauchy是数学史上许多分支的重要人物——数论和有限群理论等，但他最为广泛认可的是他在分析学，尤其是复分析领域的巨大贡献。他理应被赞誉为发明了我们今天使用的基于 \(\varepsilon\) 的极限定义。但更恰当的看法是，他仅是分析学的先驱。这是因为他的工作其实并未达到现代数学家所期望的精细程度。例如，Cauchy准则是Cauchy为研究无穷级数而设计并使用的，但他实际上并未从两个方向证明它。Cauchy工作中的这些空白丝毫不能减损他的卓越才华。当时的问题既困难又微妙，而Cauchy无疑是奠定现代严谨标准基础的最具影响力的人物。Karl Weierstrass 在完善Cauchy的论证中发挥了重要作用。我们将在第\ref{chap:6}章讨论一致收敛时更多地听到Weierstrass的贡献。Bernhard Bolzano 在布拉格工作，他也在思考和撰写关于极限和连续性等许多相同问题的文章。无论出于何种原因，他的历史声誉似乎未能充分体现他深刻见解的卓越水平。
+
+
+\subsection{完备性再探}
+
+在第一章中，我们确立了完备性公理(Axiom of Completeness，简称AoC)，即“有上界的集合必有最小上界”。随后，我们将这一公理作为证明区间套定理(Nested Interval Property，简称NIP)的关键步骤。在本章中，AoC是单调收敛定理(Monotone Convergence Theorem，简称MCT)的核心步骤，而NIP则是证明Bolzano-Weierstrass定理（简称 BW）的关键。最后，我们在证明Cauchy准则(Cauchy Criterion，简称CC)时也需要用到BW。这些定理之间的逻辑关系如下所示
+
+\[
+\mathrm{{AoC}} \Rightarrow  \left\{  {\begin{array}{ll} \mathrm{{NIP}} &  \Rightarrow  \mathrm{{BW}} \Rightarrow  \mathrm{{CC}}. \\  \mathrm{{MCT}}. &  \end{array}.}\right.
+\]
+
+但这份清单并非全部。回想一下，在我们最初关于完备性的讨论中，根本问题是有理数中存在“间隙”。从有理数转向实数进行分析的原因在于，当我们遇到一个看起来收敛于某个数(例如 \(\sqrt{2}\) )的数列时，我们可以确信那里确实存在一个我们可以称之为极限的数。“有上界的集合有最小上界”这一断言，只是数学上表达我们坚持数域中不存在“空洞”的一种方式，但并非唯一方式。相反，我们可以将NIP作为公理，并用它来证明最小上界的存在，或者我们可以假设MCT并用它来证明NIP及其他结果。事实上，这些结果中的任何一个都可以作为我们的起点。这种情况让人想起那句谚语:“先有鸡还是先有蛋？”所有前述陈述在某种意义上都是等价的，即一旦我们假设其中任何一个为真，就可以推导出其余部分。(这些含义在练习2.6.6中进行了探讨。)然而，由于我们有一个不完备的有序域的例子——即有理数集——我们知道仅凭域和序性质无法证明其中任何一个。我们如何决定哪个应该是公理，哪个成为定理，取决于偏好和上下文，最终并不那么重要。重要的是，我们要理解所有这些结果——AoC、NIP、MCT、BW和CC——属于同一个家族，每个都以自己特定的语言断言 \(\mathbb{R}\) 的完备性。
+
+\subsection{练习}
+
+练习2.6.1. 给出以下每种情况的例子，或者论证这样的请求是不可能的。
+
+(a) 一个不是单调的Cauchy列(Cauchy sequence)。
+
+(b) 一个不是Cauchy的单调序列。
+
+(c) 一个具有发散子列的Cauchy列。
+
+(d) 一个包含Cauchy子列的无界序列。
+
+练习2.6.2. 为定理2.6.2提供证明。
+
+练习2.6.3. (a) 解释以下伪Cauchy性质与Cauchy列的正确定义有何不同:一个序列 \(\left( {s}_{n}\right)\) 是伪Cauchy的，如果对于所有 \(\varepsilon  > 0\) ，存在一个 \(N\) ，使得如果 \(n \geq  N\) ，则 \(\left| {{s}_{n + 1} - {s}_{n}}\right|  < \varepsilon\) 。
+
+(b) 如果可能，给出一个发散序列 \(\left( {s}_{n}\right)\) 的例子，该序列是伪Cauchy的。
+
+练习2.6.4. 假设 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 是Cauchy列。使用三角不等式论证证明 \({c}_{n} = \left| {{a}_{n} - {b}_{n}}\right|\) 是Cauchy的。
+
+练习 2.6.5。如果 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 是Cauchy列，那么证明 \(\left( {{x}_{n} + {y}_{n}}\right)\) 是Cauchy列的一个简单方法是使用Cauchy准则。根据定理 2.6.4， \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 必须是收敛的，而代数极限定理则意味着 \(\left( {{x}_{n} + {y}_{n}}\right)\) 是收敛的，因此是Cauchy列。
+
+(a) 给出一个直接论证，证明 \(\left( {{x}_{n} + {y}_{n}}\right)\) 是Cauchy列，而不使用Cauchy准则或代数极限定理。
+
+(b) 对乘积 \(\left( {{x}_{n}{y}_{n}}\right)\) 做同样的论证。
+
+练习 2.6.6. (a) 假设嵌套区间性质(定理 1.4.1)成立，并使用类似于Bolzano-Weierstrass定理证明中的技术，给出完备性公理的证明。(反向蕴含已在第1章中给出。这表明AoC等价于NIP。)
+
+(b) 使用单调收敛定理来证明嵌套区间性质。(这确立了AoC、NIP和MCT的等价性。)
+
+(c) 这次，从Bolzano-Weierstrass定理出发，并使用它来构造嵌套区间性质的证明。(因此，BW等价于NIP，从而也等价于AoC和MCT。)
+
+(d) 最后，使用Cauchy准则来证明Bolzano-Weierstrass定理。这是第2.6节末尾讨论的完备性五种表征等价性的最后一个环节。
+
+\section{无穷级数的性质}
+\label{sec:2.7}
+给定一个无穷级数 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) ，重要的是要明确区分
+\begin{enumerate}[label = (\roman*)]
+\item 项的序列: \(\left( {{a}_{1},{a}_{2},{a}_{3},\ldots }\right)\) 
+\item 部分和的序列: \(\left( {{s}_{1},{s}_{2},{s}_{3},\ldots }\right)\) ，其中 \({s}_{n} = {a}_{1} + {a}_{2} + \cdots  + {a}_{n}\) 。
+\end{enumerate}
+
+级数 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 的收敛性是根据序列 \(\left( {s}_{n}\right)\) 来定义的。具体来说，是由下列命题定义的：
+
+\[
+\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k} = A\Leftrightarrow \lim {s}_{n} = A.
+\]
+
+正是由于这个原因，我们可以立即将许多关于序列研究的结果转化为关于无穷级数行为的陈述。
+
+\begin{Thm}[级数的代数极限定理]
+  \label{thm:2.7.1}
+  如果 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k} = A\) ， \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{b}_{k} = B\) ，那么
+\begin{enumerate}[label = (\roman*)]
+\item\label{item:2.7.1} \(\forall c\in \mathbb{R}, \mathop{\sum }\limits_{{k = 1}}^{\infty }c{a}_{k} = {cA}\) 
+\item \label{item:2.7.2}\(\mathop{\sum }\limits_{{k = 1}}^{\infty }\left( {{a}_{k} + {b}_{k}}\right)  = A + B\) 
+\end{enumerate}
+\end{Thm}
+
+
+\begin{proof}
+  \ref{item:2.7.1}为了证明 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }c{a}_{k} = {cA}\) ，我们必须论证部分和的序列
+
+\[
+{t}_{m} = c{a}_{1} + c{a}_{2} + c{a}_{3} + \cdots  + c{a}_{m}
+\]
+
+收敛于 \({cA}\) 。但我们已知 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 收敛于 \(A\) ，这意味着部分和
+
+\[
+{s}_{m} = {a}_{1} + {a}_{2} + {a}_{3} + \cdots  + {a}_{m}
+\]
+
+收敛于 \(A\) 。由于 \({t}_{m} = c{s}_{m}\) ，应用序列的代数极限定理(定理~\ref{thm:2.3.3})得到 \(\left( {t}_{m}\right)  \rightarrow  {cA}\) ，得证。
+
+\ref{item:2.7.2} 练习2.7.8。
+\end{proof}
+
+
+总结定理~\ref{thm:2.7.1}~\ref{item:2.7.1}的一种方式是，无穷加法仍然满足分配律。~\ref{item:2.7.2} 则验证了级数可以按通常的方式相加。该定理中缺少关于两个无限级数乘积的陈述。这个问题的核心是可交换性问题，这需要更精细的分析，因此推迟到第\ref{sec:2.8}节。
+
+\begin{Thm}[级数的Cauchy准则]
+  \label{thm:2.7.2}
+级数 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 收敛当且仅当 \(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得每当 \(n > m \geq  N\) 时，有
+
+\[
+\left| {{a}_{m + 1} + {a}_{m + 2} + \cdots  + {a}_{n}}\right|  < \varepsilon .
+\]
+  
+\end{Thm}
+
+\begin{proof}
+观察到
+
+\[
+\left| {{s}_{n} - {s}_{m}}\right|  = \left| {{a}_{m + 1} + {a}_{m + 2} + \cdots  + {a}_{n}}\right|
+\]
+
+并应用序列的Cauchy准则。
+  
+\end{proof}
+
+Cauchy准则为级数的几个基本事实提供了简洁的证明。
+
+
+\begin{Thm}
+  \label{thm:2.7.3}
+  如果级数 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 收敛，则 \(\left( {a}_{k}\right)  \rightarrow  0\) 。
+\end{Thm}
+
+\begin{proof}
+在收敛级数的Cauchy准则中考虑特殊情况 \(n = m + 1\) 。  
+\end{proof}
+
+每次陈述这一结果时，我们都应提醒自己查看调和级数(例~\ref{eg:2.4.5})，以消除任何认为逆命题成立的误解： \(\left( {a}_{k}\right)\) 趋于\(0\)并不意味着级数收敛。
+
+\begin{Thm}[比较判别法]
+  \label{thm:2.7.4}
+  假设 \(\left( {a}_{k}\right)\) 和 \(\left( {b}_{k}\right)\) 满足 \( \forall k\in \mathbb{N}, 0 \leq  {a}_{k} \leq  {b}_{k}\) 。
+
+  \begin{enumerate}[label = (\roman*)]
+  \item 如果 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{b}_{k}\) 收敛，则 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 收敛。
+  \item 如果 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 发散，则 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{b}_{k}\) 发散。
+  \end{enumerate}
+\end{Thm}
+
+\begin{proof}
+  这两个陈述都直接来自于级数的Cauchy准则以及以下观察:
+
+\[
+\left| {{a}_{m + 1} + {a}_{m + 2} + \cdots  + {a}_{n}}\right|  \leq  \left| {{b}_{m + 1} + {b}_{m + 2} + \cdots  + {b}_{n}}\right| .
+\]
+\end{proof}
+
+
+练习中要求使用单调收敛定理进行替代证明。
+
+这是一个提醒我们再次注意这样一点：关于序列和级数收敛性的陈述不受某些有限数量的初始项的变化的影响。在比较判别法中，条件 \({a}_{k} \leq  {b}_{k}\) 并不需要对所有 \(k \in  \mathbb{N}\) 都成立，只需要最终成立即可。一个较弱但充分的假设是假设存在某个点 \(M \in  \mathbb{N}\) ，使得 \( \forall k \geq  M\) ，不等式 \({a}_{k} \leq  {b}_{k}\) 成立。
+
+比较判别法用于根据另一个级数的行为推断一个级数的收敛或发散。因此，为了使该判则具有较大用途，我们需要一个可以作为衡量标准的级数。在第\ref{sec:2.4}节中，我们证明了Cauchy判敛法，这导致了以下一般性结论:级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/{n}^{p}\) 收敛当且仅当 \(p > 1\) 。
+
+下一个例子总结了另一类重要级数的情况。
+
+\begin{Eg}[几何级数]
+  \label{eg:2.7.5}
+称一个级数为几何级数，若其具有以下形式：
+
+\[
+\mathop{\sum }\limits_{{k = 0}}^{\infty }a{r}^{k} = a + {ar} + a{r}^{2} + a{r}^{3} + \cdots .
+\]
+
+如果 \(r = 1\) 且 \(a \neq  0\) ，该级数显然发散。对于 \(r \neq  1\) ，代数恒等式
+
+\[
+\left( {1 - r}\right) \left( {1 + r + {r}^{2} + {r}^{3} + \cdots  + {r}^{m - 1}}\right)  = 1 - {r}^{m}
+\]
+
+使我们能够重写部分和
+
+\[
+{s}_{m} = a + {ar} + a{r}^{2} + a{r}^{3} + \cdots  + a{r}^{m - 1} = \frac{a\left( {1 - {r}^{m}}\right) }{1 - r}.
+\]
+
+现在，（序列的）代数极限定理和例~\ref{eg:2.5.3}证明了以下结论：$\left| r \right|< 1$ 时
+
+\[
+\mathop{\sum }\limits_{{k = 0}}^{\infty }a{r}^{k} = \frac{a}{1 - r}
+\]
+
+\end{Eg}
+
+尽管比较检验要求级数的项为正，但它通常与下一个定理结合使用，以处理包含一些负项的级数。
+
+\begin{Thm}[绝对收敛检验]
+  \label{thm:2.7.6}
+  如果级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }\left| {a}_{n}\right|\) 收敛，则 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 也收敛。
+\end{Thm}
+
+\begin{proof}
+利用级数的Cauchy准则。因为 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }\left| {a}_{n}\right|\) 收敛，我们知道， \(\forall \varepsilon  > 0\) ， \(\exists N \in  \mathbb{N}\) ，使得 $\forall n> m \ge N$
+
+\[
+\left| {a}_{m + 1}\right|  + \left| {a}_{m + 2}\right|  + \cdots  + \left| {a}_{n}\right|  < \varepsilon
+\]
+
+根据三角不等式，
+
+\[
+\left| {{a}_{m + 1} + {a}_{m + 2} + \cdots  + {a}_{n}}\right|  \leq  \left| {a}_{m + 1}\right|  + \left| {a}_{m + 2}\right|  + \cdots  + \left| {a}_{n}\right| ,
+\]
+
+因此，Cauchy准则保证了 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 也收敛。  
+\end{proof}
+
+这个定理的逆命题不成立。在本章开头的讨论中，我们考虑了交错调和级数
+
+\[
+1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots .
+\]
+
+取各项的绝对值便得到调和级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/n\) ，我们已经看到它是发散的。然而，不难证明，在交替负号的情况下，该级数确实收敛。这是交错级数检验的一个特例。
+
+\begin{Thm}[交错级数检验]
+  \label{thm:2.7.7}
+  设 \(\left( {a}_{n}\right)\) 为满足以下条件的序列，
+\begin{enumerate}[label = (\roman*)]
+\item \({a}_{1} \geq  {a}_{2} \geq  {a}_{3} \geq  \cdots  \geq  {a}_{n} \geq  {a}_{n + 1} \geq  \cdots\) 
+\item \(\left( {a}_{n}\right)  \rightarrow  0\)
+\end{enumerate}
+则交错级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{\left( -1\right) }^{n + 1}{a}_{n}\) 收敛。
+\end{Thm}
+
+
+\begin{proof}
+
+
+对交错级数 \( S_n = \sum_{k=1}^n (-1)^{k+1} a_k \)，任取 \( \varepsilon >0 \)，由 \( a_n \to 0 \)，存在 \( N \) 使得 \( n > N \) 时 \( a_{n+1} < \varepsilon \).
+
+对任意 \( n > N \) 及 \( p \geq 1 \)，考虑部分和差：  
+\[
+|S_{n+p} - S_n| = \left| \sum_{k=n+1}^{n+p} (-1)^{k+1} a_k \right|.
+\]
+
+因 \( \{a_n\} \) 单调递减，其绝对值满足：  
+\[
+\left| \sum_{k=n+1}^{n+p} (-1)^{k+1} a_k \right| \leq a_{n+1} < \varepsilon.
+\]
+
+故对任意 \( \varepsilon >0 \)，存在 \( N \) 使 \( n > N \) 时，对任意 \( p \geq1 \)，有 \( |S_{n+p}-S_n| < \varepsilon \)，即级数满足Cauchy收敛准则，从而收敛。
+
+\end{proof}
+
+
+\begin{Def}
+  \label{def:2.7.8}
+  如果 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }\left| {a}_{n}\right|\) 收敛，那么我们说原级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 绝对收敛。
+
+  如果级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 收敛但绝对值级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }\left| {a}_{n}\right|\) 不收敛，那么我们说原级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 条件收敛。
+\end{Def}
+
+
+就这一新定义的术语而言，我们已经证明
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n + 1}}{n}
+\]
+
+条件收敛，而
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n + 1}}{{n}^{2}},\;\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{1}{{2}^{n}}\;\text{ 和 }\;\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n + 1}}{{2}^{n}}
+\]
+
+绝对收敛。特别是，任何(除有限多项外)正项的收敛级数都必须绝对收敛。
+
+交错级数检验是条件收敛中最易理解的检验方法，但在练习中还探讨了其他几种方法。特别是，练习2.7.14中概述的 Abel 判别法将在第\ref{chap:6}章我们对幂级数的研究中证明有用。
+
+\subsection{重排}
+非正式地说，级数的重排是通过将和中的项重新排列成其他顺序而得到的。重要的是，所有原始项最终都会出现在新的顺序中，并且没有项被重复。在之前的讨论中，我们通过为每个负项取两个正项，形成了交错调和级数的一个重排:
+
+\[
+1 + \frac{1}{3} - \frac{1}{2} + \frac{1}{5} + \frac{1}{7} - \frac{1}{4} + \cdots .
+\]
+
+显然，任何级数都有无限多种重排方式；然而，以下两者都不是原交错调和级数的重排：
+
+\[
+1 + \frac{1}{2} - \frac{1}{3} + \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \cdots
+\]
+
+
+\[
+1 + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} + \frac{1}{7} - \frac{1}{8} + \frac{1}{9} + \frac{1}{11} - \frac{1}{12} + \cdots
+\]
+
+理解这一事实对我们理解重排的概念是有帮助的。
+
+\begin{Def}
+  \label{def:2.7.9}
+设 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 为一个级数。如果存在双射 \(f : \mathbb{N} \rightarrow  \mathbb{N}\) ，使得对于 \(\forall k \in  \mathbb{N}\) ， \({b}_{f\left( k\right) } = {a}_{k}\) ，则称级数 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{b}_{k}\) 为 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 的一个重排。
+\end{Def}
+
+我们现在已经具备了所有工具和符号，可以解决本章开头提出的一个问题。在\ref{sec:2.1}节中，我们构造了一个交错调和级数的特定重排，该重排收敛到一个不同于原级数的极限。这是因为该收敛仅为条件收敛。
+
+\begin{Def}
+  \label{thm:2.7.10}
+  如果 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 绝对收敛，那么该级数的任何重排都收敛到相同的极限。
+\end{Def}
+
+\begin{proof}
+设 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 绝对收敛到 \(A\) ，并且令 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{b}_{k}\) 为 \(\mathop{\sum }\limits_{{k = 1}}^{\infty }{a}_{k}\) 的一个重排。我们以
+
+\[
+{s}_{n} = \mathop{\sum }\limits_{{k = 1}}^{n}{a}_{k} = {a}_{1} + {a}_{2} + \cdots  + {a}_{n}
+\]
+
+表示原级数的部分和，并以
+
+\[
+{t}_{m} = \mathop{\sum }\limits_{{k = 1}}^{m}{b}_{k} = {b}_{1} + {b}_{2} + \cdots  + {b}_{m}
+\]
+
+表示重排级数的部分和。我们希望证明 \(\left( {t}_{m}\right)  \rightarrow\)  \(A\) 。
+
+任取 \(\varepsilon  > 0\) 。根据假设， \(\left( {s}_{n}\right)  \rightarrow  A\) ，因此选择 \({N}_{1}\) 使得\(\forall n \geq  {N}_{1}\) 
+
+\[
+\left| {{s}_{n} - A}\right|  < \frac{\varepsilon }{2}
+\]
+
+由于收敛是绝对收敛，我们可以选择 \({N}_{2}\) 使得 $\forall n> m \ge N_2$
+
+\[
+\mathop{\sum }\limits_{{k = m + 1}}^{n}\left| {a}_{k}\right|  < \frac{\varepsilon }{2}
+\]
+
+现在，取 \(N = \max \left\{  {{N}_{1},{N}_{2}}\right\}\) 。我们知道，有限项集 \(\left\{  {{a}_{1},{a}_{2},{a}_{3},\ldots ,{a}_{N}}\right\}\) 必须全部出现在重排后的级数中，并且我们希望在该级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{b}_{n}\) 中移动足够远，以便（在部分和中）包含所有这些项。因此，选择
+
+\[
+M = \max \{ f\left( k\right)  : 1 \leq  k \leq  N\} .
+\]
+
+显然，如果 \(m \geq  M\) ，那么 \(\left( {{t}_{m} - {s}_{N}}\right)\) 由一组有限的项组成，这些项的绝对值出现在尾部 \(\mathop{\sum }\limits_{{k = N + 1}}^{\infty }\left| {a}_{k}\right|\) 中。我们之前选择的 \({N}_{2}\) 保证了 \(\left| {{t}_{m} - {s}_{N}}\right|  < \varepsilon /2\) ，因此 $\forall m\ge M$
+
+\begin{align*}
+\left| {{t}_{m} - A}\right|  = & \left| {{t}_{m} - {s}_{N} + {s}_{N} - A}\right|\\
+\leq & \left| {{t}_{m} - {s}_{N}}\right|  + \left| {{s}_{N} - A}\right|\\
+< & \frac{\varepsilon }{2} + \frac{\varepsilon }{2} = \varepsilon
+\end{align*}
+\end{proof}
+
+\subsection{练习}
+
+练习2.7.1。证明交错级数判别法(定理2.7.7)相当于证明部分和序列
+
+\[
+{s}_{n} = {a}_{1} - {a}_{2} + {a}_{3} - \cdots  \pm  {a}_{n}
+\]
+
+收敛。(第2.1节中的开篇例子包括 \(\left( {s}_{n}\right)\) 的典型说明。)完备性的不同特征导致不同的证明。
+
+(a) 通过证明 \(\left( {s}_{n}\right)\) 是Cauchy列来证明交错级数判别法。
+
+(b) 使用嵌套区间性质(定理1.4.1)为该结果提供另一种证明。
+
+(c) 考虑子列 \(\left( {s}_{2n}\right)\) 和 \(\left( {s}_{{2n} + 1}\right)\) ，并展示单调收敛定理如何为交错级数检验提供第三种证明。
+
+练习2.7.2. (a) 使用级数的Cauchy准则为比较检验(定理2.7.4)的证明提供详细步骤。
+
+(b) 使用单调收敛定理为比较判别法提供另一种证明。
+
+练习 2.7.3. 设 \(\sum {a}_{n}\) 给定。对于每个 \(n \in  \mathbb{N}\) ，如果 \({a}_{n}\) 为正，则赋值 \({p}_{n} = 0\) ；如果 \({a}_{n}\) 为负，则赋值 \({q}_{n} = {a}_{n}\) 。类似地，如果 \({a}_{n}\) 为负，则赋值 \({q}_{n} = 0\) ；如果 \({a}_{n}\) 为正，则赋值 [latex7]。
+
+(a) 论证如果 \(\sum {a}_{n}\) 发散，则 \(\sum {p}_{n}\) 或 \(\sum {q}_{n}\) 中至少有一个发散。
+
+(b) 证明如果 \(\sum {a}_{n}\) 条件收敛，则 \(\sum {p}_{n}\) 和 \(\sum {q}_{n}\) 都发散。
+
+练习2.7.4. 给出一个例子，说明 \(\sum {x}_{n}\) 和 \(\sum {y}_{n}\) 都发散，但 \(\sum {x}_{n}{y}_{n}\) 收敛的情况是可能的。
+
+练习2.7.5. (a) 证明如果 \(\sum {a}_{n}\) 绝对收敛，则 \(\sum {a}_{n}^{2}\) 也绝对收敛。这个命题在没有绝对收敛的情况下是否成立？(b) 如果 \(\sum {a}_{n}\) 收敛且 \({a}_{n} \geq  0\) ，我们能否得出关于 \(\sum \sqrt{{a}_{n}}\) 的任何结论？
+
+习题2.7.6. (a) 证明如果 \(\sum {x}_{n}\) 绝对收敛，且序列 \(\left( {y}_{n}\right)\) 有界，则和 \(\sum {x}_{n}{y}_{n}\) 收敛。
+
+(b) 找出一个反例，证明如果 \(\sum {x}_{n}\) 的条件收敛，则(a)部分并不总是成立。
+
+习题2.7.7. 既然我们已经证明了关于几何级数的基本事实，请为推论2.4.7提供一个证明。
+
+习题2.7.8. 证明定理2.7.1的第(ii)部分。
+
+习题2.7.9 (比值判别法). 给定一个级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) ，其中 \({a}_{n} \neq  0\) ，比值判别法指出，如果 \(\left( {a}_{n}\right)\) 满足
+
+\[
+\lim \left| \frac{{a}_{n + 1}}{{a}_{n}}\right|  = r < 1
+\]
+
+则该级数绝对收敛。
+
+(a) 设 \({r}^{\prime }\) 满足 \(r < {r}^{\prime } < 1\) 。(为什么这样的 \({r}^{\prime }\) 必须存在？)解释为什么存在一个 \(N\) ，使得 \(n \geq  N\) 蕴含 \(\left| {a}_{n + 1}\right|  \leq  \left| {a}_{n}\right| {r}^{\prime }\) 。
+
+(b) 为什么 \(\left| {a}_{N}\right| \sum {\left( {r}^{\prime }\right) }^{n}\) 必然收敛？
+
+(c) 现在，证明 \(\sum \left| {a}_{n}\right|\) 收敛。
+
+习题2.7.10。(a) 证明如果 \({a}_{n} > 0\) 和 \(\lim \left( {n{a}_{n}}\right)  = l\) 且 \(l \neq  0\) ，则级数 \(\sum {a}_{n}\) 发散。
+
+(b) 假设 \({a}_{n} > 0\) 和 \(\lim \left( {{n}^{2}{a}_{n}}\right)\) 存在。证明 \(\sum {a}_{n}\) 收敛。
+
+练习 2.7.11。找出两个级数 \(\sum {a}_{n}\) 和 \(\sum {b}_{n}\) 的例子，它们都发散，但 \(\sum \min \left\{  {{a}_{n},{b}_{n}}\right\}\) 收敛。为了使问题更具挑战性，请给出 \(\left( {a}_{n}\right)\) 和 \(\left( {b}_{n}\right)\) 为正且递减的例子。
+
+练习2.7.12(分部求和法)。设 \(\left( {x}_{n}\right)\) 和 \(\left( {y}_{n}\right)\) 为序列，且令 \({s}_{n} = {x}_{1} + {x}_{2} + \cdots  + {x}_{n}\) 。利用 \({x}_{j} = {s}_{j} - {s}_{j - 1}\) 的观察来验证公式
+
+\[
+\mathop{\sum }\limits_{{j = m + 1}}^{n}{x}_{j}{y}_{j} = {s}_{n}{y}_{n + 1} - {s}_{m}{y}_{m + 1} + \mathop{\sum }\limits_{{j = m + 1}}^{n}{s}_{j}\left( {{y}_{j} - {y}_{j + 1}}\right) .
+\]
+
+习题 2.7.13(Dirichlet判别法)。Dirichlet判别法用于判断级数收敛性，它指出如果 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{x}_{n}\) 的部分和有界(但不一定收敛)，且如果 \(\left( {y}_{n}\right)\) 是一个满足 \({y}_{1} \geq  {y}_{2} \geq  {y}_{3} \geq  \cdots  \geq  0\) 且 \(\lim {y}_{n} = 0\) 的序列，那么级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{x}_{n}{y}_{n}\) 收敛。
+
+(a) 设 \(M > 0\) 为 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{x}_{n}\) 的部分和的上界。利用习题 2.7.12 证明
+
+\[
+\left| {\mathop{\sum }\limits_{{j = m + 1}}^{n}{x}_{j}{y}_{j}}\right|  \leq  {2M}\left| {y}_{m + 1}\right| .
+\]
+
+(b) 证明上述Dirichlet判别法。
+
+展示如何将交替级数判别法(定理2.7.7)作为Dirichlet判别法的特例推导出来。
+
+练习2.7.14(Abel判别法)。Abel判别法用于判断级数收敛性，其指出如果级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{x}_{n}\) 收敛，且 \(\left( {y}_{n}\right)\) 是一个满足以下条件的序列:
+
+\[
+{y}_{1} \geq  {y}_{2} \geq  {y}_{3} \geq  \cdots  \geq  0
+\]
+
+那么级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{x}_{n}{y}_{n}\) 收敛。
+
+(a)仔细指出Abel判别法的假设与练习2.7.13中Dirichlet判别法的假设有何不同。
+
+(b) 假设 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 的部分和有界于常数 \(A > 0\) ，并假设 \({b}_{1} \geq  {b}_{2} \geq  {b}_{3} \geq  \cdots  \geq  0\) 。使用练习 2.7.12 来证明
+
+\[
+\left| {\mathop{\sum }\limits_{{j = 1}}^{n}{a}_{j}{b}_{j}}\right|  \leq  {2A}{b}_{1}
+\]
+
+(c) 通过以下策略证明Abel判别法(Abel’s Test)。对于固定的 \(m \in  N\) ，将部分 (b) 应用于 \(\mathop{\sum }\limits_{{j = m + 1}}^{n}{x}_{j}{y}_{j}\) ，通过设置 \({a}_{n} = {x}_{m + n}\) 和 \({b}_{n} = {y}_{m + n}\) 。(论证 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 的部分和的上界可以通过取 \(m\) 为任意大而变得任意小。)
+
+\section{双重求和与无穷级数的乘积}
+\label{sec:2.8}
+给定一个双索引的实数数组 \(\left\{  {{a}_{ij} : i,j \in  \mathbb{N}}\right\}\) ，我们在\ref{sec:2.1}节中发现，定义 \(\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij}\) 是危险的、容易出现歧义的。先对一个变量求和，然后再对另一个变量求和的求和法称为迭代求和。在我们的具体例子中，先对行求和然后再对这些行和求和，与先计算每列的和并将这些列和相加，产生的结果是不同的。
+
+简而言之，
+
+\[
+\mathop{\sum }\limits_{{j = 1}}^{\infty }\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij} \neq  \mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}
+\]
+
+还有其他方法可以合理地定义 \(\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij}\) 。一个自然的想法是通过在数组中越来越大的“矩形”内将有限数量的项相加来计算一种部分和；也就是说，对于 \(m,n \in  \mathbb{N}\) ，设定
+
+
+\begin{equation}
+\label{eq:2.3}
+{s}_{mn} = \mathop{\sum }\limits_{{i = 1}}^{m}\mathop{\sum }\limits_{{j = 1}}^{n}{a}_{ij}
+\end{equation}
+
+这里求和的顺序无关紧要，因为求和是有限的。我们讨论中特别感兴趣的是 \({s}_{nn}\) (“正方形”上的和)，它们构成了一个由 \(n\) 索引的合法序列，因此可以应用我们的定理和定义。例如，如果序列 \(\left( {s}_{nn}\right)\) 收敛，我们可能希望定义
+
+\[
+\mathop{\sum }\limits_{{i,j = 1}}^{\infty }{a}_{ij} = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn}
+\]
+
+练习2.8.1。使用第2.1节中的特定数组 \(\left( {a}_{ij}\right)\) ，计算 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn}\) 。这个值与已经计算的两个迭代和值相比如何？
+
+如何定义双重求和的问题与第2.7节末尾讨论的重排主题之间存在深刻的相似性。两者都涉及到无限设置中加法的交换性。对于重排，解决方案是增加了绝对收敛的假设，同样的方法适用于双重求和也就不足为奇了。在绝对收敛的假设下，讨论的每种计算双重和值的方法都会得到相同的结果。
+
+练习2.8.2。证明如果迭代级数
+
+\[
+\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }\left| {a}_{ij}\right|
+\]
+
+收敛(意味着对于每个固定的 \(i \in  \mathbb{N}\) ，级数 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }\left| {a}_{ij}\right|\) 收敛到某个实数 \({b}_{i}\) ，并且级数 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }{b}_{i}\) 也收敛)，则迭代级数
+
+\[
+\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}
+\]
+
+收敛。
+
+\begin{Thm}
+  \label{thm:2.8.1}
+  设 \(\left\{  {{a}_{ij} : i,j \in  N}\right\}\) 为一个双索引的实数数组。如果
+
+\[
+\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }\left| {a}_{ij}\right|
+\]
+
+收敛，则 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}\) 和 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij}\) 都收敛到相同的值。此外，
+
+\[
+\mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn} = \mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij} = \mathop{\sum }\limits_{{j = 1}}^{\infty }\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij}
+\]
+
+其中 \({s}_{nn} = \mathop{\sum }\limits_{{i = 1}}^{n}\mathop{\sum }\limits_{{j = 1}}^{n}{a}_{ij}\)
+\end{Thm}
+
+\begin{proof}
+  与我们在方程~\eqref{eq:2.3}中定义“矩形部分和” \({s}_{mn}\) 的方式相同，定义
+  
+\[
+{t}_{mn} = \mathop{\sum }\limits_{{i = 1}}^{m}\mathop{\sum }\limits_{{j = 1}}^{n}\left| {a}_{ij}\right| .
+\]
+
+练习2.8.3. (a) 证明集合 \(\left\{  {{t}_{mn} : m,n \in  \mathbb{N}}\right\}\) 有上界，并利用这一事实得出结论:序列 \(\left( {t}_{nn}\right)\) 收敛。
+
+(b) 现在，利用 \(\left( {t}_{nn}\right)\) 是Cauchy列这一事实，论证 \(\left( {s}_{nn}\right)\) 也是Cauchy列，因此收敛。
+
+我们现在可以设
+
+\[
+S = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn}
+\]
+
+为了证明该定理，我们必须证明这两个迭代和收敛到相同的极限。我们将首先证明
+
+\[
+S = \mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}
+\]
+
+因为 \(\left\{  {{t}_{mn} : m,n \in  \mathbb{N}}\right\}\) 有上界，我们可以设
+
+\[
+B = \sup \left\{  {{t}_{mn} : m,n \in  \mathbb{N}}\right\}  .
+\]
+
+设 \(\varepsilon  > 0\) 为任意值。因为 \(B\) 是该集合的最小上界，我们知道存在一个特定的 \({t}_{{m}_{0}{n}_{0}}\) 满足
+
+\[
+B - \frac{\varepsilon }{2} < {t}_{{m}_{0}{n}_{0}} \leq  B
+\]
+
+练习 2.8.4. (a) 论证存在一个 \({N}_{1} \in  \mathbb{N}\) ，使得 \(m,n \geq  {N}_{1}\) 蕴含 \(B - \frac{\varepsilon }{2} < {t}_{mn} \leq  B\) 。
+
+(b) 现在，证明存在一个 \(N\) ，使得
+
+\[
+\left| {{s}_{mn} - S}\right|  < \varepsilon
+\]
+
+对于所有 \(m,n \geq  N\) 。
+
+暂时将 \(m \in  \mathbb{N}\) 视为固定，并将 \({s}_{mn}\) 写为
+
+\[
+{s}_{mn} = \mathop{\sum }\limits_{{j = 1}}^{n}{a}_{1j} + \mathop{\sum }\limits_{{j = 1}}^{n}{a}_{2j} + \cdots  + \mathop{\sum }\limits_{{j = 1}}^{n}{a}_{mj}.
+\]
+
+我们的假设保证对于每个固定的行 \(i\) ，级数 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}\) 绝对收敛到某个实数 \({r}_{i}\) 。
+
+练习 2.8.5. (a) 使用代数极限定理(定理 2.3.3)和序极限定理(定理 2.3.4)来证明对于所有 \(m \geq  N\)
+
+\[
+\left| {\left( {{r}_{1} + {r}_{2} + \cdots  + {r}_{m}}\right)  - S}\right|  \leq  \varepsilon .
+\]
+
+得出结论，迭代和 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{ij}\) 收敛于 \(S\) 。
+
+练习 2.8.6。通过证明另一个迭代和 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij}\) 也收敛于 \(S\) 来完成证明。注意，一旦确定对于每个固定列 \(j\) ，和 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{ij}\) 收敛于某个实数 \({c}_{i}\) ，就可以使用相同的论证。
+\end{proof}
+
+
+
+
+计算双重求和的最后一种常见方法是沿着 \(i + j\) 等于常数的对角线求和。给定一个双重索引数组 \(\left\{  {a}_{ij}\right.\) : \(i,j \in  N\}\) ，令
+
+\[
+{d}_{2} = {a}_{11},\;{d}_{3} = {a}_{12} + {a}_{21},\;{d}_{4} = {a}_{13} + {a}_{22} + {a}_{31},
+\]
+
+并设
+
+\[
+{d}_{k} = {a}_{1,k - 1} + {a}_{2,k - 2} + \cdots  + {a}_{k - 1,1}.
+\]
+
+那么， \(\mathop{\sum }\limits_{{k = 2}}^{\infty }{d}_{k}\) 代表了另一种对数组中每个 \({a}_{ij}\) 求和的合理方法。
+
+练习 2.8.7. (a) 假设定理 2.8.1 的假设——以及结论——成立，证明 \(\mathop{\sum }\limits_{{k = 2}}^{\infty }{d}_{k}\) 绝对收敛。
+
+(b) 模仿定理 2.8.1 证明中的策略，证明 \(\mathop{\sum }\limits_{{k = 2}}^{\infty }{d}_{k}\) 收敛于 \(S = \mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn}\) 。
+
+\subsection{级数的乘积}
+
+在级数的代数极限定理(定理~\ref{thm:2.7.1})中，明显缺少关于两个收敛级数乘积的任何陈述。正式进行此类乘积的代数运算的一种方法是写成
+
+\begin{align*}
+\left( {\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{i}}\right) \left( {\mathop{\sum }\limits_{{j = 1}}^{\infty }{b}_{j}}\right)  = &\left( {{a}_{1} + {a}_{2} + {a}_{3} + \cdots }\right) \left( {{b}_{1} + {b}_{2} + {b}_{3} + \cdots }\right)\\
+= &{a}_{1}{b}_{1} + \left( {{a}_{1}{b}_{2} + {a}_{2}{b}_{1}}\right)  + \left( {{a}_{3}{b}_{1} + {a}_{2}{b}_{2} + {a}_{1}{b}_{3}}\right)  + \cdots\\
+= & \mathop{\sum }\limits_{{k = 2}}^{\infty }{d}_{k}
+\end{align*}
+
+其中
+
+\[
+{d}_{k} = {a}_{1}{b}_{k - 1} + {a}_{2}{b}_{k - 2} + \cdots  + {a}_{k - 1}{b}_{1}.
+\]
+
+这种特殊形式的乘积，在练习2.8.7中早些时候已经考察过，被称为两个级数的Cauchy乘积。尽管以这种形式书写乘积在代数上有些自然之处，但很可能通过一种或另一种迭代求和更容易计算该和的值。那么，问题仍然在于，Cauchy积的值——如果存在的话——与这些双重和的其他值有何关系。如果被乘的两个级数绝对收敛，那么不难证明可以以最方便的方式计算该和。
+
+练习2.8.8。假设 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{i}\) 绝对收敛于 \(A\) ，且 \(\mathop{\sum }\limits_{{j = 1}}^{\infty }{b}_{j}\) 绝对收敛于 \(B\) 。
+
+(a) 证明该集合
+
+\[
+\left\{  {\mathop{\sum }\limits_{{i = 1}}^{m}\mathop{\sum }\limits_{{j = 1}}^{n}\left| {{a}_{i}{b}_{j}}\right|  : m,n \in  \mathbb{N}}\right\}
+\]
+
+是有界的。利用这一点来证明迭代和 \(\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }\left| {{a}_{i}{b}_{j}}\right|\) 收敛，从而我们可以应用定理2.8.1。
+
+(b) 设 \({s}_{nn} = \mathop{\sum }\limits_{{i = 1}}^{n}\mathop{\sum }\limits_{{j = 1}}^{n}{a}_{i}{b}_{j}\) ，并利用代数极限定理证明 \(\mathop{\lim }\limits_{{n \rightarrow  \infty }}{s}_{nn} = {AB}\) 。由此得出结论
+
+\[
+\mathop{\sum }\limits_{{i = 1}}^{\infty }\mathop{\sum }\limits_{{j = 1}}^{\infty }{a}_{i}{b}_{j} = \mathop{\sum }\limits_{{j = 1}}^{\infty }\mathop{\sum }\limits_{{i = 1}}^{\infty }{a}_{i}{b}_{j} = \mathop{\sum }\limits_{{k = 2}}^{\infty }{d}_{k} = {AB},
+\]
+
+其中，如前所述， \({d}_{k} = {a}_{1}{b}_{k - 1} + {a}_{2}{b}_{k - 2} + \cdots  + {a}_{k - 1}{b}_{1}\) 。
+
+\section{结语}
+\label{sec:2.9}
+定理 \ref{thm:2.7.10}和~\ref{thm:2.8.1}清楚地表明，绝对收敛在处理级数时是一个极其理想的特性。另一方面，条件收敛级数的情况则异常复杂。在重排的情况下，它们不仅不再保证收敛到相同的极限，事实上，如果 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 条件收敛，那么 \(\forall r \in  \mathbb{R}\) ，都存在一个 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }{a}_{n}\) 的重排，使其收敛到 \(r\) 。为了理解这一点，让我们再次看看交错调和级数
+
+\[
+\mathop{\sum }\limits_{{n = 1}}^{\infty }\frac{{\left( -1\right) }^{n + 1}}{n}.
+\]
+
+单独取出的负项构成级数 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }\left( {-1}\right) /{2n}\) 。该级数的部分和恰好是 \(- 1/2\) 调和级数的部分和，因此(以一半的速度)趋向负无穷。类似的论证表明，正项的和 \(\mathop{\sum }\limits_{{n = 1}}^{\infty }1/\left( {{2n} - 1}\right)\) 也发散到正无穷。不难证明，对于条件收敛级数，这种情况总是成立(练习 2.7.3)。现在，设 \(r\) 为某个给定的极限，为了便于论证，我们假设它是正数。思路是取足够多的正项，使得第一个部分和大于 \(r\) 。然后我们加上负项，直到部分和小于 \(r\) ，此时我们再切换回正项。正项和负项的和都没有上界这一事实使得这个过程可以无限持续下去。而这些项本身趋向于零这一事实足以保证，以这种方式构造的部分和，在围绕这个目标值振荡时，确实收敛到 \(r\) 。
+
+或许总结这种情况的最佳方式是，绝对收敛的假设本质上允许我们将无限和视为有限和来处理。这一评估同样适用于双重和，尽管其中存在一些细微之处需要处理。在乘积的情况下，我们在练习2.8.8中展示了两个绝对收敛的无限级数的Cauchy乘积收敛于这两个因子的乘积，但实际上，如果两个原始级数中只有一个绝对收敛，同样的结论也成立。在练习2.8.8的记号下，如果 \(\sum {a}_{n}\) 绝对收敛于 \(A\) ，并且如果 \(\sum {b}_{n}\) (可能条件收敛)收敛于 \(B\) ，那么Cauchy乘积 \(\sum {d}_{k} = {AB}\) 。另一方面，如果 \(\sum {a}_{n}\) 和 \(\sum {b}_{n}\) 都是条件收敛的，那么Cauchy乘积可能会发散。 \(\sum {\left( -1\right) }^{n}/\sqrt{n}\) 的平方提供了这种现象的一个例子。当然，也有可能找到条件收敛的 \(\sum {a}_{n} = A\) 和条件收敛的 \(\sum {b}_{n} = B\) ，它们的Cauchy乘积 \(\sum {d}_{k}\) 收敛。如果是这种情况，那么收敛值是正确的，即 \(\sum {d}_{k} = {AB}\) 。这一事实的证明将在第\ref{chap:6}章中提供，届时我们将研究幂级数。这就是其中的联系。幂级数的形式为 \({a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + \cdots\) 。如果我们将两个幂级数像多项式一样相乘，那么当我们归并 \(x\) 的相同幂次时，结果是
+
+\begin{align*}
+&\left( {{a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + \cdots }\right) \left( {{b}_{0} + {b}_{1}x + {b}_{2}{x}^{2} + \cdots }\right)\\
+= & {a}_{0}{b}_{0} + \left( {{a}_{0}{b}_{1} + {a}_{1}{b}_{0}}\right) x + \left( {{a}_{0}{b}_{2} + {a}_{1}{b}_{1} + {a}_{2}{b}_{0}}\right) {x}^{2} + \cdots\\
+= & {d}_{0} + {d}_{1}x + {d}_{2}{x}^{2} + \cdots ,
+\end{align*}
+
+这是 \(\sum {a}_{n}{x}^{n}\) 和 \(\sum {b}_{n}{x}^{n}\) 的Cauchy乘积(索引从 \(n = 0\) 开始，而不是 \(n = 1\) )。后面我们会得到一个关于幂级数良好行为的结果，基于此结果我们可以证明：收敛的Cauchy乘积会求和到正确的值。在另一个方向上，练习2.8.8将有助于建立一个关于两个幂级数乘积的定理。
+

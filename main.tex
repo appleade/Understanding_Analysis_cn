@@ -1,0 +1,78 @@
+% -*- coding: utf-8 -*-
+\documentclass{ctexbook}
+
+\title{Understanding Analysis}
+
+\author{Stephen Abbott（原著） \& 方汝见之（译）}
+
+% \usepackage{silence}
+% \WarningFilter{latexfont}{Font shape}
+
+\usepackage{enumitem}
+\usepackage{amsthm}
+\newtheorem{Thm}{\indent 定理}[section]
+\newtheorem{Lem}[Thm]{\indent 引理}
+\newtheorem{Prop}[Thm]{\indent 命题}
+\newtheorem{Cor}[Thm]{\indent 推论}
+\newtheorem{Def}[Thm]{\indent 定义}
+%\newtheorem{Eg}[Thm]{\indent 例}
+\newtheorem{Rmk}[Thm]{\indent 注}
+\newtheorem{Axm}[Thm]{\indent 公理}
+\theoremstyle{definition} % 设置定理样式为definition（正体正文）
+\newtheorem{Eg}[Thm]{\indent 例}
+\usepackage[verbose, a4paper, hmargin=2.5cm, vmargin=2.5cm]{geometry}
+%\usepackage{fontspec}
+\usepackage{ctex}
+\usepackage{paratype}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{esint}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{mdframed}
+\usepackage{booktabs,array,multirow}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}
+\urlstyle{same}
+\usepackage[most]{tcolorbox}
+\definecolor{mygray}{RGB}{240,240,240}
+\tcbset{
+  colback=mygray,
+  boxrule=0pt,
+}
+
+\graphicspath{ {./images/} }
+\newcommand{\HRule}{\begin{center}\rule{0.9\linewidth}{0.2mm}\end{center}}
+\newcommand{\customfootnote}[1]{
+  \let\thefootnote\relax\footnotetext{#1}
+}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+
+\input{Understanding_analysis_0.tex}
+
+\tableofcontents
+
+\mainmatter
+
+\input{Understanding_analysis_1.tex}
+\input{Understanding_analysis_2.tex}
+\input{Understanding_analysis_3.tex}
+\input{Understanding_analysis_4.tex}
+\input{Understanding_analysis_5.tex}
+\input{Understanding_analysis_6.tex}
+\input{Understanding_analysis_7.tex}
+\input{Understanding_analysis_8.tex}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
